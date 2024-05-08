@@ -82,11 +82,12 @@ class ManageMain:
 
     def repeat_or_close_screen(self):
         while True:
-            choice = input("\nPress R to repeat measurement or Q to quit the program: ").upper()
+            choice = input("Press R to repeat measurement or Q to quit the program: ").upper()
+            print("\n")
             if choice == 'R':
                 return choice
             elif choice == 'Q':
                 print("Exiting the program \n")
                 return choice
             else:
-                print("Invalid input, please choose 'R' to repeat or 'Q' to quit")
+                print("Invalid input, please choose 'R' to repeat or 'Q' to quit \n")
