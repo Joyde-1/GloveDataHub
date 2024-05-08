@@ -1,0 +1,69 @@
+1) Gestire Nome, Cognome, Durata (default -1), Directory e Path (da determinare)
+
+Metodi:
+- Creare file csv
+- Creare nome del file csv
+- Conversione durata in secondi
+- Gestire apertura e chiusura di SenseCom
+- Gestire esecuzione e interruzione script C++
+- Gestire timer
+
+
+
+
+Classe UserData:
+variabili di classe:
+Name
+Surname
+Path_Directory
+- Name CSV
+- Path_CSV
+
+metodi pubblici:
+SetName --> Lanciare eccezione se presenti caratteri diversi da lettere e numeri
+SetSurname --> Lanciare eccezione se presenti caratteri diversi da lettere e numeri
+SetPath_Directory
+GetName
+GetSurname
+GetPath_Directory
+
+metodi privati:
+CalculateNameCSV(Name, Surname)
+CreateCSV(NameCSV, Path_Directory)
+
+
+
+Classe Time:
+variabili di classe:
+- Time_Sec
+Time_Min
+
+metodi pubblici:
+SetTime_Min --> Lanciare eccezione se il formato non è valido
+GetTime_Min
+CheckTime(CurrentTime)
+
+metodi privati:
+ConvertTimeToSecond(Time_Min)
+
+
+
+Classe ManageMain:
+Gestisce le schermate (UI da riga di comando con vari while annidati)
+1) Schermata Benvenuto
+2) Schermata inizio Calibrazione
+3) Inserimento dati per csv e inizio script C++ (o tornare indietro)
+4) Acquisizione dei dati, mostrare timer e possibilità di interrompere l'Acquisizione
+5) Ripetere un'altra misurazione o chiudere il programma
+
+
+Classe ManageExe:
+variabili di classe privati:
+const path_script
+const path_sensecom
+
+metodi pubblici:
+RunSenseCom
+RunScript
+CloseSenseCom
+CloseScript
