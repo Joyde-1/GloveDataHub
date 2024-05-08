@@ -4,7 +4,7 @@ if __name__ == "__main__":
 
     checkpoint = 1
 
-    main_manager = ManageMain()
+    main_manager = MainManager()
     
     main_manager.display_welcome_screen()
 
