@@ -17,7 +17,7 @@ class ManageMain:
 
     def start_calibration_screen(self):
         print("Calibration starting... \n")
-        # TODO: Add run_sensecom
+        self.exe_manager.run_sensecom()
         input("Press Enter to continue...")
         print("\n")
         print("Calibration completed \n")
@@ -57,22 +57,25 @@ class ManageMain:
 
         path_csv = self.user_data.create_path_csv()
         print(f"Data saved in {path_csv} \n")
-
+        
         input("Press Enter to continue...")
         print("\n")
 
     def data_acquisition_screen(self):
+        path_csv = self.user_data.create_path_csv()
         start_time = time.time()
 
         print("Data acquisition in progress...\n")
+        self.exe_manager.run_script(path_csv, self.duration_time.get_time_sec())
 
         current_time = time.time() - start_time
-        while(self.duration_time.check_time(current_time)):
+        
+        """ while(self.duration_time.is_time_over(current_time)):
             current_time = time.time() - start_time
 
             if current_time % 5 == 0:
                 print(f"Current Time: {current_time} \n")
-
+ """
         print("Data acquisition completed \n")
         input("Press Enter to continue...")
         print("\n")

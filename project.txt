@@ -61,9 +61,13 @@ Classe ManageExe:
 variabili di classe privati:
 const path_script
 const path_sensecom
+sensecom_process
+script_process
 
 metodi pubblici:
 RunSenseCom
 RunScript
+CheckSenseComProcess --> ritorna True se è in esecuzione
+CheckScriptProcess --> ritorna True se è in esecuzione
 CloseSenseCom
 CloseScript
