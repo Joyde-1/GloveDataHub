@@ -2,13 +2,13 @@ import time
 
 from user_data import UserData
 from duration_time import DurationTime
-from manage_exe import ManageExe
+from exe_manager import ExeManager
 
-class ManageMain:
+class MainManager:
     def __init__(self):
         self.user_data = UserData()
         self.duration_time = DurationTime()
-        self.exe_manager = ManageExe()
+        self.exe_manager = ExeManager()
 
     def display_welcome_screen(self):
         print("Welcome to the NOVA Gloves Data Acquisition System \n")
