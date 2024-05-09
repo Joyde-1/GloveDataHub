@@ -35,27 +35,26 @@ def create_welcome_window():
 
     # Crea un frame per il titolo e il logo
     title_frame = tk.Frame(window, bg='#E9E6DB')
-    title_frame.pack(pady=(20, 10))
+    title_frame.pack(fill='both', pady=(20, 20))
 
     # Inserisci il logo GDH nel frame
     logo_label = tk.Label(title_frame, image=gdh_image, bg='#E9E6DB')
-    logo_label.pack(side=tk.LEFT, padx=10)
+    logo_label.pack(side=tk.LEFT, padx=(0, 20))
 
     # Inserisci il logo kore nel frame
-    logo_label = tk.Label(title_frame, image=kore_image, bg='#E9E6DB')
-    logo_label.pack(side=tk.RIGHT, padx=10)
-
+    kore_label = tk.Label(title_frame, image=kore_image, bg='#E9E6DB')
+    kore_label.pack(side=tk.RIGHT, padx=(20, 20))
 
     # Titolo dell'applicazione accanto al logo
     title_label = tk.Label(title_frame, text="GloveDataHub", font=("Arial", 24), bg='#E9E6DB', fg='black')
-    title_label.pack(side=tk.LEFT, padx=10)
+    title_label.pack(side=tk.LEFT, padx=0, expand=True, fill='both')
 
     # Paragrafo di descrizione
     description = ("Welcome to GloveDataHub, your interface for managing and "
                    "visualizing data from your sensor-equipped gloves. This tool "
                    "allows you to access and analyze the data in real-time.")
-    description_label = tk.Label(window, text=description, wraplength=500, font=("Arial", 16), justify="left", bg='#E9E6DB', fg='black')
-    description_label.pack(pady=(0, 20))
+    description_label = tk.Label(window, text=description, wraplength=500, font=("Arial", 16), justify="center", bg='#E9E6DB', fg='black')
+    description_label.pack(pady=(50, 40))
 
     # Crea un widget Frame per contenere il contenuto principale
     main_frame = tk.Frame(window, bg='#E9E6DB')
@@ -66,8 +65,8 @@ def create_welcome_window():
     #text_area.pack(padx=20, pady=(0, 20))
 
     # Bottone per procedere
-    next_button = tk.Button(main_frame, text="Next", command=lambda: print("Next was clicked"), bg='#E9E6DB', fg='black', padx=20, pady=10, highlightbackground='#E9E6DB')
-    next_button.pack(side=tk.BOTTOM, anchor='e', padx=20, pady=20)
+    next_button = tk.Button(main_frame, text="Next", command=lambda: print("Next was clicked"), font=("Arial", 18), bg='#E9E6DB', fg='black', padx=40, pady=20, highlightbackground='#E9E6DB')
+    next_button.pack(side=tk.BOTTOM, anchor='e', padx=(0, 20), pady=(20, 20))
 
     # Avvia il main loop della finestra
     window.mainloop()
