@@ -7,17 +7,29 @@ def create_welcome_window():
     window = tk.Tk()
     window.title("GloveDataHub")
 
-    # Configura le dimensioni della finestra e il colore di sfondo
-    window.geometry('600x400')
+    # Configura le dimensioni della finestra
+    window_width = 800
+    window_height = 600
+
+    # Ottieni le dimensioni dello schermo automaticamente
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+
+    # Calcola le coordinate per centrare la finestra
+    x_cordinate = int((screen_width / 2) - (window_width / 2))
+    y_cordinate = int((screen_height / 2) - (window_height / 2))
+
+    # Imposta la geometria della finestra con posizione centrata
+    window.geometry(f"{window_width}x{window_height}+{x_cordinate}+{y_cordinate}")
     window.configure(bg='#E9E6DB')
 
     # Carica e ridimensiona l'immagine del logo
-    gdh_original_image = Image.open('/Users/giovanni/Desktop/Human-Centered AI/GloveDataHub/GUI/images/logo_GloveDataHub_new.png')  # Assicurati di sostituire 'path/to/your/logo.png' con il percorso corretto
+    gdh_original_image = Image.open('GUI/images/logo_GloveDataHub_new.png')  # Assicurati di sostituire 'path/to/your/logo.png' con il percorso corretto
     #resized_image = original_image.resize((100, 100))
     gdh_image = ImageTk.PhotoImage(gdh_original_image)
 
     # Carica e ridimensiona l'immagine del logo Kore
-    kore_original_image = Image.open('/Users/giovanni/Desktop/Human-Centered AI/GloveDataHub/GUI/images/kore_Logo.png')  # Assicurati di sostituire 'path/to/your/logo.png' con il percorso corretto
+    kore_original_image = Image.open('GUI/images/kore_Logo.png')  # Assicurati di sostituire 'path/to/your/logo.png' con il percorso corretto
     #resized_image = original_image.resize((100, 100))
     kore_image = ImageTk.PhotoImage(kore_original_image)
 
@@ -42,7 +54,7 @@ def create_welcome_window():
     description = ("Welcome to GloveDataHub, your interface for managing and "
                    "visualizing data from your sensor-equipped gloves. This tool "
                    "allows you to access and analyze the data in real-time.")
-    description_label = tk.Label(window, text=description, wraplength=500, justify="left", bg='#E9E6DB', fg='black')
+    description_label = tk.Label(window, text=description, wraplength=500, font=("Arial", 16), justify="left", bg='#E9E6DB', fg='black')
     description_label.pack(pady=(0, 20))
 
     # Crea un widget Frame per contenere il contenuto principale
