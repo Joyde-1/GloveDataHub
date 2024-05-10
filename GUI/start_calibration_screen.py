@@ -1,6 +1,7 @@
 import tkinter as tk
 from window_manager import WindowManager
 import subprocess
+from data_handler_screen import DataHandlerScreen
 
 
 class StartCalibrationScreen:
@@ -40,7 +41,7 @@ class StartCalibrationScreen:
         button_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(10, 20))
         
         # Bottone per tornare indietro
-        back_button = tk.Button(button_frame, text="Back", command= self._show_start_calibration_screen, font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
+        back_button = tk.Button(button_frame, text="Back", command= self._show_welcome_screen, font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
         back_button.pack(side=tk.LEFT, padx=(20, 10), anchor='w')
         
         # Bottone per avviare SenseCom
@@ -48,7 +49,7 @@ class StartCalibrationScreen:
         SenseCom_button.pack(side=tk.LEFT, expand= True, anchor='center', padx=(10, 10))
 
         # Bottone per andare avanti
-        next_button = tk.Button(button_frame, text="Next", command=lambda: print("Next"), font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
+        next_button = tk.Button(button_frame, text="Next", command=self._show_data_handler_screen, font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
         next_button.pack(side=tk.LEFT, padx=(10, 20), anchor='e')
 
     def launch_calibration_app(self):
@@ -56,9 +57,16 @@ class StartCalibrationScreen:
         path_to_app = "C:\Program Files (x86)\SenseCom\SenseCom.exe"
         subprocess.Popen([path_to_app])
 
-    def _show_start_calibration_screen(self):
+    def _show_welcome_screen(self):
         # Import ritardato per evitare import circolare tra classe start_acalibration_screen e classe welcome_screen
         from welcome_screen import WelcomeScreen
         # Cancella tutto il contenuto attuale
         self.calibration_panel.destroy()
+        # Avvia la schermata inziale
         self.start_welcome_screen = WelcomeScreen(self.main_window)
+
+    def _show_data_handler_screen(self):
+        # Cancella tutto il contenuto attuale
+        self.calibration_panel.destroy()
+        # Avvia la schermata successiva di inserimento dei dati
+        self.start_data_handler_screen = DataHandlerScreen(self.main_window)
