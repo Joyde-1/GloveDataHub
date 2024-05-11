@@ -1,10 +1,11 @@
 import tkinter as tk
 from window_manager import WindowManager
-from start_calibration_screen import StartCalibrationScreen
+from calibration_screen import CalibrationScreen
 
 class WelcomeScreen:
-    def __init__(self, window):
+    def __init__(self, window, win):
         self.main_window = window
+        self.win = win
         self._create_welcome_screen()
 
     def _create_welcome_screen(self):       
@@ -91,10 +92,10 @@ class WelcomeScreen:
         main_frame.pack(fill=tk.BOTH, expand=True)
 
         # Bottone per procedere
-        next_button = tk.Button(main_frame, text="Next", command=lambda: self._show_start_calibration_screen(), font=("Arial", 18), bg='#E9E6DB', fg='black', padx=40, pady=20, highlightbackground='#E9E6DB')
+        next_button = tk.Button(main_frame, text="Next", command=lambda: self._show_calibration_screen(), font=("Arial", 18), bg='#E9E6DB', fg='black', padx=40, pady=20, highlightbackground='#E9E6DB')
         next_button.pack(side=tk.BOTTOM, anchor='e', padx=(0, 20), pady=(0, 20))
 
-    def _show_start_calibration_screen(self):
+    def _show_calibration_screen(self):
         # Cancella tutto il contenuto attuale
         self.welcome_panel.destroy()
-        self.start_calilbration_screen = StartCalibrationScreen(self.main_window)
+        self.start_calilbration_screen = CalibrationScreen(self.main_window, self.win)

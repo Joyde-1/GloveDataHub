@@ -1,20 +1,22 @@
 import tkinter as tk
 from window_manager import WindowManager
-import subprocess
-from data_handler_screen import DataHandlerScreen
+import sys
+import os
 
-
-class StartCalibrationScreen:
-    def __init__(self, window):
+class CalibrationScreen:
+    def __init__(self, window, win):
         self.main_window = window
-        self._create_start_calibration_screen()
+        self._create_calibration_screen()
+        self.win = win
     
-    def _create_start_calibration_screen(self):    
+    def _create_calibration_screen(self):    
         # Crea un pannello per contenere tutti i widget
         self.calibration_panel = tk.PanedWindow(self.main_window, orient=tk.VERTICAL, bg='#E9E6DB')
         self.calibration_panel.pack(fill=tk.BOTH, expand=True)
 
-
+        self.frame_sensecom = tk.LabelFrame(self.main_window, text="SenseCom")
+        self.frame_sensecom.pack(fill="both", expand=True, padx=10, pady=10)
+        
         # Descrizione dell'applicazione
         description_text = (
             "Activate the SenseCom application by clicking the button at the bottom center to calibrate your haptic gloves.\n"
@@ -49,13 +51,11 @@ class StartCalibrationScreen:
         SenseCom_button.pack(side=tk.LEFT, expand= True, anchor='center', padx=(10, 10))
 
         # Bottone per andare avanti
-        next_button = tk.Button(button_frame, text="Next", command=self._show_data_handler_screen, font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
+        next_button = tk.Button(button_frame, text="Next", command=self._show_data_entry_screen, font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
         next_button.pack(side=tk.LEFT, padx=(10, 20), anchor='e')
 
     def launch_calibration_app(self):
-        # Percorso dell'applicazione di calibrazione (Attenzione c'è questo percorso perchè mi trovo su parallels !)
-        path_to_app = "C:\Program Files (x86)\SenseCom\SenseCom.exe"
-        subprocess.Popen([path_to_app])
+        self.win.embed_sensecom()
 
     def _show_welcome_screen(self):
         # Import ritardato per evitare import circolare tra classe start_acalibration_screen e classe welcome_screen
@@ -65,8 +65,9 @@ class StartCalibrationScreen:
         # Avvia la schermata inziale
         self.start_welcome_screen = WelcomeScreen(self.main_window)
 
-    def _show_data_handler_screen(self):
+    def _show_data_entry_screen(self):
+        from data_entry_screen import DataEntryScreen
         # Cancella tutto il contenuto attuale
         self.calibration_panel.destroy()
         # Avvia la schermata successiva di inserimento dei dati
-        self.start_data_handler_screen = DataHandlerScreen(self.main_window)
+        self.start_data_entry_screen = DataEntryScreen(self.main_window)

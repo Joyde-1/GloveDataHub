@@ -5,10 +5,17 @@ if __name__ == "__main__":
     # Crea la finestra principale
     window_manager = WindowManager()
 
-    main_window_params = {
+    """ main_window_params = {
         'title': "GloveDataHub", 
         'width': 800, 
         'height': 600, 
+        'background': '#E9E6DB'
+    } """
+
+    main_window_params = {
+        'title': "GloveDataHub", 
+        'width': 1100, 
+        'height': 800, 
         'background': '#E9E6DB'
     }
 
@@ -25,7 +32,7 @@ if __name__ == "__main__":
 
     main_window = window_manager.get_window()
 
-    welcome_screen = WelcomeScreen(main_window)
+    welcome_screen = WelcomeScreen(main_window, window_manager)
 
     # Avvia il main loop della finestra
     main_window.mainloop()

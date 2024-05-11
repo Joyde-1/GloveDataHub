@@ -1,11 +1,21 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import sys
+import os
+import subprocess
+import ctypes
+
+# Aggiungi il percorso della directory 'API' al PYTHONPATH
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
+
+from exe_manager import ExeManager
 
 class WindowManager:
 
     def __init__(self):
         self.ghd_logo_path = 'GUI/images/logo_GloveDataHub_new.png'
         self.kore_logo_path = 'GUI/images/kore_Logo.png'
+        self.exe_manager = ExeManager()
 
     def create_window(self, title, width, height, background):
         # Crea la finestra principale
@@ -65,3 +75,37 @@ class WindowManager:
 
     def get_window(self):
         return self.window
+    
+    def embed_sensecom(self):
+        # Avvia l'API di terze parti
+        self.exe_manager.run_sensecom()
+        
+        # Attendi un momento per consentire l'avvio dell'API
+        self.window.after(1000, lambda: self.embed_sensecom_window(self.exe_manager.get_sensecom_process_pid()))
+        
+    def embed_sensecom_window(self, sensecom_process_pid):
+        # Creare il Canvas per l'API
+        canvas = tk.Canvas(self.window, width=800, height=600)
+        canvas.pack()
+        
+        # Ottieni l'handle della finestra dell'API
+        hwnd = ctypes.windll.user32.FindWindowW(None, "SenseCom 1.2.0") # Modifica con il titolo della finestra dell'API
+        
+        # Verifica che l'handle sia stato trovato
+        if hwnd == 0:
+            print("Errore: Finestra dell'API non trovata.")
+            return
+        
+        # Ottieni l'handle del Canvas di Tkinter
+        canvas_hwnd = ctypes.windll.user32.FindWindowW(None, str(canvas.winfo_id()))
+        
+        # Incolla la finestra dell'API nel Canvas
+        ctypes.windll.user32.SetParent(hwnd, canvas_hwnd)
+        
+        # Ridimensiona e posiziona la finestra dell'API
+        ctypes.windll.user32.SetWindowPos(hwnd, None, 100, 100, canvas.winfo_width(), canvas.winfo_height(), 0x0040)
+
+        # Rendi la finestra dell'API non ridimensionabile
+        style = ctypes.windll.user32.GetWindowLongW(hwnd, -16)
+        style &= ~0x00040000  # Rimuovi WS_SIZEBOX
+        ctypes.windll.user32.SetWindowLongW(hwnd, -16, style)
