@@ -13,6 +13,35 @@ class DataHandlerScreen:
         self.data_handler_panel = tk.PanedWindow(self.main_window, orient=tk.VERTICAL, bg='#E9E6DB')
         self.data_handler_panel.pack(fill=tk.BOTH, expand=True)
 
+        # Widget Frame per il nome
+        name_frame = tk.Frame(self.data_handler_panel, bg='#E9E6DB')
+        name_frame.pack(fill=tk.X, padx=10, pady=10)
+
+        # Campo per inserire il nome
+        name_label = tk.Label(name_frame, text="Name:", font=("Arial", 18), bg='#E9E6DB', fg='black')
+        name_label.pack(side=tk.LEFT, padx=(20, 10), pady=10)
+        self.name_entry = tk.Entry(name_frame, font=("Arial", 14), width=15)
+        self.name_entry.pack(side=tk.LEFT, padx=10, pady=10)
+
+        # Widget Frame per il cognome
+        surname_frame = tk.Frame(self.data_handler_panel, bg='#E9E6DB')
+        surname_frame.pack(fill=tk.X, padx=10, pady=10)
+
+        # Campo per inserire il cognome
+        surname_label = tk.Label(surname_frame, text="Surname:", font=("Arial", 18), bg='#E9E6DB', fg='black')
+        surname_label.pack(side=tk.LEFT, padx=(20, 10), pady=10)
+        self.surname_entry = tk.Entry(surname_frame, font=("Arial", 14), width=15)
+        self.surname_entry.pack(side=tk.LEFT, padx=10, pady=10)
+
+        # Widget Frame per la durata
+        duration_frame = tk.Frame(self.data_handler_panel, bg='#E9E6DB')
+        duration_frame.pack(fill=tk.X, padx=10, pady=10)
+
+        # Campo per inserire la durata
+        duration_label = tk.Label(duration_frame, text="Duration:", font=("Arial", 18), bg='#E9E6DB', fg='black')
+        duration_label.pack(side=tk.LEFT, padx=(20, 10), pady=10)
+        self.duration_entry = tk.Entry(duration_frame, font=("Arial", 14), width=8)
+        self.duration_entry.pack(side=tk.LEFT, padx=10, pady=10)
 
         # Descrizione dell'applicazione
         description_text = (
@@ -32,8 +61,8 @@ class DataHandlerScreen:
         description_label.pack(expand=True)
 
         # Crea un widget Frame per contenere il contenuto principale
-        main_frame = tk.Frame(self.data_handler_panel, bg='#E9E6DB')
-        main_frame.pack(fill=tk.BOTH, expand=True)
+        #main_frame = tk.Frame(self.data_handler_panel, bg='#E9E6DB')
+        #main_frame.pack(fill=tk.BOTH, expand=True)
 
         # Crea un widget Frame per contenere i bottoni
         button_frame = tk.Frame(self.data_handler_panel, bg='#E9E6DB')
