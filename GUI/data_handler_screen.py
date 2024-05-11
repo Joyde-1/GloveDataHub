@@ -73,7 +73,7 @@ class DataHandlerScreen:
         back_button.pack(side=tk.LEFT, padx=(20, 10), anchor='w')
         
         # Bottone per iniziare la misurazione
-        next_button = tk.Button(button_frame, text="Start the Measurement ", command=lambda: print("Start the Measurement"), font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
+        next_button = tk.Button(button_frame, text="Start the Measurement ", command= self._start_measurement, font=("Arial", 18), bg='#E9E6DB', fg='black', padx=10, pady=5, highlightbackground='#E9E6DB')
         next_button.pack(side=tk.RIGHT, padx=(10, 20), anchor='e') 
 
     
@@ -83,3 +83,13 @@ class DataHandlerScreen:
         # Cancella tutto il contenuto attuale
         self.data_handler_panel.destroy()
         self.start_calibration_screen = StartCalibrationScreen(self.main_window)
+
+    def _start_measurement(self):
+        # Recupera il nome, il cognome e la durata inseriti dall'utente
+        name = self.name_entry.get()
+        surname = self.surname_entry.get()
+        duration = self.duration_entry.get()
+        # Stampa i dati inseriti nei campi dall'uetente
+        print("Name:", name)
+        print("Surname:", surname)
+        print("Duration:", duration)    
