@@ -103,7 +103,7 @@ class WindowManager:
         ctypes.windll.user32.SetParent(hwnd, canvas_hwnd)
         
         # Ridimensiona e posiziona la finestra dell'API
-        ctypes.windll.user32.SetWindowPos(hwnd, None, 100, 100, canvas.winfo_width(), canvas.winfo_height(), 0x0040)
+        ctypes.windll.user32.SetWindowPos(hwnd, None, 0, 0, canvas.winfo_width(), canvas.winfo_height(), 0x0040)
 
         # Rendi la finestra dell'API non ridimensionabile
         style = ctypes.windll.user32.GetWindowLongW(hwnd, -16)
