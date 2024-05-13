@@ -11,15 +11,11 @@ class ExeManager:
 
     def run_sensecom(self):
         self.sensecom_process = subprocess.Popen([self.path_sensecom], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+        return self.sensecom_process
 
     def run_script(self, path_to_csv, total_time):
         self.script_process = subprocess.Popen([self.path_script, path_to_csv, str(total_time)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
-        
-    def get_sensecom_process_pid(self):
-        return self.sensecom_process.pid
-    
-    def get_script_process_pid(self):
-        return self.script_process.pid
+        return self.script_process
 
     def is_sensecom_running(self):
         if self.sensecom_process is None:
