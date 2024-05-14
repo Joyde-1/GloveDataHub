@@ -84,7 +84,7 @@ class WindowManager(QtWidgets.QMainWindow):
         """ # Aggiungi l'header layout alla parte superiore del layout principale
         self.layout.addLayout(header_layout) """
 
-    def _center_window(self):
+    """ def _center_window(self):
         # Ottieni le dimensioni dello schermo
         screen_geometry = QtGui.QGuiApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
@@ -95,7 +95,44 @@ class WindowManager(QtWidgets.QMainWindow):
         y = (screen_height - self.height()) // 2
 
         # Imposta la posizione della finestra
+        self.move(x, y) """
+    
+    def _center_window(self):
+        # Ottieni le dimensioni dello schermo
+        screen_geometry = QtGui.QGuiApplication.primaryScreen().geometry()
+        screen_width = screen_geometry.width()
+        screen_height = screen_geometry.height()
+
+        # Calcola la larghezza e l'altezza della finestra
+        window_width = self.width()
+        window_height = self.height()
+
+        # Definisci la distanza desiderata dai bordi
+        margin_horizontal = 50  # Modifica questa variabile per regolare la distanza dai bordi
+        margin_vertical = 50  # Modifica questa variabile per regolare la distanza dai bordi
+
+        # Calcola le posizioni x e y per centrare la finestra orizzontalmente e verticalmente
+        x = (screen_width - window_width) // 2
+        y = (screen_height - window_height) // 2
+
+        # Calcola la distanza verticale dai bordi
+        distance_top = y
+        distance_bottom = screen_height - y - window_height
+
+        # Calcola l'offset verticale aggiuntivo per compensare la differenza tra distanza superiore e inferiore
+        additional_offset = (distance_bottom - distance_top) // 2  # Aumenta il divisore per sollevare ulteriormente la finestra
+
+        # Aggiusta l'offset verticale
+        y -= additional_offset + 50  # Modifica il valore di 50 per regolare ulteriormente il sollevamento
+
+        # Assicurati che la finestra non esca fuori dallo schermo
+        x = max(margin_horizontal, min(x, screen_width - window_width - margin_horizontal))
+        y = max(margin_vertical, min(y, screen_height - window_height - margin_vertical))
+
+        # Imposta la posizione della finestra
         self.move(x, y)
+
+
 
     def embed_sensecom(self):
         # Controlla se il processo SenseCom è già attivo
