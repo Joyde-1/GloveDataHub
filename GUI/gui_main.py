@@ -8,15 +8,15 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     
     main_window_params = {
-        'ghd_logo_path': "GUI/images/logo_GloveDataHub_new.png",
+        'ghd_logo_path': "GUI/images/logo_GloveDataHub.png",
         'kore_logo_path': "GUI/images/kore_Logo.png",
         'window_title': "GloveDataHub", 
-        'window_width': 800, 
+        'window_width': 1000, 
         'window_height': 600, 
         'background': '#E9E6DB',
         'frontground': '#000000',
         'header_title': "GloveDataHub",
-        'header_font': QFont("Arial", 30, QFont.Weight.Bold)
+        'header_font': QFont("Arial", 24, QFont.Weight.Bold)
     }
     
     # Crea la finestra principale

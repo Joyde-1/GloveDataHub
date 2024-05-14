@@ -1,6 +1,7 @@
 from PyQt6 import QtWidgets, QtGui, QtCore
 from window_manager import WindowManager
-#from calibration_screen import CalibrationScreen
+from custom_button import CustomButton
+from calibration_screen import CalibrationScreen
 
 class WelcomeScreen:
     def __init__(self, main_window):
@@ -15,9 +16,9 @@ class WelcomeScreen:
         
         # Titolo di benvenuto
         welcome_label = QtWidgets.QLabel("Welcome to GloveDataHub!")
-        welcome_label.setFont(QtGui.QFont("Arial", 24, QtGui.QFont.Weight.Bold))
+        welcome_label.setFont(QtGui.QFont("Arial", 20, QtGui.QFont.Weight.Bold))
         # welcome_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        welcome_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 40px 20px;")
+        welcome_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 0px 30px 20px;")
         title_layout = QtWidgets.QVBoxLayout()
         title_layout.addWidget(welcome_label, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         # title_layout.addStretch()
@@ -30,8 +31,8 @@ class WelcomeScreen:
         )
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
-        description_label.setFont(QtGui.QFont("Arial", 20))
-        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 60px 20px;")
+        description_label.setFont(QtGui.QFont("Arial", 16))
+        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 40px 20px;")
         description_layout = QtWidgets.QVBoxLayout()
         # description_layout.addWidget(description_label, alignment=QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         description_layout.addWidget(description_label)
@@ -41,19 +42,19 @@ class WelcomeScreen:
         # Step 1 da compiere
         step1_text = "1 • Calibration of haptic gloves"
         step1_label = QtWidgets.QLabel(step1_text)
-        step1_label.setFont(QtGui.QFont("Arial", 20))
-        step1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 60px 20px;")
+        step1_label.setFont(QtGui.QFont("Arial", 16))
+        step1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 40px 20px;")
 
         # Step 2 da compiere
         step2_text = "2 • Entering user data"
         step2_label = QtWidgets.QLabel(step2_text)
-        step2_label.setFont(QtGui.QFont("Arial", 20))
-        step2_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 60px 20px;")
+        step2_label.setFont(QtGui.QFont("Arial", 16))
+        step2_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 40px 20px;")
         
         # Step 3 da compiere
         step3_text = "3 • Data acquisition"
         step3_label = QtWidgets.QLabel(step3_text)
-        step3_label.setFont(QtGui.QFont("Arial", 20))
+        step3_label.setFont(QtGui.QFont("Arial", 16))
         step3_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 0px 20px;")
         
         steps_layout = QtWidgets.QVBoxLayout()
@@ -66,12 +67,10 @@ class WelcomeScreen:
         self.layout.addLayout(steps_layout)
 
         # Bottone per procedere
-        next_button = QtWidgets.QPushButton("Next")
-        next_button.setFont(QtGui.QFont("Arial", 18))
-        next_button.setStyleSheet("background-color: #E9E6DB; color: black; padding: 20px 40px;")
+        next_button = CustomButton("Next")
         next_button.clicked.connect(self._show_calibration_screen)
         button_layout = QtWidgets.QHBoxLayout()
-        button_layout.addStretch() # Pay Attention
+        button_layout.addStretch()
         button_layout.addWidget(next_button)
         self.layout.addLayout(button_layout)
         
@@ -82,5 +81,6 @@ class WelcomeScreen:
 
     def _show_calibration_screen(self):
         # Cancella tutto il contenuto attuale
-        self.main_window.setCentralWidget(None)
-        #self.start_calilbration_screen = CalibrationScreen(self.main_window, self.win)
+        self.main_window.clear_content_layout()
+        # self.main_window.setCentralWidget(None)
+        self.calilbration_screen = CalibrationScreen(self.main_window)

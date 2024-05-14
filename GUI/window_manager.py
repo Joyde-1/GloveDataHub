@@ -5,11 +5,29 @@ import os
 import ctypes
 import psutil
 import pygetwindow as gw
+from custom_button import CustomButton
 
 # Aggiungi il percorso della directory 'API' al PYTHONPATH
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
 
 from exe_manager import ExeManager
+
+# Costanti per i messaggi di Windows
+WM_SYSCOMMAND = 0x0112
+WM_NCLBUTTONDOWN = 0x00A1
+SC_MOVE = 0xF010
+
+# Definisci la funzione di callback per il filtro di messaggi
+def window_proc(hwnd, msg, wparam, lparam):
+    if msg == WM_SYSCOMMAND and (wparam == SC_MOVE or wparam == SC_MOVE + 1):
+        return 0  # Ignora il comando di movimento
+    if msg == WM_NCLBUTTONDOWN:
+        return 0  # Ignora il click non-client (movimento)
+    return ctypes.windll.user32.DefWindowProcW(hwnd, msg, wparam, lparam)
+
+# Converti la funzione di callback in un puntatore di funzione
+WNDPROC = ctypes.WINFUNCTYPE(ctypes.c_long, ctypes.c_int, ctypes.c_uint, ctypes.c_int, ctypes.c_int)
+window_proc_pointer = WNDPROC(window_proc)
 
 class WindowManager(QtWidgets.QMainWindow):
 
@@ -50,6 +68,10 @@ class WindowManager(QtWidgets.QMainWindow):
         # Carica le immagini dei loghi
         gdh_image = QtGui.QPixmap(self.ghd_logo_path)
         kore_image = QtGui.QPixmap(self.kore_logo_path)
+        
+        # Ridimensiona le immagini a 100x100 pixel
+        gdh_image = gdh_image.scaled(100, 100, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
+        kore_image = kore_image.scaled(80, 80, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
 
         # Crea i label per le immagini
         self.gdh_logo = QtWidgets.QLabel()
@@ -72,7 +94,7 @@ class WindowManager(QtWidgets.QMainWindow):
         header_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter | QtCore.Qt.AlignmentFlag.AlignTop)
 
         # Imposta il margine e padding per posizionare correttamente gli elementi
-        header_layout.setContentsMargins(10, 10, 10, 10)
+        header_layout.setContentsMargins(5, 5, 5, 5)
         
         # Aggiungi l'header layout alla parte superiore del layout principale
         self.main_layout.addLayout(header_layout)
@@ -80,22 +102,6 @@ class WindowManager(QtWidgets.QMainWindow):
         # Aggiungi un layout per il contenuto dinamico
         self.content_layout = QtWidgets.QVBoxLayout()
         self.main_layout.addLayout(self.content_layout)
-
-        """ # Aggiungi l'header layout alla parte superiore del layout principale
-        self.layout.addLayout(header_layout) """
-
-    """ def _center_window(self):
-        # Ottieni le dimensioni dello schermo
-        screen_geometry = QtGui.QGuiApplication.primaryScreen().geometry()
-        screen_width = screen_geometry.width()
-        screen_height = screen_geometry.height()
-
-        # Calcola la posizione x e y per centrare la finestra
-        x = (screen_width - self.width()) // 2
-        y = (screen_height - self.height()) // 2
-
-        # Imposta la posizione della finestra
-        self.move(x, y) """
     
     def _center_window(self):
         # Ottieni le dimensioni dello schermo
@@ -131,10 +137,30 @@ class WindowManager(QtWidgets.QMainWindow):
 
         # Imposta la posizione della finestra
         self.move(x, y)
+        
+    def create_sensecom_layout(self):
+        # Contenitore SenseCom
+        self.sensecom_container = QtWidgets.QStackedWidget()
+        self.sensecom_container.setFixedSize(512, 250)
+        
+        # Bottone per avviare SenseCom
+        sensecom_button = CustomButton("Start SenseCom")
+        sensecom_button.clicked.connect(self._embed_sensecom)
+        button_layout = QtWidgets.QVBoxLayout()
+        # button_layout.addStretch()
+        button_layout.addWidget(sensecom_button)
+                
+        # Aggiungi un layout per sensecom
+        self.sensecom_layout = QtWidgets.QVBoxLayout()
+        
+        self.sensecom_layout.addWidget(self.sensecom_container)
+        self.sensecom_layout.addStretch()
+        self.sensecom_layout.addLayout(button_layout)
+        self.sensecom_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignRight)
 
+        self.content_layout.addLayout(self.sensecom_layout)
 
-
-    def embed_sensecom(self):
+    def _embed_sensecom(self):
         # Controlla se il processo SenseCom è già attivo
         sensecom_running = False
         for process in psutil.process_iter():
@@ -157,7 +183,7 @@ class WindowManager(QtWidgets.QMainWindow):
             sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
             sensecom_hwnd.restore()  # Restore the window if it's minimized or maximized
             sensecom_hwnd.moveTo(0, 0)  # Move the window to a specific position
-            sensecom_hwnd.resize(400, 300)  # Resize the window to fit inside the GUI container
+            #sensecom_hwnd.resize(300, 200)  # Resize the window to fit inside the GUI container
 
             container_hwnd = int(self.sensecom_container.winId())
             ctypes.windll.user32.SetParent(sensecom_hwnd._hWnd, container_hwnd)
@@ -181,3 +207,33 @@ class WindowManager(QtWidgets.QMainWindow):
         if hasattr(self, 'sensecom_process') and self.sensecom_process:
             self.sensecom_process.terminate()
         event.accept()
+        
+    """ def clear_content_layout(self):
+        # Ciclo per rimuovere tutti i widget da un layout
+        while self.main_layout.content_layout.count():
+            item = self.main_layout.content_layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+            else:
+                self.clear_content_layout() """
+                
+    # Metodo per ripulire il content_layout
+    def clear_content_layout(self):
+        while self.content_layout.count():
+            item = self.content_layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+            elif item.layout() is not None:
+                # Se l'item è un layout, puliscilo ricorsivamente
+                self._clear_layout(item.layout())
+
+    def _clear_layout(self, layout):
+        while layout.count():
+            item = layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+            elif item.layout() is not None:
+                self._clear_layout(item.layout())
