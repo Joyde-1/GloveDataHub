@@ -42,7 +42,7 @@ class WindowManager(QtWidgets.QMainWindow):
 
         central_widget = QtWidgets.QWidget()
         self.setCentralWidget(central_widget)
-        self.layout = QtWidgets.QVBoxLayout(central_widget)
+        self.main_layout = QtWidgets.QVBoxLayout(central_widget)
 
     def _set_window_header(self):
         header_layout = QtWidgets.QHBoxLayout()
@@ -73,9 +73,16 @@ class WindowManager(QtWidgets.QMainWindow):
 
         # Imposta il margine e padding per posizionare correttamente gli elementi
         header_layout.setContentsMargins(10, 10, 10, 10)
-
+        
         # Aggiungi l'header layout alla parte superiore del layout principale
-        self.layout.addLayout(header_layout)
+        self.main_layout.addLayout(header_layout)
+
+        # Aggiungi un layout per il contenuto dinamico
+        self.content_layout = QtWidgets.QVBoxLayout()
+        self.main_layout.addLayout(self.content_layout)
+
+        """ # Aggiungi l'header layout alla parte superiore del layout principale
+        self.layout.addLayout(header_layout) """
 
     def _center_window(self):
         # Ottieni le dimensioni dello schermo
@@ -134,6 +141,6 @@ class WindowManager(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.critical(self, "Error", "SenseCom window not found.")
 
     def closeEvent(self, event):
-        if self.sensecom_process:
+        if hasattr(self, 'sensecom_process') and self.sensecom_process:
             self.sensecom_process.terminate()
         event.accept()
