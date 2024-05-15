@@ -5,7 +5,7 @@ class CalibrationScreen():
     def __init__(self, main_window):
         self.main_window = main_window
         self._create_calibration_screen()
-        self.main_window.create_sensecom_layout()
+        self.main_window.create_sensecom_layout()   # inserire controllo se sensecom è gia attivo (utilizzare exe_manager -->is_sensecom_running)
 
     def _create_calibration_screen(self):
         # Crea un pannello per contenere tutti i widget
@@ -27,7 +27,7 @@ class CalibrationScreen():
         
         self.calibration_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
         
-        self.main_window.create_dynamic_content_layout()
+        self.main_window.create_dynamic_content_layout()    # inserire controllo se sensecom è gia attivo (utilizzare exe_manager -->is_sensecom_running)
         
         # Aggiungi il calibration panel al layout del contenuto principale
         self.main_window.add_dynamic_content(self.calibration_panel)
@@ -40,7 +40,7 @@ class CalibrationScreen():
         next_button = CustomButton("Next", 140, 40)
         next_button.clicked.connect(self._show_data_entry_screen)
         
-        self.main_window.create_button_layout()
+        self.main_window.create_button_layout()     # inserire controllo se sensecom è gia attivo (utilizzare exe_manager -->is_sensecom_running)
         
         self.main_window.add_button(back_button)
         self.main_window.add_button(next_button)        
