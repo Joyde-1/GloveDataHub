@@ -138,6 +138,23 @@ class WindowManager(QtWidgets.QMainWindow):
         # Imposta la posizione della finestra
         self.move(x, y)
         
+    def create_dynamic_content_layout(self):
+        self.dynamic_content_box = QtWidgets.QHBoxLayout()
+        self.content_layout.addLayout(self.dynamic_content_box)
+        
+        # Left widget for dynamic content
+        self.dynamic_content_widget = QtWidgets.QVBoxLayout()
+        # self.dynamic_content_widget.setFixedSize(500, 250)
+        self.dynamic_content_widget.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.dynamic_content_box.addLayout(self.dynamic_content_widget)
+        
+    def add_dynamic_content(self, widget):
+        """Add or switch dynamic content in the left widget."""
+        self.dynamic_content_widget.addWidget(widget)
+        self.dynamic_content_widget.addStretch()
+        # self.dynamic_content_widget.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
+        # self.dynamic_content_widget.setCurrentWidget(widget)
+        
     def create_sensecom_layout(self):
         # Contenitore SenseCom
         self.sensecom_container = QtWidgets.QStackedWidget()
@@ -156,9 +173,13 @@ class WindowManager(QtWidgets.QMainWindow):
         self.sensecom_layout.addWidget(self.sensecom_container)
         self.sensecom_layout.addStretch()
         self.sensecom_layout.addLayout(button_layout)
+        self.sensecom_layout.addStretch()
         self.sensecom_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignRight)
 
-        self.content_layout.addLayout(self.sensecom_layout)
+        self.dynamic_content_box.addLayout(self.sensecom_layout)
+        # Aggiungi un layout per il contenuto dinamico
+        # self.content_panel = QtWidgets.QStackedWidget()
+        # self.content_layout.addWidget(self.content_panel)
 
     def _embed_sensecom(self):
         # Controlla se il processo SenseCom è già attivo
