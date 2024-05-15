@@ -1,10 +1,12 @@
 from PyQt6 import QtWidgets, QtGui
 
 class CustomButton(QtWidgets.QPushButton):
-    def __init__(self, title, parent=None):
+    def __init__(self, title, width, height, parent=None):
         super().__init__(title, parent)
         self.setFont(QtGui.QFont("Arial", 16))
         self.setStyleSheet(self.normal_style())
+        # Imposta le dimensioni del pulsante
+        self.setFixedSize(width, height)
         self.setMouseTracking(True)  # Enables mouse tracking
 
     def normal_style(self):

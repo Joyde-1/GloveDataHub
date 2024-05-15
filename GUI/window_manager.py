@@ -143,17 +143,27 @@ class WindowManager(QtWidgets.QMainWindow):
         self.content_layout.addLayout(self.dynamic_content_box)
         
         # Left widget for dynamic content
-        self.dynamic_content_widget = QtWidgets.QVBoxLayout()
+        self.dynamic_content = QtWidgets.QVBoxLayout()
         # self.dynamic_content_widget.setFixedSize(500, 250)
-        self.dynamic_content_widget.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.dynamic_content_box.addLayout(self.dynamic_content_widget)
-        
+        self.dynamic_content.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.dynamic_content_box.addLayout(self.dynamic_content)
+    
     def add_dynamic_content(self, widget):
         """Add or switch dynamic content in the left widget."""
-        self.dynamic_content_widget.addWidget(widget)
-        self.dynamic_content_widget.addStretch()
+        self.dynamic_content.addWidget(widget)
+        self.dynamic_content.addStretch()
         # self.dynamic_content_widget.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
         # self.dynamic_content_widget.setCurrentWidget(widget)
+        
+    def create_button_layout(self):
+        self.button_layout = QtWidgets.QHBoxLayout()
+        self.button_layout.addStretch()
+        self.button_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom)
+        self.content_layout.addLayout(self.button_layout)
+        
+    def add_button(self, button):
+        self.button_layout.addWidget(button)
+        self.button_layout.addStretch()
         
     def create_sensecom_layout(self):
         # Contenitore SenseCom
@@ -161,17 +171,16 @@ class WindowManager(QtWidgets.QMainWindow):
         self.sensecom_container.setFixedSize(512, 250)
         
         # Bottone per avviare SenseCom
-        sensecom_button = CustomButton("Start SenseCom")
+        sensecom_button = CustomButton("Start SenseCom", 250, 40)
         sensecom_button.clicked.connect(self._embed_sensecom)
-        button_layout = QtWidgets.QVBoxLayout()
-        # button_layout.addStretch()
+        button_layout = QtWidgets.QHBoxLayout()
         button_layout.addWidget(sensecom_button)
                 
         # Aggiungi un layout per sensecom
         self.sensecom_layout = QtWidgets.QVBoxLayout()
         
         self.sensecom_layout.addWidget(self.sensecom_container)
-        self.sensecom_layout.addStretch()
+        # self.sensecom_layout.addStretch()
         self.sensecom_layout.addLayout(button_layout)
         self.sensecom_layout.addStretch()
         self.sensecom_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignRight)
@@ -228,16 +237,6 @@ class WindowManager(QtWidgets.QMainWindow):
         if hasattr(self, 'sensecom_process') and self.sensecom_process:
             self.sensecom_process.terminate()
         event.accept()
-        
-    """ def clear_content_layout(self):
-        # Ciclo per rimuovere tutti i widget da un layout
-        while self.main_layout.content_layout.count():
-            item = self.main_layout.content_layout.takeAt(0)
-            widget = item.widget()
-            if widget is not None:
-                widget.deleteLater()
-            else:
-                self.clear_content_layout() """
                 
     # Metodo per ripulire il content_layout
     def clear_content_layout(self):
@@ -250,7 +249,28 @@ class WindowManager(QtWidgets.QMainWindow):
                 # Se l'item è un layout, puliscilo ricorsivamente
                 self._clear_layout(item.layout())
 
+    def clear_dynamic_content(self):
+        # Ripulisci solo il dynamic_content
+        while self.dynamic_content.count() > 0:
+            item = self.dynamic_content.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()  # Rimuove e cancella il widget
+            elif item.layout() is not None:
+                self._clear_layout(item.layout())  # Pulizia ricorsiva dei layout annidati
+                
+    def clear_button_layout(self):
+        # Ripulisci solo il button_layou
+        while self.button_layout.count() > 0:
+            item = self.button_layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()  # Rimuove e cancella il widget
+            elif item.layout() is not None:
+                self._clear_layout(item.layout())  # Pulizia ricorsiva dei layout annidati
+
     def _clear_layout(self, layout):
+        # Pulizia ricorsiva di un layout generico
         while layout.count():
             item = layout.takeAt(0)
             widget = item.widget()
@@ -258,3 +278,4 @@ class WindowManager(QtWidgets.QMainWindow):
                 widget.deleteLater()
             elif item.layout() is not None:
                 self._clear_layout(item.layout())
+

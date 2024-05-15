@@ -1,7 +1,5 @@
 from PyQt6 import QtWidgets, QtGui, QtCore
-from window_manager import WindowManager
 from custom_button import CustomButton
-from calibration_screen import CalibrationScreen
 
 class WelcomeScreen:
     def __init__(self, main_window):
@@ -67,7 +65,7 @@ class WelcomeScreen:
         self.layout.addLayout(steps_layout)
 
         # Bottone per procedere
-        next_button = CustomButton("Next")
+        next_button = CustomButton("Next", 140, 40)
         next_button.clicked.connect(self._show_calibration_screen)
         button_layout = QtWidgets.QHBoxLayout()
         button_layout.addStretch()
@@ -80,6 +78,8 @@ class WelcomeScreen:
         self.main_window.content_layout.addWidget(self.welcome_panel)
 
     def _show_calibration_screen(self):
+        from calibration_screen import CalibrationScreen
+        
         # Cancella tutto il contenuto attuale
         self.main_window.clear_content_layout()
         # self.main_window.setCentralWidget(None)
