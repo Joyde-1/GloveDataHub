@@ -23,7 +23,7 @@ class CalibrationScreen():
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 200px 20px 0px;")
+        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 0px 20px 0px;")
         description_layout = QtWidgets.QVBoxLayout()
         description_layout.addWidget(description_label)
         self.layout.addLayout(description_layout)
