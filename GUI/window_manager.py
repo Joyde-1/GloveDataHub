@@ -33,7 +33,7 @@ class WindowManager(QtWidgets.QMainWindow):
 
     def __init__(self, ghd_logo_path, kore_logo_path, window_title, window_width, window_height, background, frontground, header_title, header_font):
         super().__init__()
-        
+        self.calibration_screen = False    
         self.ghd_logo_path = ghd_logo_path
         self.kore_logo_path = kore_logo_path
         self.window_title = window_title
@@ -279,3 +279,20 @@ class WindowManager(QtWidgets.QMainWindow):
             elif item.layout() is not None:
                 self._clear_layout(item.layout())
 
+    def init_calibration_screen(self):
+        
+        from calibration_screen import CalibrationScreen
+
+        """ if  self.calibration_screen is False:
+            self.clear_content_layout()
+            print("Instanzio Calibration screen")
+            self.calibration_screen = True
+            CalibrationScreen(self)
+        else:
+            print("Calibartion Screen già instanziato") """
+            
+       
+        self.clear_content_layout()
+        CalibrationScreen(self)
+       
+             

@@ -1,8 +1,9 @@
 from PyQt6 import QtWidgets, QtGui, QtCore
+from window_manager import WindowManager
 from custom_button import CustomButton
 
 class WelcomeScreen:
-    def __init__(self, main_window):
+    def __init__(self, main_window: WindowManager):
         self.main_window = main_window
         self._create_welcome_screen()
 
@@ -81,6 +82,7 @@ class WelcomeScreen:
         from calibration_screen import CalibrationScreen
         
         # Cancella tutto il contenuto attuale
-        self.main_window.clear_content_layout()
+        #self.main_window.clear_content_layout()
+        self.main_window.init_calibration_screen()
         # self.main_window.setCentralWidget(None)
-        self.calilbration_screen = CalibrationScreen(self.main_window)
+        #self.calilbration_screen = CalibrationScreen(self.main_window)
