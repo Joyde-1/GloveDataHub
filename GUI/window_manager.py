@@ -48,6 +48,8 @@ class WindowManager(QtWidgets.QMainWindow):
         
         self._init_window()
 
+        self.last_dynamic_content = None
+    
     def _init_window(self):
         self._create_window()
         self._set_window_header()
@@ -149,9 +151,9 @@ class WindowManager(QtWidgets.QMainWindow):
         self.dynamic_content_box.addLayout(self.dynamic_content)
     
     def add_dynamic_content(self, widget):
-        """Add or switch dynamic content in the left widget."""
         self.dynamic_content.addWidget(widget)
         self.dynamic_content.addStretch()
+                
         # self.dynamic_content_widget.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
         # self.dynamic_content_widget.setCurrentWidget(widget)
         
@@ -282,17 +284,6 @@ class WindowManager(QtWidgets.QMainWindow):
     def init_calibration_screen(self):
         
         from calibration_screen import CalibrationScreen
-
-        """ if  self.calibration_screen is False:
-            self.clear_content_layout()
-            print("Instanzio Calibration screen")
-            self.calibration_screen = True
-            CalibrationScreen(self)
-        else:
-            print("Calibartion Screen già instanziato") """
             
-       
         self.clear_content_layout()
         CalibrationScreen(self)
-       
-             

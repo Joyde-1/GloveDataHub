@@ -82,7 +82,7 @@ class WelcomeScreen:
         from calibration_screen import CalibrationScreen
         
         # Cancella tutto il contenuto attuale
-        #self.main_window.clear_content_layout()
-        self.main_window.init_calibration_screen()
+        self.main_window.clear_content_layout()
+        #self.main_window.init_calibration_screen()
         # self.main_window.setCentralWidget(None)
-        #self.calilbration_screen = CalibrationScreen(self.main_window)
+        self.calilbration_screen = CalibrationScreen(self.main_window)

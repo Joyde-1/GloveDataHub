@@ -36,12 +36,10 @@ class CalibrationScreen():
         
         # Bottone per tornare indietro
         back_button = CustomButton("Back", 140, 40)
-        print("azione back button")
         back_button.clicked.connect(self._show_welcome_screen)
         
         # Bottone per procedere
         next_button = CustomButton("Next", 140, 40)
-        print("azione next button")
         next_button.clicked.connect(self._show_data_entry_screen)
         
         self.main_window.create_button_layout()     # inserire controllo se sensecom è gia attivo (utilizzare exe_manager -->is_sensecom_running)
@@ -51,21 +49,22 @@ class CalibrationScreen():
 
     def _show_welcome_screen(self):
         # Import ritardato per evitare import circolare tra classe start_calibration_screen e classe welcome_screen
-        print("back clicked -> Welcome screen from calibration screen")
-        """ from welcome_screen import WelcomeScreen
-        
-        print("back clicked -> Welcome screen from calibration screen")
+        from welcome_screen import WelcomeScreen
+    
         self.main_window.clear_content_layout()
         
-        self.welcome_screen = WelcomeScreen(self.main_window) """
-        QMessageBox.information(self,"Ciao", "ciao")
+        self.welcome_screen = WelcomeScreen(self.main_window)
         
 
     def _show_data_entry_screen(self):
         from data_entry_screen import DataEntryScreen
-        print("Next clicked")
+        
         self.main_window.clear_dynamic_content()
         
         self.main_window.clear_button_layout()
         
         self.data_entry_screen = DataEntryScreen(self.main_window)
+
+
+
+
