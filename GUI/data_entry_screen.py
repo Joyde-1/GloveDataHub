@@ -108,13 +108,13 @@ class DataEntryScreen:
         from exe_manager import ExeManager
 
         # Chiedi all'utente di selezionare una cartella
-        folder_path = QFileDialog.getExistingDirectory(self.main_window, 'Seleziona la cartella di destinazione')
+        folder_path = QFileDialog.getExistingDirectory(self.main_window, 'Select the destination folder')
 
         if folder_path:
             # Creare la finestra di dialogo per inserire la durata
             input_dialog = QInputDialog(self.main_window)
-            input_dialog.setWindowTitle("Durata misurazione")
-            input_dialog.setLabelText("Inserisci la durata (in minuti):")
+            input_dialog.setWindowTitle("Measurement duration")
+            input_dialog.setLabelText("Enter the duration (in minutes):")
             input_dialog.setIntRange(1, 1000)
             input_dialog.setIntValue(1)
 
