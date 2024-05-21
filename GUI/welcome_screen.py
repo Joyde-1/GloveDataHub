@@ -3,15 +3,23 @@ from window_manager import WindowManager
 from custom_button import CustomButton
 
 class WelcomeScreen:
+    is_first_time = True
+    
     def __init__(self, main_window: WindowManager):
         self.main_window = main_window
-        self._create_welcome_screen()
+        
+    def set_welcome_screen(self):
+        if WelcomeScreen.is_first_time:
+            self._create_welcome_widget()
+            WelcomeScreen.is_first_time = not WelcomeScreen.is_first_time
+            
+        self._set_buttons_layout()
 
-    def _create_welcome_screen(self):
+    def _create_welcome_widget(self):
         # Crea un pannello per contenere tutti i widget
         self.welcome_panel = QtWidgets.QWidget()
         self.welcome_panel.setStyleSheet("background-color: #E9E6DB;")
-        self.layout = QtWidgets.QVBoxLayout(self.welcome_panel)
+        self.welcome_layout = QtWidgets.QVBoxLayout(self.welcome_panel)
         
         # Titolo di benvenuto
         welcome_label = QtWidgets.QLabel("Welcome to GloveDataHub!")
@@ -21,7 +29,7 @@ class WelcomeScreen:
         title_layout = QtWidgets.QVBoxLayout()
         title_layout.addWidget(welcome_label, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         # title_layout.addStretch()
-        self.layout.addLayout(title_layout)
+        self.welcome_layout.addLayout(title_layout)
         
         # Descrizione dell'applicazione
         description_text = (
@@ -36,7 +44,7 @@ class WelcomeScreen:
         # description_layout.addWidget(description_label, alignment=QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         description_layout.addWidget(description_label)
         # description_layout.addStretch()
-        self.layout.addLayout(description_layout)
+        self.welcome_layout.addLayout(description_layout)
 
         # Step 1 da compiere
         step1_text = "1 • Calibration of haptic gloves"
@@ -63,26 +71,42 @@ class WelcomeScreen:
         #steps_layout.addStretch()
         steps_layout.addWidget(step3_label)
         steps_layout.addStretch()
-        self.layout.addLayout(steps_layout)
-
-        # Bottone per procedere
-        next_button = CustomButton("Next", 140, 40)
-        next_button.clicked.connect(self._show_calibration_screen)
-        button_layout = QtWidgets.QHBoxLayout()
-        button_layout.addStretch()
-        button_layout.addWidget(next_button)
-        self.layout.addLayout(button_layout)
+        self.welcome_layout.addLayout(steps_layout)
         
-        self.layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        self.welcome_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
         
         # Aggiungi il welcome panel al layout del contenuto principale
-        self.main_window.content_layout.addWidget(self.welcome_panel)
+        self.main_window.add_content_widget(self.welcome_panel)
+        
+        # self.main_window.content_layout.addWidget(self.welcome_panel)
+        
+    def _set_buttons_layout(self):
+        # Bottone per procedere
+        next_button = CustomButton("Next", 140, 40)
+        next_button.clicked.connect(self._show_next_screen)
+        
+        button_layout = QtWidgets.QHBoxLayout()
+        button_layout.addWidget(next_button)
+        button_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        
+        button_widget = QtWidgets.QWidget()
+        button_widget.setLayout(button_layout)
+        
+        self.main_window.add_button(button_widget)
 
-    def _show_calibration_screen(self):
+    def _show_next_screen(self):
         from calibration_screen import CalibrationScreen
         
+        self.main_window.clear_buttons_layout()
+        
+        self.calibration_screen = CalibrationScreen(self.main_window)
+        
+        self.calibration_screen.set_calibration_screen()
+        
+        self.main_window.show_content_widget("Next")
+        
         # Cancella tutto il contenuto attuale
-        self.main_window.clear_content_layout()
+        # self.main_window.clear_content_layout()
         #self.main_window.init_calibration_screen()
         # self.main_window.setCentralWidget(None)
-        self.calilbration_screen = CalibrationScreen(self.main_window)
+        # self.calilbration_screen = CalibrationScreen(self.main_window)

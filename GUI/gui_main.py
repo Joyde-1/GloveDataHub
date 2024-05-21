@@ -27,4 +27,6 @@ if __name__ == "__main__":
 
     welcome_screen = WelcomeScreen(main_window)
     
+    welcome_screen.set_welcome_screen()
+    
     sys.exit(app.exec())

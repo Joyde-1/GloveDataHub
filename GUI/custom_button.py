@@ -1,4 +1,4 @@
-from PyQt6 import QtWidgets, QtGui
+from PyQt6 import QtWidgets, QtGui, QtCore
 
 class CustomButton(QtWidgets.QPushButton):
     def __init__(self, title, width, height, parent=None):
@@ -61,8 +61,6 @@ class CustomButton(QtWidgets.QPushButton):
     def mouseReleaseEvent(self, event):
         self.setStyleSheet(self.hover_style() if self.underMouse() else self.normal_style())
         super().mouseReleaseEvent(event)
-        
-        
 
     def action_next(self):
         print("Next button pressed")

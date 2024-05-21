@@ -6,10 +6,10 @@ import sys
 import os
 
 # Aggiungi il percorso della directory 'Data-Acquisition' al PYTHONPATH
-# sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'Data-Acquisition'))
 from user_data import UserData
 
-class DataEntryScreen:
+class DataAcquisitionScreen:
     is_first_time = True
     
     def __init__(self, main_window: WindowManager):
@@ -17,17 +17,17 @@ class DataEntryScreen:
         self.user_data = UserData()
         
     def set_data_entry_screen(self):
-        if DataEntryScreen.is_first_time:
-            self._create_data_entry_widget()
-            DataEntryScreen.is_first_time = not DataEntryScreen.is_first_time
+        if DataAcquisitionScreen.is_first_time:
+            self._create_data_acquisition_widget()
+            DataAcquisitionScreen.is_first_time = not DataAcquisitionScreen.is_first_time
             
         self._set_buttons_layout()
     
-    def _create_data_entry_widget(self):  
+    def _create_data_acquisition_widget(self):  
         # Crea un pannello per contenere tutti i widget
-        self.data_entry_panel = QtWidgets.QWidget()
-        self.data_entry_panel.setStyleSheet("background-color: #E9E6DB;")
-        self.data_entry_layout = QtWidgets.QVBoxLayout(self.data_entry_panel)
+        self.data_acquisition_panel = QtWidgets.QWidget()
+        self.data_acquisition_panel.setStyleSheet("background-color: #E9E6DB;")
+        self.data_acquisition_layout = QtWidgets.QVBoxLayout(self.data_acquisition_panel)
         
         # Descrizione sopra i campi
         description1_text = "Ensure name and surname are entered, specify measurement duration, and complete calibration before starting."
@@ -126,7 +126,7 @@ class DataEntryScreen:
         self.data_entry_layout.addLayout(duration_layout) """
         
         # Aggiungi il panel al layout del contenuto principale
-        self.main_window.add_content_widget(self.data_entry_panel)
+        self.main_window.add_content_widget(self.data_acquisition_panel)
         
     def _set_buttons_layout(self):
         # Bottone per tornare indietro
@@ -159,20 +159,18 @@ class DataEntryScreen:
             self.path_entry.setText(folder_path)
 
     def _show_previous_screen(self):
-        from calibration_screen import CalibrationScreen
+        from data_entry_screen import DataEntryScreen
         
         self.main_window.show_content_widget("Back")
         
         self.main_window.clear_buttons_layout()
         
-        self.calibration_screen = CalibrationScreen(self.main_window)
+        self.data_entry_screen = DataEntryScreen(self.main_window)
         
-        self.calibration_screen.set_calibration_screen()
+        self.data_entry_screen.set_data_entry_screen()
 
     def _show_next_screen(self):
-        from data_acquisition_screen import DataAcquisitionScreen
-        
-        self._check_entry_fields()
+        """ from data_acquisition_screen import DataAcquisitionScreen
         
         self.main_window.clear_buttons_layout()
         
@@ -180,7 +178,9 @@ class DataEntryScreen:
         
         self.data_acquisition_screen.set_data_acquisition_screen()
         
-        self.main_window.show_content_widget("Next")
+        self.main_window.show_content_widget("Next") """
+        
+        self._check_entry_fields()
 
     def _check_entry_fields(self):
         try:
