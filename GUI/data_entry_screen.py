@@ -15,14 +15,27 @@ class DataEntryScreen:
     def __init__(self, main_window: WindowManager):
         self.main_window = main_window
         self.user_data = UserData()
+        self.name_entry = None
+        self.surname_entry = None
+        self.code_entry = None
+        self.path_entry = None
+        self.saved_name = ""
+        self.saved_surname = ""
+        self.saved_code = ""
+        self.saved_path = ""
+
         
     def set_data_entry_screen(self):
+        #if DataEntryScreen.is_first_time:
+        #    self._create_data_entry_widget()
+        #    DataEntryScreen.is_first_time = not DataEntryScreen.is_first_time
         if DataEntryScreen.is_first_time:
             self._create_data_entry_widget()
-            DataEntryScreen.is_first_time = not DataEntryScreen.is_first_time
+            DataEntryScreen.is_first_time = False
             
         self._set_buttons_layout()
-    
+        
+        
     def _create_data_entry_widget(self):  
         # Crea un pannello per contenere tutti i widget
         self.data_entry_panel = QtWidgets.QWidget()
@@ -30,7 +43,7 @@ class DataEntryScreen:
         self.data_entry_layout = QtWidgets.QVBoxLayout(self.data_entry_panel)
         
         # Descrizione sopra i campi
-        description1_text = "Ensure name and surname are entered, specify measurement duration, and complete calibration before starting."
+        description1_text = "Ensure name and surname and possibly also the code are correctly entered."
         description1_label = QtWidgets.QLabel(description1_text)
         description1_label.setWordWrap(True)
         description1_label.setFont(QtGui.QFont("Arial", 16))
@@ -111,20 +124,6 @@ class DataEntryScreen:
         
         self.data_entry_layout.addLayout(path_layout) 
 
-        """ # Widget per la durata
-        duration_label = QtWidgets.QLabel("Duration:")
-        duration_label.setFont(QtGui.QFont("Arial", 16))
-        duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
-        self.duration_entry = QtWidgets.QLineEdit()
-        self.duration_entry.setFont(QtGui.QFont("Arial", 14))
-        self.duration_entry.setStyleSheet("color: black;")
-        self.duration_entry.setFixedWidth(200)
-        self.duration_entry.setContentsMargins(20, 5, 10, 5)
-        duration_layout = QtWidgets.QVBoxLayout()
-        duration_layout.addWidget(duration_label)
-        duration_layout.addWidget(self.duration_entry)
-        self.data_entry_layout.addLayout(duration_layout) """
-        
         # Aggiungi il panel al layout del contenuto principale
         self.main_window.add_content_widget(self.data_entry_panel)
         
@@ -138,29 +137,29 @@ class DataEntryScreen:
         next_button.clicked.connect(self._show_next_screen)
         
         buttons_layout = QtWidgets.QHBoxLayout()
-        # button_layout.addStretch()
         buttons_layout.addWidget(back_button)
         buttons_layout.addStretch()
         buttons_layout.addWidget(next_button)
         buttons_layout.addStretch()
-        # buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
         
         button_widget = QtWidgets.QWidget()
         button_widget.setLayout(buttons_layout)
         
         self.main_window.add_button(button_widget)
         
-        """ self.main_window.add_button(back_button)
-        self.main_window.add_button(next_button) """
-        
     def _browse_path(self):
         folder_path = QFileDialog.getExistingDirectory(self.main_window, 'Select the destination folder')
         if folder_path:
-            self.path_entry.setText(folder_path)
+            path = self.path_entry.setText(folder_path)
+            self.user_data.set_path_directory(path)
+
 
     def _show_previous_screen(self):
         from calibration_screen import CalibrationScreen
         
+        # Memorizza i valori dei campi
+        self._save_field_values()
+
         self.main_window.show_content_widget("Back")
         
         self.main_window.clear_buttons_layout()
@@ -172,64 +171,84 @@ class DataEntryScreen:
     def _show_next_screen(self):
         from data_acquisition_screen import DataAcquisitionScreen
         
-        self._check_entry_fields()
-        
-        self.main_window.clear_buttons_layout()
-        
-        self.data_acquisition_screen = DataAcquisitionScreen(self.main_window)
-        
-        self.data_acquisition_screen.set_data_acquisition_screen()
-        
-        self.main_window.show_content_widget("Next")
+        if self._check_entry_fields():
+
+            # Memorizza i valori dei campi
+            self._save_field_values()
+
+            self.main_window.clear_buttons_layout()
+            self.data_acquisition_screen = DataAcquisitionScreen(self.main_window, self.saved_name, self.saved_surname, self.saved_path)
+            self.data_acquisition_screen.set_data_acquisition_screen()
+            self.main_window.show_content_widget("Next")
 
     def _check_entry_fields(self):
-        try:
-            name = self.name_entry.text().strip()  # Ottieni il nome inserito dall'utente
-            surname = self.surname_entry.text().strip()  # Ottieni il cognome inserito dall'utente
-            code = self.code_entry.text().strip()
-        except AttributeError as e:
-            name = ""
-            surname = ""
-            code = ""
-        
-        if name == "" and surname == "" and code == "":
+        if not self.name_entry or not self.surname_entry or not self.code_entry or not self.path_entry:
+            self._show_error_message("Form fields are not initialized.")
+            return False
+
+        name = self.name_entry.text().strip()  # Ottieni il nome inserito dall'utente
+        surname = self.surname_entry.text().strip()  # Ottieni il cognome inserito dall'utente
+        code = self.code_entry.text().strip()  # Ottieni il codice inserito dall'utente
+        path = self.path_entry.text().strip() # Ottieni la path della directory indicata dall'utente
+
+        errors = []
+
+        if not name:
+            errors.append("- Name cannot be empty.")
+        if not surname:
+            errors.append("- Surname cannot be empty.")
+        if len(code) != 4 or not code.isdigit():
+            errors.append("- Code must be a 4-digit number.")
+        if not path:
+            errors.append("- you must specify the directory")       
+        if name == "" and surname == "" and code == "" and path != "":
             code = self.user_data.generate_random_code()
-        
-        name_error = None
-        surname_error = None
-        code_error = None
-        
+            self.code_entry.setText(code)
+            self._show_information_message("the code has been generated automatically because the name and surname are missing")
+            return True    
+        if name != "" and surname != "" and path != "":
+            return True
+
         try:
             self.user_data.set_name(name)
         except ValueError as e:
-            name_error = str(e)
-        
+            errors.append(str(e))
         try:
             self.user_data.set_surname(surname)
         except ValueError as e:
-            surname_error = str(e)
-            
+            errors.append(str(e))
         try:
             self.user_data.set_code(code)
         except ValueError as e:
-            code_error = str(e)
-        
-        if name_error or surname_error:
-            error_message = "Please fix the following errors:\n"
-            if name_error:
-                error_message += f"- {name_error}\n"
-            if surname_error:
-                error_message += f"- {surname_error}\n"
-            if code_error:
-                error_message += f"- {code_error}\n"
-            
-            msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", error_message.strip())
-            self._set_output_dialog_style(msg_box)
-            msg_box.exec()
-        else:
-            msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Success", "Name, surname and code set successfully!")
-            self._set_output_dialog_style(msg_box)
-            msg_box.exec()
+            errors.append(str(e))
+
+        if errors:
+            self._show_error_message("\n".join(errors))
+            return False
+
+        return True
+    
+    def _save_field_values(self):
+        self.saved_name = self.name_entry.text().strip()
+        self.saved_surname = self.surname_entry.text().strip()
+        self.saved_code = self.code_entry.text().strip()
+        self.saved_path = self.path_entry.text().strip()
+
+    def _restore_field_values(self):
+        self.name_entry.setText(self.saved_name)
+        self.surname_entry.setText(self.saved_surname)
+        self.code_entry.setText(self.saved_code)
+        self.path_entry.setText(self.saved_path)    
+
+    def _show_error_message(self, message):
+        msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", message)
+        self._set_output_dialog_style(msg_box)
+        msg_box.exec()
+
+    def _show_information_message(self, message):
+        msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Information", message)
+        self._set_output_dialog_style(msg_box)
+        msg_box.exec()      
 
     def _set_output_dialog_style(self, dialog):
         if dialog:
@@ -242,95 +261,15 @@ class DataEntryScreen:
                     color: black;
                 }
                 QPushButton {
-                background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                  stop:0 #E9E6DB, stop:1 #CDE2CD);
-                color: black;
-                border: 2px solid #A3C293;
-                border-radius: 10px;
-                padding: 8px 10px;
-                min-width: 40px;  /* Aggiunto per ingrandire il pulsante OK */
-                }
-                QPushButton {
-                background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                  stop:0 #CDE2CD, stop:1 #E9E6DB);
-                border-color: #89A06B;
-                color: black;
-                border: 2px solid #A3C293;
-                padding: 8px 10px;
-                min-width: 40px;  /* Aggiunto per ingrandire il pulsante OK */
-                }
-            """)
-    
-    
-    
-    
-    
-    
-    
-    def _start_measurement(self):
-        # Aggiungi il percorso della directory 'API' al PYTHONPATH
-        sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
-        from exe_manager import ExeManager
-
-        # Chiedi all'utente di selezionare una cartella
-        folder_path = QFileDialog.getExistingDirectory(self.main_window, 'Select the destination folder')
-
-        if folder_path:
-            # Creare la finestra di dialogo per inserire la durata
-            input_dialog = QInputDialog(self.main_window)
-            input_dialog.setWindowTitle("Measurement duration")
-            input_dialog.setLabelText("Enter the duration (in minutes):")
-            input_dialog.setIntRange(1, 1000)
-            input_dialog.setIntValue(1)
-
-            # Applica lo stile alla finestra di dialogo
-            self._set_input_dialog_style(input_dialog)
-
-            # Mostra la finestra di dialogo e ottieni il valore inserito dall'utente
-            ok_pressed = input_dialog.exec()
-
-            if ok_pressed:
-                duration = input_dialog.intValue()
-                # Mostra la durata nel campo duration_entry
-                self.duration_entry.setText(str(duration))
-
-                # Se l'utente ha confermato la durata, esegui lo script con i parametri forniti
-                self.duration = duration
-
-                # Ottieni nome e cognome inseriti dall'utente
-                name = self.name_entry.text().strip()
-                surname = self.surname_entry.text().strip()
-
-                # Genera il nome del file CSV
-                csv_filename = f"{name}_{surname}.csv"
-                csv_path = os.path.join(folder_path, csv_filename)
-                
-                # Esegui lo script con il percorso CSV e la durata
-                self.script = ExeManager().run_script(csv_path, duration)
-
-    
-    def _set_input_dialog_style(self, input_dialog):
-        if input_dialog:
-            input_dialog.setStyleSheet("""
-                QInputDialog {
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #CDE2CD);
                     color: black;
-                }
-                QLabel {
-                    color: black;
-                }
-                
-                QSpinBox {
-                    color: black; /* Colore dei numeri */
-                }
-                QPushButton {
-                    color: black;
-                    background-color: #E9E6DB;
-                    border: 1px solid #000000;
-                    border-radius: 5px;
-                    padding: 5px;
+                    border: 2px solid #A3C293;
+                    border-radius: 10px;
+                    padding: 8px 10px;
+                    min-width: 40px;
                 }
                 QPushButton:hover {
-                    background-color: #CCCCCC;
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #CDE2CD, stop:1 #E9E6DB);
+                    border-color: #89A06B;
                 }
             """)
-

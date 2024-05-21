@@ -57,8 +57,9 @@ class UserData:
     def create_path_csv(self):
         name_csv = self._calculate_name_csv()
         path_csv = os.path.join(self.path_directory, name_csv)
+        normalized_path_csv = os.path.normpath(path_csv)
         
-        return path_csv
+        return normalized_path_csv
     
     def generate_random_code(self, length=4):
         random_code = ""
