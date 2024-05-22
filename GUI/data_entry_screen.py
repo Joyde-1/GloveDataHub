@@ -1,9 +1,10 @@
-from PyQt6 import QtWidgets, QtGui
+from PyQt6 import QtWidgets, QtGui, QtCore
 from PyQt6.QtWidgets import QFileDialog, QInputDialog
 from custom_button import CustomButton
 from window_manager import WindowManager
 import sys
 import os
+from pathlib import Path
 
 # Aggiungi il percorso della directory 'Data-Acquisition' al PYTHONPATH
 # sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
@@ -15,23 +16,11 @@ class DataEntryScreen:
     def __init__(self, main_window: WindowManager):
         self.main_window = main_window
         self.user_data = UserData()
-        self.name_entry = None
-        self.surname_entry = None
-        self.code_entry = None
-        self.path_entry = None
-        self.saved_name = ""
-        self.saved_surname = ""
-        self.saved_code = ""
-        self.saved_path = ""
 
-        
     def set_data_entry_screen(self):
-        #if DataEntryScreen.is_first_time:
-        #    self._create_data_entry_widget()
-        #    DataEntryScreen.is_first_time = not DataEntryScreen.is_first_time
         if DataEntryScreen.is_first_time:
             self._create_data_entry_widget()
-            DataEntryScreen.is_first_time = False
+            DataEntryScreen.is_first_time = not DataEntryScreen.is_first_time
             
         self._set_buttons_layout()
         
@@ -47,7 +36,7 @@ class DataEntryScreen:
         description1_label = QtWidgets.QLabel(description1_text)
         description1_label.setWordWrap(True)
         description1_label.setFont(QtGui.QFont("Arial", 16))
-        description1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 20px 10px 20px;")
+        description1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 0px 10px 10px;")
         self.data_entry_layout.addWidget(description1_label)
         
         # Layout per nome e cognome
@@ -56,30 +45,36 @@ class DataEntryScreen:
         # Widget per il nome
         name_label = QtWidgets.QLabel("Name:")
         name_label.setFont(QtGui.QFont("Arial", 16))
-        name_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
+        name_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
+        name_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         self.name_entry = QtWidgets.QLineEdit()
         self.name_entry.setFont(QtGui.QFont("Arial", 14))
         self.name_entry.setFixedWidth(200)
         self.name_entry.setStyleSheet("color: black;")  
-        self.name_entry.setContentsMargins(20, 5, 10, 5)
+        self.name_entry.setContentsMargins(10, 5, 10, 5)
         name_layout = QtWidgets.QVBoxLayout() 
         name_layout.addWidget(name_label)  
         name_layout.addWidget(self.name_entry) 
+        name_layout.addStretch()
+        #name_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         name_surname_layout.addLayout(name_layout)
 
         # Widget per il cognome
         surname_label = QtWidgets.QLabel("Surname:")
         surname_label.setFont(QtGui.QFont("Arial", 16))
-        surname_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
+        surname_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
         self.surname_entry = QtWidgets.QLineEdit()
         self.surname_entry.setFont(QtGui.QFont("Arial", 14))
         self.surname_entry.setStyleSheet("color: black;")
         self.surname_entry.setFixedWidth(200)
-        self.surname_entry.setContentsMargins(20, 5, 10, 5)
+        self.surname_entry.setContentsMargins(10, 5, 10, 5)
         surname_layout = QtWidgets.QVBoxLayout()
         surname_layout.addWidget(surname_label)
         surname_layout.addWidget(self.surname_entry)
+        surname_layout.addStretch()
         name_surname_layout.addLayout(surname_layout)
+        
+        name_surname_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         
         self.data_entry_layout.addLayout(name_surname_layout)
         
@@ -91,38 +86,39 @@ class DataEntryScreen:
         self.code_entry.setFont(QtGui.QFont("Arial", 14))
         self.code_entry.setStyleSheet("color: black;")
         self.code_entry.setFixedWidth(200)
-        self.code_entry.setContentsMargins(20, 5, 10, 5)
+        self.code_entry.setContentsMargins(10, 5, 10, 5)
         code_layout = QtWidgets.QVBoxLayout()
         code_layout.addWidget(code_label)
         code_layout.addWidget(self.code_entry)
         self.data_entry_layout.addLayout(code_layout)
 
         # Widget per la path
-        path_label = QtWidgets.QLabel("Path:")
-        path_label.setFont(QtGui.QFont("Arial", 16))
-        path_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
+        path_directory_label = QtWidgets.QLabel("Path:")
+        path_directory_label.setFont(QtGui.QFont("Arial", 16))
+        path_directory_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
 
-        self.path_entry = QtWidgets.QLineEdit()
-        self.path_entry.setFont(QtGui.QFont("Arial", 12))
-        self.path_entry.setStyleSheet("color: black;")
-        self.path_entry.setFixedWidth(300)
-        self.path_entry.setContentsMargins(20, 5, 10, 5)
+        self.path_directory_entry = QtWidgets.QLineEdit()
+        self.path_directory_entry.setText(str(Path.home() / "Documents"))
+        self.path_directory_entry.setFont(QtGui.QFont("Arial", 12))
+        self.path_directory_entry.setStyleSheet("color: black;")
+        self.path_directory_entry.setFixedWidth(300)
+        self.path_directory_entry.setContentsMargins(10, 5, 10, 5)
         
         browse_button = CustomButton("Browse", 155, 40)
         browse_button.clicked.connect(self._browse_path)
 
         # Use QVBoxLayout for label and QHBoxLayout for entry and button
-        path_layout = QtWidgets.QVBoxLayout()
+        path_directory_layout = QtWidgets.QVBoxLayout()
         
-        path_entry_layout = QtWidgets.QHBoxLayout()
-        path_entry_layout.addWidget(self.path_entry)
-        path_entry_layout.addStretch()
-        path_entry_layout.addWidget(browse_button)
+        path_directory_entry_layout = QtWidgets.QHBoxLayout()
+        path_directory_entry_layout.addWidget(self.path_directory_entry)
+        path_directory_entry_layout.addStretch()
+        path_directory_entry_layout.addWidget(browse_button)
 
-        path_layout.addWidget(path_label)
-        path_layout.addLayout(path_entry_layout)
+        path_directory_layout.addWidget(path_directory_label)
+        path_directory_layout.addLayout(path_directory_entry_layout)
         
-        self.data_entry_layout.addLayout(path_layout) 
+        self.data_entry_layout.addLayout(path_directory_layout) 
 
         # Aggiungi il panel al layout del contenuto principale
         self.main_window.add_content_widget(self.data_entry_panel)
@@ -140,7 +136,6 @@ class DataEntryScreen:
         buttons_layout.addWidget(back_button)
         buttons_layout.addStretch()
         buttons_layout.addWidget(next_button)
-        buttons_layout.addStretch()
         
         button_widget = QtWidgets.QWidget()
         button_widget.setLayout(buttons_layout)
@@ -148,17 +143,20 @@ class DataEntryScreen:
         self.main_window.add_button(button_widget)
         
     def _browse_path(self):
-        folder_path = QFileDialog.getExistingDirectory(self.main_window, 'Select the destination folder')
-        if folder_path:
-            path = self.path_entry.setText(folder_path)
-            self.user_data.set_path_directory(path)
+        # Ottieni il percorso della cartella Documenti
+        documents_path = str(Path.home() / "Documents")
+        
+        # Apri il QFileDialog partendo dalla cartella Documenti
+        path_directory = QFileDialog.getExistingDirectory(self.main_window, 'Select the destination folder', documents_path)
 
+        if path_directory:
+            self.path_directory_entry.setText(path_directory)
 
     def _show_previous_screen(self):
         from calibration_screen import CalibrationScreen
         
         # Memorizza i valori dei campi
-        self._save_field_values()
+        # self._save_field_values()
 
         self.main_window.show_content_widget("Back")
         
@@ -171,84 +169,77 @@ class DataEntryScreen:
     def _show_next_screen(self):
         from data_acquisition_screen import DataAcquisitionScreen
         
-        if self._check_entry_fields():
-
-            # Memorizza i valori dei campi
-            self._save_field_values()
-
+        self._save_fields_values()
+        
+        if not self._is_error_message():
+            if self.info_message != "":
+                self._show_information_message()
+                
             self.main_window.clear_buttons_layout()
-            self.data_acquisition_screen = DataAcquisitionScreen(self.main_window, self.saved_name, self.saved_surname, self.saved_path)
+            self.data_acquisition_screen = DataAcquisitionScreen(self.main_window, self.user_data)
             self.data_acquisition_screen.set_data_acquisition_screen()
             self.main_window.show_content_widget("Next")
+        else:
+            self._show_error_message()
 
-    def _check_entry_fields(self):
-        if not self.name_entry or not self.surname_entry or not self.code_entry or not self.path_entry:
-            self._show_error_message("Form fields are not initialized.")
-            return False
-
-        name = self.name_entry.text().strip()  # Ottieni il nome inserito dall'utente
-        surname = self.surname_entry.text().strip()  # Ottieni il cognome inserito dall'utente
-        code = self.code_entry.text().strip()  # Ottieni il codice inserito dall'utente
-        path = self.path_entry.text().strip() # Ottieni la path della directory indicata dall'utente
-
-        errors = []
-
-        if not name:
-            errors.append("- Name cannot be empty.")
-        if not surname:
-            errors.append("- Surname cannot be empty.")
-        if len(code) != 4 or not code.isdigit():
-            errors.append("- Code must be a 4-digit number.")
-        if not path:
-            errors.append("- you must specify the directory")       
-        if name == "" and surname == "" and code == "" and path != "":
+    def _save_fields_values(self):
+        self.fields_errors = ""
+        self.info_message = ""
+        
+        try:
+            name = self.name_entry.text().strip()  # Ottieni il nome inserito dall'utente
+            surname = self.surname_entry.text().strip()  # Ottieni il cognome inserito dall'utente
+            code = self.code_entry.text() # Ottieni il codice inserito dall'utente
+            path_directory = self.path_directory_entry.text() # Ottieni la path della directory indicata dall'utente
+        except AttributeError as e:
+            name = ""
+            surname = ""
+            code = ""
+            path_directory = ""
+            
+        if name == "" and surname == "" and code == "" and self.fields_errors == "":
             code = self.user_data.generate_random_code()
             self.code_entry.setText(code)
-            self._show_information_message("the code has been generated automatically because the name and surname are missing")
-            return True    
-        if name != "" and surname != "" and path != "":
-            return True
+            self.info_message = "The code has been generated automatically because the name and surname are missing"
 
         try:
             self.user_data.set_name(name)
         except ValueError as e:
-            errors.append(str(e))
+            self.fields_errors += "• " + str(e)
+        
         try:
             self.user_data.set_surname(surname)
         except ValueError as e:
-            errors.append(str(e))
+            self.fields_errors += "• " + str(e)
+            
         try:
             self.user_data.set_code(code)
         except ValueError as e:
-            errors.append(str(e))
+            self.fields_errors += "• " + str(e)
+        """ except ValueError as e:
+            self.fields_errors += "• " + str(e) """
+            
+        try:
+            self.user_data.set_path_directory(path_directory)
+        except ValueError as e:
+            self.fields_errors += "• " + str(e)
+        
+    def _is_error_message(self):
+        if self.fields_errors != "":
+            self.fields_errors = "Please fix the following errors:\n" + self.fields_errors
+            return True
+        else:
+            return False  
 
-        if errors:
-            self._show_error_message("\n".join(errors))
-            return False
+    def _show_error_message(self):
+        error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.fields_errors.strip())
+        self._set_output_dialog_style(error_msg_box)
+        error_msg_box.exec()
 
-        return True
-    
-    def _save_field_values(self):
-        self.saved_name = self.name_entry.text().strip()
-        self.saved_surname = self.surname_entry.text().strip()
-        self.saved_code = self.code_entry.text().strip()
-        self.saved_path = self.path_entry.text().strip()
-
-    def _restore_field_values(self):
-        self.name_entry.setText(self.saved_name)
-        self.surname_entry.setText(self.saved_surname)
-        self.code_entry.setText(self.saved_code)
-        self.path_entry.setText(self.saved_path)    
-
-    def _show_error_message(self, message):
-        msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", message)
-        self._set_output_dialog_style(msg_box)
-        msg_box.exec()
-
-    def _show_information_message(self, message):
-        msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Information", message)
-        self._set_output_dialog_style(msg_box)
-        msg_box.exec()      
+    def _show_information_message(self):
+        info_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Information", self.info_message)
+        self._set_output_dialog_style(info_msg_box)
+        info_msg_box.exec()      
 
     def _set_output_dialog_style(self, dialog):
         if dialog:

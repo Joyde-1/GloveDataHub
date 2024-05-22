@@ -273,7 +273,7 @@ class WindowManager(QWidget):
         self.sensecom_widget.setLayout(self.sensecom_layout)
 
         # self.main_layout.addLayout(self.sensecom_layout)
-        self.content_layout.addWidget(self.sensecom_widget, 0, 1, 2, 2, QtCore.Qt.AlignmentFlag.AlignRight)
+        self.content_layout.addWidget(self.sensecom_widget, 0, 1, 3, 2, QtCore.Qt.AlignmentFlag.AlignRight)
         # Aggiungi un layout per il contenuto dinamico
         # self.content_panel = QtWidgets.QStackedWidget()
         # self.content_layout.addWidget(self.content_panel)

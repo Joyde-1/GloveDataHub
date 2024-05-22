@@ -11,24 +11,26 @@ class UserData:
 
     def set_name(self, name):
         if not re.match("^[A-Za-z]+$", name) and name != "":
-            raise ValueError("Name must contain only letters.")
+            raise ValueError("Name must contain only letters. \n")
         self.name = name
 
     def set_surname(self, surname):
         if not re.match("^[A-Za-z]+$", surname) and surname != "":
-            raise ValueError("Surname must contain only letters.")
+            raise ValueError("Surname must contain only letters. \n")
         self.surname = surname
         
     def set_code(self, code):
         if not re.match("^[0-9]+$", code):
-            raise ValueError("Code must contain only numbers.")
+            raise ValueError("Code must contain only numbers. \n")
         if len(code) != 4:
-            raise ValueError("Code must have a length of 4 numbers.")
+            raise ValueError("Code must have a length of 4 numbers. \n")
         self.code = code
 
     def set_path_directory(self, path_directory):
+        if not os.path.exists(path_directory):
+            raise ValueError("Path does not exist. \n")
         self.path_directory = path_directory
-
+            
     def get_name(self):
         return self.name
 

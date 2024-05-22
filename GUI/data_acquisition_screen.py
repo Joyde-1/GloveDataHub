@@ -13,13 +13,10 @@ from duration_time import DurationTime
 class DataAcquisitionScreen:
     is_first_time = True
     
-    def __init__(self, main_window: WindowManager, name: str, surname: str, path: str):
+    def __init__(self, main_window: WindowManager, user_data: UserData):
         self.main_window = main_window
-        self.user_data = UserData()
+        self.user_data = user_data
         self.duration_time = DurationTime()
-        self.name = name
-        self.surname = surname
-        self.folder_path = path
         self.stop_measurement_button = None  # Variabile per il pulsante di stop
         
     def set_data_acquisition_screen(self):
@@ -79,23 +76,20 @@ class DataAcquisitionScreen:
         back_button = CustomButton("Back", 140, 40)
         back_button.clicked.connect(self._show_previous_screen)
         
-        # Bottone per procedere
-        next_button = CustomButton("Next", 140, 40)
-        next_button.clicked.connect(self._show_next_screen)
-
         # Bottone per iniziare la misurazione
         start_measurement_button = CustomButton("Start Measurement", 280, 40)
         start_measurement_button.clicked.connect(self._start_measurement)
         
+        # Bottone per procedere
+        next_button = CustomButton("Next", 140, 40)
+        next_button.clicked.connect(self._show_next_screen)
+        
         buttons_layout = QtWidgets.QHBoxLayout()
-        # button_layout.addStretch()
         buttons_layout.addWidget(back_button)
-        buttons_layout.addStretch()
-        buttons_layout.addWidget(next_button)
         buttons_layout.addStretch()
         buttons_layout.addWidget(start_measurement_button)
         buttons_layout.addStretch()
-        # buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        buttons_layout.addWidget(next_button)
         
         button_widget = QtWidgets.QWidget()
         button_widget.setLayout(buttons_layout)
@@ -133,21 +127,12 @@ class DataAcquisitionScreen:
         # Aggiungi il percorso della directory 'API' al PYTHONPATH
         sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
         from exe_manager import ExeManager
+        
+        self.path_csv = self.user_data.create_path_csv()
 
-        if self._check_entry_fields():
-            self.user_data.set_name(self.name)
-            self.user_data.set_surname(self.surname)
-            self.user_data.set_code(self.user_data.generate_random_code())  # Genera un codice casuale, se necessario
-            print(f"Folder path before setting: {self.folder_path}")  # Debug: verifica il valore di folder_path
-            self.user_data.set_path_directory(self.folder_path)
-
-            path_csv = self.user_data.create_path_csv()
-            print(f"Path CSV after creation: {path_csv}")  # Debug: verifica il valore di path_csv
-            self.script = ExeManager().run_script(path_csv, self.duration_entry.text())
-
-            # Aggiorna lo stato e crea il pulsante di stop
-            DataAcquisitionScreen.measurement_started = True
-            self._create_stop_button()
+        # Aggiorna lo stato e crea il pulsante di stop
+        DataAcquisitionScreen.measurement_started = True
+        self._create_stop_button()
 
     def _create_stop_button(self):
         self.stop_measurement_button = CustomButton("Stop Measurement", 280, 40)
@@ -204,29 +189,33 @@ class DataAcquisitionScreen:
         
         self.data_entry_screen.set_data_entry_screen()
 
-    def _check_entry_fields(self):
-        duration = self.duration_entry.text().strip()  # Ottieni la durata inserita dall'utente
-
-        errors = []
-
-        if not duration.isdigit() or int(duration) <= 0:
-            errors.append("Duration must be a positive integer in minutes.")
-
+    def _save_duration_field(self):
+        self.field_error = ""
+        
+        try:
+            duration = self.duration_entry.text()  # Ottieni la durata inserita dall'utente
+        except AttributeError as e:
+            duration = ""
+            
+        if duration == "":
+            duration = "-1"
+            
         try:
             self.duration_time.set_time_min(int(duration))
         except ValueError as e:
-            errors.append(str(e))
-
-        if errors:
-            self._show_error_message("\n".join(errors))
+            self.field_error += "• " + str(e)
+    
+    def _is_error_message(self):
+        if self.field_error != "":
+            self.field_error = "Please fix the following errors:\n" + self.field_error
+            return True
+        else:
             return False
 
-        return True
-
-    def _show_error_message(self, message):
-        msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", message)
-        self._set_output_dialog_style(msg_box)
-        msg_box.exec()
+    def _show_error_message(self):
+        error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.fields_errors.strip())
+        self._set_output_dialog_style(error_msg_box)
+        error_msg_box.exec()
 
     def _set_output_dialog_style(self, dialog):
         if dialog:

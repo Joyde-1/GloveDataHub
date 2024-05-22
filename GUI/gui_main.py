@@ -11,7 +11,7 @@ if __name__ == "__main__":
         'ghd_logo_path': "GUI/images/logo_GloveDataHub.png",
         'kore_logo_path': "GUI/images/kore_Logo.png",
         'window_title': "GloveDataHub", 
-        'window_width': 1000, 
+        'window_width': 1025, 
         'window_height': 600, 
         'background': '#E9E6DB',
         'frontground': '#000000',

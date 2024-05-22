@@ -61,7 +61,6 @@ class CalibrationScreen():
         buttons_layout.addWidget(back_button)
         buttons_layout.addStretch()
         buttons_layout.addWidget(next_button)
-        buttons_layout.addStretch()
         # buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
         
         button_widget = QtWidgets.QWidget()

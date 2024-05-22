@@ -5,11 +5,13 @@ class DurationTime:
 
     def set_time_min(self, minutes=None):
         if minutes == None:
-            minutes = -1
+            self.time_min = -1
+            self.time_sec = -1
         elif not isinstance(minutes, int) or minutes < 0:
             raise ValueError("Invalid format for minutes. Must be a non-negative integer.")
-        self.time_min = minutes
-        self._convert_time_to_seconds()
+        else:
+            self.time_min = minutes
+            self._convert_time_to_seconds()
 
     def get_time_sec(self):
         return self.time_sec
