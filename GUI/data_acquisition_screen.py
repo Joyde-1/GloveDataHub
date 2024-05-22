@@ -20,6 +20,7 @@ class DataAcquisitionScreen:
         self.name = name
         self.surname = surname
         self.folder_path = path
+        self.stop_measurement_button = None  # Variabile per il pulsante di stop
         
     def set_data_acquisition_screen(self):
         if DataAcquisitionScreen.is_first_time:
@@ -144,6 +145,65 @@ class DataAcquisitionScreen:
             print(f"Path CSV after creation: {path_csv}")  # Debug: verifica il valore di path_csv
             self.script = ExeManager().run_script(path_csv, self.duration_entry.text())
 
+            # Aggiorna lo stato e crea il pulsante di stop
+            DataAcquisitionScreen.measurement_started = True
+            self._create_stop_button()
+
+    def _create_stop_button(self):
+        self.stop_measurement_button = CustomButton("Stop Measurement", 280, 40)
+        self.stop_measurement_button.clicked.connect(self._stop_measurement)
+
+        self.main_window.clear_buttons_layout()  # Rimuove i pulsanti attuali
+        self.main_window.add_button(self.stop_measurement_button)  # Aggiunge il pulsante di stop
+
+    def _stop_measurement(self):
+        # Aggiungi il percorso della directory 'API' al PYTHONPATH
+        sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
+        from exe_manager import ExeManager
+
+        if DataAcquisitionScreen.measurement_started:
+            # Logica per fermare la misurazione, ad esempio fermare il processo del script
+            self.script = ExeManager().close_script()
+            DataAcquisitionScreen.measurement_started = False
+
+            # Rimuove il pulsante di stop
+            self.main_window.clear_buttons_layout() 
+            
+            # Aggiungi i pulsanti "Close" e "New Measurement"
+            self._create_post_measurement_buttons()     
+
+    def _create_post_measurement_buttons(self):
+        close_button = CustomButton("Close", 140, 40)
+        close_button.clicked.connect(self._close_application)
+        
+        new_measurement_button = CustomButton("New Measurement", 280, 40)
+        new_measurement_button.clicked.connect(self._start_new_measurement)
+        
+        buttons_layout = QtWidgets.QHBoxLayout()
+        buttons_layout.addWidget(close_button)
+        buttons_layout.addStretch()
+        buttons_layout.addWidget(new_measurement_button)
+        buttons_layout.addStretch()
+        
+        button_widget = QtWidgets.QWidget()
+        button_widget.setLayout(buttons_layout)
+        
+        self.main_window.add_button(button_widget)
+        
+    def _close_application(self):
+        QtCore.QCoreApplication.quit()
+        
+    def _start_new_measurement(self):
+        from data_entry_screen import DataEntryScreen
+        
+        self.main_window.show_content_widget("Back")
+        
+        self.main_window.clear_buttons_layout()
+        
+        self.data_entry_screen = DataEntryScreen(self.main_window)
+        
+        self.data_entry_screen.set_data_entry_screen()
+
     def _check_entry_fields(self):
         duration = self.duration_entry.text().strip()  # Ottieni la durata inserita dall'utente
 
@@ -162,7 +222,6 @@ class DataAcquisitionScreen:
             return False
 
         return True
-
 
     def _show_error_message(self, message):
         msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", message)
@@ -191,6 +250,4 @@ class DataAcquisitionScreen:
                     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #CDE2CD, stop:1 #E9E6DB);
                     border-color: #89A06B;
                 }
-            """)    
-
-        
+            """)
