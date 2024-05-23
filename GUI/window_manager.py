@@ -253,34 +253,35 @@ class WindowManager(QWidget):
                     break
                 
         self.exe_manager.run_sensecom()
-        QtCore.QTimer.singleShot(1250, self._embed_sensecom_window)
+        QtCore.QTimer.singleShot(2500, self._embed_sensecom_window)
 
     def _embed_sensecom_window(self):
         
         try:
             sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
+
+            sensecom_hwnd.restore()  # Restore the window if it's minimized or maximized
+            sensecom_hwnd.moveTo(0, 0)  # Move the window to a specific position
+            #sensecom_hwnd.resize(300, 200)  # Resize the window to fit inside the GUI container
+
+            container_hwnd = int(self.sensecom_container.winId())
+            ctypes.windll.user32.SetParent(sensecom_hwnd._hWnd, container_hwnd)
+            
+            # Get the current style of the SenseCom window
+            style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -16)
+            
+            # Remove the system buttons from the window
+            style &= ~0x00C00000  # Remove WS_CAPTION (title bar) and WS_BORDER (border)
+            ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -16, style)
+
+            # Set the anchor to pin the SenseCom window to the main GUI window
+            ex_style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -20)
+            ex_style |= 0x00000008  # Set WS_EX_CONTROLPARENT
+            ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -20, ex_style)
+
         except IndexError:
-            QMessageBox.critical(self, "Error", "SenseCom window not found.")
-
-        sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
-        sensecom_hwnd.restore()  # Restore the window if it's minimized or maximized
-        sensecom_hwnd.moveTo(0, 0)  # Move the window to a specific position
-        #sensecom_hwnd.resize(300, 200)  # Resize the window to fit inside the GUI container
-
-        container_hwnd = int(self.sensecom_container.winId())
-        ctypes.windll.user32.SetParent(sensecom_hwnd._hWnd, container_hwnd)
-        
-        # Get the current style of the SenseCom window
-        style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -16)
-        
-        # Remove the system buttons from the window
-        style &= ~0x00C00000  # Remove WS_CAPTION (title bar) and WS_BORDER (border)
-        ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -16, style)
-
-        # Set the anchor to pin the SenseCom window to the main GUI window
-        ex_style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -20)
-        ex_style |= 0x00000008  # Set WS_EX_CONTROLPARENT
-        ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -20, ex_style) 
+            #pass
+            QMessageBox.critical(self, "Error", "SenseCom window not found.") 
         
     def close_sensecom_widget(self):
         self.clear_sensecom_layout()
