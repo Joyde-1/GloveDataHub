@@ -7,6 +7,7 @@ import ctypes
 from ctypes import wintypes
 import psutil
 import pygetwindow as gw
+import time
 from custom_button import CustomButton
 
 # Aggiungi il percorso della directory 'API' al PYTHONPATH
@@ -238,25 +239,21 @@ class WindowManager(QWidget):
         WindowManager.is_sensecom_layout = not WindowManager.is_sensecom_layout
 
     def _embed_sensecom(self):
-        # Controlla se il processo SenseCom è già attivo
-        sensecom_running = False
-        for process in psutil.process_iter():
-            if process.name() == "SenseCom.exe":
-                sensecom_running = True
-                break
-
-        if sensecom_running:
-            # Termina il processo SenseCom
+        if self.exe_manager.is_sensecom_running():
+            pass
+        else:
+            # Controlla se il processo SenseCom è già attivo
             for process in psutil.process_iter():
                 if process.name() == "SenseCom.exe":
                     process.terminate()
                     break
-                
-        self.exe_manager.run_sensecom()
-        QtCore.QTimer.singleShot(2500, self._embed_sensecom_window)
+            
+            time.sleep(1)
+
+            self.exe_manager.run_sensecom()
+            QtCore.QTimer.singleShot(2500, self._embed_sensecom_window)
 
     def _embed_sensecom_window(self):
-        
         try:
             sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
 
