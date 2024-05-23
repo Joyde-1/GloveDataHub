@@ -4,6 +4,7 @@ from PyQt6.QtGui import QFont
 import sys
 import os
 import ctypes
+from ctypes import wintypes
 import psutil
 import pygetwindow as gw
 from custom_button import CustomButton
@@ -33,8 +34,6 @@ window_proc_pointer = WNDPROC(window_proc)
 class WindowManager(QWidget):
     
     is_sensecom_layout = False
-    is_dynamic_content_layout = False
-    is_buttons_layout = False
 
     def __init__(self, ghd_logo_path, kore_logo_path, window_title, window_width, window_height, background, frontground, header_title, header_font):
         super().__init__()
@@ -200,53 +199,11 @@ class WindowManager(QWidget):
         #self.main_layout.addWidget(self.buttons_widget)
         self.main_layout.addLayout(self.buttons_layout)
         
-        WindowManager.is_buttons_layout = not WindowManager.is_buttons_layout
+        # WindowManager.is_buttons_layout = not WindowManager.is_buttons_layout
         
     def add_button(self, button):
         self.buttons_layout.addWidget(button)
         #self.buttons_layout.addStretch()
-        
-        
-        
-        
-        
-        
-        
-        
-    def create_dynamic_content_layout(self):
-        # Rimuovi il layout stesso dal layout principale
-        self.main_layout.removeItem(self.content_layout)
-        
-        # Aggiungi un layout per il contenuto dinamico
-        self.content_layout = QVBoxLayout()
-        self.content_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.main_layout.addLayout(self.content_layout)
-        
-        """ self.dynamic_content_box = QtWidgets.QHBoxLayout()
-        self.content_layout.addLayout(self.dynamic_content_box) """
-        
-        # Left widget for dynamic content
-        self.dynamic_content = QtWidgets.QVBoxLayout()
-        # self.dynamic_content_widget.setFixedSize(500, 250)
-        self.dynamic_content.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.content_layout.addLayout(self.dynamic_content)
-        
-        WindowManager.is_dynamic_content_layout = not WindowManager.is_dynamic_content_layout
-    
-    def add_dynamic_content(self, widget):
-        self.dynamic_content.addWidget(widget)
-        self.dynamic_content.addStretch()
-        
-        """ if WindowManager.is_sensecom_layout:
-            self.dynamic_content.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
-            self.sensecom_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignRight)
-            self.button_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom) """
-            
-
-        # self.dynamic_content.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
-                
-        # self.dynamic_content_widget.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
-        # self.dynamic_content_widget.setCurrentWidget(widget)
         
     def create_sensecom_widget(self):
         self.sensecom_widget = QWidget()
@@ -256,7 +213,7 @@ class WindowManager(QWidget):
         
         # Contenitore SenseCom
         self.sensecom_container = QWidget()
-        self.sensecom_container.setFixedSize(512, 250)
+        self.sensecom_container.setFixedSize(528, 289)
         
         # Bottone per avviare SenseCom
         sensecom_button = CustomButton("Start SenseCom", 250, 40)
@@ -296,33 +253,38 @@ class WindowManager(QWidget):
                     break
                 
         self.exe_manager.run_sensecom()
-        QtCore.QTimer.singleShot(1000, self._embed_sensecom_window)
+        QtCore.QTimer.singleShot(1250, self._embed_sensecom_window)
 
     def _embed_sensecom_window(self):
-        try:
-            sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
-            sensecom_hwnd.restore()  # Restore the window if it's minimized or maximized
-            sensecom_hwnd.moveTo(0, 0)  # Move the window to a specific position
-            #sensecom_hwnd.resize(300, 200)  # Resize the window to fit inside the GUI container
+        
+        while True:
+            try:
+                sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
+                break
+            except IndexError:
+                pass
+                # QMessageBox.critical(self, "Error", "SenseCom window not found.")
 
-            container_hwnd = int(self.sensecom_container.winId())
-            ctypes.windll.user32.SetParent(sensecom_hwnd._hWnd, container_hwnd)
-           
-            # Get the current style of the SenseCom window
-            style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -16)
-            
-            # Remove the system buttons from the window
-            style &= ~0x00C00000  # Remove WS_CAPTION (title bar) and WS_BORDER (border)
-            ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -16, style)
+        sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
+        sensecom_hwnd.restore()  # Restore the window if it's minimized or maximized
+        sensecom_hwnd.moveTo(0, 0)  # Move the window to a specific position
+        #sensecom_hwnd.resize(300, 200)  # Resize the window to fit inside the GUI container
 
-            # Set the anchor to pin the SenseCom window to the main GUI window
-            ex_style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -20)
-            ex_style |= 0x00000008  # Set WS_EX_CONTROLPARENT
-            ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -20, ex_style)    
+        container_hwnd = int(self.sensecom_container.winId())
+        ctypes.windll.user32.SetParent(sensecom_hwnd._hWnd, container_hwnd)
+        
+        # Get the current style of the SenseCom window
+        style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -16)
+        
+        # Remove the system buttons from the window
+        style &= ~0x00C00000  # Remove WS_CAPTION (title bar) and WS_BORDER (border)
+        ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -16, style)
 
-        except IndexError:
-            QMessageBox.critical(self, "Error", "SenseCom window not found.")
-            
+        # Set the anchor to pin the SenseCom window to the main GUI window
+        ex_style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -20)
+        ex_style |= 0x00000008  # Set WS_EX_CONTROLPARENT
+        ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -20, ex_style) 
+        
     def close_sensecom_widget(self):
         self.clear_sensecom_layout()
         # self.content_layout.removeWidget(self.sensecom_widget)
@@ -332,8 +294,7 @@ class WindowManager(QWidget):
         if self.exe_manager.is_sensecom_running():
             self.exe_manager.close_sensecom()
         event.accept()
-                
-    # Metodo per ripulire il sensecom_layout
+        
     def clear_sensecom_layout(self):
         while self.sensecom_layout.count():
             item = self.sensecom_layout.takeAt(0)
@@ -343,20 +304,6 @@ class WindowManager(QWidget):
             elif item.layout() is not None:
                 # Se l'item è un layout, puliscilo ricorsivamente
                 self._clear_layout(item.layout())
-
-    def clear_dynamic_content(self):
-        # Ripulisci solo il dynamic_content
-        while self.dynamic_content.count() > 0:
-            item = self.dynamic_content.takeAt(0)
-            widget = item.widget()
-            if widget is not None:
-                widget.deleteLater()  # Rimuove e cancella il widget
-            elif item.layout() is not None:
-                self._clear_layout(item.layout())  # Pulizia ricorsiva dei layout annidati
-
-        # Rimuovi il layout stesso dal layout principale
-        # self.content_layout.removeItem(self.dynamic_content_box)
-        # self.dynamic_content_box.removeItem(self.dynamic_content)
                 
     def clear_buttons_layout(self):
         # Ripulisci solo il button_layou

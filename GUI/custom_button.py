@@ -13,9 +13,9 @@ class CustomButton(QtWidgets.QPushButton):
         return """
             QPushButton {
                 background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                  stop:0 #E9E6DB, stop:1 #CDE2CD);
+                                                  stop:0 #E9E6DB, stop:1 #C8C5B8);
                 color: black;
-                border: 2px solid #A3C293;
+                border: 2px solid #C8C5B8;
                 border-radius: 15px;
                 padding: 10px 40px;
             }
@@ -25,10 +25,10 @@ class CustomButton(QtWidgets.QPushButton):
         return """
             QPushButton {
                 background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                  stop:0 #CDE2CD, stop:1 #E9E6DB);
-                border-color: #89A06B;
+                                                  stop:0 #C8C5B8, stop:1 #A9A69B);
+                border-color: #A9A69B;
                 color: black;
-                border: 2px solid #A3C293;
+                border: 2px solid #A9A69B;
                 border-radius: 15px;
                 padding: 10px 40px;
             }
@@ -37,10 +37,10 @@ class CustomButton(QtWidgets.QPushButton):
     def pressed_style(self):
         return """
             QPushButton {
-                background-color: #BADA55;
-                border-color: #789048;
+                background-color: #A9A69B;
+                border-color: #8B887E;
                 color: black;
-                border: 2px solid #A3C293;
+                border: 2px solid #8B887E;
                 border-radius: 15px;
                 padding: 10px 40px;
             }

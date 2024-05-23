@@ -13,6 +13,8 @@ from duration_time import DurationTime
 class DataAcquisitionScreen:
     is_first_time = True
     
+    duration_entry = None
+    
     def __init__(self, main_window: WindowManager, user_data: UserData):
         self.main_window = main_window
         self.user_data = user_data
@@ -31,19 +33,20 @@ class DataAcquisitionScreen:
         self.data_acquisition_panel = QtWidgets.QWidget()
         self.data_acquisition_panel.setStyleSheet("background-color: #E9E6DB;")
         self.data_acquisition_layout = QtWidgets.QVBoxLayout(self.data_acquisition_panel)
-        self.data_acquisition_layout.setContentsMargins(20, 40, 20, 20)
+        # self.data_acquisition_layout.setContentsMargins(20, 40, 20, 20)
 
         # Spaziatore per sollevare il contenuto
-        self.data_acquisition_layout.addStretch(2)
+        # self.data_acquisition_layout.addStretch(2)
         
         # Descrizione sopra i campi
-        description1_text = "Data acquisition."
-        description1_label = QtWidgets.QLabel(description1_text)
-        description1_label.setWordWrap(True)
-        description1_label.setFont(QtGui.QFont("Arial", 16))
-        description1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 20px 10px 20px;")
-        description1_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.data_acquisition_layout.addWidget(description1_label)
+        description_text = "Data acquisition."
+        description_label = QtWidgets.QLabel(description_text)
+        description_label.setWordWrap(True)
+        description_label.setFont(QtGui.QFont("Arial", 16))
+        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 20px 10px 20px;")
+        description_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
+        
+        self.data_acquisition_layout.addWidget(description_label)
         
         # Layout per il tempo
         time_layout = QtWidgets.QHBoxLayout()
@@ -52,14 +55,17 @@ class DataAcquisitionScreen:
         duration_label = QtWidgets.QLabel("Duration:")
         duration_label.setFont(QtGui.QFont("Arial", 16))
         duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
-        self.duration_entry = QtWidgets.QLineEdit()
-        self.duration_entry.setFont(QtGui.QFont("Arial", 14))
-        self.duration_entry.setStyleSheet("color: black;")
-        self.duration_entry.setFixedWidth(200)
-        self.duration_entry.setContentsMargins(20, 5, 10, 5)
+        
+        DataAcquisitionScreen.duration_entry = QtWidgets.QLineEdit()
+        DataAcquisitionScreen.duration_entry.setFont(QtGui.QFont("Arial", 14))
+        DataAcquisitionScreen.duration_entry.setStyleSheet("color: black;")
+        DataAcquisitionScreen.duration_entry.setFixedWidth(200)
+        DataAcquisitionScreen.duration_entry.setContentsMargins(20, 5, 10, 5)
+        
         duration_layout = QtWidgets.QVBoxLayout()
         duration_layout.addWidget(duration_label)
-        duration_layout.addWidget(self.duration_entry)
+        duration_layout.addWidget(DataAcquisitionScreen.duration_entry)
+        
         time_layout.addLayout(duration_layout)
         time_layout.addStretch(1)  # Sposta verso sinistra
 
@@ -80,16 +86,16 @@ class DataAcquisitionScreen:
         start_measurement_button = CustomButton("Start Measurement", 280, 40)
         start_measurement_button.clicked.connect(self._start_measurement)
         
-        # Bottone per procedere
+        """ # Bottone per procedere
         next_button = CustomButton("Next", 140, 40)
-        next_button.clicked.connect(self._show_next_screen)
+        next_button.clicked.connect(self._show_next_screen) """
         
         buttons_layout = QtWidgets.QHBoxLayout()
-        buttons_layout.addWidget(back_button)
+        buttons_layout.addWidget(back_button, 2, alignment=QtCore.Qt.AlignmentFlag.AlignLeft)
         buttons_layout.addStretch()
-        buttons_layout.addWidget(start_measurement_button)
+        buttons_layout.addWidget(start_measurement_button, 2, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         buttons_layout.addStretch()
-        buttons_layout.addWidget(next_button)
+        # buttons_layout.addWidget(next_button)
         
         button_widget = QtWidgets.QWidget()
         button_widget.setLayout(buttons_layout)
@@ -111,17 +117,15 @@ class DataAcquisitionScreen:
         self.data_entry_screen.set_data_entry_screen()
 
     def _show_next_screen(self):
-        """ from data_acquisition_screen import DataAcquisitionScreen
+        from final_screen import FinalScreen
         
         self.main_window.clear_buttons_layout()
         
-        self.data_acquisition_screen = DataAcquisitionScreen(self.main_window)
+        self.final_screen = FinalScreen(self.main_window)
         
-        self.data_acquisition_screen.set_data_acquisition_screen()
+        # self.final_screen.set_final_screen()
         
-        self.main_window.show_content_widget("Next") """
-        
-        self._check_entry_fields()
+        self.main_window.show_content_widget("Next")
 
     def _start_measurement(self):
         # Aggiungi il percorso della directory 'API' al PYTHONPATH
@@ -193,15 +197,17 @@ class DataAcquisitionScreen:
         self.field_error = ""
         
         try:
-            duration = self.duration_entry.text()  # Ottieni la durata inserita dall'utente
+            duration = DataAcquisitionScreen.duration_entry.text()  # Ottieni la durata inserita dall'utente
         except AttributeError as e:
             duration = ""
             
         if duration == "":
-            duration = "-1"
+            duration = None
+        else:
+            duration = int(duration)
             
         try:
-            self.duration_time.set_time_min(int(duration))
+            self.duration_time.set_time_min(duration)
         except ValueError as e:
             self.field_error += "• " + str(e)
     
