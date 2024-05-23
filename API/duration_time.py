@@ -18,6 +18,8 @@ class DurationTime:
         return self.time_sec
 
     def is_time_over(self, current_time):
+        if self.time_sec == -1:
+            return False
         return current_time <= self.time_sec
 
     def _convert_time_to_seconds(self):

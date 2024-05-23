@@ -2,7 +2,7 @@ import subprocess
 
 class ExeManager:
     def __init__(self):
-        self.path_script = "Data-Acquisition/prova.exe"
+        self.path_script = "Data-Acquisition/glove_data_acquisition.exe"
         self.path_sensecom = "C:/Program Files/SenseCom/SenseCom.exe"
         self.sensecom_process = None
         self.script_process = None

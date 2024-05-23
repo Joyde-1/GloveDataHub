@@ -142,7 +142,7 @@ class DataEntryScreen:
         path_directory_layout.addWidget(path_directory_label)
         path_directory_layout.addLayout(path_directory_entry_layout)
         
-        self.data_entry_layout.addLayout(path_directory_layout) 
+        self.data_entry_layout.addLayout(path_directory_layout)
 
         # Aggiungi il panel al layout del contenuto principale
         self.main_window.add_content_widget(self.data_entry_panel)

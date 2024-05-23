@@ -77,8 +77,44 @@ class DataAcquisitionScreen:
         # Spaziatore per mantenere il contenuto centrale
         self.data_acquisition_layout.addStretch(5)
         
+        # Display del cronometro
+        self.time_display = QtWidgets.QLabel("00:00:00")
+        self.time_display.setFont(QtGui.QFont("Arial", 16))
+        self.time_display.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.data_acquisition_layout.addWidget(self.time_display)
+        
         # Aggiungi il panel al layout del contenuto principale
         self.main_window.add_content_widget(self.data_acquisition_panel)
+        
+    def _start_timer(self):
+        # Inizializza il timer
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.update_timer)
+        
+        # Tempo trascorso in secondi
+        self.elapsed_time = 0
+        
+        # Inizia il timer con un intervallo di 1 secondo (1000 millisecondi)
+        self.timer.start(1000)
+        #self.start_button.setEnabled(False)  # Disabilita il pulsante di avvio
+        
+    def update_timer(self):
+        self.elapsed_time += 1
+        hours, remainder = divmod(self.elapsed_time, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        self.time_display.setText(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+
+        #if self.elapsed_time >= self.target_time:
+        if self.duration_time.is_time_over(self.elapsed_time):
+            self.timer.stop()
+            self.handle_target_time_reached()
+    
+    def handle_target_time_reached(self):
+        # Codice per gestire il raggiungimento del tempo target
+        QtWidgets.QMessageBox.information(self, "Timer", "Il tempo è scaduto!")
+        # self.start_button.setEnabled(True)  # Riabilita il pulsante di avvio
+        self.elapsed_time = 0  # Resetta il tempo trascorso
+        # self.time_display.setText("00:00:00")  # Resetta il display del tempo
         
     def _set_buttons_layout(self):
         # Bottone per tornare indietro
