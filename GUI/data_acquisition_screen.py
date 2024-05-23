@@ -79,11 +79,11 @@ class DataAcquisitionScreen:
         
     def _set_buttons_layout(self):
         # Bottone per tornare indietro
-        back_button = CustomButton("Back", 140, 40)
+        back_button = CustomButton("Back", 120, 40, 16)
         back_button.clicked.connect(self._show_previous_screen)
         
         # Bottone per iniziare la misurazione
-        start_measurement_button = CustomButton("Start Measurement", 280, 40)
+        start_measurement_button = CustomButton("Start Measurement", 280, 40, 14)
         start_measurement_button.clicked.connect(self._start_measurement)
         
         """ # Bottone per procedere
@@ -139,7 +139,7 @@ class DataAcquisitionScreen:
         self._create_stop_button()
 
     def _create_stop_button(self):
-        self.stop_measurement_button = CustomButton("Stop Measurement", 280, 40)
+        self.stop_measurement_button = CustomButton("Stop Measurement", 280, 40, 14)
         self.stop_measurement_button.clicked.connect(self._stop_measurement)
 
         self.main_window.clear_buttons_layout()  # Rimuove i pulsanti attuali
@@ -162,10 +162,10 @@ class DataAcquisitionScreen:
             self._create_post_measurement_buttons()     
 
     def _create_post_measurement_buttons(self):
-        close_button = CustomButton("Close", 140, 40)
+        close_button = CustomButton("Close", 140, 40, 14)
         close_button.clicked.connect(self._close_application)
         
-        new_measurement_button = CustomButton("New Measurement", 280, 40)
+        new_measurement_button = CustomButton("New Measurement", 280, 40, 14)
         new_measurement_button.clicked.connect(self._start_new_measurement)
         
         buttons_layout = QtWidgets.QHBoxLayout()

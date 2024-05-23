@@ -65,11 +65,11 @@ class CalibrationScreen():
         
     def _set_buttons_layout(self):
         # Bottone per tornare indietro
-        back_button = CustomButton("Back", 140, 40)
+        back_button = CustomButton("Back", 120, 40, 16)
         back_button.clicked.connect(self._show_previous_screen)
         
         # Bottone per procedere
-        next_button = CustomButton("Next", 140, 40)
+        next_button = CustomButton("Next", 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         buttons_layout = QtWidgets.QHBoxLayout()

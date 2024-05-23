@@ -125,10 +125,10 @@ class DataEntryScreen:
         DataEntryScreen.path_directory_entry.setText(str(Path.home() / "Documents"))
         DataEntryScreen.path_directory_entry.setFont(QtGui.QFont("Arial", 12))
         DataEntryScreen.path_directory_entry.setStyleSheet("color: black;")
-        DataEntryScreen.path_directory_entry.setFixedWidth(300)
+        DataEntryScreen.path_directory_entry.setFixedWidth(335)
         DataEntryScreen.path_directory_entry.setContentsMargins(10, 5, 40, 5)
         
-        browse_button = CustomButton("Browse", 155, 40)
+        browse_button = CustomButton("Browse", 120, 30, 14)
         browse_button.clicked.connect(self._browse_path)
 
         # Use QVBoxLayout for label and QHBoxLayout for entry and button
@@ -149,11 +149,11 @@ class DataEntryScreen:
         
     def _set_buttons_layout(self):
         # Bottone per tornare indietro
-        back_button = CustomButton("Back", 140, 40)
+        back_button = CustomButton("Back", 120, 40, 16)
         back_button.clicked.connect(self._show_previous_screen)
         
         # Bottone per procedere
-        next_button = CustomButton("Next", 140, 40)
+        next_button = CustomButton("Next", 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         buttons_layout = QtWidgets.QHBoxLayout()

@@ -82,7 +82,7 @@ class WelcomeScreen:
         
     def _set_buttons_layout(self):
         # Bottone per procedere
-        next_button = CustomButton("Next", 140, 40)
+        next_button = CustomButton("Next", 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         button_layout = QtWidgets.QHBoxLayout()

@@ -1,9 +1,9 @@
 from PyQt6 import QtWidgets, QtGui, QtCore
 
 class CustomButton(QtWidgets.QPushButton):
-    def __init__(self, title, width, height, parent=None):
+    def __init__(self, title, width, height, font_size, parent=None):
         super().__init__(title, parent)
-        self.setFont(QtGui.QFont("Arial", 16))
+        self.setFont(QtGui.QFont("Arial", font_size))
         self.setStyleSheet(self.normal_style())
         # Imposta le dimensioni del pulsante
         self.setFixedSize(width, height)
@@ -17,7 +17,7 @@ class CustomButton(QtWidgets.QPushButton):
                 color: black;
                 border: 2px solid #C8C5B8;
                 border-radius: 15px;
-                padding: 10px 40px;
+                padding: 0px 0px;
             }
         """
 
@@ -30,7 +30,7 @@ class CustomButton(QtWidgets.QPushButton):
                 color: black;
                 border: 2px solid #A9A69B;
                 border-radius: 15px;
-                padding: 10px 40px;
+                padding: 0px 0px;
             }
         """
 
@@ -42,7 +42,7 @@ class CustomButton(QtWidgets.QPushButton):
                 color: black;
                 border: 2px solid #8B887E;
                 border-radius: 15px;
-                padding: 10px 40px;
+                padding: 0px 0px;
             }
         """
 

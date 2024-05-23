@@ -216,7 +216,7 @@ class WindowManager(QWidget):
         self.sensecom_container.setFixedSize(528, 289)
         
         # Bottone per avviare SenseCom
-        sensecom_button = CustomButton("Start SenseCom", 250, 40)
+        sensecom_button = CustomButton("Start SenseCom", 200, 30, 14)
         sensecom_button.clicked.connect(self._embed_sensecom)
         button_layout = QHBoxLayout()
         button_layout.addWidget(sensecom_button)
@@ -257,13 +257,10 @@ class WindowManager(QWidget):
 
     def _embed_sensecom_window(self):
         
-        while True:
-            try:
-                sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
-                break
-            except IndexError:
-                pass
-                # QMessageBox.critical(self, "Error", "SenseCom window not found.")
+        try:
+            sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
+        except IndexError:
+            QMessageBox.critical(self, "Error", "SenseCom window not found.")
 
         sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
         sensecom_hwnd.restore()  # Restore the window if it's minimized or maximized
