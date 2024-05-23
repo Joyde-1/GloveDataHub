@@ -8,7 +8,8 @@ class DurationTime:
             self.time_min = -1
             self.time_sec = -1
         elif not isinstance(minutes, int) or minutes < 0:
-            raise ValueError("Invalid format for minutes. Must be a non-negative integer.")
+            raise ValueError("Invalid format for minutes. \n"
+                             "Must be a non-negative integer.")
         else:
             self.time_min = minutes
             self._convert_time_to_seconds()

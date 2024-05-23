@@ -168,14 +168,10 @@ class WindowManager(QWidget):
     def show_content_widget(self, direction):
         current_index = self.stacked_content.currentIndex()
         
-        print(self.stacked_content.count())
-        print(current_index)
         if direction == "Next":
             next_index = current_index + 1
         elif direction == "Back":
             next_index = current_index - 1
-            
-        print(next_index)
             
         if next_index == 0 or next_index == 1:
             self._modify_content_widget_position(next_index)
@@ -250,7 +246,7 @@ class WindowManager(QWidget):
             
             time.sleep(1)
 
-            self.exe_manager.run_sensecom()
+            self.exe_manager.start_sensecom()
             QtCore.QTimer.singleShot(2500, self._embed_sensecom_window)
 
     def _embed_sensecom_window(self):

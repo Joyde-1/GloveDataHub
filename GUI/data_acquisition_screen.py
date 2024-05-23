@@ -7,8 +7,10 @@ import os
 
 # Aggiungi il percorso della directory 'Data-Acquisition' al PYTHONPATH
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
+
 from user_data import UserData
 from duration_time import DurationTime
+from exe_manager import ExeManager
 
 class DataAcquisitionScreen:
     is_first_time = True
@@ -19,6 +21,7 @@ class DataAcquisitionScreen:
         self.main_window = main_window
         self.user_data = user_data
         self.duration_time = DurationTime()
+        self.exe_manager = ExeManager()
         self.stop_measurement_button = None  # Variabile per il pulsante di stop
         
     def set_data_acquisition_screen(self):
@@ -79,31 +82,35 @@ class DataAcquisitionScreen:
         
     def _set_buttons_layout(self):
         # Bottone per tornare indietro
-        back_button = CustomButton("Back", 120, 40, 16)
-        back_button.clicked.connect(self._show_previous_screen)
+        self.back_button = CustomButton("Back", 120, 40, 16)
+        self.back_button.clicked.connect(self._show_previous_screen)
         
-        # Bottone per iniziare la misurazione
-        start_measurement_button = CustomButton("Start Measurement", 280, 40, 14)
-        start_measurement_button.clicked.connect(self._start_measurement)
+        # Bottone per la misurazione
+        self.measurement_button = CustomButton("Start Measurement", 240, 40, 16)
+        self.measurement_button.clicked.connect(self._start_measurement)
         
-        """ # Bottone per procedere
-        next_button = CustomButton("Next", 140, 40)
-        next_button.clicked.connect(self._show_next_screen) """
+        # Bottone per procedere
+        self.next_button = CustomButton("Next", 120, 40, 16)
+        self.next_button.clicked.connect(self._show_next_screen)
         
-        buttons_layout = QtWidgets.QHBoxLayout()
-        buttons_layout.addWidget(back_button, 2, alignment=QtCore.Qt.AlignmentFlag.AlignLeft)
-        buttons_layout.addStretch()
-        buttons_layout.addWidget(start_measurement_button, 2, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
-        buttons_layout.addStretch()
-        # buttons_layout.addWidget(next_button)
+        self.buttons_layout = QtWidgets.QHBoxLayout()
         
-        button_widget = QtWidgets.QWidget()
-        button_widget.setLayout(buttons_layout)
+        self.buttons_layout.addWidget(self.back_button, alignment=QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.buttons_layout.addStretch()
+        self.buttons_layout.addWidget(self.measurement_button, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.buttons_layout.addStretch()
+        self.buttons_layout.addWidget(self.next_button, alignment=QtCore.Qt.AlignmentFlag.AlignRight)
         
-        self.main_window.add_button(button_widget)
+        # Impostare lo stato iniziale dei pulsanti
+        self.next_button.hide()
         
-        """ self.main_window.add_button(back_button)
-        self.main_window.add_button(next_button) """    
+        self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
+        
+        self.button_widget = QtWidgets.QWidget()
+        self.button_widget.setLayout(self.buttons_layout)
+        
+        self.main_window.add_button(self.button_widget)
 
     def _show_previous_screen(self):
         from data_entry_screen import DataEntryScreen
@@ -123,75 +130,58 @@ class DataAcquisitionScreen:
         
         self.final_screen = FinalScreen(self.main_window)
         
-        # self.final_screen.set_final_screen()
+        self.final_screen.set_final_screen()
         
         self.main_window.show_content_widget("Next")
 
-    def _start_measurement(self):
-        # Aggiungi il percorso della directory 'API' al PYTHONPATH
-        sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
-        from exe_manager import ExeManager
+    def _start_measurement(self):       
+        self._save_duration_field()
         
-        self.path_csv = self.user_data.create_path_csv()
-
-        # Aggiorna lo stato e crea il pulsante di stop
-        DataAcquisitionScreen.measurement_started = True
-        self._create_stop_button()
-
-    def _create_stop_button(self):
-        self.stop_measurement_button = CustomButton("Stop Measurement", 280, 40, 14)
-        self.stop_measurement_button.clicked.connect(self._stop_measurement)
-
-        self.main_window.clear_buttons_layout()  # Rimuove i pulsanti attuali
-        self.main_window.add_button(self.stop_measurement_button)  # Aggiunge il pulsante di stop
-
-    def _stop_measurement(self):
-        # Aggiungi il percorso della directory 'API' al PYTHONPATH
-        sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
-        from exe_manager import ExeManager
-
-        if DataAcquisitionScreen.measurement_started:
-            # Logica per fermare la misurazione, ad esempio fermare il processo del script
-            self.script = ExeManager().close_script()
-            DataAcquisitionScreen.measurement_started = False
-
-            # Rimuove il pulsante di stop
-            self.main_window.clear_buttons_layout() 
+        if not self._is_error_message():
+            self.path_to_csv = self.user_data.create_path_csv()
             
-            # Aggiungi i pulsanti "Close" e "New Measurement"
-            self._create_post_measurement_buttons()     
-
-    def _create_post_measurement_buttons(self):
-        close_button = CustomButton("Close", 140, 40, 14)
-        close_button.clicked.connect(self._close_application)
+            self.total_time = self.duration_time.get_time_sec()
+            
+            self.exe_manager.start_script(self.path_to_csv, self.total_time)
+            
+            # TODO: aggiungere inizio cronometro
+            
+            self.back_button.hide()
+            self.measurement_button.setText("Stop")
+            self.measurement_button.clicked.disconnect(self._start_measurement)
+            self.measurement_button.clicked.connect(self._stop_measurement)
+            self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
+        else:
+            self._show_error_message()
         
-        new_measurement_button = CustomButton("New Measurement", 280, 40, 14)
-        new_measurement_button.clicked.connect(self._start_new_measurement)
+    def _stop_measurement(self):
+        # TODO: aggiungere controllo sul tempo
+        if self.exe_manager.is_script_running():
+            
+            self.exe_manager.close_script()
+            
+            self.measurement_button.setText("Restart")
+            self.measurement_button.clicked.disconnect(self._stop_measurement)
+            self.measurement_button.clicked.connect(self._restart_measurement)
+            self.next_button.show()
+            self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignLeft)
+            self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
         
-        buttons_layout = QtWidgets.QHBoxLayout()
-        buttons_layout.addWidget(close_button)
-        buttons_layout.addStretch()
-        buttons_layout.addWidget(new_measurement_button)
-        buttons_layout.addStretch()
+    def _restart_measurement(self):
+        self._save_duration_field()
         
-        button_widget = QtWidgets.QWidget()
-        button_widget.setLayout(buttons_layout)
-        
-        self.main_window.add_button(button_widget)
-        
-    def _close_application(self):
-        QtCore.QCoreApplication.quit()
-        
-    def _start_new_measurement(self):
-        from data_entry_screen import DataEntryScreen
-        
-        self.main_window.show_content_widget("Back")
-        
-        self.main_window.clear_buttons_layout()
-        
-        self.data_entry_screen = DataEntryScreen(self.main_window)
-        
-        self.data_entry_screen.set_data_entry_screen()
+        if not self._is_error_message():
+            self.total_time = self.duration_time.get_time_sec()
+            
+            self.exe_manager.start_script(self.path_to_csv, self.total_time)
+            
+            # TODO: aggiungere inizio cronometro
+            
+            self.measurement_button.setText("Stop")
+            self.measurement_button.clicked.disconnect(self._restart_measurement)
+            self.measurement_button.clicked.connect(self._stop_measurement)
+            self.next_button.hide()
+            self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
 
     def _save_duration_field(self):
         self.field_error = ""
@@ -232,17 +222,30 @@ class DataAcquisitionScreen:
                 }
                 QLabel {
                     color: black;
+                    font: ("Arial", 14);
                 }
                 QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #CDE2CD);
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8);
                     color: black;
-                    border: 2px solid #A3C293;
-                    border-radius: 10px;
-                    padding: 8px 10px;
-                    min-width: 40px;
+                    border: 2px solid #C8C5B8;
+                    border-radius: 15px;
+                    padding: 5px 7px;
+                    min-width: 30px;
                 }
                 QPushButton:hover {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #CDE2CD, stop:1 #E9E6DB);
-                    border-color: #89A06B;
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #C8C5B8, stop:1 #A9A69B);
+                    border-color: #A9A69B;
+                    color: black;
+                    border: 2px solid #A9A69B;
+                    border-radius: 15px;
+                    padding: 5px 7px;
+                }
+                QPushButton:pressed {
+                    background-color: #A9A69B;
+                    border-color: #8B887E;
+                    color: black;
+                    border: 2px solid #8B887E;
+                    border-radius: 15px;
+                    padding: 5px 7px;
                 }
             """)

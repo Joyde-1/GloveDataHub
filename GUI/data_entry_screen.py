@@ -218,7 +218,10 @@ class DataEntryScreen:
         if name == "" and surname == "" and code == "" and self.fields_errors == "":
             code = self.user_data.generate_random_code()
             DataEntryScreen.code_entry.setText(code)
-            self.info_message = "The code has been generated automatically because the name and surname are missing"
+            self.info_message = (
+                "The code has been generated automatically \n"
+                "because the name and surname are missing"
+            )
 
         try:
             self.user_data.set_name(name)
@@ -268,17 +271,30 @@ class DataEntryScreen:
                 }
                 QLabel {
                     color: black;
+                    font: ("Arial", 14);
                 }
                 QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #CDE2CD);
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8);
                     color: black;
-                    border: 2px solid #A3C293;
-                    border-radius: 10px;
-                    padding: 8px 10px;
-                    min-width: 40px;
+                    border: 2px solid #C8C5B8;
+                    border-radius: 15px;
+                    padding: 5px 7px;
+                    min-width: 30px;
                 }
                 QPushButton:hover {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #CDE2CD, stop:1 #E9E6DB);
-                    border-color: #89A06B;
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #C8C5B8, stop:1 #A9A69B);
+                    border-color: #A9A69B;
+                    color: black;
+                    border: 2px solid #A9A69B;
+                    border-radius: 15px;
+                    padding: 5px 7px;
+                }
+                QPushButton:pressed {
+                    background-color: #A9A69B;
+                    border-color: #8B887E;
+                    color: black;
+                    border: 2px solid #8B887E;
+                    border-radius: 15px;
+                    padding: 5px 7px;
                 }
             """)

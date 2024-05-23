@@ -7,10 +7,10 @@ class ExeManager:
         self.sensecom_process = None
         self.script_process = None
 
-    def run_sensecom(self):
+    def start_sensecom(self):
         self.sensecom_process = subprocess.Popen([self.path_sensecom], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
-    def run_script(self, path_to_csv, total_time):
+    def start_script(self, path_to_csv, total_time):
         self.script_process = subprocess.Popen([self.path_script, path_to_csv, str(total_time)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
     def is_sensecom_running(self):

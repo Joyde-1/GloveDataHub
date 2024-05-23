@@ -17,7 +17,7 @@ class MainManager:
 
     def start_calibration_screen(self):
         print("Calibration starting... \n")
-        self.exe_manager.run_sensecom()
+        self.exe_manager.start_sensecom()
         input("Press Enter to continue...")
         print("\n")
         print("Calibration completed \n")
@@ -66,7 +66,7 @@ class MainManager:
         start_time = time.time()
 
         print("Data acquisition in progress...\n")
-        self.exe_manager.run_script(path_csv, self.duration_time.get_time_sec())
+        self.exe_manager.start_script(path_csv, self.duration_time.get_time_sec())
 
         current_time = time.time() - start_time
         
