@@ -1,3 +1,13 @@
-è moscio deve attirare di più l'attenzione migliorando il tema di colori
-è noioso
-spostare tasto browse
+1.  (   "Quando inizia o si riavvia la misurazione, fare in modo che cambi la schermata facendo"
+        "apparire soltanto il tempo ed un testo con scritte le istruzioni se si vuole terminare prima l acquisizione dei dati."
+        "La schermata deve riapparire quando finisce la misurazione, quindi gestire tutto nel metodo _stop_measurement")
+
+2.  (   "Correggere il layout dei pulsanti nella schermata di acquisizione dei dati in modod da essere sempre ben disposti")
+
+3.  (   "Verificare il codice C++ che avvia sensecom quando non è avviato, ogni tanto anche se è già attivo prova a riavviarlo")
+
+4.  (   "Inserire un titolo sopra la finestra di sensecom")
+
+5.  (   "Inserire la finestra di conclusione del programma")
+
+6.  (   "Rivedere la parte di creazione del codice poichè sarebbe meglio assegnare un codice crescente a ciascun utente o per task eseguito")

@@ -28,24 +28,24 @@ class CalibrationScreen():
         # Descrizione dell'applicazione
         description_text = (
             "On this screen you can calibrate your haptic \n"
-            "gloves. \n"
+            "gloves. \n\n"
             "To run it you will need to launch the \n"
             "application \'SenseCom\' which will manage \n"
-            "the connection with your haptic gloves. \n"
+            "the connection with your haptic gloves. \n\n"
             "Make sure both your gloves are connected to \n"
             "your PC via Bluetooth and appear on the \n"
-            "SenseCom main screen. \n"
+            "SenseCom main screen. \n\n"
             "It is important that this application remains \n"
-            "open throughout the session. \n"
+            "open throughout the session. \n\n"
             "In case you mistakenly close it, please reopen \n"
-            "it and re-calibrate. \n\n\n"
+            "it and re-calibrate. \n\n"
             "Press the \'Start Sensecom\' button to start \n"
-            "the application and proceed with the calibration. \n"
+            "the application and proceed with the calibration."
         )
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 10px;")
+        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 5px 10px;")
         description_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
         #description_layout = QtWidgets.QVBoxLayout()
         #description_layout.addWidget(description_label)

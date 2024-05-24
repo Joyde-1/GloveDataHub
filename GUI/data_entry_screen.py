@@ -39,7 +39,7 @@ class DataEntryScreen:
         # Descrizione sopra i campi
         description_text = (
             "Enter the user data in the corresponding \n"
-            "fields. \n"
+            "fields. \n\n"
             "If you do not want to specify the user's \n"
             "first and last name, leave these two \n"
             "fields empty and the system will generate \n"
@@ -65,7 +65,7 @@ class DataEntryScreen:
         DataEntryScreen.name_entry.setFont(QtGui.QFont("Arial", 14))
         DataEntryScreen.name_entry.setFixedWidth(200)
         DataEntryScreen.name_entry.setStyleSheet("color: black;")  
-        DataEntryScreen.name_entry.setContentsMargins(10, 5, 20, 5)
+        DataEntryScreen.name_entry.setContentsMargins(15, 5, 20, 5)
         
         name_layout = QtWidgets.QVBoxLayout() 
         
@@ -85,7 +85,7 @@ class DataEntryScreen:
         DataEntryScreen.surname_entry.setFont(QtGui.QFont("Arial", 14))
         DataEntryScreen.surname_entry.setStyleSheet("color: black;")
         DataEntryScreen.surname_entry.setFixedWidth(200)
-        DataEntryScreen.surname_entry.setContentsMargins(20, 5, 10, 5)
+        DataEntryScreen.surname_entry.setContentsMargins(25, 5, 10, 5)
         
         surname_layout = QtWidgets.QVBoxLayout()
         surname_layout.addWidget(surname_label)
@@ -99,15 +99,15 @@ class DataEntryScreen:
         self.data_entry_layout.addLayout(name_surname_layout)
         
         # Widget per il codice opzionale
-        code_label = QtWidgets.QLabel("Code (optional):")
+        code_label = QtWidgets.QLabel("Code (4 digit):")
         code_label.setFont(QtGui.QFont("Arial", 16))
         code_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
         
         DataEntryScreen.code_entry = QtWidgets.QLineEdit()
         DataEntryScreen.code_entry.setFont(QtGui.QFont("Arial", 14))
         DataEntryScreen.code_entry.setStyleSheet("color: black;")
-        DataEntryScreen.code_entry.setFixedWidth(100)
-        DataEntryScreen.code_entry.setContentsMargins(10, 5, 10, 5)
+        DataEntryScreen.code_entry.setFixedWidth(90)
+        DataEntryScreen.code_entry.setContentsMargins(15, 5, 10, 5)
         
         code_layout = QtWidgets.QVBoxLayout()
         
@@ -126,7 +126,7 @@ class DataEntryScreen:
         DataEntryScreen.path_directory_entry.setFont(QtGui.QFont("Arial", 12))
         DataEntryScreen.path_directory_entry.setStyleSheet("color: black;")
         DataEntryScreen.path_directory_entry.setFixedWidth(335)
-        DataEntryScreen.path_directory_entry.setContentsMargins(10, 5, 40, 5)
+        DataEntryScreen.path_directory_entry.setContentsMargins(15, 5, 40, 5)
         
         browse_button = CustomButton("Browse", 120, 30, 14)
         browse_button.clicked.connect(self._browse_path)
@@ -220,7 +220,7 @@ class DataEntryScreen:
             DataEntryScreen.code_entry.setText(code)
             self.info_message = (
                 "The code has been generated automatically \n"
-                "because the name and surname are missing"
+                "because the name and surname are missing."
             )
 
         try:

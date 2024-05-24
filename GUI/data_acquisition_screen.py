@@ -36,69 +36,94 @@ class DataAcquisitionScreen:
         self.data_acquisition_panel = QtWidgets.QWidget()
         self.data_acquisition_panel.setStyleSheet("background-color: #E9E6DB;")
         self.data_acquisition_layout = QtWidgets.QVBoxLayout(self.data_acquisition_panel)
-        # self.data_acquisition_layout.setContentsMargins(20, 40, 20, 20)
 
-        # Spaziatore per sollevare il contenuto
-        # self.data_acquisition_layout.addStretch(2)
+        # Descrizione sopra il campo
+        description1_text = (
+            "Enter the measurement duration in the \n"
+            "corresponding field. \n\n"
+            "If you prefer the data acquisition to have \n"
+            "an unlimited duration, leave the duration \n"
+            "field empty."
+        )
+        description1_label = QtWidgets.QLabel(description1_text)
+        description1_label.setWordWrap(True)
+        description1_label.setFont(QtGui.QFont("Arial", 16))
+        description1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 20px 10px;")
         
-        # Descrizione sopra i campi
-        description_text = "Data acquisition."
-        description_label = QtWidgets.QLabel(description_text)
-        description_label.setWordWrap(True)
-        description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 20px 10px 20px;")
-        description_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignLeft)
-        
-        self.data_acquisition_layout.addWidget(description_label)
-        
-        # Layout per il tempo
-        time_layout = QtWidgets.QHBoxLayout()
+        self.data_acquisition_layout.addWidget(description1_label)
 
         # Widget per la durata
-        duration_label = QtWidgets.QLabel("Duration:")
+        duration_label = QtWidgets.QLabel("Duration (in minutes):")
         duration_label.setFont(QtGui.QFont("Arial", 16))
-        duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
+        duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
         
         DataAcquisitionScreen.duration_entry = QtWidgets.QLineEdit()
         DataAcquisitionScreen.duration_entry.setFont(QtGui.QFont("Arial", 14))
         DataAcquisitionScreen.duration_entry.setStyleSheet("color: black;")
-        DataAcquisitionScreen.duration_entry.setFixedWidth(200)
-        DataAcquisitionScreen.duration_entry.setContentsMargins(20, 5, 10, 5)
+        DataAcquisitionScreen.duration_entry.setFixedWidth(90)
+        DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 10, 5)
         
         duration_layout = QtWidgets.QVBoxLayout()
+        
         duration_layout.addWidget(duration_label)
         duration_layout.addWidget(DataAcquisitionScreen.duration_entry)
         
-        time_layout.addLayout(duration_layout)
-        time_layout.addStretch(1)  # Sposta verso sinistra
+        #duration_layout.addStretch()
 
-        self.data_acquisition_layout.addLayout(time_layout)
-
-        # Spaziatore per mantenere il contenuto centrale
-        self.data_acquisition_layout.addStretch(5)
+        self.data_acquisition_layout.addLayout(duration_layout)
         
-        # Display del cronometro
+        time_label = QtWidgets.QLabel("Time:")
+        time_label.setFont(QtGui.QFont("Arial", 16))
+        time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 10px 10px")
+        
         self.time_display = QtWidgets.QLabel("00:00:00")
         self.time_display.setFont(QtGui.QFont("Arial", 16))
-        self.time_display.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.data_acquisition_layout.addWidget(self.time_display)
+        self.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 5px;")
+        
+        self.time_to_reach_label = QtWidgets.QLabel("/  -")
+        self.time_to_reach_label.setFont(QtGui.QFont("Arial", 16))
+        self.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 0px;")
+        
+        # Display del cronometro
+        time_layout = QtWidgets.QHBoxLayout()
+        
+        time_layout.addWidget(time_label)
+        time_layout.addWidget(self.time_display)
+        time_layout.addWidget(self.time_to_reach_label)
+        
+        time_layout.addStretch()
+        
+        self.data_acquisition_layout.addLayout(time_layout)
+        
+        # Descrizione sotto il campo
+        description2_text = (
+            "Press the 'Start Measurement' button to \n"
+            "start capturing data from your haptic gloves."
+        )
+        description2_label = QtWidgets.QLabel(description2_text)
+        description2_label.setWordWrap(True)
+        description2_label.setFont(QtGui.QFont("Arial", 16))
+        description2_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 20px 10px;")
+        
+        self.data_acquisition_layout.addWidget(description2_label)
         
         # Aggiungi il panel al layout del contenuto principale
         self.main_window.add_content_widget(self.data_acquisition_panel)
         
-    def _start_timer(self):
+    def _start_timer(self):        
+        self.time_display.setText("00:00:00")  # Resetta il display del tempo
+        
         # Inizializza il timer
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.update_timer)
+        self.timer.timeout.connect(self._update_timer)
         
         # Tempo trascorso in secondi
         self.elapsed_time = 0
         
         # Inizia il timer con un intervallo di 1 secondo (1000 millisecondi)
         self.timer.start(1000)
-        #self.start_button.setEnabled(False)  # Disabilita il pulsante di avvio
         
-    def update_timer(self):
+    def _update_timer(self):
         self.elapsed_time += 1
         hours, remainder = divmod(self.elapsed_time, 3600)
         minutes, seconds = divmod(remainder, 60)
@@ -106,15 +131,12 @@ class DataAcquisitionScreen:
 
         #if self.elapsed_time >= self.target_time:
         if self.duration_time.is_time_over(self.elapsed_time):
-            self.timer.stop()
-            self.handle_target_time_reached()
-    
-    def handle_target_time_reached(self):
-        # Codice per gestire il raggiungimento del tempo target
-        QtWidgets.QMessageBox.information(self, "Timer", "Il tempo è scaduto!")
-        # self.start_button.setEnabled(True)  # Riabilita il pulsante di avvio
+            self._stop_measurement()
+            
+    def _conclude_data_acquisition(self):
+        self.timer.stop()
+        self._show_success_message()
         self.elapsed_time = 0  # Resetta il tempo trascorso
-        # self.time_display.setText("00:00:00")  # Resetta il display del tempo
         
     def _set_buttons_layout(self):
         # Bottone per tornare indietro
@@ -180,7 +202,7 @@ class DataAcquisitionScreen:
             
             self.exe_manager.start_script(self.path_to_csv, self.total_time)
             
-            # TODO: aggiungere inizio cronometro
+            self._start_timer()
             
             self.back_button.hide()
             self.measurement_button.setText("Stop")
@@ -191,27 +213,28 @@ class DataAcquisitionScreen:
             self._show_error_message()
         
     def _stop_measurement(self):
-        # TODO: aggiungere controllo sul tempo
-        if self.exe_manager.is_script_running():
+        if self.exe_manager.is_script_running() and not self.duration_time.is_time_over(self.elapsed_time):
             
             self.exe_manager.close_script()
             
-            self.measurement_button.setText("Restart")
-            self.measurement_button.clicked.disconnect(self._stop_measurement)
-            self.measurement_button.clicked.connect(self._restart_measurement)
-            self.next_button.show()
-            self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignLeft)
-            self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
-        
+        self._conclude_data_acquisition()
+            
+        self.measurement_button.setText("Restart")
+        self.measurement_button.clicked.disconnect(self._stop_measurement)
+        self.measurement_button.clicked.connect(self._restart_measurement)
+        self.next_button.show()
+        self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
+            
     def _restart_measurement(self):
         self._save_duration_field()
         
-        if not self._is_error_message():
+        if not self._is_error_message():            
             self.total_time = self.duration_time.get_time_sec()
             
             self.exe_manager.start_script(self.path_to_csv, self.total_time)
             
-            # TODO: aggiungere inizio cronometro
+            self._start_timer()
             
             self.measurement_button.setText("Stop")
             self.measurement_button.clicked.disconnect(self._restart_measurement)
@@ -222,20 +245,20 @@ class DataAcquisitionScreen:
     def _save_duration_field(self):
         self.field_error = ""
         
-        try:
-            duration = DataAcquisitionScreen.duration_entry.text()  # Ottieni la durata inserita dall'utente
-        except AttributeError as e:
-            duration = ""
+        duration = DataAcquisitionScreen.duration_entry.text()  # Ottieni la durata inserita dall'utente
             
         if duration == "":
-            duration = None
+            self.duration_time.set_time_min()
+            self.time_to_reach_label.setText("/  ∞")
         else:
-            duration = int(duration)
-            
-        try:
-            self.duration_time.set_time_min(duration)
-        except ValueError as e:
-            self.field_error += "• " + str(e)
+            try:
+                duration = int(duration)
+                self.duration_time.set_time_min(duration)
+                
+                hours, minutes = divmod(duration, 60)
+                self.time_to_reach_label.setText(f"/  {hours:02d}:{minutes:02d}:00")
+            except ValueError as e:
+                self.field_error += "• " + str(e)
     
     def _is_error_message(self):
         if self.field_error != "":
@@ -245,9 +268,15 @@ class DataAcquisitionScreen:
             return False
 
     def _show_error_message(self):
-        error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.fields_errors.strip())
+        error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.field_error.strip())
         self._set_output_dialog_style(error_msg_box)
         error_msg_box.exec()
+        
+    def _show_success_message(self):
+        timer_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Success", ("I dati dei guanti aptici sono stati \n"
+                                                                                                  "acquisiti con successo!"))
+        self._set_output_dialog_style(timer_msg_box)
+        timer_msg_box.exec() 
 
     def _set_output_dialog_style(self, dialog):
         if dialog:
