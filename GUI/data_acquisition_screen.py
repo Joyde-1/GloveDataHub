@@ -5,7 +5,7 @@ from window_manager import WindowManager
 import sys
 import os
 
-# Aggiungi il percorso della directory 'Data-Acquisition' al PYTHONPATH
+# Add the path of the 'Data-Acquisition' directory to the PYTHONPATH
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
 
 from user_data import UserData
@@ -13,18 +13,61 @@ from duration_time import DurationTime
 from exe_manager import ExeManager
 
 class DataAcquisitionScreen:
+    """
+    DataAcquisitionScreen class manages the data acquisition process.
+
+    Attributes
+    ----------
+    is_first_time : bool 
+        Flag indicating if it's the first time setting up the screen.
+    duration_entry : QtWidgets.QLineEdit
+    Widget for entering the measurement duration.
+    data_acquisition_panel : QtWidgets.QWidget 
+        Panel containing all widgets for data acquisition.
+    timer : QtCore.QTimer 
+        Timer for tracking the measurement duration.
+    lapsed_time : int 
+        Time elapsed since the start of measurement.
+    path_to_csv : str
+        Path to the CSV file for saving measurement data.
+    total_time : int 
+        Total duration of the measurement in seconds.
+    field_error : str 
+        Error message related to the duration field.
+    time_display : QtWidgets.QLabel 
+        Widget for displaying the elapsed time.
+    time_to_reach_label : QtWidgets.QLabel 
+        Widget for displaying the remaining time.
+    back_button : CustomButton 
+        Button for navigating to the previous screen.
+    measurement_button : CustomButton
+        Button for starting/stopping/restarting the measurement.
+    next_button : CustomButton
+        Button for navigating to the next screen.
+    """
     is_first_time = True
     
     duration_entry = None
     
     def __init__(self, main_window: WindowManager, user_data: UserData):
+        """
+        Constructor, initializes the DataAcquisitionScreen.
+
+        Parameters
+        ----------
+        main_window : WindowManager 
+            Instance of WindowManager for managing the main window.
+        user_data : UserData 
+            Instance of UserData for managing user data.
+        """
         self.main_window = main_window
         self.user_data = user_data
         self.duration_time = DurationTime()
         self.exe_manager = ExeManager()
-        self.stop_measurement_button = None  # Variabile per il pulsante di stop
+        self.stop_measurement_button = None 
         
     def set_data_acquisition_screen(self):
+        """Sets up the data acquisition screen."""
         if DataAcquisitionScreen.is_first_time:
             self._create_data_acquisition_widget()
             DataAcquisitionScreen.is_first_time = not DataAcquisitionScreen.is_first_time
@@ -32,12 +75,13 @@ class DataAcquisitionScreen:
         self._set_buttons_layout()
     
     def _create_data_acquisition_widget(self):  
-        # Crea un pannello per contenere tutti i widget
+        """Creates the widgets for data acquisition."""
+        # Create a panel to contain all widgets
         self.data_acquisition_panel = QtWidgets.QWidget()
         self.data_acquisition_panel.setStyleSheet("background-color: #E9E6DB;")
         self.data_acquisition_layout = QtWidgets.QVBoxLayout(self.data_acquisition_panel)
 
-        # Descrizione sopra il campo
+        # Description above the field
         description1_text = (
             "Enter the measurement duration in the \n"
             "corresponding field. \n\n"
@@ -52,17 +96,19 @@ class DataAcquisitionScreen:
         
         self.data_acquisition_layout.addWidget(description1_label)
 
-        # Widget per la durata
+        # Widget for duration
         duration_label = QtWidgets.QLabel("Duration (in minutes):")
         duration_label.setFont(QtGui.QFont("Arial", 16))
         duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
         
+        # Field for duration
         DataAcquisitionScreen.duration_entry = QtWidgets.QLineEdit()
         DataAcquisitionScreen.duration_entry.setFont(QtGui.QFont("Arial", 14))
         DataAcquisitionScreen.duration_entry.setStyleSheet("color: black;")
         DataAcquisitionScreen.duration_entry.setFixedWidth(90)
         DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 10, 5)
         
+        # Layout for duration
         duration_layout = QtWidgets.QVBoxLayout()
         
         duration_layout.addWidget(duration_label)
@@ -72,6 +118,7 @@ class DataAcquisitionScreen:
 
         self.data_acquisition_layout.addLayout(duration_layout)
         
+        # Lable for time
         time_label = QtWidgets.QLabel("Time:")
         time_label.setFont(QtGui.QFont("Arial", 16))
         time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 10px 10px")
@@ -84,7 +131,7 @@ class DataAcquisitionScreen:
         self.time_to_reach_label.setFont(QtGui.QFont("Arial", 16))
         self.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 0px;")
         
-        # Display del cronometro
+        # Display the timer
         time_layout = QtWidgets.QHBoxLayout()
         
         time_layout.addWidget(time_label)
@@ -95,7 +142,7 @@ class DataAcquisitionScreen:
         
         self.data_acquisition_layout.addLayout(time_layout)
         
-        # Descrizione sotto il campo
+        # Description below the field
         description2_text = (
             "Press the 'Start Measurement' button to \n"
             "start capturing data from your haptic gloves."
@@ -107,47 +154,52 @@ class DataAcquisitionScreen:
         
         self.data_acquisition_layout.addWidget(description2_label)
         
-        # Aggiungi il panel al layout del contenuto principale
+        # Add the panel to the layout of the main content
         self.main_window.add_content_widget(self.data_acquisition_panel)
         
-    def _start_timer(self):        
-        self.time_display.setText("00:00:00")  # Resetta il display del tempo
+    def _start_timer(self):
+        """Starts the timer for measurement duration."""        
+        self.time_display.setText("00:00:00")  # Reset the time display
         
-        # Inizializza il timer
+        # Initialize the timer
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self._update_timer)
         
-        # Tempo trascorso in secondi
+        # Time elapsed in seconds
         self.elapsed_time = 0
         
-        # Inizia il timer con un intervallo di 1 secondo (1000 millisecondi)
+        #Start the timer with an interval of 1 second (1000 milliseconds)
         self.timer.start(1000)
         
     def _update_timer(self):
+        """Updates the timer display."""
         self.elapsed_time += 1
         hours, remainder = divmod(self.elapsed_time, 3600)
         minutes, seconds = divmod(remainder, 60)
         self.time_display.setText(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
 
+        # Stop the measurement if the duration is over
         #if self.elapsed_time >= self.target_time:
         if self.duration_time.is_time_over(self.elapsed_time):
             self._stop_measurement()
             
     def _conclude_data_acquisition(self):
+        """Concludes the data acquisition process."""
         self.timer.stop()
         self._show_success_message()
-        self.elapsed_time = 0  # Resetta il tempo trascorso
+        self.elapsed_time = 0  # Reset the elapsed time
         
     def _set_buttons_layout(self):
-        # Bottone per tornare indietro
+        """Sets up the layout for buttons."""
+        # Button for going back
         self.back_button = CustomButton("Back", 120, 40, 16)
         self.back_button.clicked.connect(self._show_previous_screen)
         
-        # Bottone per la misurazione
+        # Button for starting/stopping the measurement
         self.measurement_button = CustomButton("Start Measurement", 240, 40, 16)
         self.measurement_button.clicked.connect(self._start_measurement)
         
-        # Bottone per procedere
+        # Button for proceeding
         self.next_button = CustomButton("Next", 120, 40, 16)
         self.next_button.clicked.connect(self._show_next_screen)
         
@@ -159,7 +211,7 @@ class DataAcquisitionScreen:
         self.buttons_layout.addStretch()
         self.buttons_layout.addWidget(self.next_button, alignment=QtCore.Qt.AlignmentFlag.AlignRight)
         
-        # Impostare lo stato iniziale dei pulsanti
+        # Set the initial state of buttons
         self.next_button.hide()
         
         self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
@@ -171,6 +223,9 @@ class DataAcquisitionScreen:
         self.main_window.add_button(self.button_widget)
 
     def _show_previous_screen(self):
+        """
+        Shows the previous screen.
+        """
         from data_entry_screen import DataEntryScreen
         
         self.main_window.show_content_widget("Back")
@@ -182,6 +237,9 @@ class DataAcquisitionScreen:
         self.data_entry_screen.set_data_entry_screen()
 
     def _show_next_screen(self):
+        """
+        Shows the next screen.
+        """
         from final_screen import FinalScreen
         
         self.main_window.clear_buttons_layout()
@@ -192,7 +250,8 @@ class DataAcquisitionScreen:
         
         self.main_window.show_content_widget("Next")
 
-    def _start_measurement(self):       
+    def _start_measurement(self): 
+        """Starts the measurement process."""      
         self._save_duration_field()
         
         if not self._is_error_message():
@@ -213,6 +272,7 @@ class DataAcquisitionScreen:
             self._show_error_message()
         
     def _stop_measurement(self):
+        """Stop the measurement process."""  
         if self.exe_manager.is_script_running() and not self.duration_time.is_time_over(self.elapsed_time):
             
             self.exe_manager.close_script()
@@ -227,6 +287,7 @@ class DataAcquisitionScreen:
         self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
             
     def _restart_measurement(self):
+        """Restart the measurement process."""  
         self._save_duration_field()
         
         if not self._is_error_message():            
@@ -243,6 +304,7 @@ class DataAcquisitionScreen:
             self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
 
     def _save_duration_field(self):
+        """Saves the duration entered by the user."""
         self.field_error = ""
         
         duration = DataAcquisitionScreen.duration_entry.text()  # Ottieni la durata inserita dall'utente
@@ -261,6 +323,7 @@ class DataAcquisitionScreen:
                 self.field_error += "• " + str(e)
     
     def _is_error_message(self):
+        """Checks if there is an error message."""
         if self.field_error != "":
             self.field_error = "Please fix the following errors:\n" + self.field_error
             return True
@@ -268,17 +331,27 @@ class DataAcquisitionScreen:
             return False
 
     def _show_error_message(self):
+        """Shows an error message."""
         error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.field_error.strip())
         self._set_output_dialog_style(error_msg_box)
         error_msg_box.exec()
         
     def _show_success_message(self):
+        """Shows a success message."""
         timer_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Success", ("I dati dei guanti aptici sono stati \n"
                                                                                                   "acquisiti con successo!"))
         self._set_output_dialog_style(timer_msg_box)
         timer_msg_box.exec() 
 
     def _set_output_dialog_style(self, dialog):
+        """
+        Sets the style for the output dialog.
+
+        Parameters
+        ----------
+        dialog : QMessageBox 
+            The output dialog to set the style for.
+        """
         if dialog:
             dialog.setStyleSheet("""
                 QMessageBox {

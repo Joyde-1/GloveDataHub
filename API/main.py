@@ -1,5 +1,16 @@
 from main_manager import MainManager
 
+"""
+    The main class responsible for managing the program flow.
+
+    Attributes
+    ----------
+    checkpoint : int 
+        The current checkpoint in the program flow.
+    main_manager : MainManager
+        An instance of MainManager for managing program operations.
+    """
+
 if __name__ == "__main__":
 
     checkpoint = 1

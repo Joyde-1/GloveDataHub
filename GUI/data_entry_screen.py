@@ -6,11 +6,14 @@ import sys
 import os
 from pathlib import Path
 
-# Aggiungi il percorso della directory 'Data-Acquisition' al PYTHONPATH
+# Add the path of the 'Data-Acquisition' directory to the PYTHONPATH
 # sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
 from user_data import UserData
 
 class DataEntryScreen:
+    """
+    Represents the data entry screen of the application.
+    """
     is_first_time = True
     
     name_entry = None
@@ -19,10 +22,21 @@ class DataEntryScreen:
     path_directory_entry = None
     
     def __init__(self, main_window: WindowManager):
+        """
+        Initializes the Data Entry Screen.
+
+        Parameters
+        ----------
+        main_window : WindowManager
+            The main window manager instance.
+        """
         self.main_window = main_window
         self.user_data = UserData()
 
     def set_data_entry_screen(self):
+        """
+        Sets up the data entry screen.
+        """
         if DataEntryScreen.is_first_time:
             self._create_data_entry_widget()
             DataEntryScreen.is_first_time = not DataEntryScreen.is_first_time
@@ -30,13 +44,16 @@ class DataEntryScreen:
         self._set_buttons_layout()
         
         
-    def _create_data_entry_widget(self):  
-        # Crea un pannello per contenere tutti i widget
+    def _create_data_entry_widget(self):
+        """
+        Creates the widget for data entry.
+        """
+        # Create a panel to contain all the widgets
         self.data_entry_panel = QtWidgets.QWidget()
         self.data_entry_panel.setStyleSheet("background-color: #E9E6DB;")
         self.data_entry_layout = QtWidgets.QVBoxLayout(self.data_entry_panel)
         
-        # Descrizione sopra i campi
+        # Description above the fields
         description_text = (
             "Enter the user data in the corresponding \n"
             "fields. \n\n"
@@ -52,21 +69,23 @@ class DataEntryScreen:
         
         self.data_entry_layout.addWidget(description_label)
         
-        # Layout per nome e cognome
+        # Layout for name and surname
         name_surname_layout = QtWidgets.QHBoxLayout()
 
-        # Widget per il nome
+        # Widget for the name
         name_label = QtWidgets.QLabel("Name:")
         name_label.setFont(QtGui.QFont("Arial", 16))
         name_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 20px 10px 10px;")
         name_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         
+        # Name field
         DataEntryScreen.name_entry = QtWidgets.QLineEdit()
         DataEntryScreen.name_entry.setFont(QtGui.QFont("Arial", 14))
         DataEntryScreen.name_entry.setFixedWidth(200)
         DataEntryScreen.name_entry.setStyleSheet("color: black;")  
         DataEntryScreen.name_entry.setContentsMargins(15, 5, 20, 5)
-        
+
+        # Name layout
         name_layout = QtWidgets.QVBoxLayout() 
         
         name_layout.addWidget(name_label)  
@@ -76,17 +95,19 @@ class DataEntryScreen:
         
         name_surname_layout.addLayout(name_layout)
 
-        # Widget per il cognome
+        # Widget for the surname
         surname_label = QtWidgets.QLabel("Surname:")
         surname_label.setFont(QtGui.QFont("Arial", 16))
         surname_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
         
+        # Surname field
         DataEntryScreen.surname_entry = QtWidgets.QLineEdit()
         DataEntryScreen.surname_entry.setFont(QtGui.QFont("Arial", 14))
         DataEntryScreen.surname_entry.setStyleSheet("color: black;")
         DataEntryScreen.surname_entry.setFixedWidth(200)
         DataEntryScreen.surname_entry.setContentsMargins(25, 5, 10, 5)
         
+        # Surname layout
         surname_layout = QtWidgets.QVBoxLayout()
         surname_layout.addWidget(surname_label)
         surname_layout.addWidget(DataEntryScreen.surname_entry)
@@ -98,17 +119,19 @@ class DataEntryScreen:
         
         self.data_entry_layout.addLayout(name_surname_layout)
         
-        # Widget per il codice opzionale
+        # Widget for the optional code
         code_label = QtWidgets.QLabel("Code (4 digit):")
         code_label.setFont(QtGui.QFont("Arial", 16))
         code_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
         
+        # Code field
         DataEntryScreen.code_entry = QtWidgets.QLineEdit()
         DataEntryScreen.code_entry.setFont(QtGui.QFont("Arial", 14))
         DataEntryScreen.code_entry.setStyleSheet("color: black;")
         DataEntryScreen.code_entry.setFixedWidth(90)
         DataEntryScreen.code_entry.setContentsMargins(15, 5, 10, 5)
         
+        # Code layout
         code_layout = QtWidgets.QVBoxLayout()
         
         code_layout.addWidget(code_label)
@@ -116,11 +139,12 @@ class DataEntryScreen:
         
         self.data_entry_layout.addLayout(code_layout)
 
-        # Widget per la path
+        # Widget for the path
         path_directory_label = QtWidgets.QLabel("Path:")
         path_directory_label.setFont(QtGui.QFont("Arial", 16))
         path_directory_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
 
+        # Path field
         DataEntryScreen.path_directory_entry = QtWidgets.QLineEdit()
         DataEntryScreen.path_directory_entry.setText(str(Path.home() / "Documents"))
         DataEntryScreen.path_directory_entry.setFont(QtGui.QFont("Arial", 12))
@@ -128,9 +152,11 @@ class DataEntryScreen:
         DataEntryScreen.path_directory_entry.setFixedWidth(335)
         DataEntryScreen.path_directory_entry.setContentsMargins(15, 5, 40, 5)
         
+        # browse button to set a specific path
         browse_button = CustomButton("Browse", 120, 30, 14)
         browse_button.clicked.connect(self._browse_path)
 
+        # Path Layout
         # Use QVBoxLayout for label and QHBoxLayout for entry and button
         path_directory_layout = QtWidgets.QVBoxLayout()
         
@@ -144,15 +170,18 @@ class DataEntryScreen:
         
         self.data_entry_layout.addLayout(path_directory_layout)
 
-        # Aggiungi il panel al layout del contenuto principale
+        # Add the panel to the main content layout
         self.main_window.add_content_widget(self.data_entry_panel)
         
     def _set_buttons_layout(self):
-        # Bottone per tornare indietro
+        """
+        Sets up the layout for buttons.
+        """
+        # Button to go back
         back_button = CustomButton("Back", 120, 40, 16)
         back_button.clicked.connect(self._show_previous_screen)
         
-        # Bottone per procedere
+        # Button to proceed
         next_button = CustomButton("Next", 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
@@ -167,16 +196,22 @@ class DataEntryScreen:
         self.main_window.add_button(button_widget)
         
     def _browse_path(self):
-        # Ottieni il percorso della cartella Documenti
+        """
+        Opens a file dialog to browse for a directory path.
+        """
+        # Get the path of the Documents folder
         documents_path = str(Path.home() / "Documents")
         
-        # Apri il QFileDialog partendo dalla cartella Documenti
+        # Open the QFileDialog starting from the Documents folder
         path_directory = QFileDialog.getExistingDirectory(self.main_window, 'Select the destination folder', documents_path)
 
         if path_directory:
             DataEntryScreen.path_directory_entry.setText(path_directory)
 
     def _show_previous_screen(self):
+        """
+        Shows the previous screen.
+        """
         from calibration_screen import CalibrationScreen
         
         # Memorizza i valori dei campi
@@ -191,6 +226,9 @@ class DataEntryScreen:
         self.calibration_screen.set_calibration_screen()
 
     def _show_next_screen(self):
+        """
+        Shows the next screen.
+        """
         from data_acquisition_screen import DataAcquisitionScreen
         
         self._save_fields_values()
@@ -207,13 +245,16 @@ class DataEntryScreen:
             self._show_error_message()
 
     def _save_fields_values(self):
+        """
+        Saves the values of the fields.
+        """
         self.fields_errors = ""
         self.info_message = ""
 
-        name = DataEntryScreen.name_entry.text().strip()  # Ottieni il nome inserito dall'utente
-        surname = DataEntryScreen.surname_entry.text().strip()  # Ottieni il cognome inserito dall'utente
-        code = DataEntryScreen.code_entry.text() # Ottieni il codice inserito dall'utente
-        path_directory = DataEntryScreen.path_directory_entry.text() # Ottieni la path della directory indicata dall'utente
+        name = DataEntryScreen.name_entry.text().strip()  # Get the name entered by the user
+        surname = DataEntryScreen.surname_entry.text().strip()  # Get the surname entered by the user
+        code = DataEntryScreen.code_entry.text() # Get the code entered by the user
+        path_directory = DataEntryScreen.path_directory_entry.text() # Get the path of the directory indicated by the user
             
         if name == "" and surname == "" and code == "" and self.fields_errors == "":
             code = self.user_data.generate_random_code()
@@ -246,6 +287,9 @@ class DataEntryScreen:
             self.fields_errors += "• " + str(e)
         
     def _is_error_message(self):
+        """
+        Checks if there is an error message.
+        """
         if self.fields_errors != "":
             self.fields_errors = "Please fix the following errors:\n" + self.fields_errors
             return True
@@ -253,16 +297,25 @@ class DataEntryScreen:
             return False  
 
     def _show_error_message(self):
+        """
+        Shows an error message.
+        """
         error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.fields_errors.strip())
         self._set_output_dialog_style(error_msg_box)
         error_msg_box.exec()
 
     def _show_information_message(self):
+        """
+        Shows an information message.
+        """
         info_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Information", self.info_message)
         self._set_output_dialog_style(info_msg_box)
         info_msg_box.exec()      
 
     def _set_output_dialog_style(self, dialog):
+        """
+        Sets the style of the output dialog.
+        """
         if dialog:
             dialog.setStyleSheet("""
                 QMessageBox {

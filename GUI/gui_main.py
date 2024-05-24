@@ -5,8 +5,12 @@ from window_manager import WindowManager
 from welcome_screen import WelcomeScreen
 
 if __name__ == "__main__":
+    """
+    Main script to initialize and run the application.
+    """
     app = QtWidgets.QApplication(sys.argv)
     
+    # Parameters for the main window
     main_window_params = {
         'ghd_logo_path': "GUI/images/logo_GloveDataHub.png",
         'kore_logo_path': "GUI/images/kore_Logo.png",
@@ -19,12 +23,13 @@ if __name__ == "__main__":
         'header_font': QFont("Arial", 24, QFont.Weight.Bold)
     }
     
-    # Crea la finestra principale
+    # Create the main window
     main_window = WindowManager(**main_window_params)
     
-    # Avvia il main loop della finestra
+    # Start the main window's event loop
     main_window.show()
 
+    # Create and set up the welcome screen
     welcome_screen = WelcomeScreen(main_window)
     
     welcome_screen.set_welcome_screen()

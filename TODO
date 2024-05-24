@@ -2,7 +2,7 @@
         "apparire soltanto il tempo ed un testo con scritte le istruzioni se si vuole terminare prima l acquisizione dei dati."
         "La schermata deve riapparire quando finisce la misurazione, quindi gestire tutto nel metodo _stop_measurement")
 
-2.  (   "Correggere il layout dei pulsanti nella schermata di acquisizione dei dati in modod da essere sempre ben disposti")
+2.  (   "Correggere il layout dei pulsanti nella schermata di acquisizione dei dati in modo da essere sempre ben disposti")
 
 3.  (   "Verificare il codice C++ che avvia sensecom quando non è avviato, ogni tanto anche se è già attivo prova a riavviarlo")
 
