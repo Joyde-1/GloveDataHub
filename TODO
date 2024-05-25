@@ -7,7 +7,3 @@
 3.  (   "Verificare il codice C++ che avvia sensecom quando non è avviato, ogni tanto anche se è già attivo prova a riavviarlo")
 
 4.  (   "Inserire un titolo sopra la finestra di sensecom")
-
-5.  (   "Inserire la finestra di conclusione del programma")
-
-6.  (   "Rivedere la parte di creazione del codice poichè sarebbe meglio assegnare un codice crescente a ciascun utente o per task eseguito")

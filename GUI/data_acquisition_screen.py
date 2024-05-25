@@ -187,6 +187,14 @@ class DataAcquisitionScreen:
         if self.duration_time.is_time_over(self.elapsed_time) or not self.exe_manager.is_sensecom_running():
             self._stop_measurement()
             
+    def _reset_time_layout(self):
+        """
+        Resets time labels that are includes in time layouy
+        """
+        self.time_display.setText("00:00:00")
+        self.time_to_reach_label.setText("/  -")
+        
+            
     def _conclude_data_acquisition(self):
         """Concludes the data acquisition process."""
         self.timer.stop()
@@ -197,29 +205,29 @@ class DataAcquisitionScreen:
         """Sets up the layout for buttons."""
         # Button for going back
         self.back_button = CustomButton("Back", 120, 40, 16)
+        self.back_button.setContentsMargins(20, 0, 300, 20)
         self.back_button.clicked.connect(self._show_previous_screen)
         
         # Button for starting/stopping the measurement
         self.measurement_button = CustomButton("Start Measurement", 240, 40, 16)
+        self.measurement_button.setContentsMargins(300, 0, 4000, 20)
         self.measurement_button.clicked.connect(self._start_measurement)
         
         # Button for proceeding
         self.next_button = CustomButton("Next", 120, 40, 16)
-        self.next_button.clicked.connect(self._show_next_screen)
+        self.next_button.setContentsMargins(300, 0, 20, 20)
+        self.next_button.clicked.connect(self._show_next_screen)        
         
         self.buttons_layout = QtWidgets.QHBoxLayout()
         
         self.buttons_layout.addWidget(self.back_button, alignment=QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.buttons_layout.addStretch()
+        self.buttons_layout.addStretch(7)
         self.buttons_layout.addWidget(self.measurement_button, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.buttons_layout.addStretch()
+        self.buttons_layout.addStretch(10)
         self.buttons_layout.addWidget(self.next_button, alignment=QtCore.Qt.AlignmentFlag.AlignRight)
         
         # Set the initial state of buttons
         self.next_button.hide()
-        
-        self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
         
         self.button_widget = QtWidgets.QWidget()
         self.button_widget.setLayout(self.buttons_layout)
@@ -246,6 +254,8 @@ class DataAcquisitionScreen:
         """
         from final_screen import FinalScreen
         
+        self.main_window.close_sensecom_widget()
+        
         self.main_window.clear_buttons_layout()
         
         self.final_screen = FinalScreen(self.main_window)
@@ -270,9 +280,15 @@ class DataAcquisitionScreen:
             
             self.back_button.hide()
             self.measurement_button.setText("Stop")
+            self.measurement_button.setFixedSize(120, 40)
             self.measurement_button.clicked.disconnect(self._start_measurement)
             self.measurement_button.clicked.connect(self._stop_measurement)
+            
+            self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
+            self.buttons_layout.addStretch(10)
             self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
+            self.buttons_layout.addStretch(2)
+            self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
         else:
             self._show_error_message()
         
@@ -285,6 +301,7 @@ class DataAcquisitionScreen:
         self._conclude_data_acquisition()
             
         self.measurement_button.setText("Restart")
+        self.measurement_button.setFixedSize(140, 40)
         self.measurement_button.clicked.disconnect(self._stop_measurement)
         self.measurement_button.clicked.connect(self._restart_measurement)
         self.next_button.show()

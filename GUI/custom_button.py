@@ -63,7 +63,8 @@ class CustomButton(QtWidgets.QPushButton):
         """
         Defines the CSS style for the hover state of the button.
 
-        Returns:
+        Returns
+        -------
         str 
             CSS style for the hover state.
         """
@@ -83,7 +84,8 @@ class CustomButton(QtWidgets.QPushButton):
         """
         Defines the CSS style for the pressed state of the button.
 
-        Returns:
+        Returns
+        -------
         str
             CSS style for the pressed state.
         """

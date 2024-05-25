@@ -274,8 +274,10 @@ class WindowManager(QWidget):
             next_index = current_index + 1
         elif direction == "Back":
             next_index = current_index - 1
+        elif direction == "New":
+            next_index = current_index - 3
             
-        if next_index == 0 or next_index == 1:
+        if next_index == 0 or next_index == 1 or next_index == 4:
             self._modify_content_widget_position(next_index)
             
         self.stacked_content.setCurrentIndex(next_index)
@@ -292,7 +294,7 @@ class WindowManager(QWidget):
         # Rimuovi the widget from the current layout
         self.content_layout.removeWidget(self.stacked_content)
 
-        if next_index == 0:
+        if next_index == 0 or next_index == 4:
             self.content_layout.addWidget(self.stacked_content)
         else:
             self.content_layout.addWidget(self.stacked_content, 0, 0, 3, 2, QtCore.Qt.AlignmentFlag.AlignLeft)
@@ -332,16 +334,24 @@ class WindowManager(QWidget):
         # Add a layout for sensecom
         self.sensecom_layout = QVBoxLayout()
         
+        # Sensecom title
+        self.sensecom_title = QLabel("SenseCom Application")
+        self.sensecom_title.setWordWrap(True)
+        self.sensecom_title.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Weight.Bold))
+        self.sensecom_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.sensecom_title.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 5px 0px;")
+        
         # Container for SenseCom
         self.sensecom_container = QWidget()
         self.sensecom_container.setFixedSize(528, 289)
         
         # Button to start SenseCom
-        sensecom_button = CustomButton("Start SenseCom", 200, 30, 14)
-        sensecom_button.clicked.connect(self._embed_sensecom)
+        self.sensecom_button = CustomButton("Start SenseCom", 200, 30, 14)
+        self.sensecom_button.clicked.connect(self._embed_sensecom)
         button_layout = QHBoxLayout()
-        button_layout.addWidget(sensecom_button)
+        button_layout.addWidget(self.sensecom_button)
         
+        self.sensecom_layout.addWidget(self.sensecom_title)
         self.sensecom_layout.addWidget(self.sensecom_container)
         # self.sensecom_layout.addStretch()
         self.sensecom_layout.addLayout(button_layout)
@@ -349,6 +359,11 @@ class WindowManager(QWidget):
         self.sensecom_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
         
         self.sensecom_widget.setLayout(self.sensecom_layout)
+        
+        # Initialize the timer
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self._check_sensecom)
+        self.timer.start(1000)
 
         # self.main_layout.addLayout(self.sensecom_layout)
         self.content_layout.addWidget(self.sensecom_widget, 0, 1, 3, 2, QtCore.Qt.AlignmentFlag.AlignRight)
@@ -357,6 +372,17 @@ class WindowManager(QWidget):
         # self.content_layout.addWidget(self.content_panel)
         
         WindowManager.is_sensecom_layout = not WindowManager.is_sensecom_layout
+
+    def _check_sensecom(self):
+        """
+        Check if SenseCom is not running to show 'Start Sensecom' button
+        """
+        
+        if not self.exe_manager.is_sensecom_running():
+            try:
+                self.sensecom_button.show()
+            except:
+                pass
 
     def _embed_sensecom(self):
         """
@@ -375,6 +401,8 @@ class WindowManager(QWidget):
 
             self.exe_manager.start_sensecom()
             QtCore.QTimer.singleShot(2500, self._embed_sensecom_window)
+            
+            self.sensecom_button.hide()
 
     def _embed_sensecom_window(self):
         """
