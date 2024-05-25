@@ -285,9 +285,9 @@ class DataAcquisitionScreen:
             self.measurement_button.clicked.connect(self._stop_measurement)
             
             self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
-            self.buttons_layout.addStretch(10)
+            self.buttons_layout.setStretch(1, 1)
             self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
-            self.buttons_layout.addStretch(2)
+            self.buttons_layout.setStretch(3, 1)
             self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
         else:
             self._show_error_message()
@@ -305,7 +305,11 @@ class DataAcquisitionScreen:
         self.measurement_button.clicked.disconnect(self._stop_measurement)
         self.measurement_button.clicked.connect(self._restart_measurement)
         self.next_button.show()
-        self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignLeft)
+        
+        self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.buttons_layout.setStretch(1, 10)
+        self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.buttons_layout.setStretch(3, 7)
         self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
             
     def _restart_measurement(self):
@@ -321,10 +325,16 @@ class DataAcquisitionScreen:
             self._start_timer()
             
             self.measurement_button.setText("Stop")
+            self.measurement_button.setFixedSize(120, 40)
             self.measurement_button.clicked.disconnect(self._restart_measurement)
             self.measurement_button.clicked.connect(self._stop_measurement)
             self.next_button.hide()
+            
+            self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
+            self.buttons_layout.setStretch(1, 1)
             self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
+            self.buttons_layout.setStretch(3, 1)
+            self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
         else:
             self._show_error_message()
 
