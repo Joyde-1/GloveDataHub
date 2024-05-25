@@ -48,6 +48,9 @@ class DataAcquisitionScreen:
     is_first_time = True
     
     duration_entry = None
+    time_display = None
+    time_to_reach_label = None
+    
     
     def __init__(self, main_window: WindowManager, user_data: UserData):
         """
@@ -71,6 +74,8 @@ class DataAcquisitionScreen:
         if DataAcquisitionScreen.is_first_time:
             self._create_data_acquisition_widget()
             DataAcquisitionScreen.is_first_time = not DataAcquisitionScreen.is_first_time
+        else:
+            self._reset_time_layout()
             
         self._set_buttons_layout()
     
@@ -123,20 +128,20 @@ class DataAcquisitionScreen:
         time_label.setFont(QtGui.QFont("Arial", 16))
         time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 10px 10px")
         
-        self.time_display = QtWidgets.QLabel("00:00:00")
-        self.time_display.setFont(QtGui.QFont("Arial", 16))
-        self.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 5px;")
+        DataAcquisitionScreen.time_display = QtWidgets.QLabel("00:00:00")
+        DataAcquisitionScreen.time_display.setFont(QtGui.QFont("Arial", 16))
+        DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 5px;")
         
-        self.time_to_reach_label = QtWidgets.QLabel("/  -")
-        self.time_to_reach_label.setFont(QtGui.QFont("Arial", 16))
-        self.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 0px;")
+        DataAcquisitionScreen.time_to_reach_label = QtWidgets.QLabel("/  -")
+        DataAcquisitionScreen.time_to_reach_label.setFont(QtGui.QFont("Arial", 16))
+        DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 0px;")
         
         # Display the timer
         time_layout = QtWidgets.QHBoxLayout()
         
         time_layout.addWidget(time_label)
-        time_layout.addWidget(self.time_display)
-        time_layout.addWidget(self.time_to_reach_label)
+        time_layout.addWidget(DataAcquisitionScreen.time_display)
+        time_layout.addWidget(DataAcquisitionScreen.time_to_reach_label)
         
         time_layout.addStretch()
         
@@ -159,7 +164,7 @@ class DataAcquisitionScreen:
         
     def _start_timer(self):
         """Starts the timer for measurement duration."""        
-        self.time_display.setText("00:00:00")  # Reset the time display
+        DataAcquisitionScreen.time_display.setText("00:00:00")  # Reset the time display
         
         # Initialize the timer
         self.timer = QtCore.QTimer()
@@ -176,11 +181,10 @@ class DataAcquisitionScreen:
         self.elapsed_time += 1
         hours, remainder = divmod(self.elapsed_time, 3600)
         minutes, seconds = divmod(remainder, 60)
-        self.time_display.setText(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+        DataAcquisitionScreen.time_display.setText(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
 
         # Stop the measurement if the duration is over
-        #if self.elapsed_time >= self.target_time:
-        if self.duration_time.is_time_over(self.elapsed_time):
+        if self.duration_time.is_time_over(self.elapsed_time) or not self.exe_manager.is_sensecom_running():
             self._stop_measurement()
             
     def _conclude_data_acquisition(self):
@@ -253,6 +257,7 @@ class DataAcquisitionScreen:
     def _start_measurement(self): 
         """Starts the measurement process."""      
         self._save_duration_field()
+        self._check_sensecom_running_before_start()
         
         if not self._is_error_message():
             self.path_to_csv = self.user_data.create_path_csv()
@@ -289,6 +294,7 @@ class DataAcquisitionScreen:
     def _restart_measurement(self):
         """Restart the measurement process."""  
         self._save_duration_field()
+        self._check_sensecom_running_before_start()
         
         if not self._is_error_message():            
             self.total_time = self.duration_time.get_time_sec()
@@ -302,37 +308,48 @@ class DataAcquisitionScreen:
             self.measurement_button.clicked.connect(self._stop_measurement)
             self.next_button.hide()
             self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
+        else:
+            self._show_error_message()
 
     def _save_duration_field(self):
         """Saves the duration entered by the user."""
-        self.field_error = ""
+        self.fields_errors = ""
         
         duration = DataAcquisitionScreen.duration_entry.text()  # Ottieni la durata inserita dall'utente
             
         if duration == "":
             self.duration_time.set_time_min()
-            self.time_to_reach_label.setText("/  ∞")
+            DataAcquisitionScreen.time_to_reach_label.setText("/  ∞")
         else:
             try:
-                duration = int(duration)
                 self.duration_time.set_time_min(duration)
                 
+                duration = int(duration)
+                
                 hours, minutes = divmod(duration, 60)
-                self.time_to_reach_label.setText(f"/  {hours:02d}:{minutes:02d}:00")
+                DataAcquisitionScreen.time_to_reach_label.setText(f"/  {hours:02d}:{minutes:02d}:00")
             except ValueError as e:
-                self.field_error += "• " + str(e)
+                self.fields_errors += "• " + str(e)
+                
+    def _check_sensecom_running_before_start(self):
+        """
+        Checks if sensecom is running before script starts
+        """
+        if not self.exe_manager.is_sensecom_running():
+            self.fields_errors += "• " + ("SenseCom is not running. Please press the 'Start Sensecom' \n   "
+                                          "button to start SenseCom before proceeding with data acquisition. \n")
     
     def _is_error_message(self):
-        """Checks if there is an error message."""
-        if self.field_error != "":
-            self.field_error = "Please fix the following errors:\n" + self.field_error
+        """Checks if there are errors messages."""
+        if self.fields_errors != "":
+            self.fields_errors = "Please fix the following errors:\n" + self.fields_errors
             return True
         else:
             return False
 
     def _show_error_message(self):
         """Shows an error message."""
-        error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.field_error.strip())
+        error_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Critical, "Error", self.fields_errors.strip())
         self._set_output_dialog_style(error_msg_box)
         error_msg_box.exec()
         
