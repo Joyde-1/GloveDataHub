@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html lang="Python" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API Module &#8212; GloveDataHub 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=afdf7161"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GUI Module" href="gui.html" />
+    <link rel="prev" title="Welcome to GloveDataHub&#39;s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-duration_time">
+<span id="api-module"></span><h1>API Module<a class="headerlink" href="#module-duration_time" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="duration_time.DurationTime">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">duration_time.</span></span><span class="sig-name descname"><span class="pre">DurationTime</span></span><a class="headerlink" href="#duration_time.DurationTime" title="Link to this definition">¶</a></dt>
+<dd><p>Class to manage duration time in seconds.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duration_time.DurationTime.time_sec">
+<span class="sig-name descname"><span class="pre">time_sec</span></span><a class="headerlink" href="#duration_time.DurationTime.time_sec" title="Link to this definition">¶</a></dt>
+<dd><p>The duration time in seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="duration_time.DurationTime.time_min">
+<span class="sig-name descname"><span class="pre">time_min</span></span><a class="headerlink" href="#duration_time.DurationTime.time_min" title="Link to this definition">¶</a></dt>
+<dd><p>The duration time in minutes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duration_time.DurationTime.get_time_sec">
+<span class="sig-name descname"><span class="pre">get_time_sec</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#duration_time.DurationTime.get_time_sec" title="Link to this definition">¶</a></dt>
+<dd><p>Get the duration time in seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The duration time in seconds.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duration_time.DurationTime.is_time_over">
+<span class="sig-name descname"><span class="pre">is_time_over</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duration_time.DurationTime.is_time_over" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the given time has exceeded the duration time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>current_time</strong> (<em>float</em>) -- The current time in seconds.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the current time has not exceeded the duration time, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="duration_time.DurationTime.set_time_min">
+<span class="sig-name descname"><span class="pre">set_time_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minutes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#duration_time.DurationTime.set_time_min" title="Link to this definition">¶</a></dt>
+<dd><p>Set the duration time in minutes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>minutes</strong> (<em>int</em>) -- The duration time in minutes,
+it is an optional parametr by defaults it is set to None.
+If None, sets time_min and time_sec to -1.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> -- If minutes is not a non-negative integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-exe_manager">
+<dt class="sig sig-object py" id="exe_manager.ExeManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exe_manager.</span></span><span class="sig-name descname"><span class="pre">ExeManager</span></span><a class="headerlink" href="#exe_manager.ExeManager" title="Link to this definition">¶</a></dt>
+<dd><p>Class to manage execution of external scripts and processes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.path_script">
+<span class="sig-name descname"><span class="pre">path_script</span></span><a class="headerlink" href="#exe_manager.ExeManager.path_script" title="Link to this definition">¶</a></dt>
+<dd><p>The path to the script for data acquisition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.path_sensecom">
+<span class="sig-name descname"><span class="pre">path_sensecom</span></span><a class="headerlink" href="#exe_manager.ExeManager.path_sensecom" title="Link to this definition">¶</a></dt>
+<dd><p>The path to the SenseCom executable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.sensecom_process">
+<span class="sig-name descname"><span class="pre">sensecom_process</span></span><a class="headerlink" href="#exe_manager.ExeManager.sensecom_process" title="Link to this definition">¶</a></dt>
+<dd><p>The process for SenseCom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>subprocess.Popen</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.script_process">
+<span class="sig-name descname"><span class="pre">script_process</span></span><a class="headerlink" href="#exe_manager.ExeManager.script_process" title="Link to this definition">¶</a></dt>
+<dd><p>The process for the data acquisition script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>subprocess.Popen</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.close_script">
+<span class="sig-name descname"><span class="pre">close_script</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#exe_manager.ExeManager.close_script" title="Link to this definition">¶</a></dt>
+<dd><p>Close the data acquisition script process if it is running.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.close_sensecom">
+<span class="sig-name descname"><span class="pre">close_sensecom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#exe_manager.ExeManager.close_sensecom" title="Link to this definition">¶</a></dt>
+<dd><p>Close the SenseCom process if it is running.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.is_script_running">
+<span class="sig-name descname"><span class="pre">is_script_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#exe_manager.ExeManager.is_script_running" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the data acquisition script process is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if data acquisition script process is running, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.is_sensecom_running">
+<span class="sig-name descname"><span class="pre">is_sensecom_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#exe_manager.ExeManager.is_sensecom_running" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the SenseCom process is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if SenseCom process is running, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.start_script">
+<span class="sig-name descname"><span class="pre">start_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_csv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exe_manager.ExeManager.start_script" title="Link to this definition">¶</a></dt>
+<dd><p>Start the data acquisition script process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_to_csv</strong> (<em>str</em>) -- The path to the CSV file for data storage.</p></li>
+<li><p><strong>total_time</strong> (<em>int</em>) -- The total time for data acquisition in seconds.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="exe_manager.ExeManager.start_sensecom">
+<span class="sig-name descname"><span class="pre">start_sensecom</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#exe_manager.ExeManager.start_sensecom" title="Link to this definition">¶</a></dt>
+<dd><p>Start the SenseCom process.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-main_manager">
+<dt class="sig sig-object py" id="main_manager.MainManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main_manager.</span></span><span class="sig-name descname"><span class="pre">MainManager</span></span><a class="headerlink" href="#main_manager.MainManager" title="Link to this definition">¶</a></dt>
+<dd><p>Class responsible for managing the main operations of the NOVA Gloves Data Acquisition System.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main_manager.MainManager.user_data">
+<span class="sig-name descname"><span class="pre">user_data</span></span><a class="headerlink" href="#main_manager.MainManager.user_data" title="Link to this definition">¶</a></dt>
+<dd><p>An instance of UserData for managing user data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#user_data.UserData" title="user_data.UserData">UserData</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main_manager.MainManager.duration_time">
+<span class="sig-name descname"><span class="pre">duration_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DurationTime</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main_manager.MainManager.duration_time" title="Link to this definition">¶</a></dt>
+<dd><p>An instance of DurationTime for managing duration time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#duration_time.DurationTime" title="duration_time.DurationTime">DurationTime</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main_manager.MainManager.exe_manager">
+<span class="sig-name descname"><span class="pre">exe_manager</span></span><a class="headerlink" href="#main_manager.MainManager.exe_manager" title="Link to this definition">¶</a></dt>
+<dd><p>An instance of ExeManager for executing system commands.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#exe_manager.ExeManager" title="exe_manager.ExeManager">ExeManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main_manager.MainManager.data_acquisition_screen">
+<span class="sig-name descname"><span class="pre">data_acquisition_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main_manager.MainManager.data_acquisition_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Display the data acquisition screen and perform data acquisition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main_manager.MainManager.data_entry_screen">
+<span class="sig-name descname"><span class="pre">data_entry_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main_manager.MainManager.data_entry_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Display the data entry screen and prompt user to enter necessary data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main_manager.MainManager.display_welcome_screen">
+<span class="sig-name descname"><span class="pre">display_welcome_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main_manager.MainManager.display_welcome_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Display the welcome screen of the system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main_manager.MainManager.repeat_or_close_screen">
+<span class="sig-name descname"><span class="pre">repeat_or_close_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main_manager.MainManager.repeat_or_close_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Display the repeat or close screen and prompt user for choice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>'R' if user chooses to repeat, 'Q' if user chooses to quit.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main_manager.MainManager.start_calibration_screen">
+<span class="sig-name descname"><span class="pre">start_calibration_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main_manager.MainManager.start_calibration_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Display the calibration screen and start calibration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-user_data">
+<span id="module-main"></span><dt class="sig sig-object py" id="user_data.UserData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_data.</span></span><span class="sig-name descname"><span class="pre">UserData</span></span><a class="headerlink" href="#user_data.UserData" title="Link to this definition">¶</a></dt>
+<dd><p>A class to represent user data and operations on it.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.create_path_csv">
+<span class="sig-name descname"><span class="pre">create_path_csv</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.create_path_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the full path of the user's CSV file based on the destination directory and calculated CSV file name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The normalized full path of the user's CSV file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.generate_random_code">
+<span class="sig-name descname"><span class="pre">generate_random_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.generate_random_code" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a random code of specified length.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="user_data.UserData.length">
+<span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#user_data.UserData.length" title="Link to this definition">¶</a></dt>
+<dd><p>The length of the random code, it is an optional parama and by defaults is set to 4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The randomly generated code.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.get_name" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the name of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The name of the user.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.get_path_directory">
+<span class="sig-name descname"><span class="pre">get_path_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.get_path_directory" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the directory path for user's CSV files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The directory path for user's CSV files.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.get_surname">
+<span class="sig-name descname"><span class="pre">get_surname</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.get_surname" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the surname of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The surname of the user.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.set_code">
+<span class="sig-name descname"><span class="pre">set_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.set_code" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the user code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>code</strong> (<em>str</em>) -- The the user code.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> -- If code contains non-numeric characters or is not 4 digits long.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.set_name">
+<span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.set_name" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the name of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) -- The name of the user.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> -- If name contains non-letter characters or is empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.set_path_directory">
+<span class="sig-name descname"><span class="pre">set_path_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.set_path_directory" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the directory path for user's CSV files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path_directory</strong> (<em>str</em>) -- The directory path for user's CSV files.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> -- If the specified directory path does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_data.UserData.set_surname">
+<span class="sig-name descname"><span class="pre">set_surname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#user_data.UserData.set_surname" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the surname of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>surname</strong> (<em>str</em>) -- The surname of the user.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> -- If surname contains non-letter characters or is empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GloveDataHub</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#duration_time.DurationTime"><code class="docutils literal notranslate"><span class="pre">DurationTime</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exe_manager.ExeManager"><code class="docutils literal notranslate"><span class="pre">ExeManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main_manager.MainManager"><code class="docutils literal notranslate"><span class="pre">MainManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user_data.UserData"><code class="docutils literal notranslate"><span class="pre">UserData</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">GUI Module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to GloveDataHub's documentation!</a></li>
+      <li>Next: <a href="gui.html" title="next chapter">GUI Module</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
