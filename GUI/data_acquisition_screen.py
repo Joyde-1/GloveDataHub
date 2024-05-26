@@ -382,8 +382,7 @@ class DataAcquisitionScreen:
         
     def _show_success_message(self):
         """Shows a success message."""
-        timer_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Success", ("I dati dei guanti aptici sono stati \n"
-                                                                                                  "acquisiti con successo!"))
+        timer_msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Icon.Information, "Success", ("Haptic gloves data have been acquired successfully!"))
         self._set_output_dialog_style(timer_msg_box)
         timer_msg_box.exec() 
 
