@@ -43,7 +43,7 @@ This is an API that allows you to extract data from your SenseGlove haptic glove
 
 ### Table of Contents
 
-- [GloveDataHub](#machine-learning-project-template)
+- [GloveDataHub](#GloveDataHub)
   - [Introduction](#introduction)
   - [Getting started](#Getting-started)
   - [Code structure](#code-structure)
