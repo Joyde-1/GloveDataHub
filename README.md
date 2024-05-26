@@ -72,7 +72,7 @@ To ensure the connection of your haptic senseglove gloves to your computer you m
 
 The project is based on **Python 3.12.3** - one of the latest versions of Python at the time of writing. A few considerations:
 - It is recommended to use a virtual environment to manage the dependencies of the project. For example [conda](https://docs.conda.io/en/latest/).
-- The requirements are listed in the `requirements.txt` file and can be installed using the `prepare.bat` for windows and the the user can run the prepare.bat script by passing the environment name conda as argument as follow:  `prepare.bat name_conda_ambient`, or on Unix/linux by running the `prepare.sh` file and the user can run the `prepare.sh`  script and pass the environment name conda as argument, in the following way: `./prepare.sh name_conda_ambient`.
+- The requirements are listed in the `requirements.txt` file and can be installed using the `prepare.ps1` for windows and the the user can run the prepare.bat script by passing the environment name conda as argument as follow:  `.\prepare.ps1 -envName "name_conda_enviroment" `, or on Unix/linux by running the `prepare.sh` file and the user can run the `prepare.sh`  script and pass the environment name conda as argument, in the following way: `./prepare.sh name_conda_enviroment`.
 
 Inside the file `requirements.txt` you can find the following modules:
 
