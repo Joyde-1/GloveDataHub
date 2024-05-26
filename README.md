@@ -72,7 +72,9 @@ To ensure the connection of your haptic senseglove gloves to your computer you m
 
 The project is based on **Python 3.12.3** - one of the latest versions of Python at the time of writing. A few considerations:
 - It is recommended to use a virtual environment to manage the dependencies of the project. For example [conda](https://docs.conda.io/en/latest/).
-- The requirements are listed in the `requirements.txt` file and can be installed using `pip install -r requirements.txt`. Inside the file `requirements.txt` you can find the following modules:
+- The requirements are listed in the `requirements.txt` file and can be installed using the `prepare.bat` for windows and the the user can run the prepare.bat script by passing the environment name conda as argument as follow:  `prepare.bat name_conda_ambient`, or on Unix/linux by running the `prepare.sh` file and the user can run the `prepare.sh`  script and pass the environment name conda as argument, in the following way: `./prepare.sh name_conda_ambient`.
+
+Inside the file `requirements.txt` you can find the following modules:
 
   - comtypes (1.4.2)
   - pillow (10.3.0)
@@ -88,7 +90,7 @@ The project is based on **Python 3.12.3** - one of the latest versions of Python
   - six (1.16.0)
   - wheel (0.43.0)
 
-*Other Helpful Resources*
+*Other Helpful Resources :*
 
 Here you can find information about ["How to Connect SenseGlove"](https://senseglove.gitlab.io/SenseGloveDocs/connecting-devices.html) to the system.
 
@@ -100,7 +102,7 @@ Here you can find information about ["How to Connect SenseGlove"](https://senseg
   <br/>
 </p>
 
-You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html)
+You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html).
 
 
 ### Code structure
