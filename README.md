@@ -143,10 +143,10 @@ GDH_repository/
 ├── README.md
 └── requirements.txt
 ```
-- `API/` contains the classes for managing the dataset.
-- `Data-Acquisition/` contains the classes for the model design.
-- `docs/` is the script for training the model.
-- `GUI/` is the script for testing the model.
+- `API/` contains the classes for managing the executable file.
+- `Data-Acquisition/` contains the executable of the C++ script `glove_data_acquisition.exe` and the linked .dll file `SGCoreCpp.dll` of the libraries.
+- `docs/` contains the HTML files related to the documentation and they are located inside the `build/` folder within the `html/` folder.
+- `GUI/` contains the classes for managing the GUI interface.
 - `prepare.sh` is a script for setting up the environment - at the moment it only installs the requirements.
 - `requirements.txt` contains the list of dependencies for the project.
 - `README.md` is the file you are currently reading.
@@ -155,4 +155,4 @@ GDH_repository/
 
 ### License
 
-This project is licensed under the terms of the MIT license. You can find the full license in the `LICENSE` file.
+This project is licensed under the terms of the CC BY-NC-ND 4.0 license. You can find the full license in the `LICENSE` file.
