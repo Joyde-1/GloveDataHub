@@ -184,6 +184,7 @@ GDH_repository/
 │   └── window_manager.py
 │
 ├── LICENSE
+├── prepare.bat
 ├── prepare.sh
 ├── README.md
 └── requirements.txt
@@ -192,7 +193,8 @@ GDH_repository/
 - `Data-Acquisition/` contains the executable of the C++ script `glove_data_acquisition.exe` and the linked .dll file `SGCoreCpp.dll` of the libraries.
 - `docs/` contains the HTML files related to the documentation and they are located inside the `build/` folder within the `html/` folder.
 - `GUI/` contains the classes for managing the GUI interface.
-- `prepare.sh` is a script for setting up the environment - at the moment it only installs the requirements.
+- `prepare.bat` is a script for setting up the environment on Windows OS - at the moment it only installs the requirements.
+- `prepare.sh` is a script for setting up the environment on Unix/Linux OS - at the moment it only installs the requirements.
 - `requirements.txt` contains the list of dependencies for the project.
 - `README.md` is the file you are currently reading.
 
