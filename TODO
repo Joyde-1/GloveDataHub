@@ -1,5 +1,55 @@
+"Steps GUI:"
+
 1.  (   "Quando inizia o si riavvia la misurazione, fare in modo che cambi la schermata facendo"
         "apparire soltanto il tempo ed un testo con scritte le istruzioni se si vuole terminare prima l acquisizione dei dati."
         "La schermata deve riapparire quando finisce la misurazione, quindi gestire tutto nel metodo _stop_measurement")
 
 2.  (   "Verificare il codice C++ che avvia sensecom quando non è avviato, ogni tanto anche se è già attivo prova a riavviarlo")
+
+3.  (   "Creare una scritta stilizzata di GloveDataHub per l header")
+
+4.  (   "Mettere in grassetto le parti di testo tra apici ('')")
+
+5.  (   "Inserire qualche immagine o layout nella schermata finale")
+
+6.  (   "Rivedere i colori di background del content layout")
+
+7.  (   "Rendere più appetibile la grafica")
+
+8.  (   "Rivedere i commenti nel codice")
+
+
+
+
+
+"Steps Repository:"
+
+1.  (   "Creare sezione 'Getting Started' nel file README.md")
+
+2.  (   "Correggere il file requirements.txt")
+
+3.  (   "Capire come utilizzare prepare.sh")
+
+4.  (   "Rivedere bene l'intero file README.md")
+
+5.  (   "Ricreare la documentazione quando la GUI sarà completata")
+
+
+
+
+
+"Steps Esame:"
+
+1.  (   "Fare la presentazione prestando attenzione alle norme Human Centered")
+
+2.  (   "Vedere come creare l'installer per l'applicazione GloveDataHub (*)")
+
+3.  (   "Testare GloveDataHub con i Nova gloves (*)")
+
+4.  (   "Creare un drive dove contenere l'applicazione GloveDataHub (*)")
+
+5.  (   "Creare un codice QR da inserire alla fine della presentazione (*)")
+
+
+
+"(*): gli steps successivi ad 1 sono da fare soltanto nel momento in cui saranno stati completati tutti quelli inerenti alla GUI e la repository"
