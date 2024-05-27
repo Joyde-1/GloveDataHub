@@ -118,7 +118,23 @@ class FinalScreen:
         DataEntryScreen.surname_entry.setText("")
         DataEntryScreen.code_entry.setText("")
         DataEntryScreen.path_directory_entry.setText(str(Path.home() / "Documents"))
+        DataAcquisitionScreen.description1_text = (
+            "Enter the measurement duration in the \n"
+            "corresponding field. \n\n"
+            "If you prefer the data acquisition to have \n"
+            "an unlimited duration, leave the duration \n"
+            "field empty."
+        )
+        DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
+        DataAcquisitionScreen.description2_text = (
+            "Press the 'Start Measurement' button to \n"
+            "start capturing data from your haptic gloves."
+        )
+        DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
         DataAcquisitionScreen.duration_entry.setText("")
+        DataAcquisitionScreen.time_label.hide()
+        DataAcquisitionScreen.time_display.hide()
+        DataAcquisitionScreen.time_to_reach_label.hide()
         
     def _close_application(self):
         """
