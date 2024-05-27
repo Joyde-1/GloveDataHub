@@ -102,31 +102,31 @@ class DataAcquisitionScreen:
         DataAcquisitionScreen.description1_label = QtWidgets.QLabel(DataAcquisitionScreen.description1_text)
         DataAcquisitionScreen.description1_label.setWordWrap(True)
         DataAcquisitionScreen.description1_label.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.description1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 50px 10px;")
+        DataAcquisitionScreen.description1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 20px 10px;")
         
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.description1_label)
 
         # Widget for duration
         DataAcquisitionScreen.duration_label = QtWidgets.QLabel("Duration (in minutes):")
         DataAcquisitionScreen.duration_label.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 0px 10px;")
+        DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
         
         # Field for duration
         DataAcquisitionScreen.duration_entry = QtWidgets.QLineEdit()
         DataAcquisitionScreen.duration_entry.setFont(QtGui.QFont("Arial", 14))
         DataAcquisitionScreen.duration_entry.setStyleSheet("color: black;")
         DataAcquisitionScreen.duration_entry.setFixedWidth(90)
-        DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 0, 5)
+        DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 10, 40)
         
         # Layout for duration
-        duration_layout = QtWidgets.QVBoxLayout()
+        self.duration_layout = QtWidgets.QVBoxLayout()
         
-        duration_layout.addWidget(DataAcquisitionScreen.duration_label)
-        duration_layout.addWidget(DataAcquisitionScreen.duration_entry)
+        self.duration_layout.addWidget(DataAcquisitionScreen.duration_label)
+        self.duration_layout.addWidget(DataAcquisitionScreen.duration_entry)
         
-        #duration_layout.addStretch()
+        self.duration_layout.addStretch()
 
-        self.data_acquisition_layout.addLayout(duration_layout)
+        self.data_acquisition_layout.addLayout(self.duration_layout)
         
         # Lable for time
         DataAcquisitionScreen.time_label = QtWidgets.QLabel("Time:")
@@ -142,19 +142,19 @@ class DataAcquisitionScreen:
         DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 0px;")
         
         # Display the timer
-        time_layout = QtWidgets.QHBoxLayout()
+        self.time_layout = QtWidgets.QHBoxLayout()
         
-        time_layout.addWidget(DataAcquisitionScreen.time_label)
-        time_layout.addWidget(DataAcquisitionScreen.time_display)
-        time_layout.addWidget(DataAcquisitionScreen.time_to_reach_label)
+        self.time_layout.addWidget(DataAcquisitionScreen.time_label)
+        self.time_layout.addWidget(DataAcquisitionScreen.time_display)
+        self.time_layout.addWidget(DataAcquisitionScreen.time_to_reach_label)
         
-        time_layout.addStretch()
+        self.time_layout.addStretch()
         
         DataAcquisitionScreen.time_label.hide()
         DataAcquisitionScreen.time_display.hide()
         DataAcquisitionScreen.time_to_reach_label.hide()
         
-        self.data_acquisition_layout.addLayout(time_layout)
+        self.data_acquisition_layout.addLayout(self.time_layout)
         
         # Description below the field
         DataAcquisitionScreen.description2_text = (
@@ -168,11 +168,13 @@ class DataAcquisitionScreen:
         
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.description2_label)
         
+        self.data_acquisition_layout.addStretch()
+        
         # Add the panel to the layout of the main content
         self.main_window.add_content_widget(self.data_acquisition_panel)
         
     def _start_timer(self):
-        """Starts the timer for measurement duration."""        
+        """Starts the timer for measurement duration."""
         DataAcquisitionScreen.time_display.setText("00:00:00")  # Reset the time display
         
         # Initialize the timer
@@ -203,7 +205,6 @@ class DataAcquisitionScreen:
         self.time_display.setText("00:00:00")
         self.time_to_reach_label.setText("/  -")
         
-            
     def _conclude_data_acquisition(self):
         """Concludes the data acquisition process."""
         self.timer.stop()
@@ -296,8 +297,15 @@ class DataAcquisitionScreen:
             
             DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
             
+            DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 0px 10px;")
+            DataAcquisitionScreen.duration_entry.setContentsMargins(15, 0, 10, 0)
+            
             DataAcquisitionScreen.duration_label.hide()
             DataAcquisitionScreen.duration_entry.hide()
+            
+            DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 80px 10px")
+            DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 5px;")
+            DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 0px;")
             
             DataAcquisitionScreen.time_label.show()
             DataAcquisitionScreen.time_display.show()
@@ -349,8 +357,15 @@ class DataAcquisitionScreen:
         
         DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
         
+        DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
+        DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 10, 20)
+        
         DataAcquisitionScreen.duration_label.show()
         DataAcquisitionScreen.duration_entry.show()
+        
+        DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 30px 10px")
+        DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 30px 5px;")
+        DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 30px 0px;")
         
         DataAcquisitionScreen.description2_text = (
             "If you want to repeat the measurement, press \n"
@@ -389,8 +404,15 @@ class DataAcquisitionScreen:
             
             DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
             
+            DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 0px 10px;")
+            DataAcquisitionScreen.duration_entry.setContentsMargins(15, 0, 10, 0)
+            
             DataAcquisitionScreen.duration_label.hide()
             DataAcquisitionScreen.duration_entry.hide()
+            
+            DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 80px 10px")
+            DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 5px;")
+            DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 0px;")
             
             DataAcquisitionScreen.time_label.show()
             DataAcquisitionScreen.time_display.show()

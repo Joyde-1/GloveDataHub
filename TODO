@@ -1,22 +1,18 @@
 "Steps GUI:"
 
-1.  (   "Quando inizia o si riavvia la misurazione, fare in modo che cambi la schermata facendo"
-        "apparire soltanto il tempo ed un testo con scritte le istruzioni se si vuole terminare prima l acquisizione dei dati."
-        "La schermata deve riapparire quando finisce la misurazione, quindi gestire tutto nel metodo _stop_measurement")
+1.      ("Verificare il codice C++ che avvia sensecom quando non è avviato, ogni tanto anche se è già attivo prova a riavviarlo")
 
-2.  (   "Verificare il codice C++ che avvia sensecom quando non è avviato, ogni tanto anche se è già attivo prova a riavviarlo")
+2.      ("Creare una scritta stilizzata di GloveDataHub per l header")
 
-3.  (   "Creare una scritta stilizzata di GloveDataHub per l header")
+3.      ("Mettere in grassetto le parti di testo tra apici ('')")
 
-4.  (   "Mettere in grassetto le parti di testo tra apici ('')")
+4.      ("Inserire qualche immagine o layout nella schermata finale")
 
-5.  (   "Inserire qualche immagine o layout nella schermata finale")
+5.      ("Rivedere i colori di background del content layout")
 
-6.  (   "Rivedere i colori di background del content layout")
+6.      ("Rendere più appetibile la grafica")
 
-7.  (   "Rendere più appetibile la grafica")
-
-8.  (   "Rivedere i commenti nel codice")
+7.      ("Rivedere i commenti nel codice")
 
 
 
@@ -24,15 +20,9 @@
 
 "Steps Repository:"
 
-1.  (   "Creare sezione 'Getting Started' nel file README.md")
+1.      ("Rivedere bene l'intero file README.md")
 
-2.  (   "Correggere il file requirements.txt")
-
-3.  (   "Capire come utilizzare prepare.sh")
-
-4.  (   "Rivedere bene l'intero file README.md")
-
-5.  (   "Ricreare la documentazione quando la GUI sarà completata")
+2.      ("Ricreare la documentazione quando la GUI sarà completata")
 
 
 
@@ -40,16 +30,69 @@
 
 "Steps Esame:"
 
-1.  (   "Fare la presentazione prestando attenzione alle norme Human Centered")
+1.      ("Fare la presentazione prestando attenzione alle norme Human Centered")
 
-2.  (   "Vedere come creare l'installer per l'applicazione GloveDataHub (*)")
+2.      ("Vedere come creare l'installer per l'applicazione GloveDataHub (*)")
 
-3.  (   "Testare GloveDataHub con i Nova gloves (*)")
+3.      ("Testare GloveDataHub con i Nova gloves (*)")
 
-4.  (   "Creare un drive dove contenere l'applicazione GloveDataHub (*)")
+4.      ("Creare un drive dove contenere l'applicazione GloveDataHub (*)")
 
-5.  (   "Creare un codice QR da inserire alla fine della presentazione (*)")
+5.      ("Creare un codice QR da inserire alla fine della presentazione (*)")
 
 
 
 "(*): gli steps successivi ad 1 sono da fare soltanto nel momento in cui saranno stati completati tutti quelli inerenti alla GUI e la repository"
+
+
+
+
+
+"Steps PPT:"
+
+1.      ("Frontespizio")
+
+2.      ("Obiettivo")
+
+3.      ("Indice con elenco puntato:
+          - Anatomia della mano
+          - Guanti Aptici
+          - GloveDataHub")
+
+4.      ("Immagine della mano con mini descrizione")
+
+5.      ("Spiegazione delle ossa della mano")
+
+6.      ("Spiegazione dei giunti della mano")
+
+7.      ("Introduzione ai guanti aptici")
+
+8.      ("Descrizione Nova Gloves con le loro caratteristiche (cosa possono fare)")
+
+9.      ("Come utilizzare i Nova Gloves")
+
+10.     ("Descrizione e spiegazione di SenseCom")
+
+11.     ("Descrizione e spiegazione API di SenseGlove")
+
+12.     ("Descrizione dello script C++")
+
+13.     ("Spiegazione dei dati che vengono catturati dallo script C++")
+
+14.     ("Introduzione GloveDataHub")
+
+15.     ("Requisiti per poter usare GloveDataHub")
+
+16.     ("Funzionamento di GloveDataHub: Schermata 1 e 2")
+
+17.     ("Funzionamento di GloveDataHub: Schermata 3")
+
+18.     ("Funzionamento di GloveDataHub: Schermata 4 (e sottoschermate)")
+
+19.     ("Funzionamento di GloveDataHub: Schermata 5")
+
+20.     ("Funzionamento di GloveDataHub: Video dimostrativo")
+
+21.     ("Conclusioni e implementazioni future")
+
+22.     ("Ringraziamenti")
