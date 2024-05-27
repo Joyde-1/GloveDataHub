@@ -1,5 +1,5 @@
 from PyQt6 import QtGui, QtCore
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QGridLayout, QStackedWidget, QMessageBox
+from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QGridLayout, QStackedWidget, QMessageBox, QFrame
 from PyQt6.QtGui import QFont
 import sys
 import os
@@ -344,6 +344,20 @@ class WindowManager(QWidget):
         # Container for SenseCom
         self.sensecom_container = QWidget()
         self.sensecom_container.setFixedSize(528, 289)
+        self.sensecom_container.setContentsMargins(0, 0, 10, 0)
+        
+        # Creazione del contenitore con i bordi
+        self.bordered_container = QFrame()
+        self.bordered_container.setFrameShape(QFrame.Shape.Box)
+        self.bordered_container.setLineWidth(3)
+        self.bordered_container.setStyleSheet("background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8); border-color: #C8C5B8;")
+        self.bordered_container.setFixedSize(534, 295)  # Dimensioni maggiorate per includere i bordi
+
+        # Layout per il contenitore con bordi
+        border_layout = QVBoxLayout()
+        border_layout.setContentsMargins(0, 0, 0, 0)  # Rimuove i margini interni
+        border_layout.addWidget(self.sensecom_container)
+        self.bordered_container.setLayout(border_layout)
         
         # Button to start SenseCom
         self.sensecom_button = CustomButton("Start SenseCom", 200, 30, 14)
@@ -351,8 +365,12 @@ class WindowManager(QWidget):
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.sensecom_button)
         
+        self.sensecom_layout.setContentsMargins(0, 0, 0, 0)  # Rimuove i margini interni del layout principale
+        self.sensecom_layout.setSpacing(0)  # Rimuove lo spazio tra i widget
+        
         self.sensecom_layout.addWidget(self.sensecom_title)
-        self.sensecom_layout.addWidget(self.sensecom_container)
+        #self.sensecom_layout.addWidget(self.sensecom_container)
+        self.sensecom_layout.addWidget(self.bordered_container)
         # self.sensecom_layout.addStretch()
         self.sensecom_layout.addLayout(button_layout)
         self.sensecom_layout.addStretch()

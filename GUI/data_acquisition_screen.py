@@ -93,10 +93,10 @@ class DataAcquisitionScreen:
 
         # Description above the field
         DataAcquisitionScreen.description1_text = (
-            "Enter the measurement duration in the \n"
-            "corresponding field. \n\n"
-            "If you prefer the data acquisition to have \n"
-            "an unlimited duration, leave the duration \n"
+            "Enter the measurement duration in the <br>"
+            "corresponding field. <br><br>"
+            "If you prefer the data acquisition to have <br>"
+            "an unlimited duration, leave the <b>Duration</b> <br>"
             "field empty."
         )
         DataAcquisitionScreen.description1_label = QtWidgets.QLabel(DataAcquisitionScreen.description1_text)
@@ -107,7 +107,7 @@ class DataAcquisitionScreen:
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.description1_label)
 
         # Widget for duration
-        DataAcquisitionScreen.duration_label = QtWidgets.QLabel("Duration (in minutes):")
+        DataAcquisitionScreen.duration_label = QtWidgets.QLabel("<b>Duration</b> (in minutes):")
         DataAcquisitionScreen.duration_label.setFont(QtGui.QFont("Arial", 16))
         DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
         
@@ -158,7 +158,7 @@ class DataAcquisitionScreen:
         
         # Description below the field
         DataAcquisitionScreen.description2_text = (
-            "Press the 'Start Measurement' button to \n"
+            "Press the <b>Start Measurement</b> button to <br>"
             "start capturing data from your haptic gloves."
         )
         DataAcquisitionScreen.description2_label = QtWidgets.QLabel(DataAcquisitionScreen.description2_text)
@@ -312,8 +312,8 @@ class DataAcquisitionScreen:
             DataAcquisitionScreen.time_to_reach_label.show()
             
             DataAcquisitionScreen.description2_text = (
-                "Then if you want to stop data acquisition \n"
-                "immediately, you can press the 'Stop' button \n"
+                "Then if you want to stop data acquisition <br>"
+                "immediately, you can press the <b>Stop</b> button <br>"
                 "or close SenseCom."
             )
             
@@ -347,11 +347,10 @@ class DataAcquisitionScreen:
         self.measurement_button.clicked.connect(self._restart_measurement)
         
         DataAcquisitionScreen.description1_text = (
-            "The data has been successfully captured \n"
-            "and saved in the file: \n"
-            f"{self.path_to_csv} \n\n"
-            "If you are not satisfied with the measurement, \n"
-            "you can repeat it by entering the duration in \n"
+            "The data has been successfully captured <br>"
+            "and saved in the file: <br><br>"
+            "If you are not satisfied with the measurement, <br>"
+            "you can repeat it by entering the <b>Duration</b> in <br>"
             "the corresponding field again."
         )
         
@@ -368,9 +367,10 @@ class DataAcquisitionScreen:
         DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 30px 0px;")
         
         DataAcquisitionScreen.description2_text = (
-            "If you want to repeat the measurement, press \n"
-            "the 'Restart' button or press the 'Next' \n"
-            "button to continue"
+            "If you want to repeat the measurement, press <br>"
+            "the <b>Restart</b> button. <br>"
+            "Otherwise if you want to go ahead, press the <br>"
+            "<b>Next</b> button."
         )
         
         DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
@@ -419,8 +419,8 @@ class DataAcquisitionScreen:
             DataAcquisitionScreen.time_to_reach_label.show()
             
             DataAcquisitionScreen.description2_text = (
-                "Then if you want to stop data acquisition \n"
-                "immediately, you can press the 'Stop' button \n"
+                "Then if you want to stop data acquisition <br>"
+                "immediately, you can press the <b>Stop</b> button <br>"
                 "or close SenseCom."
             )
             
@@ -465,13 +465,13 @@ class DataAcquisitionScreen:
         Checks if sensecom is running before script starts
         """
         if not self.exe_manager.is_sensecom_running():
-            self.fields_errors += "• " + ("SenseCom is not running. Please press the 'Start Sensecom' \n   "
-                                          "button to start SenseCom before proceeding with data acquisition. \n")
+            self.fields_errors += "• " + ("SenseCom is not running. Please press the <b>Start Sensecom</b> <br>"
+                                          "button to start SenseCom before proceeding with data acquisition. <br>")
     
     def _is_error_message(self):
         """Checks if there are errors messages."""
         if self.fields_errors != "":
-            self.fields_errors = "Please fix the following errors:\n" + self.fields_errors
+            self.fields_errors = "Please fix the following errors:<br>" + self.fields_errors
             return True
         else:
             return False

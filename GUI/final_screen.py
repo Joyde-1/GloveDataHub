@@ -55,8 +55,8 @@ class FinalScreen:
         
         # Application description
         description_text = (
-            "If you want to perform a new data acquisition process from your haptic gloves, click the 'New Acquisition' button. \n"
-            "Otherwise click on the 'Close' button to exit from GloveDataHub."
+            "If you want to perform a new data acquisition process from your haptic gloves, click the <b>New Acquisition</b> button. <br>"
+            "Otherwise click on the <b>Close</b> button to exit from GloveDataHub."
         )
         description_label = QLabel(description_text)
         description_label.setWordWrap(True)
@@ -120,10 +120,10 @@ class FinalScreen:
         DataEntryScreen.path_directory_entry.setText(str(Path.home() / "Documents"))
         
         DataAcquisitionScreen.description1_text = (
-            "Enter the measurement duration in the \n"
-            "corresponding field. \n\n"
-            "If you prefer the data acquisition to have \n"
-            "an unlimited duration, leave the duration \n"
+            "Enter the measurement duration in the <br>"
+            "corresponding field. <br><br>"
+            "If you prefer the data acquisition to have <br>"
+            "an unlimited duration, leave the <b>Duration</b> <br>"
             "field empty."
         )
         DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
@@ -140,7 +140,7 @@ class FinalScreen:
         DataAcquisitionScreen.time_to_reach_label.hide()
         
         DataAcquisitionScreen.description2_text = (
-            "Press the 'Start Measurement' button to \n"
+            "Press the <b>Start Measurement</b> button to <br>"
             "start capturing data from your haptic gloves."
         )
         DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)

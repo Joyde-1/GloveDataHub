@@ -49,19 +49,19 @@ class CalibrationScreen():
         
         # Description of the application
         description_text = (
-            "On this screen you can calibrate your haptic \n"
-            "gloves. \n\n"
-            "To run it you will need to launch the \n"
-            "application \'SenseCom\' which will manage \n"
-            "the connection with your haptic gloves. \n\n"
-            "Make sure both your gloves are connected to \n"
-            "your PC via Bluetooth and appear on the \n"
-            "SenseCom main screen. \n\n"
-            "It is important that this application remains \n"
-            "open throughout the session. \n\n"
-            "In case you mistakenly close it, please reopen \n"
-            "it and re-calibrate. \n\n"
-            "Press the \'Start Sensecom\' button to start \n"
+            "On this screen you can calibrate your haptic <br>"
+            "gloves. <br><br>"
+            "To run it you will need to launch the <br>"
+            "application <b>SenseCom</b> which will manage <br>"
+            "the connection with your haptic gloves. <br><br>"
+            "Make sure both your gloves are connected to <br>"
+            "your PC via Bluetooth and appear on the <br>"
+            "SenseCom main screen. <br><br>"
+            "It is important that this application remains <br>"
+            "open throughout the session. <br><br>"
+            "In case you mistakenly close it, please reopen <br>"
+            "it and re-calibrate. <br><br>"
+            "Press the <b>Start Sensecom</b> button to start <br>"
             "the application and proceed with the calibration."
         )
         description_label = QtWidgets.QLabel(description_text)

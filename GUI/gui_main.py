@@ -18,9 +18,9 @@ if __name__ == "__main__":
         'window_width': 1040, 
         'window_height': 670, 
         'background': '#E9E6DB',
-        'frontground': '#000000',
+        'frontground': '#031725',
         'header_title': "GloveDataHub",
-        'header_font': QFont("Arial", 24, QFont.Weight.Bold)
+        'header_font': QFont("Montserrat", 24, QFont.Weight.Bold)
     }
     
     # Create the main window

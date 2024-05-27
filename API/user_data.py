@@ -40,7 +40,7 @@ class UserData:
             If name contains non-letter characters or is empty.
         """
         if not re.match("^[A-Za-z]+$", name) and name != "":
-            raise ValueError("Name must contain only letters. \n")
+            raise ValueError("<b>Name</b> must contain only letters. <br>")
         self.name = name
 
     def set_surname(self, surname):
@@ -58,7 +58,7 @@ class UserData:
             If surname contains non-letter characters or is empty.
         """
         if not re.match("^[A-Za-z]+$", surname) and surname != "":
-            raise ValueError("Surname must contain only letters. \n")
+            raise ValueError("<b>Surname</b> must contain only letters. <br>")
         self.surname = surname
         
     def set_code(self, code):
@@ -76,9 +76,9 @@ class UserData:
             If code contains non-numeric characters or is not 4 digits long.
         """
         if not re.match("^[0-9]+$", code):
-            raise ValueError("Code must contain only numbers. \n")
+            raise ValueError("<b>Code</b> must contain only numbers. <br>")
         if len(code) != 4:
-            raise ValueError("Code must have a length of 4 numbers. \n")
+            raise ValueError("<b>Code</b> must have a length of 4 numbers. <br>")
         self.code = code
 
     def set_path_directory(self, path_directory):
@@ -96,7 +96,7 @@ class UserData:
             If the specified directory path does not exist.
         """
         if not os.path.exists(path_directory):
-            raise ValueError("Path does not exist. \n")
+            raise ValueError("<b>Path</b> does not exist. \n")
         self.path_directory = path_directory
             
     def get_name(self):

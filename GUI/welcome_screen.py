@@ -52,8 +52,8 @@ class WelcomeScreen:
         # Welcome title
         welcome_label = QtWidgets.QLabel("Welcome to GloveDataHub!")
         welcome_label.setFont(QtGui.QFont("Arial", 20, QtGui.QFont.Weight.Bold))
-        welcome_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        welcome_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 0px 30px 20px;")
+        #welcome_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        welcome_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 50px 0px 40px 20px;")
         
         self.welcome_layout.addWidget(welcome_label)
         

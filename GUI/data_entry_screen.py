@@ -55,12 +55,12 @@ class DataEntryScreen:
         
         # Description above the fields
         description_text = (
-            "Enter the user data in the corresponding \n"
-            "fields. \n\n"
-            "If you do not want to specify the user's \n"
-            "first and last name, leave these two \n"
-            "fields empty and the system will generate \n"
-            "a 4-digit code to assign to the user. \n"
+            "Enter the <b>user data</b> in the corresponding <br>"
+            "fields. <br><br>"
+            "If you do not want to specify the user's <br>"
+            "first and last name, leave these two <br>"
+            "fields empty and the system will generate <br>"
+            "a 4-digit code to assign to the user. <br>"
         )
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
@@ -73,7 +73,7 @@ class DataEntryScreen:
         name_surname_layout = QtWidgets.QHBoxLayout()
 
         # Widget for the name
-        name_label = QtWidgets.QLabel("Name:")
+        name_label = QtWidgets.QLabel("<b>Name</b>:")
         name_label.setFont(QtGui.QFont("Arial", 16))
         name_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 20px 10px 10px;")
         name_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
@@ -96,7 +96,7 @@ class DataEntryScreen:
         name_surname_layout.addLayout(name_layout)
 
         # Widget for the surname
-        surname_label = QtWidgets.QLabel("Surname:")
+        surname_label = QtWidgets.QLabel("<b>Surname</b>:")
         surname_label.setFont(QtGui.QFont("Arial", 16))
         surname_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
         
@@ -120,7 +120,7 @@ class DataEntryScreen:
         self.data_entry_layout.addLayout(name_surname_layout)
         
         # Widget for the optional code
-        code_label = QtWidgets.QLabel("Code (4 digit):")
+        code_label = QtWidgets.QLabel("<b>Code</b> (4 digit):")
         code_label.setFont(QtGui.QFont("Arial", 16))
         code_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
         
@@ -140,7 +140,7 @@ class DataEntryScreen:
         self.data_entry_layout.addLayout(code_layout)
 
         # Widget for the path
-        path_directory_label = QtWidgets.QLabel("Path:")
+        path_directory_label = QtWidgets.QLabel("<b>Path</b>:")
         path_directory_label.setFont(QtGui.QFont("Arial", 16))
         path_directory_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
 
@@ -255,14 +255,6 @@ class DataEntryScreen:
         surname = DataEntryScreen.surname_entry.text().strip()  # Get the surname entered by the user
         code = DataEntryScreen.code_entry.text() # Get the code entered by the user
         path_directory = DataEntryScreen.path_directory_entry.text() # Get the path of the directory indicated by the user
-            
-        if name == "" and surname == "" and code == "" and self.fields_errors == "":
-            code = self.user_data.generate_random_code()
-            DataEntryScreen.code_entry.setText(code)
-            self.info_message = (
-                "The code has been generated automatically \n"
-                "because the name and surname are missing."
-            )
 
         try:
             self.user_data.set_name(name)
@@ -274,12 +266,19 @@ class DataEntryScreen:
         except ValueError as e:
             self.fields_errors += "• " + str(e)
             
-        try:
-            self.user_data.set_code(code)
-        except ValueError as e:
-            self.fields_errors += "• " + str(e)
-        """ except ValueError as e:
-            self.fields_errors += "• " + str(e) """
+        if name == "" and surname == "" and code == "" and self.fields_errors == "":
+            code = self.user_data.generate_random_code()
+            DataEntryScreen.code_entry.setText(code)
+            self.info_message = (
+                "The <b>code</b> has been generated automatically \n"
+                "because the <b>name</b> and <b>surname</b> are missing."
+            )
+
+        if code != "":
+            try:
+                self.user_data.set_code(code)
+            except ValueError as e:
+                self.fields_errors += "• " + str(e)
             
         try:
             self.user_data.set_path_directory(path_directory)
@@ -291,7 +290,7 @@ class DataEntryScreen:
         Checks if there is an error message.
         """
         if self.fields_errors != "":
-            self.fields_errors = "Please fix the following errors:\n" + self.fields_errors
+            self.fields_errors = "Please fix the following errors:<br>" + self.fields_errors
             return True
         else:
             return False  
