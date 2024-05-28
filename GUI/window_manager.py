@@ -155,15 +155,17 @@ class WindowManager(QWidget):
         kore_image = QtGui.QPixmap(self.kore_logo_path)
         
         # Resize images to 100x100 pixel
-        gdh_image = gdh_image.scaled(100, 100, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
+        gdh_image = gdh_image.scaled(80, 80, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
         kore_image = kore_image.scaled(80, 80, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
 
         # Create labels for the images
         self.gdh_logo = QLabel()
         self.gdh_logo.setPixmap(gdh_image)
+        self.gdh_logo.setStyleSheet("padding: 10px 10px 10px 10px;")
 
         self.kore_logo = QLabel()
         self.kore_logo.setPixmap(kore_image)
+        self.kore_logo.setStyleSheet("padding: 10px 10px 10px 10px;")
 
         # Create the application title
         self.title_label = QLabel(self.header_title)
@@ -188,8 +190,14 @@ class WindowManager(QWidget):
         # Imposta il margine e padding per posizionare correttamente gli elementi
         # header_layout.setContentsMargins(5, 5, 5, 5)
         
+        header_widget = QWidget()
+        header_widget.setLayout(header_layout)
+        header_widget.setContentsMargins(0, 0, 0, 0)
+        header_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        
         # Aggiungi l'header layout alla parte superiore del layout principale
-        self.main_layout.addLayout(header_layout)
+        #self.main_layout.addLayout(header_layout)
+        self.main_layout.addWidget(header_widget)
 
         # Aggiungi un layout per il contenuto dinamico
         # self.content_layout = QVBoxLayout()
@@ -244,6 +252,8 @@ class WindowManager(QWidget):
         self.content_layout = QGridLayout()
         self.stacked_content = QStackedWidget()
         
+        self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 0px 10px 0px 10px;")
+        
         self.content_layout.addWidget(self.stacked_content)
         
         self.main_layout.addLayout(self.content_layout)
@@ -295,8 +305,10 @@ class WindowManager(QWidget):
         self.content_layout.removeWidget(self.stacked_content)
 
         if next_index == 0 or next_index == 4:
+            self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 0px 10px 0px 10px;")
             self.content_layout.addWidget(self.stacked_content)
         else:
+            self.stacked_content.setStyleSheet("background-color: #E9E6DB; border-radius: 15px; margin: 0px 0px 0px 10px;")
             self.content_layout.addWidget(self.stacked_content, 0, 0, 3, 2, QtCore.Qt.AlignmentFlag.AlignLeft)
         
     def _create_buttons_layout(self):
@@ -344,7 +356,7 @@ class WindowManager(QWidget):
         # Container for SenseCom
         self.sensecom_container = QWidget()
         self.sensecom_container.setFixedSize(528, 289)
-        self.sensecom_container.setContentsMargins(0, 0, 10, 0)
+        self.sensecom_container.setContentsMargins(0, 0, 10, 10)
         
         # Creazione del contenitore con i bordi
         self.bordered_container = QFrame()
@@ -355,7 +367,7 @@ class WindowManager(QWidget):
 
         # Layout per il contenitore con bordi
         border_layout = QVBoxLayout()
-        border_layout.setContentsMargins(0, 0, 0, 0)  # Rimuove i margini interni
+        border_layout.setContentsMargins(0, 0, 0, 10)  # Rimuove i margini interni
         border_layout.addWidget(self.sensecom_container)
         self.bordered_container.setLayout(border_layout)
         

@@ -44,7 +44,7 @@ class CalibrationScreen():
         """
         # Create a panel to contain all the widgets
         self.calibration_panel = QtWidgets.QWidget()
-        self.calibration_panel.setStyleSheet("background-color: #E9E6DB;")
+        self.calibration_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
         self.calibration_layout = QtWidgets.QVBoxLayout(self.calibration_panel)
         
         # Description of the application
@@ -67,7 +67,7 @@ class CalibrationScreen():
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 5px 10px;")
+        description_label.setStyleSheet("color: black; background-color: #FFFCF0; padding: 0px 0px 5px 0px;")
         description_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
         #description_layout = QtWidgets.QVBoxLayout()
         #description_layout.addWidget(description_label)

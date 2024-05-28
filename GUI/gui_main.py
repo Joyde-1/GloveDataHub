@@ -12,8 +12,8 @@ if __name__ == "__main__":
     
     # Parameters for the main window
     main_window_params = {
-        'ghd_logo_path': "GUI/images/logo_GloveDataHub.png",
-        'kore_logo_path': "GUI/images/kore_Logo.png",
+        'ghd_logo_path': "GUI/images/GDH.png",
+        'kore_logo_path': "GUI/images/Kore.png",
         'window_title': "GloveDataHub", 
         'window_width': 1040, 
         'window_height': 670, 
