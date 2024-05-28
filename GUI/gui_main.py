@@ -16,7 +16,7 @@ if __name__ == "__main__":
         'kore_logo_path': "GUI/images/Kore.png",
         'window_title': "GloveDataHub", 
         'window_width': 1040, 
-        'window_height': 670, 
+        'window_height': 670,
         'background': '#E9E6DB',
         'frontground': '#031725',
         'header_title': "GloveDataHub",

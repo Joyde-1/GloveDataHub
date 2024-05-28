@@ -55,7 +55,7 @@ class CustomButton(QtWidgets.QPushButton):
                 color: black;
                 border: 2px solid #C8C5B8;
                 border-radius: 15px;
-                padding: 0px 0px;
+                padding: 0px;
             }
         """
 
@@ -76,7 +76,7 @@ class CustomButton(QtWidgets.QPushButton):
                 color: black;
                 border: 2px solid #A9A69B;
                 border-radius: 15px;
-                padding: 0px 0px;
+                padding: 0px;
             }
         """
 
@@ -96,7 +96,7 @@ class CustomButton(QtWidgets.QPushButton):
                 color: black;
                 border: 2px solid #8B887E;
                 border-radius: 15px;
-                padding: 0px 0px;
+                padding: 0px;
             }
         """
 

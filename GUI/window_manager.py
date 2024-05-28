@@ -141,7 +141,8 @@ class WindowManager(QWidget):
         self.setWindowTitle(self.window_title)
         self.setFixedSize(self.window_width, self.window_height)
         self.setStyleSheet(f"background-color: {self.background};")
-
+        self.setContentsMargins(10, 10, 10, 10)
+        
         self.main_layout = QVBoxLayout()
 
     def _set_window_header(self):
@@ -182,7 +183,7 @@ class WindowManager(QWidget):
         header_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter | QtCore.Qt.AlignmentFlag.AlignTop)
         
         # Set margin and padding to position the elements correctly
-        header_layout.setContentsMargins(5, 5, 5, 5)
+        header_layout.setContentsMargins(10, 10, 10, 10)
         
         # header_widget.setLayout(header_layout)
         #header_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter) #  | QtCore.Qt.AlignmentFlag.AlignTop
@@ -192,8 +193,7 @@ class WindowManager(QWidget):
         
         header_widget = QWidget()
         header_widget.setLayout(header_layout)
-        header_widget.setContentsMargins(0, 0, 0, 0)
-        header_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        header_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
         
         # Aggiungi l'header layout alla parte superiore del layout principale
         #self.main_layout.addLayout(header_layout)
@@ -252,9 +252,11 @@ class WindowManager(QWidget):
         self.content_layout = QGridLayout()
         self.stacked_content = QStackedWidget()
         
-        self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 0px 10px 0px 10px;")
+        self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
+        #self.stacked_content.setFixedSize(1018, 450)
         
         self.content_layout.addWidget(self.stacked_content)
+        self.content_layout.setContentsMargins(0, 15, 0, 15)
         
         self.main_layout.addLayout(self.content_layout)
         
@@ -305,10 +307,15 @@ class WindowManager(QWidget):
         self.content_layout.removeWidget(self.stacked_content)
 
         if next_index == 0 or next_index == 4:
-            self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 0px 10px 0px 10px;")
+            self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
+            #self.stacked_content.setFixedSize(1018, 450)
+            
             self.content_layout.addWidget(self.stacked_content)
+            self.content_layout.setContentsMargins(0, 15, 0, 10)
         else:
-            self.stacked_content.setStyleSheet("background-color: #E9E6DB; border-radius: 15px; margin: 0px 0px 0px 10px;")
+            self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
+            self.stacked_content.setFixedSize(430, 426)
+            #self.stacked_content.setContentsMargins(20, 0, 20, 0)
             self.content_layout.addWidget(self.stacked_content, 0, 0, 3, 2, QtCore.Qt.AlignmentFlag.AlignLeft)
         
     def _create_buttons_layout(self):
@@ -319,6 +326,7 @@ class WindowManager(QWidget):
         self.buttons_layout = QHBoxLayout()
         self.buttons_layout.addStretch()
         self.buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom)
+        self.buttons_layout.setContentsMargins(0, 0, 0, 0)
         #self.button_widget.setLayout(self.buttons_layout)
         #self.main_layout.addWidget(self.buttons_widget)
         self.main_layout.addLayout(self.buttons_layout)
@@ -342,6 +350,9 @@ class WindowManager(QWidget):
         Create the SenseCom widget.
         """
         self.sensecom_widget = QWidget()
+        self.sensecom_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
+        #self.sensecom_widget.setContentsMargins(10, 10, 10, 10)
+        self.sensecom_widget.setFixedSize(548, 426)
         
         # Add a layout for sensecom
         self.sensecom_layout = QVBoxLayout()
@@ -351,39 +362,29 @@ class WindowManager(QWidget):
         self.sensecom_title.setWordWrap(True)
         self.sensecom_title.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Weight.Bold))
         self.sensecom_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.sensecom_title.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 5px 0px;")
+        self.sensecom_title.setStyleSheet("color: black; background-color: #C8C5B8; border-radius: 15px; margin: 10px 10px 10px 10px;")
         
         # Container for SenseCom
         self.sensecom_container = QWidget()
         self.sensecom_container.setFixedSize(528, 289)
-        self.sensecom_container.setContentsMargins(0, 0, 10, 10)
-        
-        # Creazione del contenitore con i bordi
-        self.bordered_container = QFrame()
-        self.bordered_container.setFrameShape(QFrame.Shape.Box)
-        self.bordered_container.setLineWidth(3)
-        self.bordered_container.setStyleSheet("background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8); border-color: #C8C5B8;")
-        self.bordered_container.setFixedSize(534, 295)  # Dimensioni maggiorate per includere i bordi
-
-        # Layout per il contenitore con bordi
-        border_layout = QVBoxLayout()
-        border_layout.setContentsMargins(0, 0, 0, 10)  # Rimuove i margini interni
-        border_layout.addWidget(self.sensecom_container)
-        self.bordered_container.setLayout(border_layout)
+        self.sensecom_container.setStyleSheet("color: red; background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8); border: 2px solid #C8C5B8; margin: 0px 10px 10px 10px;")
+        #self.sensecom_container.setContentsMargins(0, 0, 10, 10)
         
         # Button to start SenseCom
         self.sensecom_button = CustomButton("Start SenseCom", 200, 30, 14)
         self.sensecom_button.clicked.connect(self._embed_sensecom)
+        
         button_layout = QHBoxLayout()
         button_layout.addWidget(self.sensecom_button)
+        button_layout.setContentsMargins(0, 0, 0, 0)
         
-        self.sensecom_layout.setContentsMargins(0, 0, 0, 0)  # Rimuove i margini interni del layout principale
-        self.sensecom_layout.setSpacing(0)  # Rimuove lo spazio tra i widget
+        #self.sensecom_layout.setContentsMargins(0, 0, 0, 0)  # Rimuove i margini interni del layout principale
+        #self.sensecom_layout.setSpacing(0)  # Rimuove lo spazio tra i widget
         
         self.sensecom_layout.addWidget(self.sensecom_title)
-        #self.sensecom_layout.addWidget(self.sensecom_container)
-        self.sensecom_layout.addWidget(self.bordered_container)
-        # self.sensecom_layout.addStretch()
+        self.sensecom_layout.addWidget(self.sensecom_container)
+        # self.sensecom_layout.addWidget(self.bordered_container)
+        #self.sensecom_layout.addStretch()
         self.sensecom_layout.addLayout(button_layout)
         self.sensecom_layout.addStretch()
         self.sensecom_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
@@ -469,7 +470,8 @@ class WindowManager(QWidget):
         Close the SenseCom widget.
         """
         self.clear_sensecom_layout()
-        # self.content_layout.removeWidget(self.sensecom_widget)
+        #self.content_layout.removeWidget(self.sensecom_widget)
+        #self.sensecom_widget.destroy()
         WindowManager.is_sensecom_layout = not WindowManager.is_sensecom_layout
 
     def closeEvent(self, event):

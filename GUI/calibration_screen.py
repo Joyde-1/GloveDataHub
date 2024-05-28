@@ -44,31 +44,36 @@ class CalibrationScreen():
         """
         # Create a panel to contain all the widgets
         self.calibration_panel = QtWidgets.QWidget()
-        self.calibration_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
+        self.calibration_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
         self.calibration_layout = QtWidgets.QVBoxLayout(self.calibration_panel)
+        
+        calibration_title = QtWidgets.QLabel("1 • Calibration of haptic gloves")
+        calibration_title.setWordWrap(True)
+        calibration_title.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Weight.Bold))
+        calibration_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        calibration_title.setStyleSheet("color: black; background-color: #C8C5B8; border-radius: 15px; margin: 10px 10px 0px 10px;")
+        
+        self.calibration_layout.addWidget(calibration_title)
         
         # Description of the application
         description_text = (
-            "On this screen you can calibrate your haptic <br>"
-            "gloves. <br><br>"
-            "To run it you will need to launch the <br>"
-            "application <b>SenseCom</b> which will manage <br>"
-            "the connection with your haptic gloves. <br><br>"
-            "Make sure both your gloves are connected to <br>"
-            "your PC via Bluetooth and appear on the <br>"
-            "SenseCom main screen. <br><br>"
-            "It is important that this application remains <br>"
-            "open throughout the session. <br><br>"
-            "In case you mistakenly close it, please reopen <br>"
-            "it and re-calibrate. <br><br>"
-            "Press the <b>Start Sensecom</b> button to start <br>"
-            "the application and proceed with the calibration."
+            "To calibrate your haptic gloves, you need <br>"
+            "to run the <b>SenseCom</b> application, which <br>"
+            "handles the connection <br><br>"
+            "It is important that this application <br>"
+            "remains open throughout the session. <br><br>"
+            "In case you mistakenly close it, please <br>"
+            "reopen it and re-calibrate. <br><br>"
+            "Press the <b>Start Sensecom</b> button to <br>"
+            "start the application and proceed with the <br>"
+            "calibration."
         )
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #FFFCF0; padding: 0px 0px 5px 0px;")
-        description_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        description_label.setStyleSheet("color: black; background-color: #FFFCF0; margin: 0px 10px 10px 10px;")
+        #description_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        description_label.setContentsMargins(0, 0, 0, 0)
         #description_layout = QtWidgets.QVBoxLayout()
         #description_layout.addWidget(description_label)
         #self.calibration_layout.addLayout(description_layout)
@@ -78,7 +83,7 @@ class CalibrationScreen():
         #self.calibration_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         
         self.main_window.add_content_widget(self.calibration_panel)
-        
+    
         """ if not WindowManager.is_dynamic_content_layout:
             self.main_window.create_dynamic_content_layout()
         
@@ -103,6 +108,7 @@ class CalibrationScreen():
         buttons_layout.addStretch()
         buttons_layout.addWidget(next_button)
         # buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        buttons_layout.setContentsMargins(0, 0, 0, 0)
         
         button_widget = QtWidgets.QWidget()
         button_widget.setLayout(buttons_layout)
