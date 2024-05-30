@@ -249,8 +249,8 @@ class DataAcquisitionScreen:
         # Update timer display
         DataAcquisitionScreen.timer_display.setText(f"<b>Time</b>:&nbsp;&nbsp;&nbsp;&nbsp;{hours:02d}:{minutes:02d}:{seconds:02d} / " + self.time_to_reach)
 
-        # Stop the measurement if the duration is over
-        if self.duration_time.is_time_over(self.elapsed_time) or not self.exe_manager.is_sensecom_running():
+        # Stop the measurement if the duration is over or SenseCom or script is not running
+        if self.duration_time.is_time_over(self.elapsed_time) or not self.exe_manager.is_sensecom_running() or not self.exe_manager.is_script_running():
             self._stop_measurement()
             
     def _reset_time_layout(self):

@@ -15,18 +15,32 @@ import re
 import random
 import os
 
+
 class UserData:
-    """A class to represent user data and operations on it."""
+    """
+    A class to represent user data and operations on it.
+    
+    Attributes
+    ----------
+    first name : str (istance attribute)
+        The first name of the user.
+    last_name : str (istance attribute)
+        The last name of the user.
+    code : str (istance attribute)
+        The code of the user.
+    path_directory : str (istance attribute)
+        The directory path for user's CSV files.
+    """
 
     def __init__(self):
         """
         Constructor, initialize UserData object.
 
-        Attributes
+        Parameters
         ----------
-        name : str 
+        first name : str 
             The first name of the user.
-        surname : str 
+        last_name : str 
             The last name of the user.
         code : str 
             The code of the user.

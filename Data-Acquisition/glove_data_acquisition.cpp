@@ -65,7 +65,7 @@ int LaunchAndWaitForApp(const char *path_application) {
 
 		return 0;
 	} else {
-		return -1;
+		return 6;
 	}
 }
 
@@ -291,7 +291,7 @@ int main(int argc, char* argv[])
 	// Check number of arguments
 	if (argc != 3) {
         std::cerr << "Usage: " << argv[0] << " <path_to_csv> <total_time>" << std::endl;
-        return 1;
+        return 2;
     }
 
     const char* sensecom_path = "C:\\Program Files\\SenseCom\\SenseCom.exe"; ///< Path of SenseCom Application (Update the path if you're running on another PC)
@@ -301,13 +301,11 @@ int main(int argc, char* argv[])
 	// Check if SenseCom is active
 	if (!connectionsActive)
 	{
-		std::cout << "SenseCom is not yet running. Without it, we cannot connect to SenseGlove devices." << std::endl;
-		
 		// Force-Start SenseCom application
-		if (LaunchAndWaitForApp(sensecom_path) == -1) {
+		if (LaunchAndWaitForApp(sensecom_path) == 6) {
 			std::cout << "Could not Start the SenseCom process. Error: " << GetLastError() << std::endl;
 
-			return -1;
+			return 6;
 		} else {
 			std::cout << "Successfully started SenseCom." << std::endl;
 		}
@@ -344,17 +342,17 @@ int main(int argc, char* argv[])
 
 	// Get the SenseCom status
 	connectionsActive = SGCore::SenseCom::ScanningActive();
+
+	int total_time = std::atoi(argv[2]); ///< Total time duration of the data acquisition. If it is ugual to -1, the time is unlimited
+
+	// timestamp in seconds
+	double timestamp = 0.000;
 	
 	// Check if the file is correctly opened
 	if (csvFile.is_open()) {
 		
 		// Write the column names on the .CSV file
         writeCSVHeader(csvFile);
-
-		int total_time = std::atoi(argv[2]); ///< Total time duration of the data acquisition. If it is ugual to -1, the time is unlimited
-
-		// timestamp in seconds
-    	double timestamp = 0.000;
 
 		bool first_iter = true;	///< Verify the first iteration of the data acquisition loop
 
@@ -375,83 +373,83 @@ int main(int argc, char* argv[])
 			// Iter each glove to get data
 			for (const auto& glove : gloves) {
 
-					GloveData data;
+				GloveData data;
 
-					// Get True if the current glove is right or False if it is left
-					data.isRightHand = glove->IsRight();
+				// Get True if the current glove is right or False if it is left
+				data.isRightHand = glove->IsRight();
 
-					// Get the hand pose of the aptic glove
-					if (glove->GetHandPose(data.handPose)) {
-						
-						// Check if the current hand is right or left
-						if(data.isRightHand){
-							// Check if it is the first iteration
-							if (first_iter == true) {
-								// Get the first timestamp
-       							start = std::chrono::high_resolution_clock::now();
+				// Get the hand pose of the aptic glove
+				if (glove->GetHandPose(data.handPose)) {
+					
+					// Check if the current hand is right or left
+					if(data.isRightHand){
+						// Check if it is the first iteration
+						if (first_iter == true) {
+							// Get the first timestamp
+							start = std::chrono::high_resolution_clock::now();
 
-								first_iter = false;
-							} else {
-								// Get the current timestamp
-        						end = std::chrono::high_resolution_clock::now();
-
-								// Calculate the time difference in seconds
-								duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / 1000.0;
-
-								// Get the time when data acquisition is started
-								start = std::chrono::high_resolution_clock::now();
-
-								// Update the timestamp
-								timestamp += duration;
-							}
-
-							// Get the current time
-							now = std::chrono::system_clock::now();
-							now_time = std::chrono::system_clock::to_time_t(now);
-							ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
-
-							// Convert the current time in a tm structure
-							time_info = *std::localtime(&now_time);
-
-							// Write the time in Date_Time column
-							csvFile << std::put_time(&time_info, "%Y%m%d_%H%M%S") << ";";
-						}
-
-						bool sep = true;	///< Used when there is the last value to be written in the .CSV file
-
-						// Iter the 3D Vectors with the hand angles and save these values to .CSV file
-						for (int i = 0; i < 5; i++) {
-							for (int j = 0; j < 3; j++) {
-								writeGloveDataToCSV(csvFile, data.handPose.handAngles[i][j].ToString(), sep);
-							}
-						}
-
-						// Iter the 3D Vectors with the joint rotations and save these values to .CSV file
-						for (int i = 0; i < 5; i++) {
-							for (int j = 0; j < 4; j++) {
-								writeGloveDataToCSV(csvFile, data.handPose.jointRotations[i][j].ToString(), sep);
-							}
-						}
-
-						// Iter the 3D Vectors with the joint positions and save these values to .CSV file
-						for (int i = 0; i < 5; i++) {
-							for (int j = 0; j < 4; j++) {
-								if (i == 4 && j == 3) {
-									sep = false;	
-								}
-
-								writeGloveDataToCSV(csvFile, data.handPose.jointPositions[i][j].ToString(), sep);
-							}
-						}
-
-						// Check if the data are captured from the right or left and, in case is left, put a line break
-						if (data.isRightHand) {
-							csvFile << ";";
+							first_iter = false;
 						} else {
-							csvFile << std::endl;
+							// Get the current timestamp
+							end = std::chrono::high_resolution_clock::now();
+
+							// Calculate the time difference in seconds
+							duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / 1000.0;
+
+							// Get the time when data acquisition is started
+							start = std::chrono::high_resolution_clock::now();
+
+							// Update the timestamp
+							timestamp += duration;
+						}
+
+						// Get the current time
+						now = std::chrono::system_clock::now();
+						now_time = std::chrono::system_clock::to_time_t(now);
+						ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+
+						// Convert the current time in a tm structure
+						time_info = *std::localtime(&now_time);
+
+						// Write the time in Date_Time column
+						csvFile << std::put_time(&time_info, "%Y%m%d_%H%M%S") << ";";
+					}
+
+					bool sep = true;	///< Used when there is the last value to be written in the .CSV file
+
+					// Iter the 3D Vectors with the hand angles and save these values to .CSV file
+					for (int i = 0; i < 5; i++) {
+						for (int j = 0; j < 3; j++) {
+							writeGloveDataToCSV(csvFile, data.handPose.handAngles[i][j].ToString(), sep);
 						}
 					}
-        		}
+
+					// Iter the 3D Vectors with the joint rotations and save these values to .CSV file
+					for (int i = 0; i < 5; i++) {
+						for (int j = 0; j < 4; j++) {
+							writeGloveDataToCSV(csvFile, data.handPose.jointRotations[i][j].ToString(), sep);
+						}
+					}
+
+					// Iter the 3D Vectors with the joint positions and save these values to .CSV file
+					for (int i = 0; i < 5; i++) {
+						for (int j = 0; j < 4; j++) {
+							if (i == 4 && j == 3) {
+								sep = false;	
+							}
+
+							writeGloveDataToCSV(csvFile, data.handPose.jointPositions[i][j].ToString(), sep);
+						}
+					}
+
+					// Check if the data are captured from the right or left and, in case is left, put a line break
+					if (data.isRightHand) {
+						csvFile << ";";
+					} else {
+						csvFile << std::endl;
+					}
+				}
+        	}
 
 			// Get the haptic gloves objects
 			std::vector<std::shared_ptr<SGCore::HapticGlove>> gloves = SGCore::HapticGlove::GetHapticGloves();
@@ -472,5 +470,22 @@ int main(int argc, char* argv[])
 		std::cout << "Data written to " << path_to_csv << std::endl;
 	} else {
 		std::cerr << "Error opening file CSV!" << std::endl;
+
+		return 3;
+	}
+
+	// Check the conditions
+	if (gloves.size != 2) {
+		return 4;
+	}
+
+	if (!connectionsActive) {
+		return 5;
+	}
+
+	if (total_time != -1) {
+		if (timestamp > total_time) {
+			return 0;
+		}
 	}
 }

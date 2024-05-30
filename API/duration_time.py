@@ -17,9 +17,9 @@ class DurationTime:
 
     Attributes
     ----------
-    time_sec : int 
+    time_sec : int (istance attribute)
         The duration time in seconds.
-    time_min : int 
+    time_min : int (istance attribute)
         The duration time in minutes.
     """
     
@@ -95,7 +95,7 @@ class DurationTime:
         # Check if the elapsed time is over
         if self.time_sec == -1:
             return False
-        return current_time <= self.time_sec
+        return current_time >= self.time_sec
 
     def _convert_time_to_seconds(self):
         """

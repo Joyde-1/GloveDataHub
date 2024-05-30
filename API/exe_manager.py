@@ -20,16 +20,18 @@ class ExeManager:
 
     Attributes
     ----------
-    path_script : str 
-        The path to the script for data acquisition.
-    path_sensecom : str 
-        The path to the SenseCom executable.
-    sensecom_psutil_process : psutil.process 
+    sensecom_psutil_process : psutil.process (class attribute)
         The sensecom process opened outside the API.
-    sensecom_psutil_process : subprocess.Popen
+    sensecom_psutil_process : subprocess.Popen (class attribute)
         The sensecom process opened inside the API.
-    script_process : subprocess.Popen 
+    script_process : subprocess.Popen (class attribute)
         The process for the data acquisition script.
+    path_script : str (istance attribute)
+        The path to the script for data acquisition.
+    path_sensecom : str (istance attribute)
+        The path to the SenseCom executable.
+    script_return_code : int (istance attribute)
+        Return code of the script program.
     """
     
     sensecom_psutil_process = None
@@ -43,6 +45,8 @@ class ExeManager:
         
         self.path_script = "Data-Acquisition/glove_data_acquisition.exe"
         self.path_sensecom = "C:/Program Files/SenseCom/SenseCom.exe"
+        
+        self.script_return_code = None
 
     def start_sensecom(self):
         """
@@ -105,9 +109,25 @@ class ExeManager:
         """
         
         if ExeManager.script_process:
-            return ExeManager.script_process.poll() is None
+            
+            # Try to catch the return code of the script program
+            self.script_return_code = ExeManager.script_process.poll()
+            
+            return self.script_return_code is None
 
         return False
+    
+    def get_script_return_code(self):
+        """
+        Return the return code of the script program.
+        
+        Returns
+        -------
+        int
+            The return code of the script program.
+        """
+        
+        return self.script_return_code
 
     def close_sensecom(self):
         """
