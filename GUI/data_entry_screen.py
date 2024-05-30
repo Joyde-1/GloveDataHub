@@ -29,86 +29,28 @@ class DataEntryScreen:
         Entry field for the 4-digit code.
     path_directory_entry : QLineEdit (class attribute)
         Entry field for the path directory.
+    user_data : UserData (istance attribute)
+        Instance of UserData for managing user data.
     data_entry_panel : QWidget (istance attribute) 
         Panel used to contain the all widget.
     data_entry_layout :  QVBoxLayout (istance attribute)
         Layout used for the widgets.  
-    data_entry_title : QLabel (istance attribute)
-        Title of the data entry section.
-    description_text : str (istance attribute)
-        Contain the desrciption of the screen.
-    description_label : QLabel (istance attribute)
-        Label used for the description of the current screen.
-    name_layout : QHBoxLayout (istance attribute)
-        Layout used for first name and last name. 
-    first_name_label : QLabel (istance attribute)
-        Label used for the name field.
     first_name_entry : QLineEdit (istance attribute)
         Field used to insert the first name.
-    first_name_layout : QVBoxLayout (istance attribute)
-        Layout used for the first name.
-    first_name_widget :  QWidget (istance attribute) 
-       First name widget.
-    last_name_label : QLabel (istance attribute) 
-        Label used for the last name.
     last_name_entry : QLineEdit (istance attribute)
         Field used to insert the last name.
-    last_name_layout : QVBoxLayout (istance attribute)
-        Layout used for the last name. 
-    code_label : QLabel (istance attribute)
-        Label used for the code.
     code_entry : QLineEdit (istance attribute)
         Field used to insert the code.
-    code_layout : QVBoxLayout (istance attribute)
-        Code layout.
-    code_widget : QWidget (istance attribute)
-        Widget used for the code. 
-    path_directory_label : QLabel (istance attribute)
-        Label used to set the directory path. 
     path_directory_entry : QLineEdit (istance attribute)
         Field used to set the directoty path.
-    browse_button : CustomButton (istance attribute)
-        Button used to set the path to save the .CSV file.
-    path_directory_layout : QVBoxLayout (istance attribute)
-        Layout used for the directory path.
-    path_directory_entry_layout : QHBoxLayout (istance attribute)         
-        layout used for the path input field.
-    path_directory_widget : QWidget (istance attribute)
-        Widget used for the path.
-    back_button : CustomButton (istance attribute)      
-        Button used to go to the previous screen.
-    next_button : CustomButton (istance attribute)
-        Button used to go to the next screen.
-    buttons_layout : QHBoxLayout (istance attribute)
-        Layout used for the buttons.
-    button_widget : QWidget (istance attribute) 
-        Widget used for the buttons.
-    documents_path : str (istance attribute)
-        Path used to save the .CSV file, by default it is set to documents.
-    path_directory : QFileDialog (istance attribute)
-        Dialog window.
+    fields_errors : str (istance attribute)
+        Fields used for the errors.
+    info_message : str (istance attribute)
+       Contains the message that is shown to the user.
     calibration_screen : CalibrationScreen (istance attribute)
         Instance used to create the CalibrationScreen.
     data_acquisition_screen : DataAcqusitionScreen (istance attribute)
          Instance used to create the DataAcqusitionScreen.
-    fields_errors : str (istance attribute)
-        Fields used for the errors.
-    info_message : str (istance attribute)
-        Fields used for the errors.
-    first_name : str (istance attribute)
-        Contains the first name typed by the user.
-    last_name : str (istance attribute)
-        Contains the last name typed by the user.
-    code : str (istance attribute)
-        Contains the code typed by the user.
-    path_directory : str (istance attribute)
-        Contains the code typed by the user.
-    info_message : str (istance attribute)
-       Contains the message that is shown to the user.
-    error_msg_box : QMessageBox (istance attribute)   
-        Box used to show the error message to the user.
-    info_msg_box : QMessageBox (istance attribute)   
-        Box used to show the info message to the user.    
     """
 
     is_first_time = True
@@ -126,8 +68,6 @@ class DataEntryScreen:
         ----------
         main_window : WindowManager
             The main window manager instance.
-        user_data : UserData
-            Object of class UserData    
         """
 
         self.main_window = main_window
@@ -429,8 +369,6 @@ class DataEntryScreen:
                 'because the <b><span style="color: #025885;">first</span></b> and <b><span style="color: #025885;">last name</span></b> are missing.'
             )
 
-        #if code != "":
-        # Set user code
         try:
             self.user_data.set_code(code)
         except ValueError as e:

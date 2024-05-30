@@ -1,6 +1,7 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout
 from PyQt6.QtGui import QFont
+
 from window_manager import WindowManager
 from custom_button import CustomButton
 
@@ -15,8 +16,6 @@ class CalibrationScreen():
         Indicates whether it's the first time the screen is being displayed.
     is_data_acquired : bool (class attribute)
         Indicates whether the data has been acquired.
-    main_window : WindowManager (istance attribute)
-        The main window manager instance.
     calibration_panel : QWidget (istance attribute)
         The main widget for the calibration screen.
     calibration_screen : CalibrationScreen (istance attribute)

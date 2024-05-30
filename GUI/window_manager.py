@@ -62,26 +62,6 @@ class WindowManager(QWidget):
     ----------
     is_sensecom_layout : bool (class attribute)
         Flag to indicate whether the SenseCom layout is currently displayed.
-    ghd_logo_path : str (istance attribute)
-        The path to the GHD logo image.
-    kore_logo_path : str (istance attribute)
-        The path to the Kore logo image.
-    window_title : str (istance attribute)
-        The title of the window.
-    window_width : int (istance attribute)
-        The width of the window.
-    window_height : int (istance attribute)
-        The height of the window.
-    background : str (istance attribute)
-        The background color of the window.
-    frontground : str (istance attribute)
-        The frontground color of the window.
-    header_title : str (istance attribute)
-        The title displayed in the window header.
-    header_font : QFont (istance attribute)
-        The font used for the header title.
-    exe_manager : ExeManager (istance attribute)
-        An instance of the ExeManager class.
     main_layout : QVBoxLayout (istance attribute)
         The main layout of the window
     content_layout : QGridLayout (istance attribute)
@@ -128,6 +108,8 @@ class WindowManager(QWidget):
             The title displayed in the window header.
         header_font : QFont 
             The font used for the header title.
+        exe_manager : ExeManager (istance attribute)
+            An instance of the ExeManager class.
         """
         
         super().__init__()

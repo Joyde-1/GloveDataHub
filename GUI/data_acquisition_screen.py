@@ -23,29 +23,28 @@ class DataAcquisitionScreen:
     ----------
     is_first_time : bool (class attribute)
         Flag indicating if it's the first time setting up the screen.
-    description1_text : str (class attribute)
+    description1_text : str (class attribute):
+        Dynamic description in the top of the panel.
     description1_label : QLabel (class attribute)
+        Dynamic label in the top of the panel.
     description2_text : str (class attribute)
+        Dynamic description in the bottom of the panel.
     description2_label : QLabel (class attribute)
+        Dynamic label in the bottom of the panel.
     duration_entry : QLineEdit (class attribute)
-        Widget for entering the measurement duration.
+        Field for entering the measurement duration.
     duration_widget : QWidget (class attribute)
+        Widget for entering the measurement duration.
     timer_display : QLabel (class attribute)
         Widget for displaying the elapsed time.
-        
-    data_acquisition_panel : QWidget 
+    duration_time : DurationTime (istance attribute)
+        Istance of DurationTime for manage duration time.
+    exe_manager : ExeManager (istance attribute)
+        An instance of the ExeManager class.
+    data_acquisition_panel : QWidget (istance attribute)
         Panel containing all widgets for data acquisition.
-    data_acquisition_layout : QVBoxLayout
-    
-    welcome_panel : QWidget (istance attribute)
-        The main widget for the welcome screen.
-    
-    
-    
-    timer : QTimer 
-        Timer for tracking the measurement duration.
-    elapsed_time : int 
-        Time elapsed since the start of measurement.
+    data_acquisition_layout : QVBoxLayout (istance attribute)
+        Dynamic data acquisition layout
     back_button : CustomButton 
         Button for navigating to the previous screen.
     measurement_button : CustomButton
@@ -54,6 +53,10 @@ class DataAcquisitionScreen:
         Button for navigating to the next screen.
     buttons_layout : QHBoxLayout
         The dybamic buttons layout.
+    timer : QTimer 
+        Timer for tracking the measurement duration.
+    elapsed_time : int 
+        Time elapsed since the start of measurement.
     path_to_csv : str
         Path to the CSV file for saving measurement data.
     time_to_reach : str
@@ -94,8 +97,6 @@ class DataAcquisitionScreen:
         
         self.duration_time = DurationTime()
         self.exe_manager = ExeManager()
-        
-        self.stop_measurement_button = None
         
     def set_data_acquisition_screen(self):
         """
@@ -226,11 +227,13 @@ class DataAcquisitionScreen:
         Updates the timer display.
         """
         
+        # Increment of 1 second of elapsed time
         self.elapsed_time += 1
         
         hours, remainder = divmod(self.elapsed_time, 3600)
         minutes, seconds = divmod(remainder, 60)
         
+        # Update timer display
         DataAcquisitionScreen.timer_display.setText(f"<b>Time</b>:&nbsp;&nbsp;&nbsp;&nbsp;{hours:02d}:{minutes:02d}:{seconds:02d} / " + self.time_to_reach)
 
         # Stop the measurement if the duration is over
@@ -341,19 +344,28 @@ class DataAcquisitionScreen:
         Starts the measurement process.
         """      
         
+        # Save the duration field
         self._save_duration_field()
+        
+        # Check if SenseCom is active
         self._check_sensecom_running_before_start()
         
+        # Check if there is a error message to show
         if not self._is_error_message():
             
+            # Get file .CSV path to save data
             self.path_to_csv = self.user_data.create_path_csv()
             
+            # get duration time in seconds
             total_time = self.duration_time.get_time_sec()
             
+            # Start the script to get data from haptic gloves
             self.exe_manager.start_script(self.path_to_csv, total_time)
             
+            # Start the timer
             self._start_timer()
             
+            # New description for this screen
             DataAcquisitionScreen.description1_text = (
                 "The script to capture the data is running. \n\n"
                 "SenseCom manages the connection with your \n"
@@ -363,12 +375,15 @@ class DataAcquisitionScreen:
             
             DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
             
+            # Hide duration widget
             DataAcquisitionScreen.duration_widget.hide()
             
             DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 15px 10px 10px 10px; padding: 5px;")
             
+            # Show timer display
             DataAcquisitionScreen.timer_display.show()
             
+            # New description for this screen
             DataAcquisitionScreen.description2_text = (
                 "Then if you want to stop data acquisition <br>"
                 'immediately, you can press the <b><span style="color: #025885;">Stop</span></b> button <br>'
@@ -377,6 +392,7 @@ class DataAcquisitionScreen:
             
             DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
             
+            # Set buttons layout and handlers with only 'Stop' button
             self.back_button.hide()
             self.measurement_button.setText("Stop")
             self.measurement_button.setFixedSize(120, 40)
@@ -396,16 +412,13 @@ class DataAcquisitionScreen:
         Stop the measurement process.
         """  
         
+        # Check if the script is running while the duration_time isn't over
         if self.exe_manager.is_script_running() and not self.duration_time.is_time_over(self.elapsed_time):
             
+            # Terminate the script to get data from haptic gloves
             self.exe_manager.close_script()
             
         self._conclude_data_acquisition()
-            
-        self.measurement_button.setText("Restart")
-        self.measurement_button.setFixedSize(140, 40)
-        self.measurement_button.clicked.disconnect(self._stop_measurement)
-        self.measurement_button.clicked.connect(self._restart_measurement)
         
         DataAcquisitionScreen.description1_text = (
             "The data has been successfully acquired. <br>"
@@ -431,6 +444,11 @@ class DataAcquisitionScreen:
         DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 0px 0px 0px 0px; padding: 0px 10px 0px 10px;")
         
         self.next_button.show()
+        
+        self.measurement_button.setText("Restart")
+        self.measurement_button.setFixedSize(140, 40)
+        self.measurement_button.clicked.disconnect(self._stop_measurement)
+        self.measurement_button.clicked.connect(self._restart_measurement)
         
         self.buttons_layout.setAlignment(self.back_button, Qt.AlignmentFlag.AlignLeft)
         self.buttons_layout.setStretch(1, 48)

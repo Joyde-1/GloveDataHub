@@ -41,6 +41,7 @@ class UserData:
             If first_name contains non-letter characters or is empty.
         """
         
+        # Check if the first name contains non-letter characters or is empty
         if not re.match("^[A-Za-z]+$", first_name) and first_name != "":
             raise ValueError('<b><span style="color: #025885;">First Name</span></b> must contain only letters. <br>')
         self.first_name = first_name
@@ -60,6 +61,7 @@ class UserData:
             If last name contains non-letter characters or is empty.
         """
         
+        # Check if the last name contains non-letter characters or is empty
         if not re.match("^[A-Za-z]+$", last_name) and last_name != "":
             raise ValueError('<b><span style="color: #025885;">Last Name</span></b> must contain only letters. <br>')
         self.last_name = last_name
@@ -79,6 +81,7 @@ class UserData:
             If code contains non-numeric characters or is not 4 digits long.
         """
         
+        # Check if the code is black, with character different from numbers and with a length of 4 numbers
         if not re.match("^[0-9]+$", code) and code != "":
             raise ValueError('<b><span style="color: #025885;">Code</span></b> must contain only numbers. <br>')
         if len(code) != 4 and code != "":
@@ -100,6 +103,7 @@ class UserData:
             If the specified directory path does not exist.
         """
         
+        # Check if the directory exist in the file system
         if not os.path.exists(path_directory):
             raise ValueError('<b><span style="color: #025885;">Path</span></b> does not exist. <br>')
         self.path_directory = path_directory
@@ -149,6 +153,7 @@ class UserData:
             The name of the user's CSV file.
         """
         
+        # Checks the user fields to calculate the correct file .CSV name
         if self.first_name == "" and self.last_name == "":
             return f"{self.code}.csv"
         elif self.first_name == "" and self.code == "":
@@ -175,6 +180,8 @@ class UserData:
         """
         
         name_csv = self._calculate_name_csv()
+        
+        # Joint the directory selected to save the .CSV file and the name for the .CSV file
         path_csv = os.path.join(self.path_directory, name_csv)
         normalized_path_csv = os.path.normpath(path_csv)
         
@@ -196,6 +203,8 @@ class UserData:
         """
         
         random_code = ""
+        
+        # Generate 4 integer numbers from 0 to 9
         random_code = ''.join(str(random.randint(0, 9)) for _ in range(length))
         
         return random_code

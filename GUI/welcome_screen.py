@@ -5,6 +5,7 @@ from PyQt6.QtGui import QFont
 from window_manager import WindowManager
 from custom_button import CustomButton
 
+
 class WelcomeScreen:
     """
     Class to manage the welcome screen of the application.
@@ -13,8 +14,6 @@ class WelcomeScreen:
     ----------
     is_first_time : bool (class attribute)
         Flag to indicate if it's the first time the welcome screen is being set.
-    main_window : WindowManager (istance attribute)
-        The main window manager instance.
     welcome_panel : QWidget (istance attribute)
         The main widget for the welcome screen.
     calibration_screen : CalibrationScreen (istance attribute)

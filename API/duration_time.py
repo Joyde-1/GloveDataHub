@@ -36,9 +36,11 @@ class DurationTime:
         """
         
         if minutes == None:
+            # Set an unlimited time
             self.time_min = -1
             self.time_sec = -1
         else:
+            # Set the time entered by the user
             try:
                 minutes = int(minutes)
             except ValueError:
@@ -77,6 +79,7 @@ class DurationTime:
             True if the current time has not exceeded the duration time, False otherwise.
         """
         
+        # Check if the elapsed time is over
         if self.time_sec == -1:
             return False
         return current_time <= self.time_sec

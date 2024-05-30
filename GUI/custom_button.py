@@ -1,20 +1,12 @@
-from PyQt6 import QtWidgets, QtGui, QtCore
+from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtGui import QFont
 
-class CustomButton(QtWidgets.QPushButton):
+
+class CustomButton(QPushButton):
     """
     CustomButton class inherits from QPushButton and implements a button widget with dynamic styles for different states.
-
-    Attributes
-    ----------
-    title : str 
-        The title text of the button.
-    width : int 
-        The width of the button.
-    height : int 
-        The height of the button.
-    font_size : int 
-        The font size of the button text.
     """
+    
     def __init__(self, title, style, width, height, font_size, parent=None):
         """
         Constructor method to initialize the CustomButton.
@@ -32,13 +24,19 @@ class CustomButton(QtWidgets.QPushButton):
         parent : QWidget
             It is an optional param for the parent widget.
         """
+        
         super().__init__(title, parent)
         self.style = style
-        self.setFont(QtGui.QFont("Montserrat", font_size))
+
+        # Set font type and dimensions 
+        self.setFont(QFont("Montserrat", font_size))
         self.setStyleSheet(self.normal_style())
-        # Imposta le dimensioni del pulsante
+
+        # Set the button dimensions 
         self.setFixedSize(width, height)
-        self.setMouseTracking(True)  # Enables mouse tracking
+
+        # Enables mouse tracking
+        self.setMouseTracking(True)  
 
     def normal_style(self):
         """
@@ -49,6 +47,8 @@ class CustomButton(QtWidgets.QPushButton):
         str
             CSS style for the normal state.
         """
+
+        # Return style based on the style attribute
         if self.style == 0:
             return """
                 QPushButton {
@@ -82,6 +82,7 @@ class CustomButton(QtWidgets.QPushButton):
             CSS style for the hover state.
         """
         
+        # Return style based on the style attribute
         if self.style == 0:
             return """
                 QPushButton {
@@ -117,6 +118,7 @@ class CustomButton(QtWidgets.QPushButton):
             CSS style for the pressed state.
         """
         
+        # Return style based on the style attribute
         if self.style == 0:
             return """
                 QPushButton {
@@ -144,6 +146,8 @@ class CustomButton(QtWidgets.QPushButton):
         """
         Event handler for when the mouse enters the button.
         """
+
+        # Set the hover style when the mouse enters
         self.setStyleSheet(self.hover_style())
         super().enterEvent(event)
 
@@ -151,6 +155,8 @@ class CustomButton(QtWidgets.QPushButton):
         """
         Event handler for when the mouse leaves the button.
         """
+        
+        # Set the normal style when the mouse leaves
         self.setStyleSheet(self.normal_style())
         super().leaveEvent(event)
 
@@ -158,6 +164,8 @@ class CustomButton(QtWidgets.QPushButton):
         """
         Event handler for mouse press event.
         """
+
+        # Set the pressed style when the button is pressed
         self.setStyleSheet(self.pressed_style())
         super().mousePressEvent(event)
 
@@ -165,6 +173,8 @@ class CustomButton(QtWidgets.QPushButton):
         """
         Event handler for mouse release event.
         """
+
+        # Set the hover or normal style based on the mouse position
         self.setStyleSheet(self.hover_style() if self.underMouse() else self.normal_style())
         super().mouseReleaseEvent(event)
 
@@ -172,11 +182,15 @@ class CustomButton(QtWidgets.QPushButton):
         """
         Action performed when the button is clicked.
         """
+
+        # Print a message indicating the next button was pressed
         print("Next button pressed")
 
     def action_cancel(self):
         """
         Action performed when the button is clicked.
         """
+
+        # Print a message indicating the cancel button was pressed and close the button
         print("Cancel button pressed")
         self.close() 
