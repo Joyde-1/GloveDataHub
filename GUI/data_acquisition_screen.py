@@ -610,24 +610,24 @@ class DataAcquisitionScreen:
             timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script for capturing data from haptic gloves has broken down. <br>"
                                                                              'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
         elif self.script_return_code == 2:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The Script was run to acquire data from haptic gloves <br>"
-                                                                             "passing an inadequate number of arguments. <br>"
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The Script was run to acquire data from haptic gloves passing an <br>"
+                                                                             "inadequate number of arguments. <br>"
                                                                              'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
         elif self.script_return_code == 3:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
-                                                                             "encountered an error opening the file .CSV. <br>"
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves encountered an <br>"
+                                                                             "error opening the file .CSV. <br>"
                                                                              'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
         elif self.script_return_code == 4:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
-                                                                             "suddenly stopped because it did not detect one or more gloves. <br>"
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves suddenly <br>"
+                                                                             "stopped because it did not detect one or more gloves. <br>"
                                                                              'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
         elif self.script_return_code == 5:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
-                                                                             "suddenly stopped because the connection with SenseCom was interrupted. <br>"
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves suddenly <br>"
+                                                                             "stopped because the connection with SenseCom was interrupted. <br>"
                                                                              'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
         elif self.script_return_code == 6:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
-                                                                             "failed to start SenseCom by forcing it to run. <br>"
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves failed to <br>"
+                                                                             "start SenseCom by forcing it to run. <br>"
                                                                              'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
         
         # Set the msg box style
