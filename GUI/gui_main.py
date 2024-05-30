@@ -1,14 +1,17 @@
-from PyQt6 import QtWidgets
+from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QFont
 import sys
+
 from window_manager import WindowManager
 from welcome_screen import WelcomeScreen
+
 
 if __name__ == "__main__":
     """
     Main script to initialize and run the application.
     """
-    app = QtWidgets.QApplication(sys.argv)
+    
+    app = QApplication(sys.argv)
     
     # Parameters for the main window
     main_window_params = {
