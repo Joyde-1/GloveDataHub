@@ -76,6 +76,8 @@ class DataAcquisitionScreen:
         Usefull to show the remaining time.
     fields_errors : str 
         Errors messages related to the duration field or SenseCom widget.
+    script_return_code : int 
+        The return code of the script to acquire data.
     data_entry_screen : DataEntryScreen (istance attribute)
         Set the data entry screen when 'Back' button is clicked.
     final_screen : FinalScreen (istance attribute)
@@ -110,6 +112,8 @@ class DataAcquisitionScreen:
         
         self.duration_time = DurationTime()
         self.exe_manager = ExeManager()
+        
+        self.script_return_code = None
         
     def set_data_acquisition_screen(self):
         """
@@ -268,8 +272,16 @@ class DataAcquisitionScreen:
         # Stop the timer
         self.timer.stop()
         
+        # Check if the script was closed by the 'Stop' button
+        if self.script_return_code != 8:
+            # Get the return code from the script
+            self.script_return_code = self.exe_manager.get_script_return_code()
+
         # Show success message
-        self._show_success_message()
+        self._show_script_end_message()
+        
+        # Reset the script return code
+        self.script_return_code = None
         
         # Reset the elapsed time
         self.elapsed_time = 0
@@ -431,6 +443,8 @@ class DataAcquisitionScreen:
             # Terminate the script to get data from haptic gloves
             self.exe_manager.close_script()
             
+            self.script_return_code = 8
+            
         self._conclude_data_acquisition()
         
         DataAcquisitionScreen.description1_text = (
@@ -585,12 +599,36 @@ class DataAcquisitionScreen:
         
         error_msg_box.exec()
         
-    def _show_success_message(self):
+    def _show_script_end_message(self):
         """
-        Shows a success message.
+        Shows the end of script message.
         """
         
-        timer_msg_box = QMessageBox(QMessageBox.Icon.Information, "Success", ("Haptic gloves data have been acquired successfully!"))
+        if self.script_return_code == 0 or self.script_return_code == 7 or self.script_return_code == 8:
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Information, "Success", ("Haptic gloves data have been acquired successfully!"))
+        elif self.script_return_code == 1:
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script for capturing data from haptic gloves has broken down. <br>"
+                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+        elif self.script_return_code == 2:
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The Script was run to acquire data from haptic gloves <br>"
+                                                                             "passing an inadequate number of arguments. <br>"
+                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+        elif self.script_return_code == 3:
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
+                                                                             "encountered an error opening the file .CSV. <br>"
+                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+        elif self.script_return_code == 4:
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
+                                                                             "suddenly stopped because it did not detect one or more gloves. <br>"
+                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+        elif self.script_return_code == 5:
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
+                                                                             "suddenly stopped because the connection with SenseCom was interrupted. <br>"
+                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+        elif self.script_return_code == 6:
+            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves <br>"
+                                                                             "failed to start SenseCom by forcing it to run. <br>"
+                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
         
         # Set the msg box style
         self._set_output_dialog_style(timer_msg_box)

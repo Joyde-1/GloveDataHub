@@ -487,5 +487,7 @@ int main(int argc, char* argv[])
 		if (timestamp > total_time) {
 			return 0;
 		}
+	} else {
+		return 7;
 	}
 }

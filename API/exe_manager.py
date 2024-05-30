@@ -69,6 +69,8 @@ class ExeManager:
             The total time for data acquisition in seconds.
         """
         
+        self.script_return_code = None
+        
         ExeManager.script_process = subprocess.Popen([self.path_script, path_to_csv, str(total_time)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
     def set_sensecom_process(self, sensecom_process):
