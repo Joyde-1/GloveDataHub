@@ -1,19 +1,20 @@
-from PyQt6 import QtGui, QtCore
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QGridLayout, QStackedWidget, QMessageBox, QFrame
-from PyQt6.QtGui import QFont
+from PyQt6.QtCore import Qt, QTimer
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QGridLayout, QStackedWidget, QMessageBox
+from PyQt6.QtGui import QGuiApplication, QPixmap, QFont
 import sys
 import os
 import ctypes
-from ctypes import wintypes
 import psutil
 import pygetwindow as gw
 import time
+
 from custom_button import CustomButton
 
 # Add the directory 'API' path to PYTHONPATH
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
 
 from exe_manager import ExeManager
+
 
 # Constants for Windows messages
 WM_SYSCOMMAND = 0x0112
@@ -41,10 +42,12 @@ def window_proc(hwnd, msg, wparam, lparam):
     int
         The result of the message processing and the action taken.
     """
+    
     if msg == WM_SYSCOMMAND and (wparam == SC_MOVE or wparam == SC_MOVE + 1):
         return 0  # Ignore the move command
     if msg == WM_NCLBUTTONDOWN:
         return 0  # Ignore the non-client click (movement)
+    
     return ctypes.windll.user32.DefWindowProcW(hwnd, msg, wparam, lparam)
 
 # Convert the callback function to a function pointer
@@ -57,27 +60,27 @@ class WindowManager(QWidget):
 
     Attributes
     ----------
-    is_sensecom_layout : bool 
+    is_sensecom_layout : bool (class attribute)
         Flag to indicate whether the SenseCom layout is currently displayed.
-    ghd_logo_path : str
+    ghd_logo_path : str (istance attribute)
         The path to the GHD logo image.
-    kore_logo_path : str 
+    kore_logo_path : str (istance attribute)
         The path to the Kore logo image.
-    window_title : str 
+    window_title : str (istance attribute)
         The title of the window.
-    window_width : int
+    window_width : int (istance attribute)
         The width of the window.
-    window_height : int    
+    window_height : int (istance attribute)
         The height of the window.
-    background : str
+    background : str (istance attribute)
         The background color of the window.
-    frontground : str 
+    frontground : str (istance attribute)
         The frontground color of the window.
-    header_title : str 
+    header_title : str (istance attribute)
         The title displayed in the window header.
-    header_font : QtGui.QFont 
+    header_font : QFont (istance attribute)
         The font used for the header title.
-    exe_manager : ExeManager 
+    exe_manager : ExeManager (istance attribute)
         An instance of the ExeManager class.
     """
     
@@ -105,9 +108,10 @@ class WindowManager(QWidget):
             The frontground color of the window.
         header_title : str 
             The title displayed in the window header.
-        header_font : QtGui.QFont 
+        header_font : QFont 
             The font used for the header title.
         """
+        
         super().__init__()
         
         self.ghd_logo_path = ghd_logo_path
@@ -122,15 +126,22 @@ class WindowManager(QWidget):
 
         self.exe_manager = ExeManager()
         
+        # initilize the main window
         self._init_window()
     
     def _init_window(self):
         """
         Initialize the main window.
         """
+        
+        # Create the window
         self._create_window()
+        
+        # Create and set the main window header
         self._set_window_header()
-        self._center_window()  # Center the window on the screen
+        
+        # Center the main window on the screen
+        self._center_window()
         
         self.setLayout(self.main_layout)
 
@@ -138,6 +149,7 @@ class WindowManager(QWidget):
         """
         Create the main window.
         """
+        
         self.setWindowTitle(self.window_title)
         self.setFixedSize(self.window_width, self.window_height)
         self.setStyleSheet(f"background-color: {self.background};")
@@ -149,59 +161,65 @@ class WindowManager(QWidget):
         """
         Set up the window header.
         """
+        
         header_layout = QHBoxLayout()
 
         # Load logo images
-        gdh_image = QtGui.QPixmap(self.ghd_logo_path)
-        kore_image = QtGui.QPixmap(self.kore_logo_path)
+        gdh_image = QPixmap(self.ghd_logo_path)
+        kore_image = QPixmap(self.kore_logo_path)
         
         # Resize images to 100x100 pixel
-        gdh_image = gdh_image.scaled(80, 80, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
-        kore_image = kore_image.scaled(80, 80, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
+        gdh_image = gdh_image.scaled(80, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        kore_image = kore_image.scaled(80, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
 
         # Create labels for the images
-        self.gdh_logo = QLabel()
-        self.gdh_logo.setPixmap(gdh_image)
-        self.gdh_logo.setStyleSheet("padding: 10px 10px 10px 10px;")
+        gdh_logo = QLabel()
+        gdh_logo.setPixmap(gdh_image)
+        gdh_logo.setStyleSheet("padding: 10px 10px 10px 10px;")
 
-        self.kore_logo = QLabel()
-        self.kore_logo.setPixmap(kore_image)
-        self.kore_logo.setStyleSheet("padding: 10px 10px 10px 10px;")
+        kore_logo = QLabel()
+        kore_logo.setPixmap(kore_image)
+        kore_logo.setStyleSheet("padding: 10px 10px 10px 10px;")
 
         # Create the application title
-        self.title_label = QLabel(self.header_title)
-        self.title_label.setFont(self.header_font)
-        self.title_label.setStyleSheet(f"color: {self.frontground};")
+        title_label = QLabel(self.header_title)
+        title_label.setFont(self.header_font)
+        title_label.setStyleSheet(f"color: {self.frontground};")
 
         # Add logos and title to the header layout
-        header_layout.addWidget(self.gdh_logo)
+        header_layout.addWidget(gdh_logo)
         header_layout.addStretch()
-        header_layout.addWidget(self.title_label)        
+        header_layout.addWidget(title_label)        
         header_layout.addStretch()
-        header_layout.addWidget(self.kore_logo)
+        header_layout.addWidget(kore_logo)
         
-        header_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter | QtCore.Qt.AlignmentFlag.AlignTop)
+        header_layout.setAlignment(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop)
         
         # Set margin and padding to position the elements correctly
         header_layout.setContentsMargins(10, 10, 10, 10)
         
         header_widget = QWidget()
+        
         header_widget.setLayout(header_layout)
+        
         header_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
         
         # Aggiungi l'header layout alla parte superiore del layout principale
         self.main_layout.addWidget(header_widget)
         
+        # Create main window content layout
         self._create_content_layout()
         
+        # Create main window buttons layout
         self._create_buttons_layout()
     
     def _center_window(self):
         """
         Center the window on the screen.
         """
+        
         # Get screen dimensions
-        screen_geometry = QtGui.QGuiApplication.primaryScreen().geometry()
+        screen_geometry = QGuiApplication.primaryScreen().geometry()
         screen_width = screen_geometry.width()
         screen_height = screen_geometry.height()
 
@@ -222,10 +240,10 @@ class WindowManager(QWidget):
         distance_bottom = screen_height - y - window_height
 
         # Calculate additional vertical offset to compensate for the difference between top and bottom distance
-        additional_offset = (distance_bottom - distance_top) // 2  # Aumenta il divisore per sollevare ulteriormente la finestra
+        additional_offset = (distance_bottom - distance_top) // 2
 
         # Adjust vertical offset
-        y -= additional_offset + 50  # Modifica il valore di 50 per regolare ulteriormente il sollevamento
+        y -= additional_offset + 50
 
         # Ensure window stays within the screen
         x = max(margin_horizontal, min(x, screen_width - window_width - margin_horizontal))
@@ -238,12 +256,14 @@ class WindowManager(QWidget):
         """
         Create the layout for dynamic content.
         """
+        
         self.content_layout = QGridLayout()
         self.stacked_content = QStackedWidget()
         
         self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
         
         self.content_layout.addWidget(self.stacked_content)
+        
         self.content_layout.setContentsMargins(0, 15, 0, 15)
         
         self.main_layout.addLayout(self.content_layout)
@@ -257,6 +277,7 @@ class WindowManager(QWidget):
         widget 
             The widget to add.
         """     
+        
         self.stacked_content.addWidget(widget)
         
     def show_content_widget(self, direction):
@@ -268,15 +289,19 @@ class WindowManager(QWidget):
         direction : str 
             The direction to navigate ('Next' or 'Back').
         """
+        
+        # Get the current screen index
         current_index = self.stacked_content.currentIndex()
         
+        # Set the new screen index
         if direction == "Next":
             next_index = current_index + 1
         elif direction == "Back":
             next_index = current_index - 1
         elif direction == "New":
             next_index = current_index - 3
-            
+        
+        # Set the dynamic content layout when you switch to a screen where SenseCom isn't present
         if next_index == 0 or next_index == 1 or next_index == 4:
             self._modify_content_widget_position(next_index)
             
@@ -291,10 +316,14 @@ class WindowManager(QWidget):
         next_index : int 
             The index of the next content widget.
         """
-        # Rimuovi the widget from the current layout
+        
+        # Remove the widget from the content layout
         self.content_layout.removeWidget(self.stacked_content)
 
         if next_index == 0 or next_index == 4:
+            # If the next screen is welcome or final screen:
+            
+            # Hide SenseCom Widget
             self.sensecom_widget.hide()
             self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 0px;")
             self.stacked_content.setFixedSize(998, 426)
@@ -303,19 +332,22 @@ class WindowManager(QWidget):
                                     
             self.content_layout.addWidget(self.stacked_content)
         else:
+            # If the next screen is calibration, data entry or data acquistion screen:
+            
             self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
             self.stacked_content.setFixedSize(430, 426)
             
-            self.content_layout.addWidget(self.stacked_content, 0, 0, 3, 2, QtCore.Qt.AlignmentFlag.AlignLeft)
+            self.content_layout.addWidget(self.stacked_content, 0, 0, 3, 2, Qt.AlignmentFlag.AlignLeft)
         
     def _create_buttons_layout(self):
         """
         Create the layout for buttons.
         """
-        #self.button_widget = QWidget()
+        
         self.buttons_layout = QHBoxLayout()
+        
         self.buttons_layout.addStretch()
-        self.buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignBottom)
+        self.buttons_layout.setAlignment(Qt.AlignmentFlag.AlignBottom)
         self.buttons_layout.setContentsMargins(0, 0, 0, 0)
 
         self.main_layout.addLayout(self.buttons_layout)
@@ -329,13 +361,16 @@ class WindowManager(QWidget):
         button 
             The button to add.
         """
+        
         self.buttons_layout.addWidget(button)
         
     def create_sensecom_widget(self):
         """
         Create the SenseCom widget.
         """
+        
         self.sensecom_widget = QWidget()
+        
         self.sensecom_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
         self.sensecom_widget.setFixedSize(548, 426)
         
@@ -343,11 +378,11 @@ class WindowManager(QWidget):
         self.sensecom_layout = QVBoxLayout()
         
         # Sensecom title
-        self.sensecom_title = QLabel("SenseCom Application")
-        self.sensecom_title.setWordWrap(True)
-        self.sensecom_title.setFont(QtGui.QFont("Montserrat", 16, QtGui.QFont.Weight.Bold))
-        self.sensecom_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.sensecom_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        sensecom_title = QLabel("SenseCom Application")
+        sensecom_title.setWordWrap(True)
+        sensecom_title.setFont(QFont("Montserrat", 16, QFont.Weight.Bold))
+        sensecom_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        sensecom_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
         
         # Container for SenseCom
         self.sensecom_container = QWidget()
@@ -359,23 +394,28 @@ class WindowManager(QWidget):
         self.sensecom_button.clicked.connect(self._embed_sensecom)
         
         button_layout = QHBoxLayout()
+        
         button_layout.addWidget(self.sensecom_button)
         button_layout.setContentsMargins(0, 0, 0, 0)
         
-        self.sensecom_layout.addWidget(self.sensecom_title)
+        self.sensecom_layout.addWidget(sensecom_title)
         self.sensecom_layout.addWidget(self.sensecom_container)
         self.sensecom_layout.addLayout(button_layout)
+        
         self.sensecom_layout.addStretch()
-        self.sensecom_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        
+        self.sensecom_layout.setAlignment(Qt.AlignmentFlag.AlignRight)
         
         self.sensecom_widget.setLayout(self.sensecom_layout)
         
         # Initialize the timer
-        self.timer = QtCore.QTimer()
+        self.timer = QTimer()
         self.timer.timeout.connect(self._check_sensecom)
+        
+        # Start the timer
         self.timer.start(1000)
 
-        self.content_layout.addWidget(self.sensecom_widget, 0, 1, 3, 2, QtCore.Qt.AlignmentFlag.AlignRight)
+        self.content_layout.addWidget(self.sensecom_widget, 0, 1, 3, 2, Qt.AlignmentFlag.AlignRight)
         
         WindowManager.is_sensecom_layout = not WindowManager.is_sensecom_layout
 
@@ -398,41 +438,59 @@ class WindowManager(QWidget):
                 sensecom_process = process
                 break
         
+        # If SenseCom was opened outside the GUI, embed it into the GUI
         if sensecom_process != None and not self.exe_manager.is_sensecom_running():
-            self.exe_manager.set_sensecom_process(sensecom_process)
-            QtCore.QTimer.singleShot(2500, self._embed_sensecom_window)
+            
+            # Start SenseCom API
+            self.exe_manager.start_sensecom()
+            
+            # Embed SenseCom into the GUI
+            QTimer.singleShot(2500, self._embed_sensecom_window)
+            
+            # Hide 'Start SenseCom' button
             self.sensecom_button.hide()
 
     def _embed_sensecom(self):
         """
         Embed SenseCom into the GUI.
         """
+        
         if self.exe_manager.is_sensecom_running():
             pass
         else:
-            # Control if the process SenseCom is running
+            # Control if the process SenseCom is running and in case terminate it
             for process in psutil.process_iter():
                 if process.name() == "SenseCom.exe":
                     process.terminate()
                     break
             
-            time.sleep(1)
+            time.sleep(0.5)
 
+            # Start SenseCom API
             self.exe_manager.start_sensecom()
-            QtCore.QTimer.singleShot(2500, self._embed_sensecom_window)
             
+            # Embed SenseCom into the GUI
+            QTimer.singleShot(2500, self._embed_sensecom_window)
+            
+            # Hide 'Start SenseCom' button
             self.sensecom_button.hide()
 
     def _embed_sensecom_window(self):
         """
         Embed SenseCom window into the GUI.
         """
+        
         try:
+            # Get SenseCom window
             sensecom_hwnd = gw.getWindowsWithTitle("SenseCom")[0]
 
-            sensecom_hwnd.restore()  # Restore the window if it's minimized or maximized
-            sensecom_hwnd.moveTo(0, 0)  # Move the window to a specific position
+            # Restore the window if it's minimized or maximized
+            sensecom_hwnd.restore()
+            
+            # Move the window to a specific position
+            sensecom_hwnd.moveTo(0, 0)
 
+            # Get SenseCom container window ID
             container_hwnd = int(self.sensecom_container.winId())
             ctypes.windll.user32.SetParent(sensecom_hwnd._hWnd, container_hwnd)
             
@@ -441,28 +499,32 @@ class WindowManager(QWidget):
             
             # Remove the system buttons from the window
             style &= ~0x00C00000  # Remove WS_CAPTION (title bar) and WS_BORDER (border)
+            
             ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -16, style)
 
             # Set the anchor to pin the SenseCom window to the main GUI window
             ex_style = ctypes.windll.user32.GetWindowLongW(sensecom_hwnd._hWnd, -20)
             ex_style |= 0x00000008  # Set WS_EX_CONTROLPARENT
+            
             ctypes.windll.user32.SetWindowLongW(sensecom_hwnd._hWnd, -20, ex_style)
 
         except IndexError:
-            #pass
             QMessageBox.critical(self, "Error", "SenseCom window not found.") 
         
     def close_sensecom_widget(self):
         """
         Close the SenseCom widget.
         """
+        
         self.clear_sensecom_layout()
+        
         WindowManager.is_sensecom_layout = not WindowManager.is_sensecom_layout
 
     def closeEvent(self, event):
         """
         Handle the close event of the window.
         """
+        
         if self.exe_manager.is_sensecom_running():
             self.exe_manager.close_sensecom()
         event.accept()
@@ -471,9 +533,13 @@ class WindowManager(QWidget):
         """
         Clear the SenseCom layout.
         """
+        
+        # Iter all the widget in SenseCom layout
         while self.sensecom_layout.count():
+            
             item = self.sensecom_layout.takeAt(0)
             widget = item.widget()
+            
             if widget is not None:
                 widget.deleteLater()
             elif item.layout() is not None:
@@ -484,14 +550,19 @@ class WindowManager(QWidget):
         """
         Clear the buttons layout.
         """
-        # It only cleans the button_layout
+        
+        # Iter all the buttons in button layout
         while self.buttons_layout.count() > 0:
+            
             item = self.buttons_layout.takeAt(0)
             widget = item.widget()
+            
             if widget is not None:
-                widget.deleteLater()  # Remove and delete the widget
+                # Remove and delete the widget
+                widget.deleteLater()
             elif item.layout() is not None:
-                self._clear_layout(item.layout())  # Recursively cleans nested layouts
+                # Recursively cleans nested layouts
+                self._clear_layout(item.layout())
 
     def _clear_layout(self, layout):
         """
@@ -502,10 +573,13 @@ class WindowManager(QWidget):
         layout : QLayout 
             The layout to clear.
         """
+        
         # Recursively cleans a generic layout
         while layout.count():
+            
             item = layout.takeAt(0)
             widget = item.widget()
+            
             if widget is not None:
                 widget.deleteLater()
             elif item.layout() is not None:

@@ -1,5 +1,6 @@
-from PyQt6 import QtGui, QtCore
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
+from PyQt6.QtGui import QFont
 
 from window_manager import WindowManager
 from custom_button import CustomButton
@@ -57,7 +58,7 @@ class WelcomeScreen:
         
         # Welcome title
         welcome_label = QLabel("Welcome to GloveDataHub!")
-        welcome_label.setFont(QtGui.QFont("Montserrat", 20, QtGui.QFont.Weight.Bold))
+        welcome_label.setFont(QFont("Montserrat", 20, QFont.Weight.Bold))
         welcome_label.setStyleSheet("color: #023E58; background-color: #FFFCF0; padding: 20px 0px 40px 20px;")
         
         welcome_layout.addWidget(welcome_label)
@@ -69,7 +70,7 @@ class WelcomeScreen:
         )
         description_label = QLabel(description_text)
         description_label.setWordWrap(True)
-        description_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        description_label.setFont(QFont("Source Sans Pro", 16))
         description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
         
         description_layout = QVBoxLayout()
@@ -80,19 +81,19 @@ class WelcomeScreen:
         # Step 1 to be performed
         step1_text = "1 • Calibration of haptic gloves"
         step1_label = QLabel(step1_text)
-        step1_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        step1_label.setFont(QFont("Source Sans Pro", 16))
         step1_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
 
         # Step 2 to be performed
         step2_text = "2 • Entering user data"
         step2_label = QLabel(step2_text)
-        step2_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        step2_label.setFont(QFont("Source Sans Pro", 16))
         step2_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
         
         # Step 3 to be performed
         step3_text = "3 • Data acquisition"
         step3_label = QLabel(step3_text)
-        step3_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        step3_label.setFont(QFont("Source Sans Pro", 16))
         step3_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 0px 20px;")
         
         steps_layout = QVBoxLayout()
@@ -105,7 +106,7 @@ class WelcomeScreen:
         
         welcome_layout.addLayout(steps_layout)
         
-        welcome_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        welcome_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         
         # Add the welcome panel to the main window content layout
         self.main_window.add_content_widget(self.welcome_panel)
@@ -122,7 +123,7 @@ class WelcomeScreen:
         button_layout = QHBoxLayout()
         
         button_layout.addWidget(next_button)
-        button_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        button_layout.setAlignment(Qt.AlignmentFlag.AlignRight)
         button_layout.setContentsMargins(0, 0, 0, 0)
         
         button_widget = QWidget()
