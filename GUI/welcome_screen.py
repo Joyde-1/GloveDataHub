@@ -1,3 +1,16 @@
+"""
+Authors
+-------
+Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio
+
+Date
+----
+2024-05-30
+"""
+
+
+
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt6.QtGui import QFont

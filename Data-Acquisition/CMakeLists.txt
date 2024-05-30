@@ -13,4 +13,5 @@ message(STATUS "Attempting to add the SGCoreCpp project at ${CMAKE_CURRENT_SOURC
 
 # Include the .cmake file that links and include SGCoreCpp in this project
 include(${SGCORECPP_PATH}/LinkSGCoreCpp.cmake)
+
 message(STATUS "Done!")

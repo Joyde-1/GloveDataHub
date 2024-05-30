@@ -1,3 +1,16 @@
+"""
+Authors
+-------
+Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio
+
+Date
+----
+2024-05-30
+"""
+
+
+
 from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtGui import QFont
 
