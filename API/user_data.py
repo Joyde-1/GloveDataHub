@@ -20,6 +20,7 @@ class UserData:
         path_directory : str 
             The directory path for user's CSV files.
         """
+        
         self.first_name = ""
         self.last_name = ""
         self.code = ""
@@ -39,6 +40,7 @@ class UserData:
         ValueError 
             If first_name contains non-letter characters or is empty.
         """
+        
         if not re.match("^[A-Za-z]+$", first_name) and first_name != "":
             raise ValueError('<b><span style="color: #025885;">First Name</span></b> must contain only letters. <br>')
         self.first_name = first_name
@@ -57,6 +59,7 @@ class UserData:
         ValueError 
             If last name contains non-letter characters or is empty.
         """
+        
         if not re.match("^[A-Za-z]+$", last_name) and last_name != "":
             raise ValueError('<b><span style="color: #025885;">Last Name</span></b> must contain only letters. <br>')
         self.last_name = last_name
@@ -75,6 +78,7 @@ class UserData:
         ValueError 
             If code contains non-numeric characters or is not 4 digits long.
         """
+        
         if not re.match("^[0-9]+$", code):
             raise ValueError('<b><span style="color: #025885;">Code</span></b> must contain only numbers. <br>')
         if len(code) != 4:
@@ -95,6 +99,7 @@ class UserData:
         ValueError
             If the specified directory path does not exist.
         """
+        
         if not os.path.exists(path_directory):
             raise ValueError('<b><span style="color: #025885;">Path</span></b> does not exist. <br>')
         self.path_directory = path_directory
@@ -119,6 +124,7 @@ class UserData:
         str
             The last name of the user.
         """
+        
         return self.last_name
 
     def get_path_directory(self):
@@ -130,6 +136,7 @@ class UserData:
         str
             The directory path for user's CSV files.
         """
+        
         return self.path_directory
 
     def _calculate_name_csv(self):
@@ -141,6 +148,7 @@ class UserData:
         str
             The name of the user's CSV file.
         """
+        
         if self.first_name == "" and self.last_name == "":
             return f"{self.code}.csv"
         elif self.first_name == "" and self.code == "":
@@ -165,6 +173,7 @@ class UserData:
         str 
             The normalized full path of the user's CSV file.
         """
+        
         name_csv = self._calculate_name_csv()
         path_csv = os.path.join(self.path_directory, name_csv)
         normalized_path_csv = os.path.normpath(path_csv)
@@ -185,6 +194,7 @@ class UserData:
         str 
             The randomly generated code.
         """
+        
         random_code = ""
         random_code = ''.join(str(random.randint(0, 9)) for _ in range(length))
         

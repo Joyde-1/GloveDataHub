@@ -9,10 +9,12 @@ class DurationTime:
     time_min : int 
         The duration time in minutes.
     """
+    
     def __init__(self):
         """
         Constructoe, initialize DurationTime with default values.
         """
+        
         self.time_sec = 0
         self.time_min = 0
 
@@ -32,6 +34,7 @@ class DurationTime:
         ValueError
             If minutes is not a non-negative integer.
         """
+        
         if minutes == None:
             self.time_min = -1
             self.time_sec = -1
@@ -56,6 +59,7 @@ class DurationTime:
         int
             The duration time in seconds.
         """
+        
         return self.time_sec
 
     def is_time_over(self, current_time):
@@ -72,6 +76,7 @@ class DurationTime:
         bool
             True if the current time has not exceeded the duration time, False otherwise.
         """
+        
         if self.time_sec == -1:
             return False
         return current_time <= self.time_sec
@@ -80,4 +85,5 @@ class DurationTime:
         """
         Convert the duration time from minutes to seconds.
         """
+        
         self.time_sec = self.time_min * 60

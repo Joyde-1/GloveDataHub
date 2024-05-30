@@ -11,8 +11,10 @@ class ExeManager:
         The path to the script for data acquisition.
     path_sensecom : str 
         The path to the SenseCom executable.
-    sensecom_process : subprocess.Popen 
-        The process for SenseCom.
+    sensecom_psutil_process : psutil.process 
+        The sensecom process opened outside the API.
+    sensecom_psutil_process : subprocess.Popen
+        The sensecom process opened inside the API.
     script_process : subprocess.Popen 
         The process for the data acquisition script.
     """
@@ -23,8 +25,9 @@ class ExeManager:
         
     def __init__(self):
         """
-        Constructor, initialize ExeManager with default paths and None for processes.
+        Constructor, initialize ExeManager with default paths processes.
         """
+        
         self.path_script = "Data-Acquisition/glove_data_acquisition.exe"
         self.path_sensecom = "C:/Program Files/SenseCom/SenseCom.exe"
 
@@ -48,11 +51,12 @@ class ExeManager:
         total_time : int 
             The total time for data acquisition in seconds.
         """
+        
         ExeManager.script_process = subprocess.Popen([self.path_script, path_to_csv, str(total_time)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
     def set_sensecom_process(self, sensecom_process):
         """
-        Set SenseCom process.
+        Set SenseCom process opened outside the API.
         """
         
         ExeManager.sensecom_psutil_process = sensecom_process
@@ -66,6 +70,8 @@ class ExeManager:
         bool
             True if SenseCom process is running, False otherwise.
         """
+        
+        # Check if SenseCom process is opened inside or outside the API
         if ExeManager.sensecom_psutil_process:
             # psutil does not have a direct equivalent of poll(), so we use is_running() as a proxy
             return ExeManager.sensecom_psutil_process.is_running()
@@ -84,6 +90,7 @@ class ExeManager:
         bool 
             True if data acquisition script process is running, False otherwise.
         """
+        
         if ExeManager.script_process:
             return ExeManager.script_process.poll() is None
 
@@ -93,6 +100,8 @@ class ExeManager:
         """
         Close the SenseCom process if it is running.
         """
+        
+        # Check if SenseCom process is opened inside or outside the API
         if ExeManager.sensecom_psutil_process:
             self.sensecom_psutil_process.terminate()
             
@@ -103,5 +112,6 @@ class ExeManager:
         """
         Close the data acquisition script process if it is running.
         """
+        
         if self.is_script_running():
             ExeManager.script_process.terminate()
