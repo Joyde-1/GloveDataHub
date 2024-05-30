@@ -82,6 +82,24 @@ class WindowManager(QWidget):
         The font used for the header title.
     exe_manager : ExeManager (istance attribute)
         An instance of the ExeManager class.
+    main_layout : QVBoxLayout (istance attribute)
+        The main layout of the window
+    content_layout : QGridLayout (istance attribute)
+        The main window content layout
+    stacked_content : QStackedWidget (istance attribute)
+        The dynamic screen on content layout
+    buttons_layout : QHBoxLayout (istance attribute)
+        The main window buttons layout
+    sensecom_widget : QWidget (istance attribute)
+        The SenseCom widget where the layout is setted
+    sensecom_container : QWidget (istance attribute)
+        The SenseCom container in the GUI
+    sensecom_layout : QVBoxLayout (istance attribute)
+        The SenseCom layout
+    sensecom_button : CustomButton (istance attribute)
+        The 'Start SenseCom' button
+    timer : QTimer (istance attribute)
+        The timer to check the SenseCom API status
     """
     
     is_sensecom_layout = False
@@ -421,11 +439,12 @@ class WindowManager(QWidget):
 
     def _check_sensecom(self):
         """
-        Check if SenseCom is not running to show 'Start Sensecom' button
+        Check if SenseCom is not running
         """
         
         sensecom_process = None
         
+        # If SenseCom isn't running, show the 'Start SenseCom' button
         if not self.exe_manager.is_sensecom_running():
             try:
                 self.sensecom_button.show()
