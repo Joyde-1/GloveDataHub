@@ -17,6 +17,8 @@ class WelcomeScreen:
         The main window manager instance.
     welcome_panel : QWidget (istance attribute)
         The main widget for the welcome screen.
+    calibration_screen : CalibrationScreen (istance attribute)
+        Set the calibration screen when 'Next' button is clicked.
     """
     
     is_first_time = True
