@@ -79,9 +79,9 @@ class UserData:
             If code contains non-numeric characters or is not 4 digits long.
         """
         
-        if not re.match("^[0-9]+$", code):
+        if not re.match("^[0-9]+$", code) and code != "":
             raise ValueError('<b><span style="color: #025885;">Code</span></b> must contain only numbers. <br>')
-        if len(code) != 4:
+        if len(code) != 4 and code != "":
             raise ValueError('<b><span style="color: #025885;">Code</span></b> must have a length of 4 numbers. <br>')
         self.code = code
 
