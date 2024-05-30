@@ -1,16 +1,6 @@
 "Steps GUI:"
 
-1.      ("Verificare il codice C++ che avvia sensecom quando non è avviato, ogni tanto anche se è già attivo prova a riavviarlo")
-
-2.      ("Creare una scritta stilizzata di GloveDataHub per l header")
-
-3.      ("Inserire qualche immagine o layout nella schermata finale")
-
-4.      ("Rivedere i colori di background del content layout")
-
-5.      ("Rendere più appetibile la grafica")
-
-6.      ("Rivedere i commenti nel codice")
+1.      ("Rivedere i commenti nel codice")
 
 
 

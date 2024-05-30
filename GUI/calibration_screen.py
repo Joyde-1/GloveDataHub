@@ -13,6 +13,7 @@ class CalibrationScreen():
         Indicates whether it's the first time the screen is being displayed.
     """
     is_first_time = True
+    is_data_acquired = False
     
     def __init__(self, main_window: WindowManager):
         """
@@ -47,79 +48,74 @@ class CalibrationScreen():
         self.calibration_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
         self.calibration_layout = QtWidgets.QVBoxLayout(self.calibration_panel)
         
-        calibration_title = QtWidgets.QLabel("1 • Calibration of haptic gloves")
+        calibration_title = QtWidgets.QLabel("1 • Calibration of Haptic Gloves")
         calibration_title.setWordWrap(True)
-        calibration_title.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Weight.Bold))
+        calibration_title.setFont(QtGui.QFont("Montserrat", 16, QtGui.QFont.Weight.Bold))
         calibration_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        calibration_title.setStyleSheet("color: black; background-color: #C8C5B8; border-radius: 15px; margin: 10px 10px 0px 10px;")
+        calibration_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
         
         self.calibration_layout.addWidget(calibration_title)
         
         # Description of the application
         description_text = (
-            "To calibrate your haptic gloves, you need <br>"
-            "to run the <b>SenseCom</b> application, which <br>"
-            "handles the connection <br><br>"
-            "It is important that this application <br>"
-            "remains open throughout the session. <br><br>"
-            "In case you mistakenly close it, please <br>"
-            "reopen it and re-calibrate. <br><br>"
-            "Press the <b>Start Sensecom</b> button to <br>"
-            "start the application and proceed with the <br>"
-            "calibration."
+            "To calibrate your haptic gloves, you need to <br>"
+            'run the <b><span style="color: #025885;">SenseCom</span></b> application, which <br>'
+            "handles the connection. <br><br>"
+            "It is important that this application remains <br>"
+            "open throughout the session. <br><br>"
+            "In case you mistakenly close it, please reopen <br>"
+            "it and re-calibrate. <br><br>"
+            'Press the <b><span style="color: #025885;">Start Sensecom</span></b> button to start <br>'
+            "the application and proceed with the calibration."
         )
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
-        description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #FFFCF0; margin: 0px 10px 10px 10px;")
-        #description_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
-        description_label.setContentsMargins(0, 0, 0, 0)
-        #description_layout = QtWidgets.QVBoxLayout()
-        #description_layout.addWidget(description_label)
-        #self.calibration_layout.addLayout(description_layout)
+        description_label.setFont(QtGui.QFont("Source Sans Pro", 14))
+        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px;")
+
+        description_layout = QtWidgets.QVBoxLayout()
+        description_layout.addWidget(description_label)
+        description_layout.setContentsMargins(0, 0, 0, 0)
         
-        self.calibration_layout.addWidget(description_label)
+        description_widget = QtWidgets.QWidget()
+        description_widget.setLayout(description_layout)
+        description_widget.setStyleSheet("margin: 0px 10px 10px 10px; padding 0px;")
+        description_widget.setContentsMargins(0, 0, 0, 0)
         
-        #self.calibration_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.calibration_layout.addWidget(description_widget)
+        
+        self.calibration_layout.addStretch()
         
         self.main_window.add_content_widget(self.calibration_panel)
-    
-        """ if not WindowManager.is_dynamic_content_layout:
-            self.main_window.create_dynamic_content_layout()
-        
-        # Aggiungi il calibration panel al layout del contenuto principale
-        self.main_window.add_dynamic_content(self.calibration_panel) """
         
     def _set_buttons_layout(self):
         """
         Sets up the layout for buttons.
         """
         # Button to go back
-        back_button = CustomButton("Back", 120, 40, 16)
+        back_button = CustomButton("Back", 0, 120, 40, 16)
         back_button.clicked.connect(self._show_previous_screen)
         
         # Button to proceed
-        next_button = CustomButton("Next", 120, 40, 16)
+        next_button = CustomButton("Next", 0, 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         buttons_layout = QtWidgets.QHBoxLayout()
-        # button_layout.addStretch()
+        
         buttons_layout.addWidget(back_button)
         buttons_layout.addStretch()
         buttons_layout.addWidget(next_button)
-        # buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        
+        if CalibrationScreen.is_data_acquired == True:
+            back_button.hide()
+            buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+            
         buttons_layout.setContentsMargins(0, 0, 0, 0)
         
         button_widget = QtWidgets.QWidget()
         button_widget.setLayout(buttons_layout)
         
         self.main_window.add_button(button_widget)
-        
-        """ if not WindowManager.is_button_layout:
-            self.main_window.create_button_layout() """
-        
-        #self.main_window.add_button(back_button)
-        #self.main_window.add_button(next_button)
 
     def _show_previous_screen(self):
         """
@@ -127,8 +123,6 @@ class CalibrationScreen():
         """
         # Import ritardato per evitare import circolare tra classe start_calibration_screen e classe welcome_screen
         from welcome_screen import WelcomeScreen
-    
-        # self.main_window.clear_content_layout()
         
         self.main_window.close_sensecom_widget()
         

@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 
 # Add the path of the 'Data-Acquisition' directory to the PYTHONPATH
-# sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
 from user_data import UserData
 
 class DataEntryScreen:
@@ -16,8 +16,8 @@ class DataEntryScreen:
     """
     is_first_time = True
     
-    name_entry = None
-    surname_entry = None
+    first_name_entry = None
+    last_name_entry = None
     code_entry = None
     path_directory_entry = None
     
@@ -50,110 +50,128 @@ class DataEntryScreen:
         """
         # Create a panel to contain all the widgets
         self.data_entry_panel = QtWidgets.QWidget()
-        self.data_entry_panel.setStyleSheet("background-color: #E9E6DB;")
+        self.data_entry_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
         self.data_entry_layout = QtWidgets.QVBoxLayout(self.data_entry_panel)
+        
+        data_entry_title = QtWidgets.QLabel("2 • Entering User Data")
+        data_entry_title.setWordWrap(True)
+        data_entry_title.setFont(QtGui.QFont("Montserrat", 16, QtGui.QFont.Weight.Bold))
+        data_entry_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        data_entry_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        
+        self.data_entry_layout.addWidget(data_entry_title)
         
         # Description above the fields
         description_text = (
-            "Enter the <b>user data</b> in the corresponding <br>"
-            "fields. <br><br>"
-            "If you do not want to specify the user's <br>"
-            "first and last name, leave these two <br>"
-            "fields empty and the system will generate <br>"
-            "a 4-digit code to assign to the user. <br>"
+            "You do not have to fill all fields. If all are left <br>"
+            "blank, the system will generate a random <br>"
+            "4-digit code."
         )
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
-        description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 0px 10px;")
+        description_label.setFont(QtGui.QFont("Source Sans Pro", 14))
+        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px;")
         
         self.data_entry_layout.addWidget(description_label)
         
         # Layout for name and surname
-        name_surname_layout = QtWidgets.QHBoxLayout()
+        name_layout = QtWidgets.QHBoxLayout()
 
         # Widget for the name
-        name_label = QtWidgets.QLabel("<b>Name</b>:")
-        name_label.setFont(QtGui.QFont("Arial", 16))
-        name_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 20px 10px 10px;")
-        name_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
+        first_name_label = QtWidgets.QLabel("<b>First Name</b>:")
+        first_name_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        first_name_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
+        first_name_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         
         # Name field
-        DataEntryScreen.name_entry = QtWidgets.QLineEdit()
-        DataEntryScreen.name_entry.setFont(QtGui.QFont("Arial", 14))
-        DataEntryScreen.name_entry.setFixedWidth(200)
-        DataEntryScreen.name_entry.setStyleSheet("color: black;")  
-        DataEntryScreen.name_entry.setContentsMargins(15, 5, 20, 5)
+        DataEntryScreen.first_name_entry = QtWidgets.QLineEdit()
+        DataEntryScreen.first_name_entry.setFont(QtGui.QFont("Georgia", 14))
+        DataEntryScreen.first_name_entry.setFixedSize(195, 35)
+        DataEntryScreen.first_name_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")  
 
-        # Name layout
-        name_layout = QtWidgets.QVBoxLayout() 
+        # First Name layout
+        first_name_layout = QtWidgets.QVBoxLayout() 
         
-        name_layout.addWidget(name_label)  
-        name_layout.addWidget(DataEntryScreen.name_entry) 
+        first_name_layout.addWidget(first_name_label)
+        first_name_layout.addWidget(DataEntryScreen.first_name_entry)
+        first_name_layout.addStretch(3)
+        
+        first_name_widget = QtWidgets.QWidget()
+        first_name_widget.setLayout(first_name_layout)
+        first_name_widget.setContentsMargins(0, 0, 0, 0)
+        first_name_widget.setStyleSheet("margin: 0px; padding: 5px 10px 5px 0px;")
+        
+        name_layout.addWidget(first_name_widget)
         name_layout.addStretch()
-        #name_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
-        
-        name_surname_layout.addLayout(name_layout)
 
         # Widget for the surname
-        surname_label = QtWidgets.QLabel("<b>Surname</b>:")
-        surname_label.setFont(QtGui.QFont("Arial", 16))
-        surname_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 20px;")
+        last_name_label = QtWidgets.QLabel("<b>Last Name</b>:")
+        last_name_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        last_name_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 0px 0px 0px; padding: 0px 0px 5px 0px;")
         
         # Surname field
-        DataEntryScreen.surname_entry = QtWidgets.QLineEdit()
-        DataEntryScreen.surname_entry.setFont(QtGui.QFont("Arial", 14))
-        DataEntryScreen.surname_entry.setStyleSheet("color: black;")
-        DataEntryScreen.surname_entry.setFixedWidth(200)
-        DataEntryScreen.surname_entry.setContentsMargins(25, 5, 10, 5)
+        DataEntryScreen.last_name_entry = QtWidgets.QLineEdit()
+        DataEntryScreen.last_name_entry.setFont(QtGui.QFont("Georgia", 14))
+        DataEntryScreen.last_name_entry.setFixedSize(195, 35)
+        DataEntryScreen.last_name_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
         
         # Surname layout
-        surname_layout = QtWidgets.QVBoxLayout()
-        surname_layout.addWidget(surname_label)
-        surname_layout.addWidget(DataEntryScreen.surname_entry)
-        surname_layout.addStretch()
+        last_name_layout = QtWidgets.QVBoxLayout()
+        last_name_layout.addWidget(last_name_label)
+        last_name_layout.addWidget(DataEntryScreen.last_name_entry)
+        last_name_layout.addStretch(3)
         
-        name_surname_layout.addLayout(surname_layout)
+        last_name_widget = QtWidgets.QWidget()
+        last_name_widget.setLayout(last_name_layout)
+        last_name_widget.setContentsMargins(0, 0, 0, 0)
+        last_name_widget.setStyleSheet("margin: 0px; padding: 5px 0px 5px 0px;")
+           
+        name_layout.addWidget(last_name_widget)
+        name_layout.addStretch()
         
-        name_surname_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
+        name_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         
-        self.data_entry_layout.addLayout(name_surname_layout)
+        self.data_entry_layout.addLayout(name_layout)
         
         # Widget for the optional code
-        code_label = QtWidgets.QLabel("<b>Code</b> (4 digit):")
-        code_label.setFont(QtGui.QFont("Arial", 16))
-        code_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
+        code_label = QtWidgets.QLabel("<b>4-digit Code</b>:")
+        code_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        code_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
         
         # Code field
         DataEntryScreen.code_entry = QtWidgets.QLineEdit()
-        DataEntryScreen.code_entry.setFont(QtGui.QFont("Arial", 14))
-        DataEntryScreen.code_entry.setStyleSheet("color: black;")
-        DataEntryScreen.code_entry.setFixedWidth(90)
-        DataEntryScreen.code_entry.setContentsMargins(15, 5, 10, 5)
+        DataEntryScreen.code_entry.setFont(QtGui.QFont("Georgia", 14))
+        DataEntryScreen.code_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
+        DataEntryScreen.code_entry.setFixedSize(90, 35)
         
         # Code layout
         code_layout = QtWidgets.QVBoxLayout()
         
         code_layout.addWidget(code_label)
         code_layout.addWidget(DataEntryScreen.code_entry)
+        code_layout.addStretch(3)
+
+        code_widget = QtWidgets.QWidget()
+        code_widget.setLayout(code_layout)
+        code_widget.setContentsMargins(0, 0, 0, 0)
+        code_widget.setStyleSheet("margin: 0px; padding: 5px 0px 5px 0px;")
         
-        self.data_entry_layout.addLayout(code_layout)
+        self.data_entry_layout.addWidget(code_widget)
 
         # Widget for the path
-        path_directory_label = QtWidgets.QLabel("<b>Path</b>:")
-        path_directory_label.setFont(QtGui.QFont("Arial", 16))
-        path_directory_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 10px 10px 10px 10px;")
+        path_directory_label = QtWidgets.QLabel("<b>Path</b> (is required):")
+        path_directory_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        path_directory_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
 
         # Path field
         DataEntryScreen.path_directory_entry = QtWidgets.QLineEdit()
         DataEntryScreen.path_directory_entry.setText(str(Path.home() / "Documents"))
-        DataEntryScreen.path_directory_entry.setFont(QtGui.QFont("Arial", 12))
-        DataEntryScreen.path_directory_entry.setStyleSheet("color: black;")
-        DataEntryScreen.path_directory_entry.setFixedWidth(335)
-        DataEntryScreen.path_directory_entry.setContentsMargins(15, 5, 40, 5)
+        DataEntryScreen.path_directory_entry.setFont(QtGui.QFont("Georgia", 12))
+        DataEntryScreen.path_directory_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 2px 2px 2px 2px;")
+        DataEntryScreen.path_directory_entry.setFixedSize(260, 30)
         
         # browse button to set a specific path
-        browse_button = CustomButton("Browse", 120, 30, 14)
+        browse_button = CustomButton("Browse", 1, 120, 30, 14)
         browse_button.clicked.connect(self._browse_path)
 
         # Path Layout
@@ -168,7 +186,12 @@ class DataEntryScreen:
         path_directory_layout.addWidget(path_directory_label)
         path_directory_layout.addLayout(path_directory_entry_layout)
         
-        self.data_entry_layout.addLayout(path_directory_layout)
+        path_directory_widget = QtWidgets.QWidget()
+        path_directory_widget.setLayout(path_directory_layout)
+        path_directory_widget.setContentsMargins(0, 0, 0, 0)
+        path_directory_widget.setStyleSheet("margin: 0px; padding: 5px 0px 5px 0px;")
+        
+        self.data_entry_layout.addWidget(path_directory_widget)
 
         # Add the panel to the main content layout
         self.main_window.add_content_widget(self.data_entry_panel)
@@ -178,17 +201,18 @@ class DataEntryScreen:
         Sets up the layout for buttons.
         """
         # Button to go back
-        back_button = CustomButton("Back", 120, 40, 16)
+        back_button = CustomButton("Back", 0, 120, 40, 16)
         back_button.clicked.connect(self._show_previous_screen)
         
         # Button to proceed
-        next_button = CustomButton("Next", 120, 40, 16)
+        next_button = CustomButton("Next", 0, 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         buttons_layout = QtWidgets.QHBoxLayout()
         buttons_layout.addWidget(back_button)
         buttons_layout.addStretch()
         buttons_layout.addWidget(next_button)
+        buttons_layout.setContentsMargins(0, 0, 0, 0)
         
         button_widget = QtWidgets.QWidget()
         button_widget.setLayout(buttons_layout)
@@ -213,9 +237,6 @@ class DataEntryScreen:
         Shows the previous screen.
         """
         from calibration_screen import CalibrationScreen
-        
-        # Memorizza i valori dei campi
-        # self._save_field_values()
 
         self.main_window.show_content_widget("Back")
         
@@ -251,27 +272,27 @@ class DataEntryScreen:
         self.fields_errors = ""
         self.info_message = ""
 
-        name = DataEntryScreen.name_entry.text().strip()  # Get the name entered by the user
-        surname = DataEntryScreen.surname_entry.text().strip()  # Get the surname entered by the user
+        first_name = DataEntryScreen.first_name_entry.text().strip()  # Get the name entered by the user
+        last_name = DataEntryScreen.last_name_entry.text().strip()  # Get the surname entered by the user
         code = DataEntryScreen.code_entry.text() # Get the code entered by the user
         path_directory = DataEntryScreen.path_directory_entry.text() # Get the path of the directory indicated by the user
 
         try:
-            self.user_data.set_name(name)
+            self.user_data.set_first_name(first_name)
         except ValueError as e:
             self.fields_errors += "• " + str(e)
         
         try:
-            self.user_data.set_surname(surname)
+            self.user_data.set_last_name(last_name)
         except ValueError as e:
             self.fields_errors += "• " + str(e)
             
-        if name == "" and surname == "" and code == "" and self.fields_errors == "":
+        if first_name == "" and last_name == "" and code == "" and self.fields_errors == "":
             code = self.user_data.generate_random_code()
             DataEntryScreen.code_entry.setText(code)
             self.info_message = (
-                "The <b>code</b> has been generated automatically \n"
-                "because the <b>name</b> and <b>surname</b> are missing."
+                'The <b><span style="color: #025885;">code</span></b> has been generated automatically \n'
+                'because the <b><span style="color: #025885;">first</span></b> and <b><span style="color: #025885;">last name</span></b> are missing.'
             )
 
         if code != "":
@@ -318,12 +339,12 @@ class DataEntryScreen:
         if dialog:
             dialog.setStyleSheet("""
                 QMessageBox {
-                    color: black;
+                    color: #023E58;
                     background-color: #E9E6DB;
                 }
                 QLabel {
-                    color: black;
-                    font: ("Arial", 14);
+                    color: #023E58;
+                    font: ("Merriweather", 14);
                 }
                 QPushButton {
                     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8);

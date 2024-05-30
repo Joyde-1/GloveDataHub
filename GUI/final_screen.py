@@ -42,26 +42,26 @@ class FinalScreen:
         """
         # Create a panel to contain all widgets
         self.final_screen_panel = QWidget()
-        self.final_screen_panel.setStyleSheet("background-color: #E9E6DB;")
+        self.final_screen_panel.setStyleSheet("background-color: #FFFCF0;")
         self.final_screen_layout = QVBoxLayout(self.final_screen_panel)
         
         # Welcome title
         final_screen_label = QLabel("Thanks for using GloveDataHub!")
-        final_screen_label.setFont(QtGui.QFont("Arial", 20, QtGui.QFont.Weight.Bold))
-        final_screen_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 0px 30px 20px;")
+        final_screen_label.setFont(QtGui.QFont("Montserrat", 20, QtGui.QFont.Weight.Bold))
+        final_screen_label.setStyleSheet("color: #023E58; background-color: #FFFCF0; padding: 20px 0px 30px 20px;")
         final_screen_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
         
         self.final_screen_layout.addWidget(final_screen_label)
         
         # Application description
         description_text = (
-            "If you want to perform a new data acquisition process from your haptic gloves, click the <b>New Acquisition</b> button. <br>"
-            "Otherwise click on the <b>Close</b> button to exit from GloveDataHub."
+            'If you want to perform a new data acquisition process from your haptic gloves, click the <b><span style="color: #025885;">New Acquisition</span></b> button. <br>'
+            'Otherwise click on the <b><span style="color: #025885;">Close</span></b> button to exit from GloveDataHub.'
         )
         description_label = QLabel(description_text)
         description_label.setWordWrap(True)
-        description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 20px 40px 20px;")
+        description_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
         
         self.final_screen_layout.addWidget(description_label)
         
@@ -74,10 +74,10 @@ class FinalScreen:
         """
         Sets up the layout for buttons.
         """
-        new_measurement_button = CustomButton("New Acquisition", 240, 40, 16)
+        new_measurement_button = CustomButton("New Acquisition", 1, 240, 40, 16)
         new_measurement_button.clicked.connect(self._start_new_data_acquisition)
         
-        close_button = CustomButton("Close", 120, 40, 16)
+        close_button = CustomButton("Close", 0, 120, 40, 16)
         close_button.clicked.connect(self._close_application)
         
         buttons_layout = QHBoxLayout()
@@ -85,6 +85,7 @@ class FinalScreen:
         buttons_layout.addWidget(close_button)
         
         buttons_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
+        buttons_layout.setContentsMargins(0, 0, 0, 0)
         
         button_widget = QWidget()
         button_widget.setLayout(buttons_layout)
@@ -111,40 +112,39 @@ class FinalScreen:
         """
         Reset all entry fields in data acquisition's screens
         """
+        from calibration_screen import CalibrationScreen
         from data_entry_screen import DataEntryScreen
         from data_acquisition_screen import DataAcquisitionScreen
         
-        DataEntryScreen.name_entry.setText("")
-        DataEntryScreen.surname_entry.setText("")
+        CalibrationScreen.is_data_acquired = not CalibrationScreen.is_data_acquired
+        
+        DataEntryScreen.first_name_entry.setText("")
+        DataEntryScreen.last_name_entry.setText("")
         DataEntryScreen.code_entry.setText("")
         DataEntryScreen.path_directory_entry.setText(str(Path.home() / "Documents"))
         
         DataAcquisitionScreen.description1_text = (
             "Enter the measurement duration in the <br>"
             "corresponding field. <br><br>"
-            "If you prefer the data acquisition to have <br>"
-            "an unlimited duration, leave the <b>Duration</b> <br>"
-            "field empty."
+            "If you prefer the data acquisition to have an <br>"
+            "unlimited duration, leave the duration field <br>"
+            "empty."
         )
         DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
+        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
         
-        DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
-        DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 10, 40)
+        DataAcquisitionScreen.duration_entry.setText("")
         
-        DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 10px 10px")
-        DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 5px;")
-        DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 0px;")
+        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; padding: 0px 0px 10px 5px;")
         
-        DataAcquisitionScreen.time_label.hide()
-        DataAcquisitionScreen.time_display.hide()
-        DataAcquisitionScreen.time_to_reach_label.hide()
+        DataAcquisitionScreen.timer_display.hide()
         
         DataAcquisitionScreen.description2_text = (
-            "Press the <b>Start Measurement</b> button to <br>"
+            'Press the <b><span style="color: #025885;">Start Measurement</span></b> button to <br>'
             "start capturing data from your haptic gloves."
         )
         DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
-        DataAcquisitionScreen.duration_entry.setText("")
+        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
         
     def _close_application(self):
         """

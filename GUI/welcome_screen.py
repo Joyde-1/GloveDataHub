@@ -51,9 +51,9 @@ class WelcomeScreen:
         
         # Welcome title
         welcome_label = QtWidgets.QLabel("Welcome to GloveDataHub!")
-        welcome_label.setFont(QtGui.QFont("Arial", 20, QtGui.QFont.Weight.Bold))
+        welcome_label.setFont(QtGui.QFont("Montserrat", 20, QtGui.QFont.Weight.Bold))
         #welcome_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        welcome_label.setStyleSheet("color: black; background-color: #FFFCF0; padding: 20px 0px 40px 20px;")
+        welcome_label.setStyleSheet("color: #023E58; background-color: #FFFCF0; padding: 20px 0px 40px 20px;")
         
         self.welcome_layout.addWidget(welcome_label)
         
@@ -64,8 +64,8 @@ class WelcomeScreen:
         )
         description_label = QtWidgets.QLabel(description_text)
         description_label.setWordWrap(True)
-        description_label.setFont(QtGui.QFont("Arial", 16))
-        description_label.setStyleSheet("color: black; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
+        description_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
         description_layout = QtWidgets.QVBoxLayout()
         # description_layout.addWidget(description_label, alignment=QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         description_layout.addWidget(description_label)
@@ -75,20 +75,20 @@ class WelcomeScreen:
         # Step 1 to be performed
         step1_text = "1 • Calibration of haptic gloves"
         step1_label = QtWidgets.QLabel(step1_text)
-        step1_label.setFont(QtGui.QFont("Arial", 16))
-        step1_label.setStyleSheet("color: black; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
+        step1_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        step1_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
 
         # Step 2 to be performed
         step2_text = "2 • Entering user data"
         step2_label = QtWidgets.QLabel(step2_text)
-        step2_label.setFont(QtGui.QFont("Arial", 16))
-        step2_label.setStyleSheet("color: black; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
+        step2_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        step2_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
         
         # Step 3 to be performed
         step3_text = "3 • Data acquisition"
         step3_label = QtWidgets.QLabel(step3_text)
-        step3_label.setFont(QtGui.QFont("Arial", 16))
-        step3_label.setStyleSheet("color: black; background-color: #FFFCF0; padding: 0px 20px 0px 20px;")
+        step3_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        step3_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 0px 20px;")
         
         steps_layout = QtWidgets.QVBoxLayout()
         steps_layout.addWidget(step1_label)
@@ -111,7 +111,7 @@ class WelcomeScreen:
         Set up the layout for buttons on the welcome screen.
         """
        # Button to proceed
-        next_button = CustomButton("Next", 120, 40, 16)
+        next_button = CustomButton("Next", 0, 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         button_layout = QtWidgets.QHBoxLayout()

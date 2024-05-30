@@ -1,4 +1,5 @@
 import subprocess
+import psutil
 
 class ExeManager:
     """
@@ -16,7 +17,8 @@ class ExeManager:
         The process for the data acquisition script.
     """
     
-    sensecom_process = None
+    sensecom_psutil_process = None
+    sensecom_subprocess_process = None
     script_process = None
         
     def __init__(self):
@@ -30,7 +32,10 @@ class ExeManager:
         """
         Start the SenseCom process.
         """
-        ExeManager.sensecom_process = subprocess.Popen([self.path_sensecom], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+        
+        ExeManager.sensecom_psutil_process = None
+        
+        ExeManager.sensecom_subprocess_process = subprocess.Popen([self.path_sensecom], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
     def start_script(self, path_to_csv, total_time):
         """
@@ -45,6 +50,13 @@ class ExeManager:
         """
         ExeManager.script_process = subprocess.Popen([self.path_script, path_to_csv, str(total_time)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 
+    def set_sensecom_process(self, sensecom_process):
+        """
+        Set SenseCom process.
+        """
+        
+        ExeManager.sensecom_psutil_process = sensecom_process
+
     def is_sensecom_running(self):
         """
         Check if the SenseCom process is running.
@@ -54,9 +66,14 @@ class ExeManager:
         bool
             True if SenseCom process is running, False otherwise.
         """
-        if ExeManager.sensecom_process is None:
-            return False
-        return ExeManager.sensecom_process.poll() is None
+        if ExeManager.sensecom_psutil_process:
+            # psutil does not have a direct equivalent of poll(), so we use is_running() as a proxy
+            return ExeManager.sensecom_psutil_process.is_running()
+        
+        if ExeManager.sensecom_subprocess_process:
+            return ExeManager.sensecom_subprocess_process.poll() is None
+
+        return False
 
     def is_script_running(self):
         """
@@ -67,16 +84,20 @@ class ExeManager:
         bool 
             True if data acquisition script process is running, False otherwise.
         """
-        if ExeManager.script_process is None:
-            return False
-        return ExeManager.script_process.poll() is None
+        if ExeManager.script_process:
+            return ExeManager.script_process.poll() is None
+
+        return False
 
     def close_sensecom(self):
         """
         Close the SenseCom process if it is running.
         """
-        if self.is_sensecom_running():
-            ExeManager.sensecom_process.terminate()
+        if ExeManager.sensecom_psutil_process:
+            self.sensecom_psutil_process.terminate()
+            
+        if ExeManager.sensecom_subprocess_process:
+            self.sensecom_subprocess_process.terminate()
 
     def close_script(self):
         """

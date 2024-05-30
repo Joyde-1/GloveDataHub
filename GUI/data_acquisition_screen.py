@@ -50,11 +50,9 @@ class DataAcquisitionScreen:
     description1_label = None
     description2_text = None
     description2_label = None
-    duration_label = None
     duration_entry = None
-    time_label = None
-    time_display = None
-    time_to_reach_label = None
+    duration_widget = None
+    timer_display = None
     
     
     def __init__(self, main_window: WindowManager, user_data: UserData):
@@ -88,83 +86,77 @@ class DataAcquisitionScreen:
         """Creates the widgets for data acquisition."""
         # Create a panel to contain all widgets
         self.data_acquisition_panel = QtWidgets.QWidget()
-        self.data_acquisition_panel.setStyleSheet("background-color: #E9E6DB;")
+        self.data_acquisition_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
         self.data_acquisition_layout = QtWidgets.QVBoxLayout(self.data_acquisition_panel)
+
+        data_acquisition_title = QtWidgets.QLabel("3 • Data Acquisition")
+        data_acquisition_title.setWordWrap(True)
+        data_acquisition_title.setFont(QtGui.QFont("Montserrat", 16, QtGui.QFont.Weight.Bold))
+        data_acquisition_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        data_acquisition_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        
+        self.data_acquisition_layout.addWidget(data_acquisition_title)
 
         # Description above the field
         DataAcquisitionScreen.description1_text = (
             "Enter the measurement duration in the <br>"
             "corresponding field. <br><br>"
-            "If you prefer the data acquisition to have <br>"
-            "an unlimited duration, leave the <b>Duration</b> <br>"
-            "field empty."
+            "If you prefer the data acquisition to have an <br>"
+            "unlimited duration, leave the duration field <br>"
+            "empty."
         )
         DataAcquisitionScreen.description1_label = QtWidgets.QLabel(DataAcquisitionScreen.description1_text)
         DataAcquisitionScreen.description1_label.setWordWrap(True)
-        DataAcquisitionScreen.description1_label.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.description1_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 20px 10px;")
+        DataAcquisitionScreen.description1_label.setFont(QtGui.QFont("Source Sans Pro", 14))
+        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
         
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.description1_label)
 
         # Widget for duration
-        DataAcquisitionScreen.duration_label = QtWidgets.QLabel("<b>Duration</b> (in minutes):")
-        DataAcquisitionScreen.duration_label.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
+        duration_label = QtWidgets.QLabel("<b>Duration</b> (in minutes):")
+        duration_label.setFont(QtGui.QFont("Source Sans Pro", 16))
+        duration_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
         
         # Field for duration
         DataAcquisitionScreen.duration_entry = QtWidgets.QLineEdit()
-        DataAcquisitionScreen.duration_entry.setFont(QtGui.QFont("Arial", 14))
-        DataAcquisitionScreen.duration_entry.setStyleSheet("color: black;")
-        DataAcquisitionScreen.duration_entry.setFixedWidth(90)
-        DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 10, 40)
+        DataAcquisitionScreen.duration_entry.setFont(QtGui.QFont("Georgia", 14))
+        DataAcquisitionScreen.duration_entry.setFixedSize(90, 35)
+        DataAcquisitionScreen.duration_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
         
         # Layout for duration
         self.duration_layout = QtWidgets.QVBoxLayout()
         
-        self.duration_layout.addWidget(DataAcquisitionScreen.duration_label)
+        self.duration_layout.addWidget(duration_label)
         self.duration_layout.addWidget(DataAcquisitionScreen.duration_entry)
+        self.duration_layout.addStretch(3)
         
-        self.duration_layout.addStretch()
-
-        self.data_acquisition_layout.addLayout(self.duration_layout)
+        DataAcquisitionScreen.duration_widget = QtWidgets.QWidget()
+        DataAcquisitionScreen.duration_widget.setLayout(self.duration_layout)
+        DataAcquisitionScreen.duration_widget.setContentsMargins(0, 0, 0, 0)
+        DataAcquisitionScreen.duration_widget.setStyleSheet("margin: 0px; padding: 5px 0px 5px 0px;")
         
-        # Lable for time
-        DataAcquisitionScreen.time_label = QtWidgets.QLabel("Time:")
-        DataAcquisitionScreen.time_label.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 10px 10px")
-        
-        DataAcquisitionScreen.time_display = QtWidgets.QLabel("00:00:00")
-        DataAcquisitionScreen.time_display.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 5px;")
-        
-        DataAcquisitionScreen.time_to_reach_label = QtWidgets.QLabel("/  -")
-        DataAcquisitionScreen.time_to_reach_label.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 10px 0px;")
+        self.data_acquisition_layout.addWidget(DataAcquisitionScreen.duration_widget)
         
         # Display the timer
-        self.time_layout = QtWidgets.QHBoxLayout()
+        DataAcquisitionScreen.timer_display = QtWidgets.QLabel("<b>Time</b>:&nbsp;&nbsp;&nbsp;&nbsp;00:00:00 / -")
+        DataAcquisitionScreen.timer_display.setFont(QtGui.QFont("DSEG", 16))
+        DataAcquisitionScreen.timer_display.setFixedWidth(305)
+        DataAcquisitionScreen.timer_display.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 10px; padding: 5px;")
         
-        self.time_layout.addWidget(DataAcquisitionScreen.time_label)
-        self.time_layout.addWidget(DataAcquisitionScreen.time_display)
-        self.time_layout.addWidget(DataAcquisitionScreen.time_to_reach_label)
+        self.data_acquisition_layout.addWidget(DataAcquisitionScreen.timer_display, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         
-        self.time_layout.addStretch()
-        
-        DataAcquisitionScreen.time_label.hide()
-        DataAcquisitionScreen.time_display.hide()
-        DataAcquisitionScreen.time_to_reach_label.hide()
-        
-        self.data_acquisition_layout.addLayout(self.time_layout)
+        DataAcquisitionScreen.timer_display.hide()
         
         # Description below the field
         DataAcquisitionScreen.description2_text = (
-            "Press the <b>Start Measurement</b> button to <br>"
+            'Press the <b><span style="color: #025885;">Start Measurement</span></b> button to <br>'
             "start capturing data from your haptic gloves."
         )
         DataAcquisitionScreen.description2_label = QtWidgets.QLabel(DataAcquisitionScreen.description2_text)
         DataAcquisitionScreen.description2_label.setWordWrap(True)
-        DataAcquisitionScreen.description2_label.setFont(QtGui.QFont("Arial", 16))
-        DataAcquisitionScreen.description2_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 20px 10px;")
+        DataAcquisitionScreen.description2_label.setFont(QtGui.QFont("Source Sans Pro", 14))
+        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
         
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.description2_label)
         
@@ -175,7 +167,8 @@ class DataAcquisitionScreen:
         
     def _start_timer(self):
         """Starts the timer for measurement duration."""
-        DataAcquisitionScreen.time_display.setText("00:00:00")  # Reset the time display
+        
+        DataAcquisitionScreen.timer_display.setText("<b>Time</b>:&nbsp;&nbsp;&nbsp;&nbsp;00:00:00 / " + self.time_to_reach)  # Reset the time display
         
         # Initialize the timer
         self.timer = QtCore.QTimer()
@@ -190,9 +183,11 @@ class DataAcquisitionScreen:
     def _update_timer(self):
         """Updates the timer display."""
         self.elapsed_time += 1
+        
         hours, remainder = divmod(self.elapsed_time, 3600)
         minutes, seconds = divmod(remainder, 60)
-        DataAcquisitionScreen.time_display.setText(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+        
+        DataAcquisitionScreen.timer_display.setText(f"<b>Time</b>:&nbsp;&nbsp;&nbsp;&nbsp;{hours:02d}:{minutes:02d}:{seconds:02d} / " + self.time_to_reach)
 
         # Stop the measurement if the duration is over
         if self.duration_time.is_time_over(self.elapsed_time) or not self.exe_manager.is_sensecom_running():
@@ -202,8 +197,7 @@ class DataAcquisitionScreen:
         """
         Resets time labels that are includes in time layouy
         """
-        self.time_display.setText("00:00:00")
-        self.time_to_reach_label.setText("/  -")
+        DataAcquisitionScreen.timer_display.setText("<b>Time</b>:&nbsp;&nbsp;&nbsp;&nbsp;00:00:00 / -")
         
     def _conclude_data_acquisition(self):
         """Concludes the data acquisition process."""
@@ -214,27 +208,29 @@ class DataAcquisitionScreen:
     def _set_buttons_layout(self):
         """Sets up the layout for buttons."""
         # Button for going back
-        self.back_button = CustomButton("Back", 120, 40, 16)
+        self.back_button = CustomButton("Back", 0, 120, 40, 16)
         self.back_button.setContentsMargins(20, 0, 300, 20)
         self.back_button.clicked.connect(self._show_previous_screen)
         
         # Button for starting/stopping the measurement
-        self.measurement_button = CustomButton("Start Measurement", 240, 40, 16)
+        self.measurement_button = CustomButton("Start Measurement", 1, 240, 40, 16)
         self.measurement_button.setContentsMargins(300, 0, 4000, 20)
         self.measurement_button.clicked.connect(self._start_measurement)
         
         # Button for proceeding
-        self.next_button = CustomButton("Next", 120, 40, 16)
+        self.next_button = CustomButton("Next", 0, 120, 40, 16)
         self.next_button.setContentsMargins(300, 0, 20, 20)
         self.next_button.clicked.connect(self._show_next_screen)        
         
         self.buttons_layout = QtWidgets.QHBoxLayout()
         
         self.buttons_layout.addWidget(self.back_button, alignment=QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.buttons_layout.addStretch(7)
+        self.buttons_layout.addStretch(20)
         self.buttons_layout.addWidget(self.measurement_button, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.buttons_layout.addStretch(10)
+        self.buttons_layout.addStretch(30)
         self.buttons_layout.addWidget(self.next_button, alignment=QtCore.Qt.AlignmentFlag.AlignRight)
+        
+        self.buttons_layout.setContentsMargins(0, 0, 0, 0)
         
         # Set the initial state of buttons
         self.next_button.hide()
@@ -290,30 +286,22 @@ class DataAcquisitionScreen:
             
             DataAcquisitionScreen.description1_text = (
                 "The script to capture the data is running. \n\n"
-                "SenseCom manages the connection with \n"
-                "your haptic gloves, so if you close it, \n"
-                "the measurement will be stopped instantly."
+                "SenseCom manages the connection with your \n"
+                "haptic gloves, so if you close it, the \n"
+                "measurement will be stopped instantly."
             )
             
             DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
             
-            DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 0px 10px;")
-            DataAcquisitionScreen.duration_entry.setContentsMargins(15, 0, 10, 0)
+            DataAcquisitionScreen.duration_widget.hide()
             
-            DataAcquisitionScreen.duration_label.hide()
-            DataAcquisitionScreen.duration_entry.hide()
+            DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 15px 10px 10px 10px; padding: 5px;")
             
-            DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 80px 10px")
-            DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 5px;")
-            DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 0px;")
-            
-            DataAcquisitionScreen.time_label.show()
-            DataAcquisitionScreen.time_display.show()
-            DataAcquisitionScreen.time_to_reach_label.show()
+            DataAcquisitionScreen.timer_display.show()
             
             DataAcquisitionScreen.description2_text = (
                 "Then if you want to stop data acquisition <br>"
-                "immediately, you can press the <b>Stop</b> button <br>"
+                'immediately, you can press the <b><span style="color: #025885;">Stop</span></b> button <br>'
                 "or close SenseCom."
             )
             
@@ -347,40 +335,34 @@ class DataAcquisitionScreen:
         self.measurement_button.clicked.connect(self._restart_measurement)
         
         DataAcquisitionScreen.description1_text = (
-            "The data has been successfully captured <br>"
-            "and saved in the file: <br><br>"
-            "If you are not satisfied with the measurement, <br>"
-            "you can repeat it by entering the <b>Duration</b> in <br>"
-            "the corresponding field again."
+            "The data has been successfully acquired. <br>"
+            "If you are not satisfied with the <br>"
+            "measurement, you can repeat it by entering <br>"
+            "the duration in the corresponding field again."
         )
         
         DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
+        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 0px 0px")
         
-        DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 20px 10px 10px 10px;")
-        DataAcquisitionScreen.duration_entry.setContentsMargins(15, 5, 10, 20)
+        DataAcquisitionScreen.duration_widget.show()
         
-        DataAcquisitionScreen.duration_label.show()
-        DataAcquisitionScreen.duration_entry.show()
-        
-        DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 30px 10px")
-        DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 30px 5px;")
-        DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 30px 0px;")
+        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 10px 10px 10px 10px; padding: 5px;")
         
         DataAcquisitionScreen.description2_text = (
             "If you want to repeat the measurement, press <br>"
-            "the <b>Restart</b> button. <br>"
-            "Otherwise if you want to go ahead, press the <br>"
-            "<b>Next</b> button."
+            'the <b><span style="color: #025885;">Restart</span></b> button. Otherwise if you want to <br>'
+            'go ahead, press the <b><span style="color: #025885;">Next</span></b> button.'
         )
         
         DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
+        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 0px 0px 0px 0px; padding: 0px 10px 0px 10px;")
         
         self.next_button.show()
         
         self.buttons_layout.setAlignment(self.back_button, QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.buttons_layout.setStretch(1, 10)
+        self.buttons_layout.setStretch(1, 48)
         self.buttons_layout.setAlignment(self.measurement_button, QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.buttons_layout.setStretch(3, 7)
+        self.buttons_layout.setStretch(3, 34)
         self.buttons_layout.setAlignment(self.next_button, QtCore.Qt.AlignmentFlag.AlignRight)
             
     def _restart_measurement(self):
@@ -397,34 +379,28 @@ class DataAcquisitionScreen:
             
             DataAcquisitionScreen.description1_text = (
                 "The script to capture the data is running. \n\n"
-                "SenseCom manages the connection with \n"
-                "your haptic gloves, so if you close it, \n"
-                "the measurement will be stopped instantly."
+                "SenseCom manages the connection with your \n"
+                "haptic gloves, so if you close it, the \n"
+                "measurement will be stopped instantly."
             )
             
             DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
+            DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
             
-            DataAcquisitionScreen.duration_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 0px 10px;")
-            DataAcquisitionScreen.duration_entry.setContentsMargins(15, 0, 10, 0)
+            DataAcquisitionScreen.duration_widget.hide()
             
-            DataAcquisitionScreen.duration_label.hide()
-            DataAcquisitionScreen.duration_entry.hide()
+            DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 10px 10px 15px 10px; padding: 5px;")
             
-            DataAcquisitionScreen.time_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 10px 80px 10px")
-            DataAcquisitionScreen.time_display.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 5px;")
-            DataAcquisitionScreen.time_to_reach_label.setStyleSheet("color: black; background-color: #E9E6DB; padding: 0px 0px 80px 0px;")
-            
-            DataAcquisitionScreen.time_label.show()
-            DataAcquisitionScreen.time_display.show()
-            DataAcquisitionScreen.time_to_reach_label.show()
-            
+            DataAcquisitionScreen.timer_display.show()
+                        
             DataAcquisitionScreen.description2_text = (
                 "Then if you want to stop data acquisition <br>"
-                "immediately, you can press the <b>Stop</b> button <br>"
+                'immediately, you can press the <b><span style="color: #025885;">Stop</span></b> button <br>'
                 "or close SenseCom."
             )
             
             DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
+            DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
             
             self.measurement_button.setText("Stop")
             self.measurement_button.setFixedSize(120, 40)
@@ -448,7 +424,8 @@ class DataAcquisitionScreen:
             
         if duration == "":
             self.duration_time.set_time_min()
-            DataAcquisitionScreen.time_to_reach_label.setText("/  ∞")
+            self.time_to_reach = "∞"
+            DataAcquisitionScreen.timer_display.setFixedWidth(240)
         else:
             try:
                 self.duration_time.set_time_min(duration)
@@ -456,7 +433,8 @@ class DataAcquisitionScreen:
                 duration = int(duration)
                 
                 hours, minutes = divmod(duration, 60)
-                DataAcquisitionScreen.time_to_reach_label.setText(f"/  {hours:02d}:{minutes:02d}:00")
+                self.time_to_reach = f"{hours:02d}:{minutes:02d}:00"
+                DataAcquisitionScreen.timer_display.setFixedWidth(305)
             except ValueError as e:
                 self.fields_errors += "• " + str(e)
                 
@@ -465,7 +443,7 @@ class DataAcquisitionScreen:
         Checks if sensecom is running before script starts
         """
         if not self.exe_manager.is_sensecom_running():
-            self.fields_errors += "• " + ("SenseCom is not running. Please press the <b>Start Sensecom</b> <br>"
+            self.fields_errors += "• " + ('SenseCom is not running. Please press the <b><span style="color: #025885;">Start Sensecom</span></b> <br>'
                                           "button to start SenseCom before proceeding with data acquisition. <br>")
     
     def _is_error_message(self):
@@ -500,12 +478,12 @@ class DataAcquisitionScreen:
         if dialog:
             dialog.setStyleSheet("""
                 QMessageBox {
-                    color: black;
+                    color: #023E58;
                     background-color: #E9E6DB;
                 }
                 QLabel {
-                    color: black;
-                    font: ("Arial", 14);
+                    color: #023E58;
+                    font: ("Merriweather", 14);
                 }
                 QPushButton {
                     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8);

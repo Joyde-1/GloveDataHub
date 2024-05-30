@@ -17,10 +17,10 @@ if __name__ == "__main__":
         'window_title': "GloveDataHub", 
         'window_width': 1040, 
         'window_height': 670,
-        'background': '#E9E6DB',
-        'frontground': '#031725',
+        'background': '#E0DED3',
+        'frontground': '#026192',
         'header_title': "GloveDataHub",
-        'header_font': QFont("Montserrat", 24, QFont.Weight.Bold)
+        'header_font': QFont("Raleway", 24, QFont.Weight.Bold)
     }
     
     # Create the main window

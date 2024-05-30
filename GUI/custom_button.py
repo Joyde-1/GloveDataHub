@@ -15,7 +15,7 @@ class CustomButton(QtWidgets.QPushButton):
     font_size : int 
         The font size of the button text.
     """
-    def __init__(self, title, width, height, font_size, parent=None):
+    def __init__(self, title, style, width, height, font_size, parent=None):
         """
         Constructor method to initialize the CustomButton.
 
@@ -33,7 +33,8 @@ class CustomButton(QtWidgets.QPushButton):
             It is an optional param for the parent widget.
         """
         super().__init__(title, parent)
-        self.setFont(QtGui.QFont("Arial", font_size))
+        self.style = style
+        self.setFont(QtGui.QFont("Montserrat", font_size))
         self.setStyleSheet(self.normal_style())
         # Imposta le dimensioni del pulsante
         self.setFixedSize(width, height)
@@ -48,16 +49,28 @@ class CustomButton(QtWidgets.QPushButton):
         str
             CSS style for the normal state.
         """
-        return """
-            QPushButton {
-                background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                  stop:0 #E9E6DB, stop:1 #C8C5B8);
-                color: black;
-                border: 2px solid #C8C5B8;
-                border-radius: 15px;
-                padding: 0px;
-            }
-        """
+        if self.style == 0:
+            return """
+                QPushButton {
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                                    stop:0 #FFFCF0, stop:1 #E0DED3);
+                    color: #031729;
+                    border: 2px solid #C8C5B8;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+            """
+        else:
+            return """
+                QPushButton {
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                                    stop:0 #F5FBFF, stop:1 #CCD9E3);
+                    color: #023E58;
+                    border: 2px solid #B0C4DE;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+            """
 
     def hover_style(self):
         """
@@ -68,17 +81,31 @@ class CustomButton(QtWidgets.QPushButton):
         str 
             CSS style for the hover state.
         """
-        return """
-            QPushButton {
-                background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                  stop:0 #C8C5B8, stop:1 #A9A69B);
-                border-color: #A9A69B;
-                color: black;
-                border: 2px solid #A9A69B;
-                border-radius: 15px;
-                padding: 0px;
-            }
-        """
+        
+        if self.style == 0:
+            return """
+                QPushButton {
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                                    stop:0 #C8C5B8, stop:1 #A9A69B);
+                    border-color: #A9A69B;
+                    color: #031729;
+                    border: 2px solid #A9A69B;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+            """
+        else:
+            return """
+                QPushButton {
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                                    stop:0 #D1E0EA, stop:1 #B0C4DE);
+                    border-color: #99AAB5;
+                    color: #023E58;
+                    border: 2px solid #99AAB5;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+            """
 
     def pressed_style(self):
         """
@@ -89,16 +116,29 @@ class CustomButton(QtWidgets.QPushButton):
         str
             CSS style for the pressed state.
         """
-        return """
-            QPushButton {
-                background-color: #A9A69B;
-                border-color: #8B887E;
-                color: black;
-                border: 2px solid #8B887E;
-                border-radius: 15px;
-                padding: 0px;
-            }
-        """
+        
+        if self.style == 0:
+            return """
+                QPushButton {
+                    background-color: #A9A69B;
+                    border-color: #8B887E;
+                    color: #031729;
+                    border: 2px solid #8B887E;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+            """
+        else:
+            return """
+                QPushButton {
+                    background-color: #99AAB5;
+                    border-color: #8090A0;
+                    color: #023E58;
+                    border: 2px solid #8090A0;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+            """
 
     def enterEvent(self, event):
         """

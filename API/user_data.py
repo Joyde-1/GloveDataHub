@@ -12,54 +12,54 @@ class UserData:
         Attributes
         ----------
         name : str 
-            The name of the user.
+            The first name of the user.
         surname : str 
-            The surname of the user.
+            The last name of the user.
         code : str 
             The code of the user.
         path_directory : str 
             The directory path for user's CSV files.
         """
-        self.name = ""
-        self.surname = ""
+        self.first_name = ""
+        self.last_name = ""
         self.code = ""
         self.path_directory = ""
 
-    def set_name(self, name):
+    def set_first_name(self, first_name):
         """
-        Sets the name of the user.
+        Sets the first name of the user.
         
         Parameters
         ----------
-        name : str 
-            The name of the user.
+        first_name : str 
+            The first name of the user.
     
         Raises
         ------
         ValueError 
-            If name contains non-letter characters or is empty.
+            If first_name contains non-letter characters or is empty.
         """
-        if not re.match("^[A-Za-z]+$", name) and name != "":
-            raise ValueError("<b>Name</b> must contain only letters. <br>")
-        self.name = name
+        if not re.match("^[A-Za-z]+$", first_name) and first_name != "":
+            raise ValueError('<b><span style="color: #025885;">First Name</span></b> must contain only letters. <br>')
+        self.first_name = first_name
 
-    def set_surname(self, surname):
+    def set_last_name(self, last_name):
         """
-        Sets the surname of the user.
+        Sets the last name of the user.
         
         Parameters
         ----------
-        surname : str 
-            The surname of the user.
+        last_name : str 
+            The last name of the user.
     
         Raises
         ------
         ValueError 
-            If surname contains non-letter characters or is empty.
+            If last name contains non-letter characters or is empty.
         """
-        if not re.match("^[A-Za-z]+$", surname) and surname != "":
-            raise ValueError("<b>Surname</b> must contain only letters. <br>")
-        self.surname = surname
+        if not re.match("^[A-Za-z]+$", last_name) and last_name != "":
+            raise ValueError('<b><span style="color: #025885;">Last Name</span></b> must contain only letters. <br>')
+        self.last_name = last_name
         
     def set_code(self, code):
         """
@@ -76,9 +76,9 @@ class UserData:
             If code contains non-numeric characters or is not 4 digits long.
         """
         if not re.match("^[0-9]+$", code):
-            raise ValueError("<b>Code</b> must contain only numbers. <br>")
+            raise ValueError('<b><span style="color: #025885;">Code</span></b> must contain only numbers. <br>')
         if len(code) != 4:
-            raise ValueError("<b>Code</b> must have a length of 4 numbers. <br>")
+            raise ValueError('<b><span style="color: #025885;">Code</span></b> must have a length of 4 numbers. <br>')
         self.code = code
 
     def set_path_directory(self, path_directory):
@@ -96,30 +96,30 @@ class UserData:
             If the specified directory path does not exist.
         """
         if not os.path.exists(path_directory):
-            raise ValueError("<b>Path</b> does not exist. \n")
+            raise ValueError('<b><span style="color: #025885;">Path</span></b> does not exist. <br>')
         self.path_directory = path_directory
             
-    def get_name(self):
+    def get_first_name(self):
         """
-        Returns the name of the user.
+        Returns the first name of the user.
         
         Returns
         -------
         str
-            The name of the user.
+            The first name of the user.
         """
-        return self.name
+        return self.first_name
 
-    def get_surname(self):
+    def get_last_name(self):
         """
-        Returns the surname of the user.
+        Returns the last name of the user.
         
         Returns
         -------
         str
-            The surname of the user.
+            The last name of the user.
         """
-        return self.surname
+        return self.last_name
 
     def get_path_directory(self):
         """
@@ -134,27 +134,27 @@ class UserData:
 
     def _calculate_name_csv(self):
         """
-        Calculates the name of the user's CSV file based on name, surname, and code.
+        Calculates the name of the user's CSV file based on first name, last name, and code.
         
         Returns
         -------
         str
             The name of the user's CSV file.
         """
-        if self.name == "" and self.surname == "":
+        if self.first_name == "" and self.last_name == "":
             return f"{self.code}.csv"
-        elif self.name == "" and self.code == "":
-            return f"{self.surname}.csv"
-        elif self.surname == "" and self.code == "":
-            return f"{self.name}.csv"
-        elif self.name == "":
-            return f"{self.surname}_{self.code}.csv"
-        elif self.surname == "":
-            return f"{self.name}_{self.code}.csv"
+        elif self.first_name == "" and self.code == "":
+            return f"{self.last_name}.csv"
+        elif self.last_name == "" and self.code == "":
+            return f"{self.first_name}.csv"
+        elif self.first_name == "":
+            return f"{self.last_name}_{self.code}.csv"
+        elif self.last_name == "":
+            return f"{self.first_name}_{self.code}.csv"
         elif self.code == "":
-            return f"{self.name}_{self.surname}.csv"
+            return f"{self.first_name}_{self.last_name}.csv"
         else:
-            return f"{self.name}_{self.surname}_{self.code}.csv"
+            return f"{self.first_name}_{self.last_name}_{self.code}.csv"
 
     def create_path_csv(self):
         """
