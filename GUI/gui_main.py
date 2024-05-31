@@ -13,10 +13,14 @@ Date
 
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QFont
+import os
 import sys
 
 from window_manager import WindowManager
 from welcome_screen import WelcomeScreen
+
+# Add the main directory path to PYTHONPATH
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 
 if __name__ == "__main__":

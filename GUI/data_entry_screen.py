@@ -14,16 +14,16 @@ Date
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QMessageBox,QFileDialog,QLineEdit
 from PyQt6.QtGui import QFont
-import sys
-import os
 from pathlib import Path
+import os
+import sys
 
+# Add the main directory path to PYTHONPATH
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from API.user_data import UserData
 from custom_button import CustomButton
 from window_manager import WindowManager
-
-# Add the path of the 'Data-Acquisition' directory to the PYTHONPATH
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
-from user_data import UserData
 
 
 class DataEntryScreen:

@@ -14,19 +14,18 @@ Date
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QGridLayout, QStackedWidget, QMessageBox
 from PyQt6.QtGui import QGuiApplication, QPixmap, QFont
-import sys
-import os
 import ctypes
 import psutil
 import pygetwindow as gw
 import time
+import os
+import sys
 
+# Add the main directory path to PYTHONPATH
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from API.exe_manager import ExeManager
 from custom_button import CustomButton
-
-# Add the directory 'API' path to PYTHONPATH
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'API'))
-
-from exe_manager import ExeManager
 
 
 # Constants for Windows messages
