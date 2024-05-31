@@ -120,7 +120,12 @@ GDH_repository/
 │   └── user_data.py
 │
 ├── Datat-Acquisition/
-│   ├── glove_data_acquisition.exe
+│   ├── docs/
+│   │   ├── html/   
+│   │   ├── latex/
+│   ├── CMakeLists.txt
+│   ├── gloves_data_acquisition.cpp
+│   ├── gloves_data_acquisition.exe
 │   └── SGCoreCpp.dll
 │
 ├── docs/
@@ -190,7 +195,7 @@ GDH_repository/
 └── requirements.txt
 ```
 - `API/` contains the classes for managing the executable file.
-- `Data-Acquisition/` contains the executable of the C++ script `glove_data_acquisition.exe` and the linked .dll file `SGCoreCpp.dll` of the libraries.
+- `Data-Acquisition/` contains the C++ script and its executable file to which the . dll  `SGCoreCpp.dll` file containing libraries is linked. Inside this folder we find the cmake file needed to create the executable from the file . cpp using the following command:  `cmake -S . -B build -DSGCORECPP_PATH="C:/Users/Username/Downloads/SenseGlove-API-1.4.0/SenseGlove-API-1.4.0/Core/SGCoreCpp" `. Inside this folder we find the docs folder which has two subfolders html and latex inside which is the documentation related to the script c++ in pdf and html.
 - `docs/` contains the HTML files related to the documentation and they are located inside the `build/` folder within the `html/` folder.
 - `GUI/` contains the classes for managing the GUI interface.
 - `prepare.bat` is a script for setting up the environment on Windows OS - at the moment it only installs the requirements.
