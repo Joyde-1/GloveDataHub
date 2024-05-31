@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+
+<html lang="Python" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GUI Module &#8212; GloveDataHub 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=afdf7161"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API Module" href="api.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-calibration_screen">
+<span id="gui-module"></span><h1>GUI Module<a class="headerlink" href="#module-calibration_screen" title="Link to this heading">¶</a></h1>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="date">
+<h2>Date<a class="headerlink" href="#date" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="calibration_screen.CalibrationScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">calibration_screen.</span></span><span class="sig-name descname"><span class="pre">CalibrationScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">main_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#window_manager.WindowManager" title="window_manager.WindowManager"><span class="pre">WindowManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calibration_screen.CalibrationScreen" title="Link to this definition">¶</a></dt>
+<dd><p>Class representing the calibration screen.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="calibration_screen.CalibrationScreen.is_first_time">
+<span class="sig-name descname"><span class="pre">is_first_time</span></span><a class="headerlink" href="#calibration_screen.CalibrationScreen.is_first_time" title="Link to this definition">¶</a></dt>
+<dd><p>Indicates whether it's the first time the screen is being displayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="calibration_screen.CalibrationScreen.is_data_acquired">
+<span class="sig-name descname"><span class="pre">is_data_acquired</span></span><a class="headerlink" href="#calibration_screen.CalibrationScreen.is_data_acquired" title="Link to this definition">¶</a></dt>
+<dd><p>Indicates whether the data has been acquired.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="calibration_screen.CalibrationScreen.calibration_panel">
+<span class="sig-name descname"><span class="pre">calibration_panel</span></span><a class="headerlink" href="#calibration_screen.CalibrationScreen.calibration_panel" title="Link to this definition">¶</a></dt>
+<dd><p>The main widget for the calibration screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="calibration_screen.CalibrationScreen.calibration_screen">
+<span class="sig-name descname"><span class="pre">calibration_screen</span></span><a class="headerlink" href="#calibration_screen.CalibrationScreen.calibration_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Set the calibration screen when 'Back' button is clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#calibration_screen.CalibrationScreen" title="calibration_screen.CalibrationScreen">CalibrationScreen</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="calibration_screen.CalibrationScreen.data_entry_screen">
+<span class="sig-name descname"><span class="pre">data_entry_screen</span></span><a class="headerlink" href="#calibration_screen.CalibrationScreen.data_entry_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Set the data entry screen when 'Next' button is clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#data_entry_screen.DataEntryScreen" title="data_entry_screen.DataEntryScreen">DataEntryScreen</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="calibration_screen.CalibrationScreen.set_calibration_screen">
+<span class="sig-name descname"><span class="pre">set_calibration_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calibration_screen.CalibrationScreen.set_calibration_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Sets up the calibration screen.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="module-custom_button">
+<span id="id1"></span><h2>Authors<a class="headerlink" href="#module-custom_button" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="id2">
+<h2>Date<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="custom_button.CustomButton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">custom_button.</span></span><span class="sig-name descname"><span class="pre">CustomButton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">font_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton" title="Link to this definition">¶</a></dt>
+<dd><p>CustomButton class inherits from QPushButton and implements a button widget with dynamic styles for different states.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.action_cancel">
+<span class="sig-name descname"><span class="pre">action_cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.action_cancel" title="Link to this definition">¶</a></dt>
+<dd><p>Action performed when the button is clicked.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.action_next">
+<span class="sig-name descname"><span class="pre">action_next</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.action_next" title="Link to this definition">¶</a></dt>
+<dd><p>Action performed when the button is clicked.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.enterEvent">
+<span class="sig-name descname"><span class="pre">enterEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.enterEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Event handler for when the mouse enters the button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.hover_style">
+<span class="sig-name descname"><span class="pre">hover_style</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.hover_style" title="Link to this definition">¶</a></dt>
+<dd><p>Defines the CSS style for the hover state of the button.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CSS style for the hover state.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.leaveEvent">
+<span class="sig-name descname"><span class="pre">leaveEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.leaveEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Event handler for when the mouse leaves the button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.mousePressEvent">
+<span class="sig-name descname"><span class="pre">mousePressEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.mousePressEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Event handler for mouse press event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.mouseReleaseEvent">
+<span class="sig-name descname"><span class="pre">mouseReleaseEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.mouseReleaseEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Event handler for mouse release event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.normal_style">
+<span class="sig-name descname"><span class="pre">normal_style</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.normal_style" title="Link to this definition">¶</a></dt>
+<dd><p>Defines the CSS style for the normal state of the button.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CSS style for the normal state.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="custom_button.CustomButton.pressed_style">
+<span class="sig-name descname"><span class="pre">pressed_style</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#custom_button.CustomButton.pressed_style" title="Link to this definition">¶</a></dt>
+<dd><p>Defines the CSS style for the pressed state of the button.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CSS style for the pressed state.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="module-data_acquisition_screen">
+<span id="id3"></span><h2>Authors<a class="headerlink" href="#module-data_acquisition_screen" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="id4">
+<h2>Date<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_acquisition_screen.</span></span><span class="sig-name descname"><span class="pre">DataAcquisitionScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">main_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#window_manager.WindowManager" title="window_manager.WindowManager"><span class="pre">WindowManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UserData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen" title="Link to this definition">¶</a></dt>
+<dd><p>DataAcquisitionScreen class manages the data acquisition process.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.is_first_time">
+<span class="sig-name descname"><span class="pre">is_first_time</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.is_first_time" title="Link to this definition">¶</a></dt>
+<dd><p>Flag indicating if it's the first time setting up the screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.description1_text">
+<span class="sig-name descname"><span class="pre">description1_text</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.description1_text" title="Link to this definition">¶</a></dt>
+<dd><p>Dynamic description in the top of the panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str (class attribute):</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.description1_label">
+<span class="sig-name descname"><span class="pre">description1_label</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.description1_label" title="Link to this definition">¶</a></dt>
+<dd><p>Dynamic label in the top of the panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLabel (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.description2_text">
+<span class="sig-name descname"><span class="pre">description2_text</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.description2_text" title="Link to this definition">¶</a></dt>
+<dd><p>Dynamic description in the bottom of the panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.description2_label">
+<span class="sig-name descname"><span class="pre">description2_label</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.description2_label" title="Link to this definition">¶</a></dt>
+<dd><p>Dynamic label in the bottom of the panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLabel (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.duration_entry">
+<span class="sig-name descname"><span class="pre">duration_entry</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.duration_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Field for entering the measurement duration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLineEdit (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.duration_widget">
+<span class="sig-name descname"><span class="pre">duration_widget</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.duration_widget" title="Link to this definition">¶</a></dt>
+<dd><p>Widget for entering the measurement duration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.timer_display">
+<span class="sig-name descname"><span class="pre">timer_display</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.timer_display" title="Link to this definition">¶</a></dt>
+<dd><p>Widget for displaying the elapsed time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLabel (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.duration_time">
+<span class="sig-name descname"><span class="pre">duration_time</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.duration_time" title="Link to this definition">¶</a></dt>
+<dd><p>Istance of DurationTime for manage duration time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api.html#duration_time.DurationTime" title="duration_time.DurationTime">DurationTime</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.exe_manager">
+<span class="sig-name descname"><span class="pre">exe_manager</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.exe_manager" title="Link to this definition">¶</a></dt>
+<dd><p>An instance of the ExeManager class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api.html#exe_manager.ExeManager" title="exe_manager.ExeManager">ExeManager</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.data_acquisition_panel">
+<span class="sig-name descname"><span class="pre">data_acquisition_panel</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.data_acquisition_panel" title="Link to this definition">¶</a></dt>
+<dd><p>Panel containing all widgets for data acquisition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.data_acquisition_layout">
+<span class="sig-name descname"><span class="pre">data_acquisition_layout</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.data_acquisition_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Dynamic data acquisition layout</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QVBoxLayout (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.back_button">
+<span class="sig-name descname"><span class="pre">back_button</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.back_button" title="Link to this definition">¶</a></dt>
+<dd><p>Button for navigating to the previous screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#custom_button.CustomButton" title="custom_button.CustomButton">CustomButton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.measurement_button">
+<span class="sig-name descname"><span class="pre">measurement_button</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.measurement_button" title="Link to this definition">¶</a></dt>
+<dd><p>Button for starting/stopping/restarting the measurement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#custom_button.CustomButton" title="custom_button.CustomButton">CustomButton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.next_button">
+<span class="sig-name descname"><span class="pre">next_button</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.next_button" title="Link to this definition">¶</a></dt>
+<dd><p>Button for navigating to the next screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#custom_button.CustomButton" title="custom_button.CustomButton">CustomButton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.buttons_layout">
+<span class="sig-name descname"><span class="pre">buttons_layout</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.buttons_layout" title="Link to this definition">¶</a></dt>
+<dd><p>The dybamic buttons layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QHBoxLayout</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.timer">
+<span class="sig-name descname"><span class="pre">timer</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.timer" title="Link to this definition">¶</a></dt>
+<dd><p>Timer for tracking the measurement duration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QTimer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.elapsed_time">
+<span class="sig-name descname"><span class="pre">elapsed_time</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.elapsed_time" title="Link to this definition">¶</a></dt>
+<dd><p>Time elapsed since the start of measurement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.path_to_csv">
+<span class="sig-name descname"><span class="pre">path_to_csv</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.path_to_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Path to the CSV file for saving measurement data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.time_to_reach">
+<span class="sig-name descname"><span class="pre">time_to_reach</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.time_to_reach" title="Link to this definition">¶</a></dt>
+<dd><p>Usefull to show the remaining time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.fields_errors">
+<span class="sig-name descname"><span class="pre">fields_errors</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.fields_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Errors messages related to the duration field or SenseCom widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.script_return_code">
+<span class="sig-name descname"><span class="pre">script_return_code</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.script_return_code" title="Link to this definition">¶</a></dt>
+<dd><p>The return code of the script to acquire data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.data_entry_screen">
+<span class="sig-name descname"><span class="pre">data_entry_screen</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.data_entry_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Set the data entry screen when 'Back' button is clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#data_entry_screen.DataEntryScreen" title="data_entry_screen.DataEntryScreen">DataEntryScreen</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.final_screen">
+<span class="sig-name descname"><span class="pre">final_screen</span></span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.final_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Set the final screen when 'Next' button is clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#final_screen.FinalScreen" title="final_screen.FinalScreen">FinalScreen</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_acquisition_screen.DataAcquisitionScreen.set_data_acquisition_screen">
+<span class="sig-name descname"><span class="pre">set_data_acquisition_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#data_acquisition_screen.DataAcquisitionScreen.set_data_acquisition_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Sets up the data acquisition screen.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="module-data_entry_screen">
+<span id="id5"></span><h2>Authors<a class="headerlink" href="#module-data_entry_screen" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="id6">
+<h2>Date<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">data_entry_screen.</span></span><span class="sig-name descname"><span class="pre">DataEntryScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">main_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#window_manager.WindowManager" title="window_manager.WindowManager"><span class="pre">WindowManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_entry_screen.DataEntryScreen" title="Link to this definition">¶</a></dt>
+<dd><p>Represents the data entry screen of the application.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.is_first_time">
+<span class="sig-name descname"><span class="pre">is_first_time</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.is_first_time" title="Link to this definition">¶</a></dt>
+<dd><p>Indicates if it's the first time the screen is being displayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.first_name_entry">
+<span class="sig-name descname"><span class="pre">first_name_entry</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.first_name_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Entry field for the first name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLineEdit (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.last_name_entry">
+<span class="sig-name descname"><span class="pre">last_name_entry</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.last_name_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Entry field for the last name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLineEdit (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.code_entry">
+<span class="sig-name descname"><span class="pre">code_entry</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.code_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Entry field for the 4-digit code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLineEdit (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.path_directory_entry">
+<span class="sig-name descname"><span class="pre">path_directory_entry</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.path_directory_entry" title="Link to this definition">¶</a></dt>
+<dd><p>Entry field for the path directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QLineEdit (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.user_data">
+<span class="sig-name descname"><span class="pre">user_data</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.user_data" title="Link to this definition">¶</a></dt>
+<dd><p>Instance of UserData for managing user data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api.html#user_data.UserData" title="user_data.UserData">UserData</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.data_entry_panel">
+<span class="sig-name descname"><span class="pre">data_entry_panel</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.data_entry_panel" title="Link to this definition">¶</a></dt>
+<dd><p>Panel used to contain the all widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.data_entry_layout">
+<span class="sig-name descname"><span class="pre">data_entry_layout</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.data_entry_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Layout used for the widgets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QVBoxLayout (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.fields_errors">
+<span class="sig-name descname"><span class="pre">fields_errors</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.fields_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Fields used for the errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.info_message">
+<span class="sig-name descname"><span class="pre">info_message</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.info_message" title="Link to this definition">¶</a></dt>
+<dd><p>Contains the message that is shown to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.calibration_screen">
+<span class="sig-name descname"><span class="pre">calibration_screen</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.calibration_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Instance used to create the CalibrationScreen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#calibration_screen.CalibrationScreen" title="calibration_screen.CalibrationScreen">CalibrationScreen</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.data_acquisition_screen">
+<span class="sig-name descname"><span class="pre">data_acquisition_screen</span></span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.data_acquisition_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Instance used to create the DataAcqusitionScreen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataAcqusitionScreen (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="data_entry_screen.DataEntryScreen.set_data_entry_screen">
+<span class="sig-name descname"><span class="pre">set_data_entry_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#data_entry_screen.DataEntryScreen.set_data_entry_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Sets up the data entry screen.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="module-final_screen">
+<span id="id7"></span><h2>Authors<a class="headerlink" href="#module-final_screen" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="id8">
+<h2>Date<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_screen.FinalScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_screen.</span></span><span class="sig-name descname"><span class="pre">FinalScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">main_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#window_manager.WindowManager" title="window_manager.WindowManager"><span class="pre">WindowManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#final_screen.FinalScreen" title="Link to this definition">¶</a></dt>
+<dd><p>Represents the final screen of the application, displayed after the measurement process.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_screen.FinalScreen.is_first_time">
+<span class="sig-name descname"><span class="pre">is_first_time</span></span><a class="headerlink" href="#final_screen.FinalScreen.is_first_time" title="Link to this definition">¶</a></dt>
+<dd><p>A flag to indicate if it's the first time setting up the final screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_screen.FinalScreen.main_window">
+<span class="sig-name descname"><span class="pre">main_window</span></span><a class="headerlink" href="#final_screen.FinalScreen.main_window" title="Link to this definition">¶</a></dt>
+<dd><p>Instance of WindowManager for managing the main window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#window_manager.WindowManager" title="window_manager.WindowManager">WindowManager</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_screen.FinalScreen.final_screen_panel">
+<span class="sig-name descname"><span class="pre">final_screen_panel</span></span><a class="headerlink" href="#final_screen.FinalScreen.final_screen_panel" title="Link to this definition">¶</a></dt>
+<dd><p>Panel to contain all widgets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_screen.FinalScreen.final_screen_layout">
+<span class="sig-name descname"><span class="pre">final_screen_layout</span></span><a class="headerlink" href="#final_screen.FinalScreen.final_screen_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Layout of th final screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QVBoxLayout (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="final_screen.FinalScreen.set_final_screen">
+<span class="sig-name descname"><span class="pre">set_final_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#final_screen.FinalScreen.set_final_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Sets up the final screen of the application.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="module-gui_main">
+<span id="id9"></span><h2>Authors<a class="headerlink" href="#module-gui_main" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="id10">
+<h2>Date<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<section id="module-welcome_screen">
+<span id="id11"></span><h2>Authors<a class="headerlink" href="#module-welcome_screen" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="id12">
+<h2>Date<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="welcome_screen.WelcomeScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">welcome_screen.</span></span><span class="sig-name descname"><span class="pre">WelcomeScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">main_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#window_manager.WindowManager" title="window_manager.WindowManager"><span class="pre">WindowManager</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#welcome_screen.WelcomeScreen" title="Link to this definition">¶</a></dt>
+<dd><p>Class to manage the welcome screen of the application.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="welcome_screen.WelcomeScreen.is_first_time">
+<span class="sig-name descname"><span class="pre">is_first_time</span></span><a class="headerlink" href="#welcome_screen.WelcomeScreen.is_first_time" title="Link to this definition">¶</a></dt>
+<dd><p>Flag to indicate if it's the first time the welcome screen is being set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="welcome_screen.WelcomeScreen.welcome_panel">
+<span class="sig-name descname"><span class="pre">welcome_panel</span></span><a class="headerlink" href="#welcome_screen.WelcomeScreen.welcome_panel" title="Link to this definition">¶</a></dt>
+<dd><p>The main widget for the welcome screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="welcome_screen.WelcomeScreen.calibration_screen">
+<span class="sig-name descname"><span class="pre">calibration_screen</span></span><a class="headerlink" href="#welcome_screen.WelcomeScreen.calibration_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Set the calibration screen when 'Next' button is clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#calibration_screen.CalibrationScreen" title="calibration_screen.CalibrationScreen">CalibrationScreen</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="welcome_screen.WelcomeScreen.set_welcome_screen">
+<span class="sig-name descname"><span class="pre">set_welcome_screen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#welcome_screen.WelcomeScreen.set_welcome_screen" title="Link to this definition">¶</a></dt>
+<dd><p>Set up and display the welcome screen.</p>
+</dd></dl>
+
+</dd></dl>
+
+<section id="module-window_manager">
+<span id="id13"></span><h2>Authors<a class="headerlink" href="#module-window_manager" title="Link to this heading">¶</a></h2>
+<p>Giovanni Fanara
+Alfredo Gioacchino MariaPio Vecchio</p>
+</section>
+<section id="id14">
+<h2>Date<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<p>2024-05-30</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="window_manager.WindowManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">window_manager.</span></span><span class="sig-name descname"><span class="pre">WindowManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ghd_logo_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kore_logo_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frontground</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_font</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager" title="Link to this definition">¶</a></dt>
+<dd><p>Class to manage the main window of the application.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.is_sensecom_layout">
+<span class="sig-name descname"><span class="pre">is_sensecom_layout</span></span><a class="headerlink" href="#window_manager.WindowManager.is_sensecom_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Flag to indicate whether the SenseCom layout is currently displayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool (class attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.main_layout">
+<span class="sig-name descname"><span class="pre">main_layout</span></span><a class="headerlink" href="#window_manager.WindowManager.main_layout" title="Link to this definition">¶</a></dt>
+<dd><p>The main layout of the window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QVBoxLayout (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.content_layout">
+<span class="sig-name descname"><span class="pre">content_layout</span></span><a class="headerlink" href="#window_manager.WindowManager.content_layout" title="Link to this definition">¶</a></dt>
+<dd><p>The main window content layout</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QGridLayout (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.stacked_content">
+<span class="sig-name descname"><span class="pre">stacked_content</span></span><a class="headerlink" href="#window_manager.WindowManager.stacked_content" title="Link to this definition">¶</a></dt>
+<dd><p>The dynamic screen on content layout</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QStackedWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.buttons_layout">
+<span class="sig-name descname"><span class="pre">buttons_layout</span></span><a class="headerlink" href="#window_manager.WindowManager.buttons_layout" title="Link to this definition">¶</a></dt>
+<dd><p>The main window buttons layout</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QHBoxLayout (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.sensecom_widget">
+<span class="sig-name descname"><span class="pre">sensecom_widget</span></span><a class="headerlink" href="#window_manager.WindowManager.sensecom_widget" title="Link to this definition">¶</a></dt>
+<dd><p>The SenseCom widget where the layout is setted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.sensecom_container">
+<span class="sig-name descname"><span class="pre">sensecom_container</span></span><a class="headerlink" href="#window_manager.WindowManager.sensecom_container" title="Link to this definition">¶</a></dt>
+<dd><p>The SenseCom container in the GUI</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QWidget (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.sensecom_layout">
+<span class="sig-name descname"><span class="pre">sensecom_layout</span></span><a class="headerlink" href="#window_manager.WindowManager.sensecom_layout" title="Link to this definition">¶</a></dt>
+<dd><p>The SenseCom layout</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QVBoxLayout (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.sensecom_button">
+<span class="sig-name descname"><span class="pre">sensecom_button</span></span><a class="headerlink" href="#window_manager.WindowManager.sensecom_button" title="Link to this definition">¶</a></dt>
+<dd><p>The 'Start SenseCom' button</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#custom_button.CustomButton" title="custom_button.CustomButton">CustomButton</a> (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="window_manager.WindowManager.timer">
+<span class="sig-name descname"><span class="pre">timer</span></span><a class="headerlink" href="#window_manager.WindowManager.timer" title="Link to this definition">¶</a></dt>
+<dd><p>The timer to check the SenseCom API status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QTimer (istance attribute)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.add_button">
+<span class="sig-name descname"><span class="pre">add_button</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">button</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.add_button" title="Link to this definition">¶</a></dt>
+<dd><p>Add a button to the button layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>button</strong> -- The button to add.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.add_content_widget">
+<span class="sig-name descname"><span class="pre">add_content_widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.add_content_widget" title="Link to this definition">¶</a></dt>
+<dd><p>Add a widget to the content layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>widget</strong> -- The widget to add.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.clear_buttons_layout">
+<span class="sig-name descname"><span class="pre">clear_buttons_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.clear_buttons_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Clear the buttons layout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.clear_sensecom_layout">
+<span class="sig-name descname"><span class="pre">clear_sensecom_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.clear_sensecom_layout" title="Link to this definition">¶</a></dt>
+<dd><p>Clear the SenseCom layout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.closeEvent">
+<span class="sig-name descname"><span class="pre">closeEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.closeEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Handle the close event of the window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.close_sensecom_widget">
+<span class="sig-name descname"><span class="pre">close_sensecom_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.close_sensecom_widget" title="Link to this definition">¶</a></dt>
+<dd><p>Close the SenseCom widget.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.create_sensecom_widget">
+<span class="sig-name descname"><span class="pre">create_sensecom_widget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.create_sensecom_widget" title="Link to this definition">¶</a></dt>
+<dd><p>Create the SenseCom widget.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="window_manager.WindowManager.show_content_widget">
+<span class="sig-name descname"><span class="pre">show_content_widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.WindowManager.show_content_widget" title="Link to this definition">¶</a></dt>
+<dd><p>Show the next or previous content widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>direction</strong> (<em>str</em>) -- The direction to navigate ('Next' or 'Back').</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="window_manager.window_proc">
+<span class="sig-prename descclassname"><span class="pre">window_manager.</span></span><span class="sig-name descname"><span class="pre">window_proc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hwnd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wparam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lparam</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#window_manager.window_proc" title="Link to this definition">¶</a></dt>
+<dd><p>Callback function to handle window messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hwnd</strong> (<em>int</em>) -- The handle to the window.</p></li>
+<li><p><strong>msg</strong> (<em>int</em>) -- The message identifier.</p></li>
+<li><p><strong>wparam</strong> (<em>int</em>) -- Additional message information.</p></li>
+<li><p><strong>lparam</strong> (<em>int</em>) -- Additional message information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the message processing and the action taken.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/GDH.ico" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">GloveDataHub</a></h1>
+
+
+
+<p class="blurb">GloveDataHub documentation</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GUI Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#date">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calibration_screen.CalibrationScreen"><code class="docutils literal notranslate"><span class="pre">CalibrationScreen</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-custom_button">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom_button.CustomButton"><code class="docutils literal notranslate"><span class="pre">CustomButton</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_acquisition_screen">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_acquisition_screen.DataAcquisitionScreen"><code class="docutils literal notranslate"><span class="pre">DataAcquisitionScreen</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-data_entry_screen">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data_entry_screen.DataEntryScreen"><code class="docutils literal notranslate"><span class="pre">DataEntryScreen</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-final_screen">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#final_screen.FinalScreen"><code class="docutils literal notranslate"><span class="pre">FinalScreen</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gui_main">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-welcome_screen">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#welcome_screen.WelcomeScreen"><code class="docutils literal notranslate"><span class="pre">WelcomeScreen</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-window_manager">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">Date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#window_manager.WindowManager"><code class="docutils literal notranslate"><span class="pre">WindowManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#window_manager.window_proc"><code class="docutils literal notranslate"><span class="pre">window_proc()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api.html" title="previous chapter">API Module</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/gui.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

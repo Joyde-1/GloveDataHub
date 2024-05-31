@@ -38,14 +38,17 @@ html_static_path = ['_static']
 napoleon_google_docstring = False
 napoleon_numpy_docstring = True
 
-""" templates_path = ['_templates']
-exclude_patterns = []
- """
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-""" html_theme = 'alabaster'
-html_static_path = ['_static']
- """
+
+# Logo configuration
+html_logo = "_static/GDH.ico"
+
+# Specific options for alabasyer theme
+html_theme_options = {
+    'logo': '',
+    'logo_name': True,
+    'description': 'GloveDataHub documentation',
+}
