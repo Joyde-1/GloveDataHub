@@ -13,14 +13,10 @@ Date
 
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QFont
-import os
 import sys
 
 from window_manager import WindowManager
 from welcome_screen import WelcomeScreen
-
-# Add the main directory path to PYTHONPATH
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 
 if __name__ == "__main__":
@@ -37,7 +33,8 @@ if __name__ == "__main__":
         'window_title': "GloveDataHub", 
         'window_width': 1040, 
         'window_height': 670,
-        'background': '#E0DED3',
+        #'background': '#E0DED3',
+        'background': '#9AB0B8',
         'frontground': '#026192',
         'header_title': "GloveDataHub",
         'header_font': QFont("Raleway", 24, QFont.Weight.Bold)

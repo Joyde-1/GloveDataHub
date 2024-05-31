@@ -214,7 +214,7 @@ class WindowManager(QWidget):
         
         header_widget.setLayout(header_layout)
         
-        header_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
+        header_widget.setStyleSheet("background-color: #516B79; border-radius: 15px;")
         
         # Aggiungi l'header layout alla parte superiore del layout principale
         self.main_layout.addWidget(header_widget)
@@ -272,7 +272,7 @@ class WindowManager(QWidget):
         self.content_layout = QGridLayout()
         self.stacked_content = QStackedWidget()
         
-        self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
+        self.stacked_content.setStyleSheet("background-color: #ACBEC8; border-radius: 15px;")
         
         self.content_layout.addWidget(self.stacked_content)
         
@@ -337,7 +337,7 @@ class WindowManager(QWidget):
             
             # Hide SenseCom Widget
             self.sensecom_widget.hide()
-            self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; margin: 0px;")
+            self.stacked_content.setStyleSheet("background-color: #ACBEC8; border-radius: 15px; margin: 0px;")
             self.stacked_content.setFixedSize(998, 426)
             
             self.content_layout.setVerticalSpacing(0)
@@ -346,7 +346,7 @@ class WindowManager(QWidget):
         else:
             # If the next screen is calibration, data entry or data acquistion screen:
             
-            self.stacked_content.setStyleSheet("background-color: #FFFCF0; border-radius: 15px;")
+            self.stacked_content.setStyleSheet("background-color: #ACBEC8; border-radius: 15px;")
             self.stacked_content.setFixedSize(430, 426)
             
             self.content_layout.addWidget(self.stacked_content, 0, 0, 3, 2, Qt.AlignmentFlag.AlignLeft)
@@ -383,7 +383,7 @@ class WindowManager(QWidget):
         
         self.sensecom_widget = QWidget()
         
-        self.sensecom_widget.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
+        self.sensecom_widget.setStyleSheet("background-color: #516B79; border-radius: 15px; padding: 10px")
         self.sensecom_widget.setFixedSize(548, 426)
         
         # Add a layout for sensecom
@@ -394,7 +394,7 @@ class WindowManager(QWidget):
         sensecom_title.setWordWrap(True)
         sensecom_title.setFont(QFont("Montserrat", 16, QFont.Weight.Bold))
         sensecom_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        sensecom_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        sensecom_title.setStyleSheet("color: #FDFDFD; background-color: #1D3551; border-radius: 15px; margin: 10px 10px 10px 10px;")
         
         # Container for SenseCom
         self.sensecom_container = QWidget()
