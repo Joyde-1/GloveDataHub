@@ -454,8 +454,8 @@ class WindowManager(QWidget):
         # If SenseCom was opened outside the GUI, embed it into the GUI
         if sensecom_process != None and not self.exe_manager.is_sensecom_running():
             
-            # Start SenseCom API
-            self.exe_manager.start_sensecom()
+            # Set SenseCom psutil process in executable manager
+            self.exe_manager.set_sensecom_process(sensecom_process)
             
             # Embed SenseCom into the GUI
             QTimer.singleShot(2500, self._embed_sensecom_window)
