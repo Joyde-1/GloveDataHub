@@ -76,7 +76,7 @@ class CalibrationScreen():
         
         # Create a panel to contain all the widgets
         self.calibration_panel = QWidget()
-        self.calibration_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
+        self.calibration_panel.setStyleSheet("background-color: #CFDCE6; border-radius: 15px; padding: 10px")
         calibration_layout = QVBoxLayout(self.calibration_panel)
         
         # Calibration screen title
@@ -84,7 +84,7 @@ class CalibrationScreen():
         calibration_title.setWordWrap(True)
         calibration_title.setFont(QFont("Montserrat", 16, QFont.Weight.Bold))
         calibration_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        calibration_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        calibration_title.setStyleSheet("color: #FFFFFF; background-color: #026192; border-radius: 15px; margin: 10px 10px 10px 10px;")
         
         calibration_layout.addWidget(calibration_title)
         
@@ -103,7 +103,7 @@ class CalibrationScreen():
         description_label = QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QFont("Source Sans Pro", 14))
-        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px;")
+        description_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px;")
 
         description_layout = QVBoxLayout()
         

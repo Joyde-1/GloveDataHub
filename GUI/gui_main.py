@@ -33,8 +33,7 @@ if __name__ == "__main__":
         'window_title': "GloveDataHub", 
         'window_width': 1040, 
         'window_height': 670,
-        #'background': '#E0DED3',
-        'background': '#9AB0B8',
+        'background': '#617B89',
         'frontground': '#026192',
         'header_title': "GloveDataHub",
         'header_font': QFont("Raleway", 24, QFont.Weight.Bold)

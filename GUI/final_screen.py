@@ -70,13 +70,13 @@ class FinalScreen:
 
         # Create a panel to contain all widgets
         self.final_screen_panel = QWidget()
-        self.final_screen_panel.setStyleSheet("background-color: #FFFCF0;")
+        self.final_screen_panel.setStyleSheet("background-color: #CFDCE6;")
         self.final_screen_layout = QVBoxLayout(self.final_screen_panel)
         
         # Welcome title
         final_screen_label = QLabel("Thanks for using GloveDataHub!")
         final_screen_label.setFont(QFont("Montserrat", 20, QFont.Weight.Bold))
-        final_screen_label.setStyleSheet("color: #023E58; background-color: #FFFCF0; padding: 20px 0px 30px 20px;")
+        final_screen_label.setStyleSheet("color: #023E58; background-color: #CFDCE6; padding: 20px 0px 30px 20px;")
         final_screen_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         
         self.final_screen_layout.addWidget(final_screen_label)
@@ -89,7 +89,7 @@ class FinalScreen:
         description_label = QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QFont("Source Sans Pro", 16))
-        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
+        description_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px 20px 40px 20px;")
         
         self.final_screen_layout.addWidget(description_label)
         
@@ -186,12 +186,12 @@ class FinalScreen:
 
         # Update the description label
         DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
-        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
+        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
         
         # Clear the duration entry field
         DataAcquisitionScreen.duration_entry.setText("")
         
-        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; padding: 0px 0px 10px 5px;")
+        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #B1BCC4; padding: 0px 0px 10px 5px;")
         
         # Hide the timer display
         DataAcquisitionScreen.timer_display.hide()
@@ -203,7 +203,7 @@ class FinalScreen:
         )
 
         DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
-        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
+        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #CFDCE6; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
         
     def _close_application(self):
         """

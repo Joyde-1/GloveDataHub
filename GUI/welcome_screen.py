@@ -67,13 +67,13 @@ class WelcomeScreen:
         
         # Create a panel to contain all widgets
         self.welcome_panel = QWidget()
-        self.welcome_panel.setStyleSheet("background-color: #FFFCF0;")
+        self.welcome_panel.setStyleSheet("background-color: #CFDCE6;")
         welcome_layout = QVBoxLayout(self.welcome_panel)
         
         # Welcome title
         welcome_label = QLabel("Welcome to GloveDataHub!")
         welcome_label.setFont(QFont("Montserrat", 20, QFont.Weight.Bold))
-        welcome_label.setStyleSheet("color: #023E58; background-color: #FFFCF0; padding: 20px 0px 40px 20px;")
+        welcome_label.setStyleSheet("color: #023E58; background-color: #CFDCE6; padding: 20px 0px 40px 20px;")
         
         welcome_layout.addWidget(welcome_label)
         
@@ -85,7 +85,7 @@ class WelcomeScreen:
         description_label = QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QFont("Source Sans Pro", 16))
-        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
+        description_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px 20px 40px 20px;")
         
         description_layout = QVBoxLayout()
         description_layout.addWidget(description_label)
@@ -95,20 +95,20 @@ class WelcomeScreen:
         # Step 1 to be performed
         step1_text = "1 • Calibration of haptic gloves"
         step1_label = QLabel(step1_text)
-        step1_label.setFont(QFont("Source Sans Pro", 16))
-        step1_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
+        step1_label.setFont(QFont("Source Sans Pro", 16, QFont.Weight.Bold))
+        step1_label.setStyleSheet("color: #025885; background-color: #CFDCE6; padding: 0px 20px 40px 20px;")
 
         # Step 2 to be performed
         step2_text = "2 • Entering user data"
         step2_label = QLabel(step2_text)
-        step2_label.setFont(QFont("Source Sans Pro", 16))
-        step2_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 40px 20px;")
+        step2_label.setFont(QFont("Source Sans Pro", 16, QFont.Weight.Bold))
+        step2_label.setStyleSheet("color: #025885; background-color: #CFDCE6; padding: 0px 20px 40px 20px;")
         
         # Step 3 to be performed
         step3_text = "3 • Data acquisition"
         step3_label = QLabel(step3_text)
-        step3_label.setFont(QFont("Source Sans Pro", 16))
-        step3_label.setStyleSheet("color: #025885; background-color: #FFFCF0; padding: 0px 20px 0px 20px;")
+        step3_label.setFont(QFont("Source Sans Pro", 16, QFont.Weight.Bold))
+        step3_label.setStyleSheet("color: #025885; background-color: #CFDCE6; padding: 0px 20px 0px 20px;")
         
         steps_layout = QVBoxLayout()
         

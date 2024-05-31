@@ -137,7 +137,7 @@ class DataAcquisitionScreen:
         
         # Create a panel to contain all widgets
         self.data_acquisition_panel = QWidget()
-        self.data_acquisition_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
+        self.data_acquisition_panel.setStyleSheet("background-color: #CFDCE6; border-radius: 15px; padding: 10px")
         self.data_acquisition_layout = QVBoxLayout(self.data_acquisition_panel)
 
         # Data acquistion title
@@ -145,7 +145,7 @@ class DataAcquisitionScreen:
         data_acquisition_title.setWordWrap(True)
         data_acquisition_title.setFont(QFont("Montserrat", 16, QFont.Weight.Bold))
         data_acquisition_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        data_acquisition_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        data_acquisition_title.setStyleSheet("color: #FFFFFF; background-color: #026192; border-radius: 15px; margin: 10px 10px 10px 10px;")
         
         self.data_acquisition_layout.addWidget(data_acquisition_title)
 
@@ -160,20 +160,20 @@ class DataAcquisitionScreen:
         DataAcquisitionScreen.description1_label = QLabel(DataAcquisitionScreen.description1_text)
         DataAcquisitionScreen.description1_label.setWordWrap(True)
         DataAcquisitionScreen.description1_label.setFont(QFont("Source Sans Pro", 14))
-        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
+        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
         
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.description1_label)
 
         # Widget for duration
         duration_label = QLabel("<b>Duration</b> (in minutes):")
         duration_label.setFont(QFont("Source Sans Pro", 16))
-        duration_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
+        duration_label.setStyleSheet("color: #025885; background-color: #CFDCE6; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
         
         # Field for duration
         DataAcquisitionScreen.duration_entry = QLineEdit()
         DataAcquisitionScreen.duration_entry.setFont(QFont("Georgia", 14))
         DataAcquisitionScreen.duration_entry.setFixedSize(90, 35)
-        DataAcquisitionScreen.duration_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
+        DataAcquisitionScreen.duration_entry.setStyleSheet("color: #031729; background-color: #FFFFFF; border-radius: 8px; border: 2px solid #BAC6CF; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
         
         # Layout for duration
         duration_layout = QVBoxLayout()
@@ -196,7 +196,7 @@ class DataAcquisitionScreen:
         DataAcquisitionScreen.timer_display.setFont(QFont("DSEG", 16))
         DataAcquisitionScreen.timer_display.setFixedWidth(305)
         DataAcquisitionScreen.timer_display.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 10px; padding: 5px;")
+        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #B1BCC4; border-radius: 10px; margin: 10px; padding: 5px;")
         
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.timer_display, alignment=Qt.AlignmentFlag.AlignCenter)
         
@@ -211,7 +211,7 @@ class DataAcquisitionScreen:
         DataAcquisitionScreen.description2_label = QLabel(DataAcquisitionScreen.description2_text)
         DataAcquisitionScreen.description2_label.setWordWrap(True)
         DataAcquisitionScreen.description2_label.setFont(QFont("Source Sans Pro", 14))
-        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
+        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #CFDCE6; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
         
         self.data_acquisition_layout.addWidget(DataAcquisitionScreen.description2_label)
         
@@ -402,7 +402,7 @@ class DataAcquisitionScreen:
             # Hide duration widget
             DataAcquisitionScreen.duration_widget.hide()
             
-            DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 15px 10px 10px 10px; padding: 5px;")
+            DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #B1BCC4; border-radius: 10px; margin: 15px 10px 10px 10px; padding: 5px;")
             
             # Show timer display
             DataAcquisitionScreen.timer_display.show()
@@ -454,11 +454,11 @@ class DataAcquisitionScreen:
         )
         
         DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
-        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 0px 0px")
+        DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px 10px 0px 10px; margin: 0px 0px 0px 0px")
         
         DataAcquisitionScreen.duration_widget.show()
         
-        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 10px 10px 10px 10px; padding: 5px;")
+        DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #B1BCC4; border-radius: 10px; margin: 10px 10px 10px 10px; padding: 5px;")
         
         DataAcquisitionScreen.description2_text = (
             "If you want to repeat the measurement, press <br>"
@@ -467,7 +467,7 @@ class DataAcquisitionScreen:
         )
         
         DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
-        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 0px 0px 0px 0px; padding: 0px 10px 0px 10px;")
+        DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #CFDCE6; margin: 0px 0px 0px 0px; padding: 0px 10px 0px 10px;")
         
         self.next_button.show()
         
@@ -505,11 +505,11 @@ class DataAcquisitionScreen:
             )
             
             DataAcquisitionScreen.description1_label.setText(DataAcquisitionScreen.description1_text)
-            DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
+            DataAcquisitionScreen.description1_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px 10px 0px 10px; margin: 0px 0px 15px 0px")
             
             DataAcquisitionScreen.duration_widget.hide()
             
-            DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 10px; margin: 10px 10px 15px 10px; padding: 5px;")
+            DataAcquisitionScreen.timer_display.setStyleSheet("color: #023E58; background-color: #B1BCC4; border-radius: 10px; margin: 10px 10px 15px 10px; padding: 5px;")
             
             DataAcquisitionScreen.timer_display.show()
                         
@@ -520,7 +520,7 @@ class DataAcquisitionScreen:
             )
             
             DataAcquisitionScreen.description2_label.setText(DataAcquisitionScreen.description2_text)
-            DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #FFFCF0; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
+            DataAcquisitionScreen.description2_label.setStyleSheet("color: #031729; background-color: #CFDCE6; margin: 15px 0px 0px 0px; padding: 0px 10px 0px 10px;")
             
             self.measurement_button.setText("Stop")
             self.measurement_button.setFixedSize(120, 40)

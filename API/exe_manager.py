@@ -20,8 +20,6 @@ class ExeManager:
 
     Attributes
     ----------
-    sensecom_psutil_process : psutil.process (class attribute)
-        The sensecom process opened outside the API.
     sensecom_psutil_process : subprocess.Popen (class attribute)
         The sensecom process opened inside the API.
     script_process : subprocess.Popen (class attribute)
@@ -43,7 +41,7 @@ class ExeManager:
         Constructor, initialize ExeManager with default paths processes.
         """
         
-        self.path_script = "Data-Acquisition/glove_data_acquisition.exe"
+        self.path_script = "Data-Acquisition/gloves_data_acquisition.exe"
         self.path_sensecom = "C:/Program Files/SenseCom/SenseCom.exe"
         
         self.script_return_code = None

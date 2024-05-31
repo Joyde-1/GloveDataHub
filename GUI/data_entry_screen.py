@@ -107,7 +107,7 @@ class DataEntryScreen:
 
         # Create a panel to contain all the widgets
         self.data_entry_panel = QWidget()
-        self.data_entry_panel.setStyleSheet("background-color: #FFFCF0; border-radius: 15px; padding: 10px")
+        self.data_entry_panel.setStyleSheet("background-color: #CFDCE6; border-radius: 15px; padding: 10px")
         self.data_entry_layout = QVBoxLayout(self.data_entry_panel)
         
         # Title of the data entry section
@@ -115,7 +115,7 @@ class DataEntryScreen:
         data_entry_title.setWordWrap(True)
         data_entry_title.setFont(QFont("Montserrat", 16, QFont.Weight.Bold))
         data_entry_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        data_entry_title.setStyleSheet("color: #023E58; background-color: #D9E7EC; border-radius: 15px; margin: 10px 10px 10px 10px;")
+        data_entry_title.setStyleSheet("color: #FFFFFF; background-color: #026192; border-radius: 15px; margin: 10px 10px 10px 10px;")
         
         self.data_entry_layout.addWidget(data_entry_title)
         
@@ -128,7 +128,7 @@ class DataEntryScreen:
         description_label = QLabel(description_text)
         description_label.setWordWrap(True)
         description_label.setFont(QFont("Source Sans Pro", 14))
-        description_label.setStyleSheet("color: #031729; background-color: #FFFCF0; padding: 0px 10px 0px 10px;")
+        description_label.setStyleSheet("color: #031729; background-color: #CFDCE6; padding: 0px 10px 0px 10px;")
         
         self.data_entry_layout.addWidget(description_label)
         
@@ -138,14 +138,14 @@ class DataEntryScreen:
         # Widget for the name
         first_name_label = QLabel("<b>First Name</b>:")
         first_name_label.setFont(QFont("Source Sans Pro", 16))
-        first_name_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
+        first_name_label.setStyleSheet("color: #025885; background-color: #CFDCE6; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
         first_name_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         
         # Name field
         DataEntryScreen.first_name_entry = QLineEdit()
         DataEntryScreen.first_name_entry.setFont(QFont("Georgia", 14))
         DataEntryScreen.first_name_entry.setFixedSize(195, 35)
-        DataEntryScreen.first_name_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")  
+        DataEntryScreen.first_name_entry.setStyleSheet("color: #031729; background-color: #FFFFFF; border-radius: 8px; border: 2px solid #BAC6CF; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")  
 
         # First Name layout
         first_name_layout = QVBoxLayout() 
@@ -165,13 +165,13 @@ class DataEntryScreen:
         # Widget for the surname
         last_name_label = QLabel("<b>Last Name</b>:")
         last_name_label.setFont(QFont("Source Sans Pro", 16))
-        last_name_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 0px 0px 0px; padding: 0px 0px 5px 0px;")
+        last_name_label.setStyleSheet("color: #025885; background-color: #CFDCE6; margin: 0px 0px 0px 0px; padding: 0px 0px 5px 0px;")
         
         # Last name field
         DataEntryScreen.last_name_entry = QLineEdit()
         DataEntryScreen.last_name_entry.setFont(QFont("Georgia", 14))
         DataEntryScreen.last_name_entry.setFixedSize(195, 35)
-        DataEntryScreen.last_name_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
+        DataEntryScreen.last_name_entry.setStyleSheet("color: #031729; background-color: #FFFFFF; border-radius: 8px; border: 2px solid #BAC6CF; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
         
         # Last name layout
         last_name_layout = QVBoxLayout()
@@ -195,12 +195,12 @@ class DataEntryScreen:
         # Widget for the optional code
         code_label = QLabel("<b>4-digit Code</b>:")
         code_label.setFont(QFont("Source Sans Pro", 16))
-        code_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
+        code_label.setStyleSheet("color: #025885; background-color: #CFDCE6; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
         
         # Code field
         DataEntryScreen.code_entry = QLineEdit()
         DataEntryScreen.code_entry.setFont(QFont("Georgia", 14))
-        DataEntryScreen.code_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
+        DataEntryScreen.code_entry.setStyleSheet("color: #031729; background-color: #FFFFFF; border-radius: 8px; border: 2px solid #BAC6CF; margin: 0px 10px 0px 0px; padding: 5px 5px 5px 5px;")
         DataEntryScreen.code_entry.setFixedSize(90, 35)
         
         # Code layout
@@ -220,13 +220,13 @@ class DataEntryScreen:
         # Widget for the path
         path_directory_label = QLabel("<b>Path</b> (is required):")
         path_directory_label.setFont(QFont("Source Sans Pro", 16))
-        path_directory_label.setStyleSheet("color: #025885; background-color: #FFFCF0; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
+        path_directory_label.setStyleSheet("color: #025885; background-color: #CFDCE6; margin: 0px 10px 0px 0px; padding: 0px 0px 5px 0px;")
 
         # Path field
         DataEntryScreen.path_directory_entry = QLineEdit()
         DataEntryScreen.path_directory_entry.setText(str(Path.home() / "Documents"))
         DataEntryScreen.path_directory_entry.setFont(QFont("Georgia", 12))
-        DataEntryScreen.path_directory_entry.setStyleSheet("color: #031729; background-color: #F5FBFF; border-radius: 8px; border: 2px solid #CCE4F6; margin: 0px 10px 0px 0px; padding: 2px 2px 2px 2px;")
+        DataEntryScreen.path_directory_entry.setStyleSheet("color: #031729; background-color: #FFFFFF; border-radius: 8px; border: 2px solid #BAC6CF; margin: 0px 10px 0px 0px; padding: 2px 2px 2px 2px;")
         DataEntryScreen.path_directory_entry.setFixedSize(260, 30)
         
         # browse button to set a specific path
