@@ -1,13 +1,8 @@
-"""
-Authors
--------
-Giovanni Fanara
-Alfredo Gioacchino MariaPio Vecchio
-
-Date
-----
-2024-05-30
-"""
+#   Authors:
+#   Giovanni Fanara
+#   Alfredo Gioacchino MariaPio Vecchio
+#
+#   Date: 2024-05-30
 
 
 
@@ -23,6 +18,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from API.user_data import UserData
 from custom_button import CustomButton
+from message_manager import MessageManager
 from window_manager import WindowManager
 
 
@@ -42,6 +38,8 @@ class DataEntryScreen:
         Entry field for the 4-digit code.
     path_directory_entry : QLineEdit (class attribute)
         Entry field for the path directory.
+    main_window : WindowManager (istance attribute)
+        The main window manager instance.
     user_data : UserData (istance attribute)
         Instance of UserData for managing user data.
     data_entry_panel : QWidget (istance attribute) 
@@ -409,60 +407,17 @@ class DataEntryScreen:
         Shows an error message.
         """
         
-        error_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", self.fields_errors.strip())
-        
-        # Set the msg box style
-        self._set_output_dialog_style(error_msg_box)
-        error_msg_box.exec()
+        message_manager = MessageManager("Error", self.fields_errors.strip())
+            
+        # Show an error message with an output dialog
+        message_manager.show_message_box()
 
     def _show_information_message(self):
         """
         Shows an information message.
         """
         
-        info_msg_box = QMessageBox(QMessageBox.Icon.Information, "Information", self.info_message)
-        
-        # Set the msg box style
-        self._set_output_dialog_style(info_msg_box)
-        info_msg_box.exec()      
-
-    def _set_output_dialog_style(self, dialog):
-        """
-        Sets the style of the output dialog.
-        """
-        
-        if dialog:
-            dialog.setStyleSheet("""
-                QMessageBox {
-                    color: #023E58;
-                    background-color: #E9E6DB;
-                }
-                QLabel {
-                    color: #023E58;
-                    font: ("Merriweather", 14);
-                }
-                QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8);
-                    color: black;
-                    border: 2px solid #C8C5B8;
-                    border-radius: 15px;
-                    padding: 5px 7px;
-                    min-width: 30px;
-                }
-                QPushButton:hover {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #C8C5B8, stop:1 #A9A69B);
-                    border-color: #A9A69B;
-                    color: black;
-                    border: 2px solid #A9A69B;
-                    border-radius: 15px;
-                    padding: 5px 7px;
-                }
-                QPushButton:pressed {
-                    background-color: #A9A69B;
-                    border-color: #8B887E;
-                    color: black;
-                    border: 2px solid #8B887E;
-                    border-radius: 15px;
-                    padding: 5px 7px;
-                }
-            """)
+        message_manager = MessageManager("Information", self.info_message)
+            
+        # Show an error message with an output dialog
+        message_manager.show_message_box()

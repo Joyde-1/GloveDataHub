@@ -1,13 +1,8 @@
-"""
-Authors
--------
-Giovanni Fanara
-Alfredo Gioacchino MariaPio Vecchio
-
-Date
-----
-2024-05-30
-"""
+#   Authors:
+#   Giovanni Fanara
+#   Alfredo Gioacchino MariaPio Vecchio
+#
+#   Date: 2024-05-30
 
 
 
@@ -35,17 +30,6 @@ class UserData:
     def __init__(self):
         """
         Constructor, initialize UserData object.
-
-        Parameters
-        ----------
-        first name : str 
-            The first name of the user.
-        last_name : str 
-            The last name of the user.
-        code : str 
-            The code of the user.
-        path_directory : str 
-            The directory path for user's CSV files.
         """
         
         self.first_name = ""
@@ -144,6 +128,7 @@ class UserData:
         str
             The first name of the user.
         """
+        
         return self.first_name
 
     def get_last_name(self):

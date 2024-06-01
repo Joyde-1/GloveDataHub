@@ -1,13 +1,8 @@
-"""
-Authors
--------
-Giovanni Fanara
-Alfredo Gioacchino MariaPio Vecchio
-
-Date
-----
-2024-05-30
-"""
+#   Authors:
+#   Giovanni Fanara
+#   Alfredo Gioacchino MariaPio Vecchio
+#
+#   Date: 2024-05-30
 
 
 
@@ -24,6 +19,7 @@ from API.user_data import UserData
 from API.duration_time import DurationTime
 from API.exe_manager import ExeManager
 from custom_button import CustomButton
+from message_manager import MessageManager
 from window_manager import WindowManager
 
 
@@ -49,6 +45,10 @@ class DataAcquisitionScreen:
         Widget for entering the measurement duration.
     timer_display : QLabel (class attribute)
         Widget for displaying the elapsed time.
+    main_window : WindowManager (istance attribute)
+            Instance of WindowManager for managing the main window.
+    user_data : UserData (istance attribute)
+        Instance of UserData for managing user data.
     duration_time : DurationTime (istance attribute)
         Istance of DurationTime for manage duration time.
     exe_manager : ExeManager (istance attribute)
@@ -591,91 +591,51 @@ class DataAcquisitionScreen:
         Shows an error message.
         """
         
-        error_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", self.fields_errors.strip())
-        
-        # Set the msg box style
-        self._set_output_dialog_style(error_msg_box)
-        
-        error_msg_box.exec()
+        message_manager = MessageManager("Error", self.fields_errors.strip())
+            
+        # Show an error message with an output dialog
+        message_manager.show_message_box()
         
     def _show_script_end_message(self):
         """
         Shows the end of script message.
         """
         
+        # Set the message box by the return code of the script
         if self.script_return_code == 0 or self.script_return_code == 7 or self.script_return_code == 8:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Information, "Success", ("Haptic gloves data have been acquired successfully!"))
+            msg_box_title = "Success"
+            msg_box_msg = ("Haptic gloves data have been acquired successfully!")
         elif self.script_return_code == 1:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script for capturing data from haptic gloves has broken down. <br>"
-                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+            msg_box_title = "Error"
+            msg_box_msg = ("The script for capturing data from haptic gloves has broken down. <br>"
+                           'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
         elif self.script_return_code == 2:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The Script was run to acquire data from haptic gloves passing an <br>"
-                                                                             "inadequate number of arguments. <br>"
-                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+            msg_box_title = "Error"
+            msg_box_msg = ("The Script was run to acquire data from haptic gloves passing an <br>"
+                           "inadequate number of arguments. <br>"
+                           'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
         elif self.script_return_code == 3:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves encountered an <br>"
-                                                                             "error opening the file .CSV. <br>"
-                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+            msg_box_title = "Error"
+            msg_box_msg = ("The script to acquire data from haptic gloves encountered an <br>"
+                           "error opening the file .CSV. <br>"
+                           'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
         elif self.script_return_code == 4:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves suddenly <br>"
-                                                                             "stopped because it did not detect one or more gloves. <br>"
-                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+            msg_box_title = "Error"
+            msg_box_msg = ("The script to acquire data from haptic gloves suddenly <br>"
+                           "stopped because it did not detect one or more gloves. <br>"
+                           'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
         elif self.script_return_code == 5:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves suddenly <br>"
-                                                                             "stopped because the connection with SenseCom was interrupted. <br>"
-                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+            msg_box_title = "Error"
+            msg_box_msg = ("The script to acquire data from haptic gloves suddenly <br>"
+                           "stopped because the connection with SenseCom was interrupted. <br>"
+                           'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
         elif self.script_return_code == 6:
-            timer_msg_box = QMessageBox(QMessageBox.Icon.Critical, "Error", ("The script to acquire data from haptic gloves failed to <br>"
-                                                                             "start SenseCom by forcing it to run. <br>"
-                                                                             'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.'))
+            msg_box_title = "Error"
+            msg_box_msg = ("The script to acquire data from haptic gloves failed to <br>"
+                           "start SenseCom by forcing it to run. <br>"
+                           'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
         
-        # Set the msg box style
-        self._set_output_dialog_style(timer_msg_box)
-        
-        timer_msg_box.exec() 
-
-    def _set_output_dialog_style(self, dialog):
-        """
-        Sets the style for the output dialog.
-
-        Parameters
-        ----------
-        dialog : QMessageBox 
-            The output dialog to set the style for.
-        """
-        
-        if dialog:
-            dialog.setStyleSheet("""
-                QMessageBox {
-                    color: #023E58;
-                    background-color: #E9E6DB;
-                }
-                QLabel {
-                    color: #023E58;
-                    font: ("Merriweather", 14);
-                }
-                QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8);
-                    color: black;
-                    border: 2px solid #C8C5B8;
-                    border-radius: 15px;
-                    padding: 5px 7px;
-                    min-width: 30px;
-                }
-                QPushButton:hover {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #C8C5B8, stop:1 #A9A69B);
-                    border-color: #A9A69B;
-                    color: black;
-                    border: 2px solid #A9A69B;
-                    border-radius: 15px;
-                    padding: 5px 7px;
-                }
-                QPushButton:pressed {
-                    background-color: #A9A69B;
-                    border-color: #8B887E;
-                    color: black;
-                    border: 2px solid #8B887E;
-                    border-radius: 15px;
-                    padding: 5px 7px;
-                }
-            """)
+        message_manager = MessageManager(msg_box_title, msg_box_msg)
+            
+        # Show an error message with an output dialog
+        message_manager.show_message_box()

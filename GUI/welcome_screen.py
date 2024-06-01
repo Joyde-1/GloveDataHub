@@ -1,13 +1,8 @@
-"""
-Authors
--------
-Giovanni Fanara
-Alfredo Gioacchino MariaPio Vecchio
-
-Date
-----
-2024-05-30
-"""
+#   Authors:
+#   Giovanni Fanara
+#   Alfredo Gioacchino MariaPio Vecchio
+#
+#   Date: 2024-05-30
 
 
 
@@ -27,6 +22,8 @@ class WelcomeScreen:
     ----------
     is_first_time : bool (class attribute)
         Flag to indicate if it's the first time the welcome screen is being set.
+    main_window : WindowManager (istance attribute)
+        The main window manager instance.
     welcome_panel : QWidget (istance attribute)
         The main widget for the welcome screen.
     calibration_screen : CalibrationScreen (istance attribute)

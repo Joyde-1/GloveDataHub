@@ -1,13 +1,8 @@
-"""
-Authors
--------
-Giovanni Fanara
-Alfredo Gioacchino MariaPio Vecchio
-
-Date
-----
-2024-05-30
-"""
+#   Authors:
+#   Giovanni Fanara
+#   Alfredo Gioacchino MariaPio Vecchio
+#
+#   Date: 2024-05-30
 
 
 
@@ -18,9 +13,14 @@ from PyQt6.QtGui import QFont
 class CustomButton(QPushButton):
     """
     CustomButton class inherits from QPushButton and implements a button widget with dynamic styles for different states.
+    
+    Attributes
+    ----------
+    button_style : int (istance attribute)
+        The number corresponding to a button style.
     """
     
-    def __init__(self, title, style, width, height, font_size, parent=None):
+    def __init__(self, title, button_style, width, height, font_size, parent=None):
         """
         Constructor method to initialize the CustomButton.
 
@@ -28,6 +28,8 @@ class CustomButton(QPushButton):
         ----------
         title : str 
             The title text of the button.
+        button_style : int
+            The number corresponding to a button style.
         width : int 
             The width of the button.
         height : int 
@@ -39,7 +41,7 @@ class CustomButton(QPushButton):
         """
         
         super().__init__(title, parent)
-        self.style = style
+        self.button_style = button_style
 
         # Set font type and dimensions 
         self.setFont(QFont("Montserrat", font_size))
@@ -62,7 +64,7 @@ class CustomButton(QPushButton):
         """
 
         # Return style based on the style attribute
-        if self.style == 0:
+        if self.button_style == 0:
             return """
                 QPushButton {
                     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
@@ -96,7 +98,7 @@ class CustomButton(QPushButton):
         """
         
         # Return style based on the style attribute
-        if self.style == 0:
+        if self.button_style == 0:
             return """
                 QPushButton {
                     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
@@ -132,7 +134,7 @@ class CustomButton(QPushButton):
         """
         
         # Return style based on the style attribute
-        if self.style == 0:
+        if self.button_style == 0:
             return """
                 QPushButton {
                     background-color: #A9A69B;

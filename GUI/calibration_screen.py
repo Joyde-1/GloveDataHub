@@ -1,13 +1,8 @@
-"""
-Authors
--------
-Giovanni Fanara
-Alfredo Gioacchino MariaPio Vecchio
-
-Date
-----
-2024-05-30
-"""
+#   Authors:
+#   Giovanni Fanara
+#   Alfredo Gioacchino MariaPio Vecchio
+#
+#   Date: 2024-05-30
 
 
 
@@ -29,6 +24,8 @@ class CalibrationScreen():
         Indicates whether it's the first time the screen is being displayed.
     is_data_acquired : bool (class attribute)
         Indicates whether the data has been acquired.
+    main_window : WindowManager (istance attribute)
+        The main window manager instance.
     calibration_panel : QWidget (istance attribute)
         The main widget for the calibration screen.
     calibration_screen : CalibrationScreen (istance attribute)

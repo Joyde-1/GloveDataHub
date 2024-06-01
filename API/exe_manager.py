@@ -1,13 +1,8 @@
-"""
-Authors
--------
-Giovanni Fanara
-Alfredo Gioacchino MariaPio Vecchio
-
-Date
-----
-2024-05-30
-"""
+#   Authors:
+#   Giovanni Fanara
+#   Alfredo Gioacchino MariaPio Vecchio
+#
+#   Date: 2024-05-30
 
 
 
@@ -21,6 +16,8 @@ class ExeManager:
     Attributes
     ----------
     sensecom_psutil_process : subprocess.Popen (class attribute)
+        The sensecom process opened outside the API.
+    sensecom_subprocess_process : psutil.process (class attribute)
         The sensecom process opened inside the API.
     script_process : subprocess.Popen (class attribute)
         The process for the data acquisition script.
@@ -74,6 +71,11 @@ class ExeManager:
     def set_sensecom_process(self, sensecom_process):
         """
         Set SenseCom process opened outside the API.
+        
+        Parameters
+        ----------
+        sensecom_process : psutil.process 
+            The sensecom process opened outside the API.
         """
         
         ExeManager.sensecom_psutil_process = sensecom_process
