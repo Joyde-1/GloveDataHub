@@ -228,7 +228,7 @@ class DataEntryScreen:
         DataEntryScreen.path_directory_entry.setFixedSize(260, 30)
         
         # browse button to set a specific path
-        browse_button = CustomButton("Browse", 1, 120, 30, 14)
+        browse_button = CustomButton("Browse", 120, 30, 14)
         browse_button.clicked.connect(self._browse_path)
 
         # Path Layout
@@ -259,11 +259,11 @@ class DataEntryScreen:
         """
         
         # Button to go back
-        back_button = CustomButton("Back", 0, 120, 40, 16)
+        back_button = CustomButton("Back", 120, 40, 16)
         back_button.clicked.connect(self._show_previous_screen)
         
         # Button to proceed
-        next_button = CustomButton("Next", 0, 120, 40, 16)
+        next_button = CustomButton("Next", 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         buttons_layout = QHBoxLayout()

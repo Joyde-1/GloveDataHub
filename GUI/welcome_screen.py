@@ -128,7 +128,7 @@ class WelcomeScreen:
         """
         
         # Button to proceed
-        next_button = CustomButton("Next", 0, 120, 40, 16)
+        next_button = CustomButton("Next", 120, 40, 16)
         next_button.clicked.connect(self._show_next_screen)
         
         button_layout = QHBoxLayout()

@@ -99,11 +99,11 @@ class FinalScreen:
         """
 
         # Button to start a new measurement
-        new_measurement_button = CustomButton("New Acquisition", 1, 240, 40, 16)
+        new_measurement_button = CustomButton("New Acquisition", 240, 40, 16)
         new_measurement_button.clicked.connect(self._start_new_data_acquisition)
         
         # Button to close the application
-        close_button = CustomButton("Close", 0, 120, 40, 16)
+        close_button = CustomButton("Close", 120, 40, 16)
         close_button.clicked.connect(self._close_application)
         
         # Layout for the buttons

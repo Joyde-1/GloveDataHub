@@ -413,10 +413,10 @@ class WindowManager(QWidget):
         # Container for SenseCom
         self.sensecom_container = QWidget()
         self.sensecom_container.setFixedSize(528, 289)
-        self.sensecom_container.setStyleSheet("background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #D9E7EC, stop:1 #ABC2D4); border: 2px solid #CCE4F6; margin: 0px 10px 10px 10px;")
+        self.sensecom_container.setStyleSheet("background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #A7D3E0, stop:1 #5D9BAD); border: 2px solid #A1ABB3; margin: 0px 10px 10px 10px;")
         
         # Button to start SenseCom
-        self.sensecom_button = CustomButton("Start SenseCom", 1, 200, 30, 14)
+        self.sensecom_button = CustomButton("Start SenseCom", 200, 30, 14)
         self.sensecom_button.clicked.connect(self._embed_sensecom)
         
         button_layout = QHBoxLayout()

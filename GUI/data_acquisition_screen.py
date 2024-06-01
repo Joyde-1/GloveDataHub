@@ -291,17 +291,17 @@ class DataAcquisitionScreen:
         """
         
         # Button for going back
-        self.back_button = CustomButton("Back", 0, 120, 40, 16)
+        self.back_button = CustomButton("Back", 120, 40, 16)
         self.back_button.setContentsMargins(20, 0, 300, 20)
         self.back_button.clicked.connect(self._show_previous_screen)
         
         # Button for starting/stopping the measurement
-        self.measurement_button = CustomButton("Start Measurement", 1, 240, 40, 16)
+        self.measurement_button = CustomButton("Start Measurement", 240, 40, 16)
         self.measurement_button.setContentsMargins(300, 0, 4000, 20)
         self.measurement_button.clicked.connect(self._start_measurement)
         
         # Button for proceeding
-        self.next_button = CustomButton("Next", 0, 120, 40, 16)
+        self.next_button = CustomButton("Next", 120, 40, 16)
         self.next_button.setContentsMargins(300, 0, 20, 20)
         self.next_button.clicked.connect(self._show_next_screen)        
         

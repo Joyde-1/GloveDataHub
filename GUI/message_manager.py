@@ -71,26 +71,24 @@ class MessageManager:
                     font: ("Merriweather", 16);
                 }
                 QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E9E6DB, stop:1 #C8C5B8);
-                    color: black;
-                    border: 2px solid #C8C5B8;
+                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #F5FBFF, stop:1 #B0BCC4);
+                    color: #023E58;
+                    border: 2px solid #A1ABB3;
                     border-radius: 15px;
                     padding: 5px 7px;
                     min-width: 30px;
                 }
                 QPushButton:hover {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #C8C5B8, stop:1 #A9A69B);
-                    border-color: #A9A69B;
-                    color: black;
-                    border: 2px solid #A9A69B;
+                    background-color: #B6C7D1;
+                    color: #023E58;
+                    border: 2px solid #747B82;
                     border-radius: 15px;
                     padding: 5px 7px;
                 }
                 QPushButton:pressed {
-                    background-color: #A9A69B;
-                    border-color: #8B887E;
-                    color: black;
-                    border: 2px solid #8B887E;
+                    background-color: #9EACB5;
+                    color: #023E58;
+                    border: 2px solid #606C78;
                     border-radius: 15px;
                     padding: 5px 7px;
                 }

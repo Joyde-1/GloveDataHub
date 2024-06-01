@@ -13,14 +13,9 @@ from PyQt6.QtGui import QFont
 class CustomButton(QPushButton):
     """
     CustomButton class inherits from QPushButton and implements a button widget with dynamic styles for different states.
-    
-    Attributes
-    ----------
-    button_style : int (istance attribute)
-        The number corresponding to a button style.
     """
     
-    def __init__(self, title, button_style, width, height, font_size, parent=None):
+    def __init__(self, title, width, height, font_size, parent=None):
         """
         Constructor method to initialize the CustomButton.
 
@@ -28,8 +23,6 @@ class CustomButton(QPushButton):
         ----------
         title : str 
             The title text of the button.
-        button_style : int
-            The number corresponding to a button style.
         width : int 
             The width of the button.
         height : int 
@@ -41,7 +34,6 @@ class CustomButton(QPushButton):
         """
         
         super().__init__(title, parent)
-        self.button_style = button_style
 
         # Set font type and dimensions 
         self.setFont(QFont("Montserrat", font_size))
@@ -63,29 +55,16 @@ class CustomButton(QPushButton):
             CSS style for the normal state.
         """
 
-        # Return style based on the style attribute
-        if self.button_style == 0:
-            return """
-                QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                    stop:0 #FFFCF0, stop:1 #E0DED3);
-                    color: #031729;
-                    border: 2px solid #C8C5B8;
-                    border-radius: 15px;
-                    padding: 0px;
-                }
-            """
-        else:
-            return """
-                QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                    stop:0 #F5FBFF, stop:1 #CCD9E3);
-                    color: #023E58;
-                    border: 2px solid #B0C4DE;
-                    border-radius: 15px;
-                    padding: 0px;
-                }
-            """
+        return """
+            QPushButton {
+                background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                                stop:0 #F5FBFF, stop:1 #B0BCC4);
+                color: #023E58;
+                border: 2px solid #A1ABB3;
+                border-radius: 15px;
+                padding: 0px;
+            }
+        """
 
     def hover_style(self):
         """
@@ -97,31 +76,15 @@ class CustomButton(QPushButton):
             CSS style for the hover state.
         """
         
-        # Return style based on the style attribute
-        if self.button_style == 0:
-            return """
-                QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                    stop:0 #C8C5B8, stop:1 #A9A69B);
-                    border-color: #A9A69B;
-                    color: #031729;
-                    border: 2px solid #A9A69B;
-                    border-radius: 15px;
-                    padding: 0px;
-                }
-            """
-        else:
-            return """
-                QPushButton {
-                    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                                    stop:0 #D1E0EA, stop:1 #B0C4DE);
-                    border-color: #99AAB5;
-                    color: #023E58;
-                    border: 2px solid #99AAB5;
-                    border-radius: 15px;
-                    padding: 0px;
-                }
-            """
+        return """
+            QPushButton {
+                background-color: #B6C7D1;
+                color: #023E58;
+                border: 2px solid #747B82;
+                border-radius: 15px;
+                padding: 5px 10px;
+            }
+        """
 
     def pressed_style(self):
         """
@@ -133,29 +96,15 @@ class CustomButton(QPushButton):
             CSS style for the pressed state.
         """
         
-        # Return style based on the style attribute
-        if self.button_style == 0:
-            return """
-                QPushButton {
-                    background-color: #A9A69B;
-                    border-color: #8B887E;
-                    color: #031729;
-                    border: 2px solid #8B887E;
-                    border-radius: 15px;
-                    padding: 0px;
-                }
-            """
-        else:
-            return """
-                QPushButton {
-                    background-color: #99AAB5;
-                    border-color: #8090A0;
-                    color: #023E58;
-                    border: 2px solid #8090A0;
-                    border-radius: 15px;
-                    padding: 0px;
-                }
-            """
+        return """
+            QPushButton {
+                background-color: #9EACB5;
+                color: #023E58;
+                border: 2px solid #606C78;
+                border-radius: 15px;
+                padding: 5px 10px;
+            }
+        """
 
     def enterEvent(self, event):
         """
