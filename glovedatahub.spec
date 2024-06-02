@@ -3,6 +3,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
+version = '/version.txt'
 
 a = Analysis(
     ['GUI/gui_main.py'],
@@ -35,7 +36,7 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,
-    icon='GUI/images/GDH.ico'
+    icon=['GUI\\images\\GDH.ico']
 )
 coll = COLLECT(
     exe,

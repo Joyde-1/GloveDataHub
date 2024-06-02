@@ -12,5 +12,5 @@ SolidCompression=yes
 Source: "dist\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Icons]
-Name: "{group}\GloveDataHub"; Filename: "{app}\glovedatahub.exe"; IconFilename: "{app}\GUI\images\GDH.ico"
+Name: "{group}\GloveDataHub"; Filename: "{app}\glovedatahub.exe"; IconFilename: "{app}\\GUI\\images\\GDH.ico"
 Name: "{group}\Uninstall GloveDataHub"; Filename: "{uninstallexe}"

@@ -9,10 +9,25 @@
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QFont
 import sys
+import os
 
 from window_manager import WindowManager
 from welcome_screen import WelcomeScreen
 
+
+def resource_path(relative_path):
+    """
+    Gets the absolute path of the resources, works for the executable and for the normal script.
+    """
+    
+    try:
+        # Path when it is in a PyInstaller executable
+        base_path = sys._MEIPASS
+    except Exception:
+        # Path when in a normal Python script
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 if __name__ == "__main__":
     """
@@ -23,8 +38,8 @@ if __name__ == "__main__":
     
     # Parameters for the main window
     main_window_params = {
-        'ghd_logo_path': "GUI/images/GDH.png",
-        'kore_logo_path': "GUI/images/Kore.png",
+        'ghd_logo_path': resource_path("GUI/images/GDH.png"),
+        'kore_logo_path': resource_path("GUI/images/Kore.png"),
         'window_title': "GloveDataHub", 
         'window_width': 1040, 
         'window_height': 670,
