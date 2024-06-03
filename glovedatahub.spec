@@ -36,7 +36,7 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,
-    icon=['GUI\\images\\GDH.ico'],
+    icon=['GUI\\images\\GDH_icon.ico'],
     version=version
 )
 coll = COLLECT(

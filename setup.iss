@@ -11,16 +11,16 @@ OutputDir=output
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
-SetupIconFile=GUI\images\GDH.ico
+SetupIconFile=GUI\images\GDH_icon.ico
 
 [Files]
 Source: "dist\glovedatahub\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
-Source: "GUI\images\GDH.ico"; DestDir: "{app}\GUI\images"; Flags: ignoreversion
+Source: "GUI\images\GDH_icon.ico"; DestDir: "{app}\GUI\images"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\GloveDataHub"; Filename: "{app}\glovedatahub.exe"; IconFilename: "{app}\GUI\images\GDH.ico"
+Name: "{group}\GloveDataHub"; Filename: "{app}\glovedatahub.exe"; IconFilename: "{app}\GUI\images\GDH_icon.ico"
 Name: "{group}\Uninstall GloveDataHub"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\GloveDataHub"; Filename: "{app}\glovedatahub.exe"; IconFilename: "{app}\GUI\images\GDH.ico"; Tasks: desktopicon
+Name: "{autodesktop}\GloveDataHub"; Filename: "{app}\glovedatahub.exe"; IconFilename: "{app}\GUI\images\GDH_icon.ico"; Tasks: desktopicon
 
 [Messages]
 AppCopyright=Copyright © 2024 Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio
