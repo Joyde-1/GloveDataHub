@@ -13,23 +13,23 @@ VSVersionInfo(
     fileType=0x1,
     subtype=0x0,
     date=(0, 0)
-    ),
+  ),
   kids=[
     StringFileInfo(
       [
       StringTable(
         '040904B0', [
-        StringStruct('CompanyName', 'GloveDataHub'),
-        StringStruct('FileDescription', 'GloveDataHub'),
-        StringStruct('FileVersion', '1.0.0.1'),
-        StringStruct('InternalName', 'glovedatahub'),
-        StringStruct('LegalCopyright', '© GloveDataHub. All rights reserved.'),
-        StringStruct('OriginalFilename', 'glovedatahub.exe'),
-        StringStruct('ProductName', 'GloveDataHub'),
-        StringStruct('ProductVersion', '1.0.0.1'),
-        StringStruct('Author', 'Giovanni Fanara, Alfredo Gioacchino MariaPio Vecchio, Author 3')
+            StringStruct('CompanyName', 'GloveDataHub'),
+            StringStruct('FileDescription', 'GloveDataHub Application'),
+            StringStruct('FileVersion', '1.0.0.1'),
+            StringStruct('InternalName', 'glovedatahub'),
+            StringStruct('LegalCopyright', '© GloveDataHub. All rights reserved.'),
+            StringStruct('OriginalFilename', 'glovedatahub.exe'),
+            StringStruct('ProductName', 'GloveDataHub'),
+            StringStruct('ProductVersion', '1.0.0.1')
         ])
-      ]), 
+      ]
+    ),
     VarFileInfo([VarStruct('Translation', [1033, 1200])])
   ]
 )
