@@ -118,6 +118,10 @@ GDH_repository/
 │   ├── main_manager.py
 │   ├── main.py
 │   └── user_data.py
+├── build/
+│   ├── glovedatahub/
+│       ├── localpycs/
+│
 │
 ├── Datat-Acquisition/
 │   ├── docs/
@@ -174,11 +178,14 @@ GDH_repository/
 │   
 ├── GUI/
 │   ├── images/
-│   │   ├── kore_Logo.png
-│   │   ├── logo GloveDataHub.webp
-│   │   ├── logo_GloveDataHub_new.png
-│   │   ├── logo_GloveDataHub.png    
-│   │   └── qr_code_github_repo_glovedatahub.jpg
+│   │   ├── GDH.ico 
+│   │   ├── GDH.png
+│   │   ├── GDH.webp
+│   │   ├── glovedatahub_qr_code.png
+│   │   ├── kore.png
+│   │   ├── qr_code_github_repo_glovedatahub.jpg
+│   │   └── SenseCom.png
+│   │
 │   ├── calibration_screen.py
 │   ├── custom_button.py
 │   ├── data_acquisition_screen.py
@@ -188,22 +195,66 @@ GDH_repository/
 │   ├── welcome_screen.py
 │   └── window_manager.py
 │
+├── output/
+│   ├── setup.exe
+│   
+├── screenshot/
+│   ├── 1.png
+│   ├── 2.1.png
+│   ├── 2.2.png
+│   ├── 3.1.png
+│   ├── 3.2.png
+│   ├── 4.1.1.png
+│   ├── 4.1.2.png
+│   ├── 4.2.png
+│   ├── 4.3.png
+│   ├── 5.png
+│
+├── glovedatahub.spec
+│   
 ├── LICENSE
-├── prepare.bat
+├── prepare.ps1
 ├── prepare.sh
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+├── setup.iss
+└── version.txt
 ```
 - `API/` contains the classes for managing the executable file.
 - `Data-Acquisition/` contains the C++ script and its executable file to which the . dll  `SGCoreCpp.dll` file containing libraries is linked. Inside this folder we find the cmake file needed to create the executable from the file . cpp using the following command:  `cmake -S . -B build -DSGCORECPP_PATH="C:/Users/Username/Downloads/SenseGlove-API-1.4.0/SenseGlove-API-1.4.0/Core/SGCoreCpp" `. Inside this folder we find the docs folder which has two subfolders html and latex inside which is the documentation related to the script c++ in pdf and html.
 - `docs/` contains the HTML files related to the documentation and they are located inside the `build/` folder within the `html/` folder.
 - `GUI/` contains the classes for managing the GUI interface.
-- `prepare.bat` is a script for setting up the environment on Windows OS - at the moment it only installs the requirements.
-- `prepare.sh` is a script for setting up the environment on Unix/Linux OS - at the moment it only installs the requirements.
+- `glovedatahub.spec` it's a PyInstaller specification file and it is used to configure the bundling of your Python application into a standalone executable. The file includes the following key configurations:
+  - Main Script: Specifies GUI/gui_main.py as the entry point of the application.
+  - Additional Data: Includes additional data and directories such as Data-Acquisition, API scripts, and images from GUI/images.
+  - Executable Configuration: Configures the executable with options like name (glovedatahub), icon (GDH_icon.ico), and other settings to manage binary exclusion, debugging, and compression.
+  - This file ensures that all necessary components of your application are bundled together for easy distribution and execution.
+- `prepare.ps1` PowerShell script automates the setup of a Conda environment on Windows OS . It takes a single parameter, the name of the Conda environment, and performs the following tasks:
+  - Checks if the environment name is provided; if not, it displays usage instructions and exits.
+  - Creates the specified Conda environment with Python 3.12.3 if it does not already exist.
+  - Activates the Conda environment.
+  - Installs the dependencies listed in requirements.txt.
+  - Executes the gui_main.py script located in the GUI directory.
+- `prepare.sh` this bash script automates the setup of a Conda environment on Unix-like operating systems. It takes a single parameter, the name of the Conda environment, and performs the following tasks:
+  - Checks if the environment name is provided; if not, it displays usage instructions and exits.
+  - Creates the specified Conda environment with Python 3.12.3 if it does not already exist.
+  - Activates the Conda environment.
+  - Installs the dependencies listed in requirements.txt.
+  - Executes the gui_main.py script located in the GUI directory.
 - `requirements.txt` contains the list of dependencies for the project.
 - `README.md` is the file you are currently reading.
 
 ---
+
+### Download
+You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website glovedatahub.
+it from which you can download the app directly
+
+<p align="center">
+  <img alt="GloveDataHub" src="GUI\images\glovedatahub_qr_code.png" width="400" height="450" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
 
 ### License
 
