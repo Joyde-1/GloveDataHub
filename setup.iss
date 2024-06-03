@@ -2,9 +2,7 @@
 AppName=GloveDataHub
 AppVersion=1.0
 AppPublisher=Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio
-AppPublisherURL=http://yourwebsite.com
-AppSupportURL=http://yourwebsite.com/support
-AppUpdatesURL=http://yourwebsite.com/updates
+AppPublisherURL=http://glovedatahub.it
 DefaultDirName={pf}\GloveDataHub
 DefaultGroupName=GloveDataHub
 OutputDir=output
@@ -23,7 +21,7 @@ Name: "{group}\Uninstall GloveDataHub"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\GloveDataHub"; Filename: "{app}\glovedatahub.exe"; IconFilename: "{app}\GUI\images\GDH_icon.ico"; Tasks: desktopicon
 
 [Messages]
-AppCopyright=Copyright © 2024 Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio
+AppCopyright=Copyright © GloveDataHub 2024 | All rights reserved
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

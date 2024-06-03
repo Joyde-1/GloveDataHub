@@ -1,0 +1,114 @@
+\doxysection{glove\+\_\+data\+\_\+acquisition.\+cpp File Reference}
+\hypertarget{glove__data__acquisition_8cpp}{}\label{glove__data__acquisition_8cpp}\index{glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$windows.\+h$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include "{}Library.\+h"{}}\newline
+{\ttfamily \#include "{}Sense\+Com.\+h"{}}\newline
+{\ttfamily \#include "{}Haptic\+Glove.\+h"{}}\newline
+Include dependency graph for glove\+\_\+data\+\_\+acquisition.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_glove_data}{Glove\+Data}}
+\begin{DoxyCompactList}\small\item\em \texorpdfstring{$<$}{<} Haptic Glove Interfacing \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{glove__data__acquisition_8cpp_ab5f6c9c6a9cb361f0abf76b371e6b590}{Launch\+And\+Wait\+For\+App}} (const char \texorpdfstring{$\ast$}{*}path\+\_\+application)
+\begin{DoxyCompactList}\small\item\em This function launch Sense\+Com process and wait until it is start correctly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{glove__data__acquisition_8cpp_ac53f324b7787b53efd4112e6f3220fad}{write\+CSVHeader}} (std\+::ofstream \&file)
+\begin{DoxyCompactList}\small\item\em This fuction writes the column names in the first line of .CSV file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{glove__data__acquisition_8cpp_a2f96174a51a97cd12ab7b2bad0f7b7b8}{write\+Glove\+Data\+To\+CSV}} (std\+::ofstream \&file, const std\+::string \&data, bool sep)
+\begin{DoxyCompactList}\small\item\em This fuction write the haptic glove data to a .CSV file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{glove__data__acquisition_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main of the programm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{glove__data__acquisition_8cpp_ab5f6c9c6a9cb361f0abf76b371e6b590}\index{glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}!LaunchAndWaitForApp@{LaunchAndWaitForApp}}
+\index{LaunchAndWaitForApp@{LaunchAndWaitForApp}!glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}}
+\doxysubsubsection{\texorpdfstring{LaunchAndWaitForApp()}{LaunchAndWaitForApp()}}
+{\footnotesize\ttfamily \label{glove__data__acquisition_8cpp_ab5f6c9c6a9cb361f0abf76b371e6b590} 
+int Launch\+And\+Wait\+For\+App (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path\+\_\+application}{}\end{DoxyParamCaption})}
+
+
+
+This function launch Sense\+Com process and wait until it is start correctly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+application} & Sense\+Com API path \\
+\hline
+\end{DoxyParams}
+\Hypertarget{glove__data__acquisition_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}!main@{main}}
+\index{main@{main}!glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{glove__data__acquisition_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Main of the programm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of arguments \\
+\hline
+{\em argv} & List of arguments that are\+: path to csv and total time \\
+\hline
+\end{DoxyParams}
+\texorpdfstring{$<$}{<} Path of Sense\+Com Application (Update the path if you\textquotesingle{}re running on another PC)
+
+\texorpdfstring{$<$}{<} returns true if Sense\+Com is active
+
+\texorpdfstring{$<$}{<} Path to .CSV file where data are write
+
+\texorpdfstring{$<$}{<} Total time duration of the data acquisition. If it is ugual to -\/1, the time is unlimited
+
+\texorpdfstring{$<$}{<} Verify the first iteration of the data acquisition loop
+
+\texorpdfstring{$<$}{<} Essential condition to get data from haptic gloves
+
+\texorpdfstring{$<$}{<} Used when there is the last value to be written in the .CSV file\Hypertarget{glove__data__acquisition_8cpp_ac53f324b7787b53efd4112e6f3220fad}\index{glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}!writeCSVHeader@{writeCSVHeader}}
+\index{writeCSVHeader@{writeCSVHeader}!glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}}
+\doxysubsubsection{\texorpdfstring{writeCSVHeader()}{writeCSVHeader()}}
+{\footnotesize\ttfamily \label{glove__data__acquisition_8cpp_ac53f324b7787b53efd4112e6f3220fad} 
+void write\+CSVHeader (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file}{}\end{DoxyParamCaption})}
+
+
+
+This fuction writes the column names in the first line of .CSV file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & File .CSV where is write the header \\
+\hline
+\end{DoxyParams}
+\Hypertarget{glove__data__acquisition_8cpp_a2f96174a51a97cd12ab7b2bad0f7b7b8}\index{glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}!writeGloveDataToCSV@{writeGloveDataToCSV}}
+\index{writeGloveDataToCSV@{writeGloveDataToCSV}!glove\_data\_acquisition.cpp@{glove\_data\_acquisition.cpp}}
+\doxysubsubsection{\texorpdfstring{writeGloveDataToCSV()}{writeGloveDataToCSV()}}
+{\footnotesize\ttfamily \label{glove__data__acquisition_8cpp_a2f96174a51a97cd12ab7b2bad0f7b7b8} 
+void write\+Glove\+Data\+To\+CSV (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file}{, }\item[{const std\+::string \&}]{data}{, }\item[{bool}]{sep}{}\end{DoxyParamCaption})}
+
+
+
+This fuction write the haptic glove data to a .CSV file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & The file .CSV where data are write \\
+\hline
+{\em data} & String with the data separated by \textquotesingle{},\textquotesingle{} \\
+\hline
+{\em sep} & When it is True, it put a \textquotesingle{};\textquotesingle{} when a value is write on the .CSV file \\
+\hline
+\end{DoxyParams}
