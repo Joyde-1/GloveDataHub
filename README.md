@@ -16,7 +16,7 @@ limitations under the License.
 ## GloveDataHub
 
 <p align="center">
-  <img alt="GloveDataHub" src="GUI\images\GDH.png" width="300" height="300" style="max-width: 100%;">
+  <img alt="GloveDataHub" src="GUI\images\GDH.webp" width="300" height="300" style="max-width: 100%;">
   <br/>
   <br/>
 </p>
