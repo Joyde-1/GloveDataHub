@@ -21,7 +21,7 @@ limitations under the License.
   <br/>
 </p>
 
-This is an API that allows you to extract data from your SenseGlove haptic gloves, leveraging your PC's Bluetooth protocol and the gloves to establish the connection between devices, and utilizing the glove calibration service provided by the SenseCom API.
+This is an APP that allows you to extract raw data from your haptic gloves SenseGlove nova 1, leveraging your PC's Bluetooth protocol and the gloves to establish the connection between devices, and utilizing the glove calibration service provided by the SenseCom API.
 
 <p align="center">
     <a href="https://www.glovedatahub.it">
@@ -35,7 +35,7 @@ This is an API that allows you to extract data from your SenseGlove haptic glove
 
 | | |
 | --- | --- |
-| **Description** | GloveDataHub is an API that allows you to extract data from your SenseGlove haptic gloves |
+| **Description** | GloveDataHub is an APP that allows you to extract raw data  your haptic gloves SenseGlove |
 | **Authors** |Giovanni Fanara and Alfredo Giaocchino MariaPio Vecchio|
 | **License** | [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.it) |
 
@@ -52,7 +52,7 @@ This is an API that allows you to extract data from your SenseGlove haptic glove
 ---
 
 ### Introduction
-GloveDataHub is an API that allows you to extract data from your SenseGlove haptic gloves, which can be purchased through the button in the previous section. It ensures the connection of these gloves to your PC utilizing the Bluetooth protocol present in the devices. Additionally, the GloveDataHub API embeds a third-party application provided by the glove manufacturer, which manages the connection between the PC and the gloves and also facilitates the calibration process of the devices. Within the GloveDataHub API, it is further possible to extract data from your gloves using the executable obtained from a C++ script `glove_data_acquisition.exe` and the `.dll` file `SGCoreCpp.dll` of the haptic glove management libraries, now linked. This executable is invoked as an action associated with the start measurement button, allowing the user to specify a specific time to use during task execution, or the user can choose not to specify any time and ensure an infinite measurement time. At the end of the measurement, the results stored in a `.CSV` file are saved in the specified folder entered during the entry of the user's personal information fields.
+GloveDataHub is an APP that allows you to extract raw data from your haptic gloves SenseGlove Nova. It ensures the connection of these gloves to your PC utilizing the Bluetooth protocol present in the devices. Additionally, the GloveDataHub API embeds a third-party application provided by the glove manufacturer, which manages the connection between the PC and the gloves and also facilitates the calibration process of the devices. Within the GloveDataHub API, it is further possible to extract raw data from your gloves using the executable obtained from a C++ script `glove_data_acquisition.exe` and the `.dll` file `SGCoreCpp.dll` of the haptic glove management libraries, now linked. This executable is invoked as an action associated with the start measurement button, allowing the user to specify a specific time to use during task execution, or the user can choose not to specify any time and ensure an infinite measurement time. At the end of the measurement, the results stored in a `.CSV` file are saved in the specified folder entered during the entry of the user's personal information fields.
 
 ### Getting started
 
@@ -64,7 +64,7 @@ GloveDataHub is an API that allows you to extract data from your SenseGlove hapt
 
 - [SenseGlove](https://github.com/Adjuvo/SenseGlove-API.git)
 
-To ensure the connection of your haptic senseglove gloves to your computer you must take the following steps:
+To ensure the connection of your haptic gloves SenseGlove Nova to your computer you must take the following steps:
 - Go to to [SenseGlove](https://github.com/Adjuvo/SenseGlove-API.git) and proceed with installation of the sensecom application.
 - Then go to the settings of your computer, make sure that both gloves are turned on and connect them to the pc via bluethoot.
 
@@ -72,7 +72,7 @@ To ensure the connection of your haptic senseglove gloves to your computer you m
 
 The project is based on **Python 3.12.3** - one of the latest versions of Python at the time of writing. A few considerations:
 - It is recommended to use a virtual environment to manage the dependencies of the project. For example [conda](https://docs.conda.io/en/latest/).
-- The requirements are listed in the `requirements.txt` file and can be installed using the `prepare.ps1` for windows and the the user can run the prepare.bat script by passing the environment name conda as argument as follow:  `.\prepare.ps1 -envName "name_conda_enviroment" `, or on Unix/linux by running the `prepare.sh` file and the user can run the `prepare.sh`  script and pass the environment name conda as argument, in the following way: `./prepare.sh name_conda_enviroment`.
+- The requirements are listed in the `requirements.txt` file and can be installed using the `prepare.ps1` for windows and the the user can run the `prepare.ps1` script by passing the environment name conda as argument as follow:  `.\prepare.ps1 -envName "name_conda_enviroment" `, or on Unix/linux by running the `prepare.sh` file and the user can run the `prepare.sh`  script and pass the environment name conda as argument, in the following way: `./prepare.sh name_conda_enviroment`.
 
 Inside the file `requirements.txt` you can find the following modules:
 
@@ -220,29 +220,33 @@ GDH_repository/
 ├── setup.iss
 └── version.txt
 ```
-- `API/` contains the classes for managing the executable file.
-- `Data-Acquisition/` contains the C++ script and its executable file to which the . dll  `SGCoreCpp.dll` file containing libraries is linked. Inside this folder we find the cmake file needed to create the executable from the file . cpp using the following command:  `cmake -S . -B build -DSGCORECPP_PATH="C:/Users/Username/Downloads/SenseGlove-API-1.4.0/SenseGlove-API-1.4.0/Core/SGCoreCpp" `. Inside this folder we find the docs folder which has two subfolders html and latex inside which is the documentation related to the script c++ in pdf and html.
-- `docs/` contains the HTML files related to the documentation and they are located inside the `build/` folder within the `html/` folder.
-- `GUI/` contains the classes for managing the GUI interface.
+- `API/` contains the classes for managing the executable file;
+- `Data-Acquisition/` contains:
+  - `gloves_data_acquisition.cpp` that is the C++ script;
+  - `gloves_data_acquisition.exe` which is the executable file obtained from the c++ script.;
+  - `SGCoreCpp.dll` contains the libraries linked to the executable file. 
+  - `CMakeLists.txt`is the cmake file needed to create the executable from the file . cpp using the following command: `cmake -S . -B build -DSGCORECPP_PATH="C:/Users/Username/Downloads/SenseGlove-API-1.4.0/SenseGlove-API-1.4.0/Core/SGCoreCpp" `;
+  - `docs` docs is a folder consisting of two subfolders html and latex inside which is contained the documentation related to the script c++ in pdf and html;
+- `docs/` contains the HTML files related to the documentation and they are located inside the `build/` folder within the `html/` folder;
+- `GUI/` contains the classes for managing the GUI interface;
 - `glovedatahub.spec` it's a PyInstaller specification file and it is used to configure the bundling of your Python application into a standalone executable. The file includes the following key configurations:
-  - Main Script: Specifies GUI/gui_main.py as the entry point of the application.
-  - Additional Data: Includes additional data and directories such as Data-Acquisition, API scripts, and images from GUI/images.
-  - Executable Configuration: Configures the executable with options like name (glovedatahub), icon (GDH_icon.ico), and other settings to manage binary exclusion, debugging, and compression.
-  - This file ensures that all necessary components of your application are bundled together for easy distribution and execution.
-- `prepare.ps1` PowerShell script automates the setup of a Conda environment on Windows OS . It takes a single parameter, the name of the Conda environment, and performs the following tasks:
-  - Checks if the environment name is provided; if not, it displays usage instructions and exits.
-  - Creates the specified Conda environment with Python 3.12.3 if it does not already exist.
-  - Activates the Conda environment.
-  - Installs the dependencies listed in requirements.txt.
-  - Executes the gui_main.py script located in the GUI directory.
+  - `Main Script`: Specifies `GUI/gui_main.py` as the entry point of the application;
+  - `Additional Data`: Includes additional data and directories such as `Data-Acquisition`, `API scripts`, and images from `GUI/images`.
+  - `Executable Configuration`: Configures the executable with options like name (`glovedatahub`), icon (`GDH_icon.ico`), and other settings to manage binary exclusion, debugging, and compression.
+- `prepare.ps1` is a PowerShell script that automates the setup of a Conda environment on Windows OS . It takes a single parameter, the name of the Conda environment, and performs the following tasks:
+  - Checks if the environment name is provided; if not, it displays usage instructions and exits;
+  - Creates the specified Conda environment with `Python 3.12.3` if it does not already exist;
+  - Activates the Conda environment;
+  - Installs the dependencies listed in `requirements.txt`;
+  - Executes the gui_main.py script located in the `GUI directory`;
 - `prepare.sh` this bash script automates the setup of a Conda environment on Unix-like operating systems. It takes a single parameter, the name of the Conda environment, and performs the following tasks:
-  - Checks if the environment name is provided; if not, it displays usage instructions and exits.
-  - Creates the specified Conda environment with Python 3.12.3 if it does not already exist.
-  - Activates the Conda environment.
-  - Installs the dependencies listed in requirements.txt.
-  - Executes the gui_main.py script located in the GUI directory.
-- `requirements.txt` contains the list of dependencies for the project.
-- `README.md` is the file you are currently reading.
+  - Checks if the environment name is provided; if not, it displays usage instructions and exits;
+  - Creates the specified Conda environment with `Python 3.12.3` if it does not already exist;
+  - Activates the Conda environment;
+  - Installs the dependencies listed in `requirements.txt`;
+  - Executes the gui_main.py script located in the `GUI directory`;
+- `requirements.txt` contains the list of dependencies for the project;
+- `README.md` is the file you are currently reading;
 
 ---
 
