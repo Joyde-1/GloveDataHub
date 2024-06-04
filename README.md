@@ -24,11 +24,11 @@ limitations under the License.
 This is an API that allows you to extract data from your SenseGlove haptic gloves, leveraging your PC's Bluetooth protocol and the gloves to establish the connection between devices, and utilizing the glove calibration service provided by the SenseCom API.
 
 <p align="center">
-    <a href="https://github.com/Adjuvo/SenseGlove-API.git">
-        <img alt="SenseGlove" src="https://img.shields.io/badge/Download-SenseGlove-brightgreen">
+    <a href="https://www.glovedatahub.it">
+        <img alt="SenseGlove" src="https://img.shields.io/badge/Our-website-brightgreen">
     </a>
-    <a href="https://www.senseglove.com/developer/">
-        <img alt="Buy Haptic Gloves" src="https://img.shields.io/badge/Buy-Haptic%20Gloves-blue">
+    <a href="https://linktr.ee/glovedatahub">
+        <img alt="Contact-us" src="https://img.shields.io/badge/Contact-us%20-blue">
     </a>
 </p>
 
@@ -94,7 +94,7 @@ Inside the file `requirements.txt` you can find the following modules:
 
 Here you can find information about ["How to Connect SenseGlove"](https://senseglove.gitlab.io/SenseGloveDocs/connecting-devices.html) to the system.
 
-- After downloading the SenseCom application and connecting the SenseGlove by the bluethoot protocol to your computer, you should be able to open SenseCom application, click the connect button, and see something like this:
+- After downloading the SenseCom application and connecting the SenseGlove by the bluetooth protocol to your computer, you should be able to open SenseCom application, click the connect button, and see something like this:
 
 <p align="center">
   <img alt="SenseCom" src="GUI\images\SenseCom.png" width="512" height="287" style="max-width: 100%;">
@@ -248,7 +248,7 @@ GDH_repository/
 
 ### Download
 You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website glovedatahub.
-it from which you can download the app directly
+it from which you can download the app directly.
 
 <p align="center">
   <img alt="GloveDataHub" src="GUI\images\glovedatahub_qr_code.png" width="400" height="450" style="max-width: 100%;">
