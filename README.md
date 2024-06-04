@@ -251,8 +251,7 @@ GDH_repository/
 ---
 
 ### Download
-You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website glovedatahub.
-it from which you can download the app directly.
+You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website `glovedatahub.it`, it from which you can download the app directly.
 
 <p align="center">
   <img alt="GloveDataHub" src="GUI\images\glovedatahub_qr_code.png" width="400" height="450" style="max-width: 100%;">
