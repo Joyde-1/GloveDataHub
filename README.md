@@ -21,7 +21,7 @@ limitations under the License.
   <br/>
 </p>
 
-This is an APP that allows you to extract raw data from your haptic gloves SenseGlove nova 1, leveraging your PC's Bluetooth protocol and the gloves to establish the connection between devices, and utilizing the glove calibration service provided by the SenseCom API.
+This is an APP that allows you to extract raw data from your haptic gloves SenseGlove Nova 1, using the SenseGlove-API repository and the connection and calibration services provided by the SenseCom application.
 
 <p align="center">
     <a href="https://www.glovedatahub.it">
@@ -35,7 +35,7 @@ This is an APP that allows you to extract raw data from your haptic gloves Sense
 
 | | |
 | --- | --- |
-| **Description** | GloveDataHub is an APP that allows you to extract raw data  your haptic gloves SenseGlove |
+| **Description** | GloveDataHub is an APP that allows you to extract raw data from your haptic gloves SenseGlove Nova 1|
 | **Authors** |Giovanni Fanara and Alfredo Giaocchino MariaPio Vecchio|
 | **License** | [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.it) |
 
@@ -52,23 +52,33 @@ This is an APP that allows you to extract raw data from your haptic gloves Sense
 ---
 
 ### Introduction
-GloveDataHub is an APP that allows you to extract raw data from your haptic gloves SenseGlove Nova. It ensures the connection of these gloves to your PC utilizing the Bluetooth protocol present in the devices. Additionally, the GloveDataHub API embeds a third-party application provided by the glove manufacturer, which manages the connection between the PC and the gloves and also facilitates the calibration process of the devices. Within the GloveDataHub API, it is further possible to extract raw data from your gloves using the executable obtained from a C++ script `glove_data_acquisition.exe` and the `.dll` file `SGCoreCpp.dll` of the haptic glove management libraries, now linked. This executable is invoked as an action associated with the start measurement button, allowing the user to specify a specific time to use during task execution, or the user can choose not to specify any time and ensure an infinite measurement time. At the end of the measurement, the results stored in a `.CSV` file are saved in the specified folder entered during the entry of the user's personal information fields.
+GloveDataHub is an APP that allows you to extract raw data from SenseGlove Nova 1 haptic gloves. In addition, GloveDataHub incorporates a third-party application, provided by the glove manufacturer, which manages the connection between the PC and the gloves and facilitates the process of calibration of the devices. 
+To capture data from haptic gloves, GloveDataHub uses an executable, obtained from the `glove_data_acquisition.cpp` script, and the `SGCoreCpp.dll` file to link the haptic glove management libraries. This executable is invoked by the action associated with the start measurement button, allowing the user to specify the duration of execution of the task, or not to configure any duration and ensure an infinite measurement time.
+At the end of the measurement, the acquired data can be found stored in a file `.CSV`, which was created at the beginning of the data acquisition using the information entered by the user in the compilation fields required by the system.
 
 ### Getting started
 
-#### 1.1 Getting the SenseCom application your computer
+#### 1.1 Getting the SenseCom application to your computer
+
+##### 1.1.1
+
+##### 1.1.2
 
 *Software Requirements*
 
 - Windows 10 or above
 
-- [SenseGlove](https://github.com/Adjuvo/SenseGlove-API.git)
+- [SenseGlove](https://github.com/Adjuvo/SenseGlove-API/releases/tag/v1.4.0)
 
 To ensure the connection of your haptic gloves SenseGlove Nova to your computer you must take the following steps:
 - Go to to [SenseGlove](https://github.com/Adjuvo/SenseGlove-API.git) and proceed with installation of the sensecom application.
 - Then go to the settings of your computer, make sure that both gloves are turned on and connect them to the pc via bluethoot.
 
 #### 1.2 Requirements
+
+##### 1.2.1
+
+##### 1.2.2
 
 The project is based on **Python 3.12.3** - one of the latest versions of Python at the time of writing. A few considerations:
 - It is recommended to use a virtual environment to manage the dependencies of the project. For example [conda](https://docs.conda.io/en/latest/).
