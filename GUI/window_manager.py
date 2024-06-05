@@ -472,7 +472,7 @@ class WindowManager(QWidget):
             self.exe_manager.set_sensecom_process(sensecom_process)
             
             # Embed SenseCom into the GUI
-            QTimer.singleShot(2500, self._embed_sensecom_window)
+            QTimer.singleShot(1500, self._embed_sensecom_window)
             
             # Hide 'Start SenseCom' button
             self.sensecom_button.hide()
@@ -491,13 +491,13 @@ class WindowManager(QWidget):
                     process.terminate()
                     break
             
-            time.sleep(0.5)
+            time.sleep(0.25)
 
             # Start SenseCom API
             self.exe_manager.start_sensecom()
             
             # Embed SenseCom into the GUI
-            QTimer.singleShot(2500, self._embed_sensecom_window)
+            QTimer.singleShot(1500, self._embed_sensecom_window)
             
             # Hide 'Start SenseCom' button
             self.sensecom_button.hide()

@@ -3,31 +3,31 @@ param (
 )
 
 if (-not $envName) {
-    Write-Host "Uso: .\prepare.ps1 <nome_ambiente_conda>"
+    Write-Host "Usage: .\prepare.ps1 <nome_ambiente_conda>"
     exit 1
 }
 
 $mainPath = "GUI\gui_main.py"
 
-Write-Host "Nome dell'ambiente: $envName"
-Write-Host "Path del main: $mainPath"
+Write-Host "Environment name: $envName"
+Write-Host "Path of the main: $mainPath"
 
-# Crea l'ambiente Conda (se non esiste)
+# Create the Conda environment (if it does not exist)
 if (-not (conda env list | Select-String -Pattern $envName)) {
-    Write-Host "Creazione dell'ambiente Conda '$envName'..."
+    Write-Host "Creation of the Conda environment '$envName'..."
     conda create -y -n $envName python=3.12.3
 }
 
-# Attiva l'ambiente Conda
-Write-Host "Attivazione dell'ambiente Conda '$envName'..."
+# Activate the Conda environment
+Write-Host "Activation of the Conda environment '$envName'..."
 conda activate $envName
 
-# Installa le dipendenze
-Write-Host "Installazione delle dipendenze dal file requirements.txt..."
+# Install the dependencies
+Write-Host "Installing dependencies from the requirements.txt file..."
 pip install -r requirements.txt
 
-# Esegui il file gui_main.py
-Write-Host "Esecuzione del file $mainPath..."
-python $mainPath
+Write-Host "Created '$envName' environment and successfully installed dependencies!"
 
-Write-Host "Ambiente '$envName' creato e dipendenze installate con successo!"
+# Run the file gui_main.py
+Write-Host "Running the $mainPath file..."
+python $mainPath

@@ -1,34 +1,32 @@
-#!/bin/bash
-
-# Verifica se viene passato un argomento per il nome dell'ambiente
+# Check if an argument for the environment name is passed
 if [ -z "$1" ]; then
-  echo "Uso: $0 <nome_ambiente_conda>"
+  echo "Usage: $0 <nome_ambiente_conda>"
   exit 1
 fi
 
-# Nome dell'ambiente Conda
+# Name of the Conda environment
 ENV_NAME=$1
 
-# Path del file gui_main.py
+# Path of the file gui_main.py
 MAIN_PATH="GUI/gui_main.py"
 
-# Crea l'ambiente Conda (se non esiste)
+# Create the Conda environment (if it does not exist)
 if ! conda env list | grep -q "$ENV_NAME"; then
-  echo "Creazione dell'ambiente Conda '$ENV_NAME'..."
+  echo "Creation of the Conda environment '$ENV_NAME'..."
   conda create -y -n $ENV_NAME python=3.12.3
 fi
 
-# Attiva l'ambiente Conda
-echo "Attivazione dell'ambiente Conda '$ENV_NAME'..."
+# Activate the Conda environment
+echo "Activation of the Conda environment '$ENV_NAME'..."
 source activate $ENV_NAME
 
-# Installa le dipendenze
-echo "Installazione delle dipendenze dal file requirements.txt..."
+# Install the dependencies
+echo "Installing dependencies from the requirements.txt file..."
 pip install -r requirements.txt
 
-# Esegui il file gui_main.py
-echo "Esecuzione del file $MAIN_PATH..."
-python $MAIN_PATH
+# Completion message
+echo "Created '$ENV_NAME' environment and successfully installed dependencies!"
 
-# Messaggio di completamento
-echo "Ambiente '$ENV_NAME' creato e dipendenze installate con successo!"
+# Run the file gui_main.py
+echo "Running the $MAIN_PATH file..."
+python $MAIN_PATH

@@ -58,7 +58,23 @@ At the end of the measurement, the acquired data can be found stored in a file `
 
 ## 1. Getting started
 
-### 1.1 PC requirements
+This section shows the procedures to be followed to properly install the software related to data acquisition from the SenseGlove Nova 1 haptic gloves and the GloveDataHub application. In addition, instructions are provided for proper use of the downloaded software.
+
+### 1.1 How to acquire data from SenseGlove Nova 1 haptic gloves
+
+
+
+#### 1.1.1 Requirements for acquiring data from SenseGlove Nova 1 haptic gloves
+
+*Software Requirements*
+
+- [MSVC v143 compiler](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+
+- [SenseGlove API v1.4.0](https://github.com/Adjuvo/SenseGlove-API/archive/refs/tags/v1.4.0.zip)
+
+- [CMake version 3.29.2 or later](https://cmake.org/download/)
+
+#### 1.2
 
 In this section will be explained all the necessary software to install in order to use GloveDataHub on your computer.
 
@@ -68,19 +84,8 @@ In this section will be explained all the necessary software to install in order
 
 - Bluetooth 4.2 or above
 
-#### 1.1 Requirements for acquiring data from SenseGlove Nova 1 haptic gloves
 
-*Software Requirements*
 
-- [Visual Studio Code](https://code.visualstudio.com/download)
-
-- [MSVC v143 compiler](https://aka.ms/vs/17/release/vs_BuildTools.exe)
-
-- [SenseGlove API v1.4.0](https://github.com/Adjuvo/SenseGlove-API/archive/refs/tags/v1.4.0.zip)
-
-- [CMake version 3.29.2 or later](https://cmake.org/download/)
-
-#### 1.1.2 
 
 To ensure the connection of your haptic gloves SenseGlove Nova 1 to your computer you must take the following steps:
 
