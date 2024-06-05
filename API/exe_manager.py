@@ -8,6 +8,7 @@
 
 import subprocess
 import psutil
+import os
 
 class ExeManager:
     """
@@ -39,9 +40,27 @@ class ExeManager:
         """
         
         self.path_script = "Data-Acquisition/gloves_data_acquisition.exe"
-        self.path_sensecom = "C:/Program Files/SenseCom/SenseCom.exe"
+        
+        # Check if SenseCom application is saved in 'Program Files' or 'Program Files (x86)'
+        self._check_sensecom_path()
         
         self.script_return_code = None
+        
+    def _check_sensecom_path(self):
+        """
+        Check and set the SenseCom path.
+        """
+        
+        # SenseCom paths
+        sensecom_primary_path = "C:/Program Files/SenseCom/SenseCom.exe"
+        sensecom_fallback_path = "C:/Program Files (x86)/SenseCom/SenseCom.exe"
+        
+        # Check if the SenseCom primary path exists
+        if os.path.exists(sensecom_primary_path):
+            self.path_sensecom = sensecom_primary_path
+        else:
+            # If SenseCom primary path does not exist, set the SenseCom fallback path
+            self.path_sensecom = sensecom_fallback_path
 
     def start_sensecom(self):
         """

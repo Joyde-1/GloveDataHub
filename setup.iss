@@ -5,11 +5,12 @@ AppPublisher=Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio
 AppPublisherURL=http://glovedatahub.it
 DefaultDirName={pf}\GloveDataHub
 DefaultGroupName=GloveDataHub
-OutputDir=output
-OutputBaseFilename=setup
+OutputDir=Application
+OutputBaseFilename=GloveDataHub-installer
 Compression=lzma
 SolidCompression=yes
 SetupIconFile=GUI\images\GDH_icon.ico
+ArchitecturesInstallIn64BitMode=x64
 
 [Files]
 Source: "dist\glovedatahub\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
