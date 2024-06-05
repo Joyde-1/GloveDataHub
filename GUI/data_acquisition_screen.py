@@ -634,6 +634,11 @@ class DataAcquisitionScreen:
             msg_box_msg = ("The script to acquire data from haptic gloves failed to <br>"
                            "start SenseCom by forcing it to run. <br>"
                            'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
+        else:
+            msg_box_title = "Error"
+            msg_box_msg = ("The script to acquire data from haptic gloves was interrupted <br>"
+                           "unexpectedly. <br>"
+                           'Please press the <b><span style="color: #025885;">Restart</span></b> button to perform a new measurement.')
         
         message_manager = MessageManager(msg_box_title, msg_box_msg)
             
