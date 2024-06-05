@@ -90,9 +90,11 @@ In this section will be explained all the necessary software to install in order
 
 - [SenseGlove](https://github.com/Adjuvo/SenseGlove-API/releases/tag/v1.4.0)
 
-To ensure the connection of your haptic gloves SenseGlove Nova to your computer you must take the following steps:
-- Go to to [SenseGlove](https://github.com/Adjuvo/SenseGlove-API.git) and proceed with installation of the sensecom application.
+To ensure the connection of your haptic gloves SenseGlove Nova 1 to your computer you must take the following steps:
+- Go to to [SenseGlove](https://github.com/Adjuvo/SenseGlove-API/releases/tag/v1.4.0) and proceed with installation of the SenseCcom application.
 - Then go to the settings of your computer, make sure that both gloves are turned on and connect them to the pc via bluethoot.
+    - if your pc is equipped with the Windows 11 operating system and you cannot find your Nova Glove in the list of possible devices
+      you might need to change your Bluetooth Devices Discovery setting to “Advanced” as opposed to “Basic”. 
 
 ### 1.2 Requirements
 
