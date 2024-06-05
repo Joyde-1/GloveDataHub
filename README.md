@@ -56,13 +56,33 @@ GloveDataHub is an APP that allows you to extract raw data from SenseGlove Nova 
 To capture data from haptic gloves, GloveDataHub uses an executable, obtained from the `glove_data_acquisition.cpp` script, and the `SGCoreCpp.dll` file to link the haptic glove management libraries. This executable is invoked by the action associated with the start measurement button, allowing the user to specify the duration of execution of the task, or not to configure any duration and ensure an infinite measurement time.
 At the end of the measurement, the acquired data can be found stored in a file `.CSV`, which was created at the beginning of the data acquisition using the information entered by the user in the compilation fields required by the system.
 
-## Getting started
+## 1. Getting started
 
-### 1.1 Getting the SenseCom application to your computer
+### 1.1 PC requirements
 
-#### 1.1.1
+In this section will be explained all the necessary software to install in order to use GloveDataHub on your computer.
 
-#### 1.1.2
+*Software Requirements*
+
+- 
+
+- Windows 10 or above
+
+- Bluetooth 4.2 or above
+
+#### 1.1 Requirements for acquiring data from SenseGlove Nova 1 haptic gloves
+
+*Software Requirements*
+
+- [Visual Studio Code](https://code.visualstudio.com/download)
+
+- [MSVC v143 compiler](https://aka.ms/vs/17/release/vs_BuildTools.exe)
+
+- [SenseGlove API v1.4.0](https://github.com/Adjuvo/SenseGlove-API/archive/refs/tags/v1.4.0.zip)
+
+- [CMake version 3.29.2 or later](https://cmake.org/download/)
+
+#### 1.1.2 
 
 *Software Requirements*
 
