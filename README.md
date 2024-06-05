@@ -62,9 +62,10 @@ This section shows the procedures to be followed to properly install the softwar
 
 ### 1.1 How to acquire data from SenseGlove Nova 1 haptic gloves
 
+The process of acquiring data from SenseGlove Nova 1 haptic gloves is very laborious because it requires specific knowledge of C++ programming. This difficulty is overcome by the GloveDataHub application, which prepares files that perform this process.
+Nevertheless, data acquisition from haptic gloves can be performed independently of GloveDataHub. Below will be presented the steps to use correctly the software used for this purpose
 
-
-#### 1.1.1 Requirements for acquiring data from SenseGlove Nova 1 haptic gloves
+#### 1.1.1 Requirements for using SenseGlove Nova 1 haptic gloves
 
 *Software Requirements*
 
@@ -74,7 +75,7 @@ This section shows the procedures to be followed to properly install the softwar
 
 - [CMake version 3.29.2 or later](https://cmake.org/download/)
 
-#### 1.2
+#### 1.1.2 Setup the software needed to capture data from SenseGlove Nova 1 haptic gloves
 
 In this section will be explained all the necessary software to install in order to use GloveDataHub on your computer.
 
@@ -114,7 +115,9 @@ To ensure the connection of your haptic gloves SenseGlove Nova 1 to your compute
 
 You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html).
 
-### 1.2 Requirements for GloveDataHub
+### 1.2 GloveDataHub application guide
+
+#### 1.2.1 Requirements for GloveDataHub
 
 *Software Requirements*
 
@@ -141,8 +144,6 @@ The project is based on **Python 3.12.3** - one of the latest versions of Python
 
 - The requirements can be installed on Windows by using the `prepare.ps1` script in this way : `.\prepare.ps1 -envName "name_conda_enviroment"` ;
 - The requirements can be installed on Unix/linux by using the `prepare.sh` script in this way : `./prepare.sh name_conda_enviroment` ;
-
-#### 1.2.1
 
 #### 1.2.2
 
