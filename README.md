@@ -64,8 +64,6 @@ In this section will be explained all the necessary software to install in order
 
 *Software Requirements*
 
-- 
-
 - Windows 10 or above
 
 - Bluetooth 4.2 or above
@@ -84,29 +82,43 @@ In this section will be explained all the necessary software to install in order
 
 #### 1.1.2 
 
-*Software Requirements*
-
-- Windows 10 or above
-
-- [SenseGlove](https://github.com/Adjuvo/SenseGlove-API/releases/tag/v1.4.0)
-
 To ensure the connection of your haptic gloves SenseGlove Nova 1 to your computer you must take the following steps:
-- Go to to [SenseGlove](https://github.com/Adjuvo/SenseGlove-API/releases/tag/v1.4.0) and proceed with installation of the SenseCcom application.
+
+- Go to to [SenseGlove](https://github.com/Adjuvo/SenseGlove-API/releases/tag/v1.4.0) and proceed with the installation of the SenseCcom application.
 - Then go to the settings of your computer, make sure that both gloves are turned on and connect them to the pc via bluethoot.
     - if your pc is equipped with the Windows 11 operating system and you cannot find your Nova Glove in the list of possible devices
-      you might need to change your Bluetooth Devices Discovery setting to “Advanced” as opposed to “Basic”. 
+      you might need to change your Bluetooth Devices Discovery setting to “Advanced” as opposed to “Default”.
 
-### 1.2 Requirements
+      <p align="center">
+        <img alt="Win11BTConnection" src="GUI\images\winBT_adv.png" width="800" height="500" style="max-width: 100%;">
+        <br/>
+        <br/>
+      </p>
+      
+      *Other Helpful Resources :*
+      
+      Here you can find information about ["How to Connect SenseGlove"](https://senseglove.gitlab.io/SenseGloveDocs/connecting-devices.html) to the system.
 
-#### 1.2.1
+- After downloading the SenseCom application and connecting the SenseGlove by the bluetooth protocol to your computer, you should be able to open SenseCom application, click the connect button, and see something like this:
 
-#### 1.2.2
+<p align="center">
+  <img alt="SenseCom" src="GUI\images\SenseCom.png" width="512" height="287" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
 
-The project is based on **Python 3.12.3** - one of the latest versions of Python at the time of writing. A few considerations:
-- It is recommended to use a virtual environment to manage the dependencies of the project. For example [conda](https://docs.conda.io/en/latest/).
-- The requirements are listed in the `requirements.txt` file and can be installed using the `prepare.ps1` for windows and the the user can run the `prepare.ps1` script by passing the environment name conda as argument as follow:  `.\prepare.ps1 -envName "name_conda_enviroment" `, or on Unix/linux by running the `prepare.sh` file and the user can run the `prepare.sh`  script and pass the environment name conda as argument, in the following way: `./prepare.sh name_conda_enviroment`.
+You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html).
 
-Inside the file `requirements.txt` you can find the following modules:
+### 1.2 Requirements for GloveDataHub
+
+*Software Requirements*
+
+The project is based on **Python 3.12.3** - one of the latest versions of Python at the time of writing. 
+
+-  It is recommended to use a virtual environment to manage the dependencies of the project. For example [conda](https://docs.conda.io/en/latest/) ;
+- The requirements are listed in the `requirements.txt` file;
+  
+  Inside the file `requirements.txt` you can find the following modules:
 
   - comtypes (1.4.2)
   - pillow (10.3.0)
@@ -122,19 +134,12 @@ Inside the file `requirements.txt` you can find the following modules:
   - six (1.16.0)
   - wheel (0.43.0)
 
-*Other Helpful Resources :*
+- The requirements can be installed on Windows by using the `prepare.ps1` script in this way : `.\prepare.ps1 -envName "name_conda_enviroment"` ;
+- The requirements can be installed on Unix/linux by using the `prepare.sh` script in this way : `./prepare.sh name_conda_enviroment` ;
 
-Here you can find information about ["How to Connect SenseGlove"](https://senseglove.gitlab.io/SenseGloveDocs/connecting-devices.html) to the system.
+#### 1.2.1
 
-- After downloading the SenseCom application and connecting the SenseGlove by the bluetooth protocol to your computer, you should be able to open SenseCom application, click the connect button, and see something like this:
-
-<p align="center">
-  <img alt="SenseCom" src="GUI\images\SenseCom.png" width="512" height="287" style="max-width: 100%;">
-  <br/>
-  <br/>
-</p>
-
-You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html).
+#### 1.2.2
 
 
 ## Code structure
@@ -154,8 +159,7 @@ GDH_repository/
 │   ├── glovedatahub/
 │       ├── localpycs/
 │
-│
-├── Datat-Acquisition/
+├── Data-Acquisition/
 │   ├── docs/
 │   │   ├── html/   
 │   │   ├── latex/
@@ -163,6 +167,11 @@ GDH_repository/
 │   ├── gloves_data_acquisition.cpp
 │   ├── gloves_data_acquisition.exe
 │   └── SGCoreCpp.dll
+│
+├── Dist/
+│   ├── glovedatahub/
+│       ├── _internal/
+│       ├── glovedatahub.exe
 │
 ├── docs/
 │   ├── build/
