@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-## GloveDataHub
+# GloveDataHub
 
 <p align="center">
   <img alt="GloveDataHub" src="GUI\images\GDH.webp" width="300" height="300" style="max-width: 100%;">
@@ -41,7 +41,7 @@ This is an APP that allows you to extract raw data from your haptic gloves Sense
 
 ---
 
-### Table of Contents
+## Table of Contents
 
 - [GloveDataHub](#GloveDataHub)
   - [Introduction](#introduction)
@@ -51,18 +51,18 @@ This is an APP that allows you to extract raw data from your haptic gloves Sense
 
 ---
 
-### Introduction
+## Introduction
 GloveDataHub is an APP that allows you to extract raw data from SenseGlove Nova 1 haptic gloves. In addition, GloveDataHub incorporates a third-party application, provided by the glove manufacturer, which manages the connection between the PC and the gloves and facilitates the process of calibration of the devices. 
 To capture data from haptic gloves, GloveDataHub uses an executable, obtained from the `glove_data_acquisition.cpp` script, and the `SGCoreCpp.dll` file to link the haptic glove management libraries. This executable is invoked by the action associated with the start measurement button, allowing the user to specify the duration of execution of the task, or not to configure any duration and ensure an infinite measurement time.
 At the end of the measurement, the acquired data can be found stored in a file `.CSV`, which was created at the beginning of the data acquisition using the information entered by the user in the compilation fields required by the system.
 
-### Getting started
+## Getting started
 
-#### 1.1 Getting the SenseCom application to your computer
+### 1.1 Getting the SenseCom application to your computer
 
-##### 1.1.1
+#### 1.1.1
 
-##### 1.1.2
+#### 1.1.2
 
 *Software Requirements*
 
@@ -74,11 +74,11 @@ To ensure the connection of your haptic gloves SenseGlove Nova to your computer 
 - Go to to [SenseGlove](https://github.com/Adjuvo/SenseGlove-API.git) and proceed with installation of the sensecom application.
 - Then go to the settings of your computer, make sure that both gloves are turned on and connect them to the pc via bluethoot.
 
-#### 1.2 Requirements
+### 1.2 Requirements
 
-##### 1.2.1
+#### 1.2.1
 
-##### 1.2.2
+#### 1.2.2
 
 The project is based on **Python 3.12.3** - one of the latest versions of Python at the time of writing. A few considerations:
 - It is recommended to use a virtual environment to manage the dependencies of the project. For example [conda](https://docs.conda.io/en/latest/).
@@ -115,7 +115,7 @@ Here you can find information about ["How to Connect SenseGlove"](https://senseg
 You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html).
 
 
-### Code structure
+## Code structure
 
 The code is structured as follows:
 
@@ -260,7 +260,7 @@ GDH_repository/
 
 ---
 
-### Download
+## Download
 You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website `glovedatahub.it`, it from which you can download the app directly.
 
 <p align="center">
@@ -269,6 +269,6 @@ You can easily download the application GloveDataHub scanning the qr code below 
   <br/>
 </p>
 
-### License
+## License
 
 This project is licensed under the terms of the CC BY-NC-ND 4.0 license. You can find the full license in the `LICENSE` file.
