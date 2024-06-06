@@ -150,6 +150,25 @@ The steps to do this step of compiling the C++ code will be described below.
 
 - You will find the executable file inside the `build/Debug` folder.
 
+### 1.1.3 How to connect SenseGlove Nova 1 to your device
+
+To ensure the connection of your haptic gloves SenseGlove Nova 1 to your computer you must take the following steps:
+
+- Go to the settings of your computer, make sure that both gloves are turned on and connect them to the PC via bluetooth.
+    - if your pc is equipped with the Windows 11 operating system and you cannot find your Nova Glove in the list of possible devices
+      you might need to change your Bluetooth Devices Discovery setting to “Advanced” as opposed to “Default”.
+
+      <br>
+      <p align="center">
+        <img alt="Win11BTConnection" src="Images\winBT_adv.png" width="800" height="500" style="max-width: 100%;">
+        <br/>
+        <br/>
+      </p>
+      
+      *Other Helpful Resources :*
+      
+      Here you can find information about ["How to Connect SenseGlove"](https://senseglove.gitlab.io/SenseGloveDocs/connecting-devices.html) to the system.
+
 ### 1.2 GloveDataHub application guide
 
 ---
@@ -404,24 +423,11 @@ GDH_repository/
 
 In this section we will explain the entire operation of the GloveDataHub application starting from the connection of the haptic gloves to the extraction of data.
 
-### 3.1 How to connect SenseGlove Nova 1 to your device
+### 3.1 Welcome Screen
 
-To ensure the connection of your haptic gloves SenseGlove Nova 1 to your computer you must take the following steps:
+### 3.2 Calibration Screen
 
-- Go to the settings of your computer, make sure that both gloves are turned on and connect them to the PC via bluetooth.
-    - if your pc is equipped with the Windows 11 operating system and you cannot find your Nova Glove in the list of possible devices
-      you might need to change your Bluetooth Devices Discovery setting to “Advanced” as opposed to “Default”.
 
-      <br>
-      <p align="center">
-        <img alt="Win11BTConnection" src="Images\winBT_adv.png" width="800" height="500" style="max-width: 100%;">
-        <br/>
-        <br/>
-      </p>
-      
-      *Other Helpful Resources :*
-      
-      Here you can find information about ["How to Connect SenseGlove"](https://senseglove.gitlab.io/SenseGloveDocs/connecting-devices.html) to the system.
 
 - After connecting the haptic gloves to your computer, you should be able to open SenseCom application, click the connect button, and see something like this:
 
@@ -433,6 +439,12 @@ To ensure the connection of your haptic gloves SenseGlove Nova 1 to your compute
 </p>
 
 You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html).
+
+### 3.3 Data Entry Screen
+
+### 3.4 Data Acquisition Screen
+
+### 3.5 Final Screen
 
 ## Download
 You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website `glovedatahub.it`, it from which you can download the app directly.
