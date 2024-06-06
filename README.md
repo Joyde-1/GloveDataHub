@@ -392,10 +392,10 @@ GDH_repository/
 - `API/` contains the classes for managing the executable file;
 - `Data-Acquisition/` contains:
   - `gloves_data_acquisition.cpp` that is the C++ script;
-  - `gloves_data_acquisition.exe` which is the executable file obtained from the c++ script.;
+  - `gloves_data_acquisition.exe` which is the executable file obtained from the C++ script.;
   - `SGCoreCpp.dll` contains the libraries linked to the executable file. 
   - `CMakeLists.txt`is the cmake file needed to create the executable from the file . cpp using the following command: `cmake -S . -B build -DSGCORECPP_PATH="C:/Users/Username/Downloads/SenseGlove-API-1.4.0/SenseGlove-API-1.4.0/Core/SGCoreCpp" `;
-  - `docs` docs is a folder consisting of two subfolders html and latex inside which is contained the documentation related to the script c++ in pdf and html;
+  - `docs` docs is a folder consisting of two subfolders html and latex inside which is contained the documentation related to the script C++ in pdf and html;
 - `docs/` contains the HTML files related to the documentation and they are located inside the `build/` folder within the `html/` folder;
 - `GUI/` contains the classes for managing the GUI interface;
 - `glovedatahub.spec` it's a PyInstaller specification file and it is used to configure the bundling of your Python application into a standalone executable. The file includes the following key configurations:
