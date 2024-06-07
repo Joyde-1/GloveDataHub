@@ -123,7 +123,7 @@ Below are the steps for installation:
 
 <br>
 <p align="center">
-  <img alt="VS_Build_Tools" src="Images\VS_Build_Tools.png" width="769" height="382" style="max-width: 100%; max-height: 100%">
+  <img alt="VS Build Tools" src="Images\VS_Build_Tools.png" width="769" height="382" style="max-width: 100%; max-height: 100%">
   <br/>
   <br/>
 </p>
@@ -264,7 +264,9 @@ To run GloveDataHub correctly, you must install the [SenseGlove API](#senseglove
 
 If you want to recreate the GloveDataHub application, you need to follow these steps:
 - Edit the `glovedatahub.spec` file and compile it using the appropriate command: `pyinstaller glovedatahub.spec`.
+
 - Installing [Inno Setup Compiler](https://jrsoftware.org/download.php/is.exe).
+
 - Edit the `setup.iss` file, open the Inno Setup Compiler application and compile the question file.
 
 ## 2. Code structure
@@ -402,7 +404,7 @@ GDH_repository/
   - `Main Script`: Specifies `GUI/gui_main.py` as the entry point of the application;
   - `Additional Data`: Includes additional data and directories such as `Data-Acquisition`, `API scripts`, and images from `GUI/images`.
   - `Executable Configuration`: Configures the executable with options like name (`glovedatahub`), icon (`GDH_icon.ico`), and other settings to manage binary exclusion, debugging, and compression.
-- `prepare.ps1` is a PowerShell script that automates the setup of a Conda environment on Windows OS . It takes a single parameter, the name of the Conda environment, and performs the following tasks:
+- `prepare.ps1` is a PowerShell script that automates the setup of a Conda environment on Windows OS. It takes a single parameter, the name of the Conda environment, and performs the following tasks:
   - Checks if the environment name is provided; if not, it displays usage instructions and exits;
   - Creates the specified Conda environment with `Python 3.12.3` if it does not already exist;
   - Activates the Conda environment;
@@ -419,9 +421,95 @@ GDH_repository/
 - `setup.iss` is the file to create the GloveDataHub application installer;
 - `version.txt` is the file that contains information about the released version of GloveDataHub.
 
+## 3. Meaning of data acquired by haptic gloves
+
+### 3.1 Anatomy of the human hand
+
+The hand consists of five fingers and is the main center of the tactile sense. An essential tool of humanity, the hand not only facilitates interaction but also expression, integrating or replacing the word through sign language. 
+The five fingers are known as:
+
+- Thumb, derived from the Latin *"pollex-pollicis"*.
+
+- Index, used to provide directions.
+
+- Middle, middle between the other fingers.
+
+- Ring, where the wedding ring is worn.
+
+- Pinky, the smallest, known in Latin as *"digitus minimus"*.
+
+The human hand contains at least 27 bones:
+
+- The carpus, which makes up the wrist, consists of 8 bones arranged in two rows: a proximal and a distal. The proximal row includes: scaphoid, semilunar, pyramidal and pisiform. The distal row includes: trapezium, trapezoid, capitate and hooked. The carpus enters into direct articulation with the distal epiphysis of the radius, the bone of the forearm, with which it establishes the radio-carpal articulation. The ulna, another forearm bone, does not articulate directly with the carpus but is separated by a disc called the triangular ligament of the distal radius-ulnar joint.
+
+- The metacarpal includes 5 long bones, hollow and rich in bone marrow. They articulate proximal with the carpus and distally with the phalanges.
+
+- The phalanges, which make up the fingers, comprise 14 bones. In particular, each finger is formed by three distinct phalanges in: proximal phalanx or first phalanx, which articulates with the corresponding metacarpal bone, middle phalanx or second phalanx, which is articulated with the previous, and distal phalanx or third phalanx or nail phalanx, which contains the nail. An exception is the thumb, in which there are only two distinct phalanges in: proximal phalanx or first phalanx of the thumb and distal phalanx or second phalanx or nail phalanx of the thumb.
+
+<br>
+<p align="center">
+  <img alt="Hand Anatomy" src="Images\hand_anatomy.png" width="850" height="797" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
+
+### 3.2 Variables contained in the HandPose class
+
+Variables in the `HandPose` class are contained within vectors, T[ ], or nested vectors, T[ ][ ]. Vectors always have a maximum length of 5 and the first index will always be used to indicate the finger, in order from the thumb [0] to the little finger [4]. In nested vectors, the second index indicates the finger joint, relative to the position closest to the wrist and the one furthest from the wrist. These nested vectors are 5 x 4 in length, except for the `jointAngles` variable, which is 5 x 3 in length, as it does not include fingertips. 
+
+The parameter `handAngles` represents the articulation of finger joints, in radians. It is a vector of size 5 x 3 within which are contained vectors (`Vect3D`), whose quantities represent the Pronation/Supination (x), Bending/Extension (y) and Abduction/Adduction (z) of this joint. The first index indicates the finger, from the thumb (0) to the little finger (4), while the second indicates the articulation of that finger. Doesn’t include fingertips.
+
+The values of these angles are limited to the "normal" human ranges, especially the operating ranges are those shown in the figure below.
+
+The boolean variable `isRight`, if true, indicates that the HandPose object was generated for the right hand, otherwise, for the left hand. It is mainly used to match a glove, via a HandPose object, to the appropriate hand.
+
+<br>
+<p align="center">
+  <img alt="Joint Angles Ranges" src="Images\joint_angles_ranges.png" width="705" height="371" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
+
+The `jointPositions` represent the position of the hand joints in 3D space, in millimetres, relative to the wrist (0, 0, 0). These variables consist of a vector of size 5 x 4 within which are contained vectors (`Vect3D`). The first index of this matrix indicates the finger, from the thumb (0) to the little finger (4), while the second indicates the joint relative to the finger. It also includes fingertips. 
+This rotation consists of Euler’s angles [-90,0,0] for the left hand and [90,0,0] for the right hand. 
+
+The `jointRotations` represent the rotation in the 3D space relative to the wrist, they consist of quaternions. Note that being relative to the wrist does not take into account the rotation (IMU) of the glove. `jointRotations` is a vector of size 5 x 4.  The first index indicates the finger, from the thumb (0) to the little finger (4), while the second indicates the articulation of that finger. It also includes fingertips.
+
+### 3.3 How "glove_data_acqusition.cpp" script works
+
+For the creation of the `glove_data_acquisition.cpp` script, as previously expressed, the github repository [SenseGlove API v1.4.0](#senseglove-api-installation-guide) was used, in order to capture data from the SenseGlove Nova 1 haptic gloves. The goal of this script is to allow the capture of data regarding the movement of the hand in space. Below is a description of the measured quantities, which are part of the `HandPose` class that contains all the positions and rotations that can be used to represent a hand in 3D space.
+
+#### 3.3.1 Features acquired 
+
+These quantities measured using SenseGlove Nova 1 haptic gloves are saved in a file .CSV with tabulation character: *";"*. The data are arranged in columns according to the following distribution:
+
+- `Date_Time`: contains the date time in the following aaaammgg_hhmmss format;
+
+- `Hand_Angles_FingerName_Index_Axis_Right/Left`: consists of 15 values;
+
+- `Joint_Positions_FingerName_Index1_Index2_Right/Left`: 20 values are reported for this size;
+
+- `Joint_Rotations_FingerName_Index1_Index2_Right/Left`: in this case we find 20 values;
+
+#### 3.3.2 Constraints and requirements
+
+The script is started correctly, if and only if, both haptic gloves are connected to the system.
+
+In order to ensure that the program works properly, you must ensure that the SenseCom application remains open at all times. If SenseCom is not active when the executable file starts, it will open automatically. If, on the other hand, SenseCom is closed during the execution of the program `glove_data_acqusition.exe`, then the program immediately stops data acquisition and returns a code equal to `5`.
+
+In order to run the C++ script you must input the path to the file .CSV, where the acquired data will be saved, and an integer number, indicating the duration of the test in seconds. If the user prefers an unlimited duration, input `-1` is available. In this case, in order to stop the execution there are several actions you can perform:
+
+- Close the SenseCom application;
+
+- Break the bluetooth connection between the haptic gloves and the device;
+
+- Switching off the gloves by force;
+
+- Stop execution of the executable.
+
 ## 4. How GloveDataHub works
 
-In this section we will explain the entire operation of the GloveDataHub application starting from the connection of the haptic gloves to the extraction of data.
+In this section we will explain the entire operation of the GloveDataHub application starting from the calibration of the haptic gloves to the extraction of data.
 
 ### 4.1 Welcome Screen
 
@@ -429,7 +517,7 @@ The screen in question plays the role of welcome screen and aims to show the fea
 
 <br>
 <p align="center">
-  <img alt="SenseCom" src="Images\1.png" width="800" height="485" style="max-width: 100%;">
+  <img alt="Welcome Screen" src="Images\1.png" width="800" height="485" style="max-width: 100%;">
   <br/>
   <br/>
 </p>
@@ -440,7 +528,7 @@ The screen in question offers the possibility to proceed with the calibration pr
 
 <br>
 <p align="center">
-  <img alt="SenseCom" src="Images\2.1.png" width="800" height="485" style="max-width: 100%;">
+  <img alt="Calibration Screen" src="Images\2.1.png" width="800" height="485" style="max-width: 100%;">
   <br/>
   <br/>
 </p>
@@ -463,7 +551,7 @@ If no path is specified, the Documents folder is selected by default. If the use
 
 <br>
 <p align="center">
-  <img alt="SenseCom" src="Images\3.2_sensecom.png" width="800" height="485" style="max-width: 100%;">
+  <img alt="Data Entry Screen" src="Images\3.2_sensecom.png" width="800" height="485" style="max-width: 100%;">
   <br/>
   <br/>
 </p>
@@ -476,7 +564,7 @@ Once the data acquisition is completed, if you are not satisfied with the measur
 
 <br>
 <p align="center">
-  <img alt="SenseCom" src="Images\4.1.2_sensecom.png" width="800" height="485" style="max-width: 100%;">
+  <img alt="Data Acquisition Screen" src="Images\4.1.2_sensecom.png" width="800" height="485" style="max-width: 100%;">
   <br/>
   <br/>
 </p>
@@ -487,7 +575,7 @@ The screen in question gives the possibility to the user to start a new measurem
 
 <br>
 <p align="center">
-  <img alt="SenseCom" src="Images\5.png" width="800" height="485" style="max-width: 100%;">
+  <img alt="Final Screen" src="Images\5.png" width="800" height="485" style="max-width: 100%;">
   <br/>
   <br/>
 </p>
@@ -497,7 +585,7 @@ You can easily download the application GloveDataHub scanning the qr code below 
 
 <br>
 <p align="center">
-  <img alt="GloveDataHub" src="Images\glovedatahub_qr_code.png" width="300" height="350" style="max-width: 100%;">
+  <img alt="GloveDataHub QR Code" src="Images\glovedatahub_qr_code.png" width="300" height="350" style="max-width: 100%;">
   <br/>
   <br/>
 </p>
