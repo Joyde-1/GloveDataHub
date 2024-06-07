@@ -419,17 +419,33 @@ GDH_repository/
 - `setup.iss` is the file to create the GloveDataHub application installer;
 - `version.txt` is the file that contains information about the released version of GloveDataHub.
 
-## 3. How GloveDataHub works
+## 4. How GloveDataHub works
 
 In this section we will explain the entire operation of the GloveDataHub application starting from the connection of the haptic gloves to the extraction of data.
 
-### 3.1 Welcome Screen
+### 4.1 Welcome Screen
 
-### 3.2 Calibration Screen
+The screen in question plays the role of welcome screen and aims to show the features offered by the GUI , which will be presented in subsequent screens.
 
+<br>
+<p align="center">
+  <img alt="SenseCom" src="Images\1.png" width="800" height="485" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
 
+### 4.2 Calibration Screen
 
-- After connecting the haptic gloves to your computer, you should be able to open SenseCom application, click the connect button, and see something like this:
+The screen in question offers the possibility to proceed with the calibration process of haptic gloves. By pressing the Start SenseCom button, you can start an external application, owned by the company that created the gloves, whose primary objective is to ensure the connection and calibration of haptic gloves.
+
+<br>
+<p align="center">
+  <img alt="SenseCom" src="Images\2.1.png" width="800" height="485" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
+
+- After connecting the haptic gloves to your computer, you should be able to open SenseCom application by pressing the Start SenseCom Button that is present in the current scrren, click the connect button, and see something like this:
 
 <br>
 <p align="center">
@@ -440,11 +456,41 @@ In this section we will explain the entire operation of the GloveDataHub applica
 
 You can also customize the settings of your haptic gloves to improve interaction with them as follows ["Customize SenseGlove interaction"](https://senseglove.gitlab.io/SenseGloveDocs/sensecom/settings.html).
 
-### 3.3 Data Entry Screen
+### 4.3 Data Entry Screen
 
-### 3.4 Data Acquisition Screen
+This screen allows the user to enter their personal data and the path to the folder where the CSV. file will be stored.
+If no path is specified, the Documents folder is selected by default. If the user prefers not to indicate the first name, last name and identification code, the system will automatically generate the latter randomly.
 
-### 3.5 Final Screen
+<br>
+<p align="center">
+  <img alt="SenseCom" src="Images\3.2_sensecom.png" width="800" height="485" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
+
+### 4.4 Data Acquisition Screen
+
+On the screen in question, the data is acquired. In order to accurately initiate the data capture process, the user is required to specify the test time in minutes. In case the user does not enter the duration, we proceed with the mode with unlimited duration.
+In any case, the data acquisition can be interrupted at any time by the user by pressing the specific stop button.
+Once the data acquisition is completed, if you are not satisfied with the measurement, you can repeat the process by overwriting the file . CSV previously created.
+
+<br>
+<p align="center">
+  <img alt="SenseCom" src="Images\4.1.2_sensecom.png" width="800" height="485" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
+
+### 4.5 Final Screen
+
+The screen in question gives the possibility to the user to start a new measurement through the appropriate button, or to proceed to the closure of the application through the *Close* button.
+
+<br>
+<p align="center">
+  <img alt="SenseCom" src="Images\5.png" width="800" height="485" style="max-width: 100%;">
+  <br/>
+  <br/>
+</p>
 
 ## Download
 You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website `glovedatahub.it`, it from which you can download the app directly.
