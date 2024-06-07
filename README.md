@@ -108,13 +108,13 @@ Nevertheless, data acquisition from haptic gloves can be performed independently
 
 #### 1.1.2 Setup the software needed to capture data from SenseGlove Nova 1 haptic gloves
 
----
+***
 
 After downloading the various software needed to communicate from your pc with haptic gloves, you can proceed to their installation. Below are instructions to install each software correctly.
 
 ##### SenseGlove API installation guide
 
----
+___
 
 The main repository for interfacing with haptic gloves is SenseGlove API. It contains various libraries that allow you to perform many functions, including managing communication with gloves and capture data.
 Also included are the installation files of SenseCom, the main application for connecting with haptic gloves.
