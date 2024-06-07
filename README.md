@@ -15,8 +15,6 @@ limitations under the License.
 -->
 # GloveDataHub
 
----
-
 <p align="center">
   <img alt="GloveDataHub" src="Images\GDH.webp" width="300" height="300" style="max-width: 100%;">
   <br/>
@@ -45,8 +43,6 @@ This is an APP that allows you to extract raw data from your haptic gloves Sense
 
 ## Table of Contents
 
----
-
 - [GloveDataHub](#GloveDataHub)
   - [Introduction](#introduction)
   - [1. Getting started](#1-getting-started)
@@ -73,30 +69,26 @@ This is an APP that allows you to extract raw data from your haptic gloves Sense
   - [Download](#download)
   - [License](#license)
 
-## Introduction
-
 ---
+
+## Introduction
 
 GloveDataHub is an APP that allows you to extract raw data from SenseGlove Nova 1 haptic gloves. In addition, GloveDataHub incorporates a third-party application, provided by the glove manufacturer, which manages the connection between the PC and the gloves and facilitates the process of calibration of the devices. 
 To capture data from haptic gloves, GloveDataHub uses an executable, obtained from the `glove_data_acquisition.cpp` script, and the `SGCoreCpp.dll` file to link the haptic glove management libraries. This executable is invoked by the action associated with the start measurement button, allowing the user to specify the duration of execution of the task, or not to configure any duration and ensure an infinite measurement time.
 At the end of the measurement, the acquired data can be found stored in a file `.CSV`, which was created at the beginning of the data acquisition using the information entered by the user in the compilation fields required by the system.
 
-## 1. Getting started
-
 ---
+
+## 1. Getting started
 
 This section shows the procedures to be followed to properly install the software related to data acquisition from the SenseGlove Nova 1 haptic gloves and the GloveDataHub application. In addition, instructions are provided for proper use of the downloaded software.
 
 ### 1.1 Installation guide for SenseGlove Nova 1 haptic glove software
 
----
-
 The process of acquiring data from SenseGlove Nova 1 haptic gloves is very laborious because it requires specific knowledge of C++ programming. This difficulty is overcome by the GloveDataHub application, which prepares files that perform this process.
 Nevertheless, data acquisition from haptic gloves can be performed independently of GloveDataHub. Below will be presented the steps to use correctly the software used for this purpose.
 
 #### 1.1.1 Requirements for using SenseGlove haptic gloves
-
----
 
 *Software Requirements*
 
@@ -108,13 +100,9 @@ Nevertheless, data acquisition from haptic gloves can be performed independently
 
 #### 1.1.2 Setup the software needed to capture data from SenseGlove Nova 1 haptic gloves
 
----
-
 After downloading the various software needed to communicate from your pc with haptic gloves, you can proceed to their installation. Below are instructions to install each software correctly.
 
 ##### SenseGlove API installation guide
-
----
 
 The main repository for interfacing with haptic gloves is SenseGlove API. It contains various libraries that allow you to perform many functions, including managing communication with gloves and capture data.
 Also included are the installation files of SenseCom, the main application for connecting with haptic gloves.
@@ -136,8 +124,6 @@ The SenseCom folder contains the SenseCom installation file.
 
 ##### MSVC v143 compiler installation guide
 
----
-
 To compile the files . cpp, where the libraries contained in the Core folder on SenseGlove API are imported, it is highly recommended to use the MSVC v143 compiler.
 
 Below are the steps for installation:
@@ -156,8 +142,6 @@ Below are the steps for installation:
 </p>
 
 ##### CMake installation guide
-
----
 
 If you have edited the `gloves_data_acquisition.cpp` file or created a C++ file, which uses the libraries contained in SenseGlove API, you will need to compile it to create its executable counterpart. Because you are using a third-party API, you must link libraries to code written using files that only software like cmake can generate.
 The steps to do this step of compiling the C++ code will be described below.
@@ -179,8 +163,6 @@ The steps to do this step of compiling the C++ code will be described below.
 
 #### 1.1.3 How to connect SenseGlove Nova 1 to your device
 
----
-
 To ensure the connection of your haptic gloves SenseGlove Nova 1 to your computer you must take the following steps:
 
 - Go to the settings of your computer, make sure that both gloves are turned on and connect them to the PC via bluetooth.
@@ -200,14 +182,10 @@ To ensure the connection of your haptic gloves SenseGlove Nova 1 to your compute
 
 ### 1.2 GloveDataHub installation guide
 
----
-
 The GloveDataHub application consists of several files that you can view and edit.
 The following paragraphs describe the steps to access and execute the code.
 
 #### 1.2.1 Requirements for GloveDataHub
-
----
 
 This section will explain all the software needed to install, use, edit and recreate GloveDataHub on your computer.
 
@@ -224,8 +202,6 @@ This section will explain all the software needed to install, use, edit and recr
 - [Inno Setup Compiler 6.2.2](https://jrsoftware.org/download.php/is.exe)
 
 #### 1.2.2 Setup the software needed to GloveDataHub
-
----
 
 GloveDataHub is an application based on **Python 3.12.3** - one of the latest versions of Python at the time of writing.
 
@@ -298,9 +274,9 @@ If you want to recreate the GloveDataHub application, you need to follow these s
 
 - Edit the `setup.iss` file, open the Inno Setup Compiler application and compile the question file.
 
-## 2. Code structure
-
 ---
+
+## 2. Code structure
 
 The files inside the repository have the following structure:
 
@@ -452,13 +428,11 @@ GDH_repository/
 - `setup.iss` is the file to create the GloveDataHub application installer;
 - `version.txt` is the file that contains information about the released version of GloveDataHub.
 
+---
+
 ## 3. Meaning of data acquired by haptic gloves
 
----
-
 ### 3.1 Anatomy of the human hand
-
----
 
 The hand consists of five fingers and is the main center of the tactile sense. An essential tool of humanity, the hand not only facilitates interaction but also expression, integrating or replacing the word through sign language. 
 The five fingers are known as:
@@ -490,8 +464,6 @@ The human hand contains at least 27 bones:
 
 ### 3.2 Variables contained in the HandPose class
 
----
-
 Variables in the `HandPose` class are contained within vectors, T[ ], or nested vectors, T[ ][ ]. Vectors always have a maximum length of 5 and the first index will always be used to indicate the finger, in order from the thumb [0] to the little finger [4]. In nested vectors, the second index indicates the finger joint, relative to the position closest to the wrist and the one furthest from the wrist. These nested vectors are 5 x 4 in length, except for the `jointAngles` variable, which is 5 x 3 in length, as it does not include fingertips. 
 
 The parameter `handAngles` represents the articulation of finger joints, in radians. It is a vector of size 5 x 3 within which are contained vectors (`Vect3D`), whose quantities represent the Pronation/Supination (x), Bending/Extension (y) and Abduction/Adduction (z) of this joint. The first index indicates the finger, from the thumb (0) to the little finger (4), while the second indicates the articulation of that finger. Doesn’t include fingertips.
@@ -514,13 +486,9 @@ The `jointRotations` represent the rotation in the 3D space relative to the wris
 
 ### 3.3 How "glove_data_acqusition.cpp" script works
 
----
-
 For the creation of the `glove_data_acquisition.cpp` script, as previously expressed, the github repository [SenseGlove API v1.4.0](#senseglove-api-installation-guide) was used, in order to capture data from the SenseGlove Nova 1 haptic gloves. The goal of this script is to allow the capture of data regarding the movement of the hand in space. Below is a description of the measured quantities, which are part of the `HandPose` class that contains all the positions and rotations that can be used to represent a hand in 3D space.
 
 #### 3.3.1 Features acquired
-
----
 
 These quantities measured using SenseGlove Nova 1 haptic gloves are saved in a file .CSV with tabulation character: *";"*. The data are arranged in columns according to the following distribution:
 
@@ -533,8 +501,6 @@ These quantities measured using SenseGlove Nova 1 haptic gloves are saved in a f
 - `Joint_Rotations_FingerName_JointIndex_PositionIndex_Right/Left`: in this case we find 20 values;
 
 #### 3.3.2 Constraints and requirements
-
----
 
 The script is started correctly, if and only if, both haptic gloves are connected to the system.
 
@@ -550,15 +516,13 @@ In order to run the C++ script you must input the path to the file .CSV, where t
 
 - Stop execution of the executable.
 
-## 4. How GloveDataHub works
-
 ---
+
+## 4. How GloveDataHub works
 
 In this section we will explain the entire operation of the GloveDataHub application starting from the calibration of the haptic gloves to the extraction of data.
 
 ### 4.1 Welcome Screen
-
----
 
 The screen in question plays the role of welcome screen and aims to show the features offered by the GUI , which will be presented in subsequent screens.
 
@@ -570,8 +534,6 @@ The screen in question plays the role of welcome screen and aims to show the fea
 </p>
 
 ### 4.2 Calibration Screen
-
----
 
 The screen in question offers the possibility to proceed with the calibration process of haptic gloves. By pressing the Start SenseCom button, you can start an external application, owned by the company that created the gloves, whose primary objective is to ensure the connection and calibration of haptic gloves.
 
@@ -595,8 +557,6 @@ You can also customize the settings of your haptic gloves to improve interaction
 
 ### 4.3 Data Entry Screen
 
----
-
 This screen allows the user to enter their personal data and the path to the folder where the CSV. file will be stored.
 If no path is specified, the Documents folder is selected by default. If the user prefers not to indicate the first name, last name and identification code, the system will automatically generate the latter randomly.
 
@@ -608,8 +568,6 @@ If no path is specified, the Documents folder is selected by default. If the use
 </p>
 
 ### 4.4 Data Acquisition Screen
-
----
 
 On the screen in question, the data is acquired. In order to accurately initiate the data capture process, the user is required to specify the test time in minutes. In case the user does not enter the duration, we proceed with the mode with unlimited duration.
 In any case, the data acquisition can be interrupted at any time by the user by pressing the specific stop button.
@@ -624,8 +582,6 @@ Once the data acquisition is completed, if you are not satisfied with the measur
 
 ### 4.5 Final Screen
 
----
-
 The screen in question gives the possibility to the user to start a new measurement through the appropriate button, or to proceed to the closure of the application through the *Close* button.
 
 <br>
@@ -635,9 +591,9 @@ The screen in question gives the possibility to the user to start a new measurem
   <br/>
 </p>
 
-## Download
-
 ---
+
+## Download
 
 You can easily download the application GloveDataHub scanning the qr code below which will take you back to our website `glovedatahub.it`, it from which you can download the app directly.
 
@@ -648,8 +604,8 @@ You can easily download the application GloveDataHub scanning the qr code below 
   <br/>
 </p>
 
-## License
-
 ---
+
+## License
 
 This project is licensed under the terms of the CC BY-NC-ND 4.0 license. You can find the full license in the `LICENSE` file.
