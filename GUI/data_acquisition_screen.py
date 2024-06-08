@@ -7,7 +7,7 @@
 
 
 from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit, QMessageBox
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit
 from PyQt6.QtGui import QFont
 import os
 import sys

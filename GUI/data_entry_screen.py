@@ -7,7 +7,7 @@
 
 
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QMessageBox,QFileDialog,QLineEdit
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QFileDialog, QLineEdit
 from PyQt6.QtGui import QFont
 from pathlib import Path
 import os
