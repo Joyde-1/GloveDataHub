@@ -287,7 +287,6 @@ GDH_repository/
 │   ├── duration_time.py
 │   ├── exe_manager.py
 │   ├── main_manager.py
-│   ├── main.py
 │   └── user_data.py
 |
 ├── Application/
@@ -302,8 +301,10 @@ GDH_repository/
 │   │   ├── html/   
 │   │   └── latex/
 │   ├── CMakeLists.txt
+│   ├── Doxyfile
 │   ├── gloves_data_acquisition.cpp
 │   ├── gloves_data_acquisition.exe
+│   ├── gloves_data_acquisition.pdb
 │   └── SGCoreCpp.dll
 │
 ├── Dist/
@@ -367,6 +368,7 @@ GDH_repository/
 │   ├── data_entry_screen.py
 │   ├── final_screen.py
 │   ├── gui_main.py
+│   ├── message_manager.py
 │   ├── welcome_screen.py
 │   └── window_manager.py
 │   
@@ -375,14 +377,18 @@ GDH_repository/
 │   ├── 2.1.png
 │   ├── 2.2.png
 │   ├── 3.1.png
+│   ├── 3.2_sensecom.png
 │   ├── 3.2.png
 │   ├── 4.1.1.png
+│   ├── 4.1.2_sensecom.png
 │   ├── 4.1.2.png
 │   ├── 4.2.png
 │   ├── 4.3.png
 │   ├── 5.png
 |   ├── GDH.webp
 │   ├── glovedatahub_qr_code.png
+│   ├── hand_anatomy.png
+│   ├── joint_angles_ranges.png
 │   ├── qr_code_github_repo_glovedatahub.jpg
 │   ├── SenseCom.png
 |   ├── VS_Build_Tools.png
