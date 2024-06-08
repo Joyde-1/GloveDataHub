@@ -21,12 +21,12 @@ VSVersionInfo(
         '040904B0', [
             StringStruct('CompanyName', 'GloveDataHub'),
             StringStruct('FileDescription', 'GloveDataHub Application'),
-            StringStruct('FileVersion', '1.0.0.1'),
+            StringStruct('FileVersion', '1.0.1'),
             StringStruct('InternalName', 'glovedatahub'),
             StringStruct('LegalCopyright', '© GloveDataHub. All rights reserved.'),
             StringStruct('OriginalFilename', 'glovedatahub.exe'),
             StringStruct('ProductName', 'GloveDataHub'),
-            StringStruct('ProductVersion', '1.0.0.1')
+            StringStruct('ProductVersion', '1.0.1')
         ])
       ]
     ),

@@ -1,6 +1,6 @@
 [Setup]
 AppName=GloveDataHub
-AppVersion=1.0
+AppVersion=1.0.1
 AppPublisher=Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio
 AppPublisherURL=http://glovedatahub.it
 DefaultDirName={pf}\GloveDataHub
