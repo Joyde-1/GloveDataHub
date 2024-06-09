@@ -5,34 +5,45 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+import os
+import sys
+
+# Aggiungi il percorso del progetto al sys.path
+sys.path.insert(0, os.path.abspath('../../GUI'))
+sys.path.insert(0, os.path.abspath('../../API'))
 
 project = 'GloveDataHub'
-copyright = '2024, Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio'
-author = 'Giovanni Fanara and Alfredo Gioacchino MariaPio Vecchio'
+copyright = '2024, Giovanni Fanara and Alfredo Giaocchino MariaPio Vecchio'
+author = 'Giovanni Fanara and Alfredo Giaocchino MariaPio Vecchio'
 release = '1.0.1'
-
-# -- General configuration ---------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon',  # Aggiungi questa linea
+    'sphinx.ext.napoleon',
 ]
+
+language = 'Python'
 
 templates_path = ['_templates']
 exclude_patterns = []
 
-import os
-import sys
-sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('./API'))
-sys.path.insert(0, os.path.abspath('./GUI'))
+html_theme = 'alabaster'
+html_static_path = ['_static']
 
-gdh_logo = "_static/GDH.png"
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
 
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
-html_static_path = ['_static']
+
+# Logo configuration
+html_logo = "_static/GDH_icon.ico"
+
+# Specific options for alabasyer theme
+html_theme_options = {
+    'logo': '',
+    'logo_name': True,
+    'description': 'GloveDataHub documentation',
+}
