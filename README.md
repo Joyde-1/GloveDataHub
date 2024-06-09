@@ -284,9 +284,9 @@ The files inside the repository have the following structure:
 GDH_repository/
 |
 ├── API/
+│   ├── __init__.py
 │   ├── duration_time.py
 │   ├── exe_manager.py
-│   ├── main_manager.py
 │   └── user_data.py
 |
 ├── Application/
@@ -295,6 +295,10 @@ GDH_repository/
 ├── build/
 │   └── glovedatahub/
 │       ├── localpycs/
+│       │   ├── ...
+|       |   :
+|       ├── ...
+│       :
 │
 ├── Data-Acquisition/
 │   ├── docs/
@@ -310,21 +314,18 @@ GDH_repository/
 ├── Dist/
 │   └── glovedatahub/
 │       ├── _internal/
+│       │   ├── ...
+|       |   :
 │       └── glovedatahub.exe
 │
 ├── docs/
 │   ├── build/
-│   │   ├── doctrees/
-│   │   │   ├── api.doctree
-│   │   │   ├── enviroment.pickle
-│   │   │   ├── gui.doctree
-│   │   │   └── index.doctree
-│   │   │
 │   │   └── html/
 │   │       ├── _sources/
-│   │       │   ├── api.rst.txt
-│   │       │   ├── gui.rst.txt
-│   │       │   └── index.rst.txt
+│   │       │   ├── API.rst.txt
+│   │       │   ├── GUI.rst.txt
+│   │       │   ├── index.rst.txt
+│   │       │   └── modules.rst.txt
 │   │       ├── _static/
 │   │       │   ├── alabaster.css
 │   │       │   ├── basic.css
@@ -332,27 +333,38 @@ GDH_repository/
 │   │       │   ├── doctools.js
 │   │       │   ├── documentation_options.js
 │   │       │   ├── file.png
+│   │       │   ├── GDH_icon.ico
 │   │       │   ├── langauage_data.js
 │   │       │   ├── minus.png
 │   │       │   ├── plus.png
 │   │       │   ├── pygments.css
+│   │       │   ├── searchtools.js
 │   │       │   └── sphninx_highlight.js
+│   │       ├── .doctrees/
+│   │       │   ├── API.doctree
+│   │       │   ├── enviroment.pickle
+│   │       │   ├── GUI.doctree
+│   │       │   ├── index.doctree
+│   │       │   └── modules.doctree
 │   │       ├── .buildinfo
-│   │       ├── api.html
+│   │       ├── API.html
 │   │       ├── genidex.html
-│   │       ├── gui.html
+│   │       ├── GUI.html
+│   │       ├── index.html
+│   │       ├── modules.html
 │   │       ├── objects.inv
 │   │       ├── py-modindex.html
 │   │       ├── search.html
 │   │       └── searchindex.js
-│   │
 │   ├── source/
 │   │   ├── _static/
+│   │       └── GDH_icon.ico
 │   │   ├── _templates/
-│   │   ├── api.rst
+│   │   ├── API.rst
 │   │   ├── conf.py
-│   │   ├── gui.rst
-│   │   └── index.rst
+│   │   ├── GUI.rst
+│   │   ├── index.rst
+│   │   └── modules.rst
 │   ├── make.bat
 │   └── Makefile
 │   
@@ -361,7 +373,6 @@ GDH_repository/
 │   │   ├── GDH.ico 
 │   │   ├── GDH.png
 │   │   └── kore.png
-│   │
 │   ├── calibration_screen.py
 │   ├── custom_button.py
 │   ├── data_acquisition_screen.py
