@@ -161,6 +161,27 @@ The steps to do this step of compiling the C++ code will be described below.
 
 - You will find the executable file inside the `build/Debug` folder.
 
+##### How to run C++ executable
+
+To run the executable file from powershell/terminal, obtained by compiling the `gloves_data_acquisition.cpp` file, follow the steps below:
+
+- Navigate to the directory where the `gloves_data_acquisition.exe` file is located in the terminal
+
+- Insert the following command in the terminal by changing the `<path_to_csv>` and `<total_time>` arguments (in seconds):
+  `./gloves_data_acquisition.exe "path_to_csv" total_time`
+
+  Example:
+
+  `./gloves_data_acquisition.exe "C: Users giovanni Documents 7044.csv" 120`
+
+Note: If you configure `<total_time>` to `-1`, the executable will have an unlimited duration and can be interrupted in the following ways:
+
+- Disconnect the haptic gloves
+
+- Stop the SenseCom application
+
+- Finish the `gloves_data_acquisition.exe` file process
+
 #### 1.1.3 How to connect SenseGlove Nova 1 to your device
 
 To ensure the connection of your haptic gloves SenseGlove Nova 1 to your computer you must take the following steps:
